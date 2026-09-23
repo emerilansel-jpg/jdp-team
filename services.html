@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services & Credit Rate Card - JDP.team</title>
+  <meta name="description" content="Complete transparent credit pricing catalog. 1 Credit = $0.01 USD. Junior staff at $3/hr, senior specialists at $5/hr, SEO articles, and press release distribution.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
+            },
+            accent: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857'
+            },
+            surface: {
+              pure: '#ffffff',
+              subtle: '#f8fafc',
+              muted: '#f1f5f9',
+              border: '#e2e8f0',
+              borderHover: '#cbd5e1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-short: 200ms;
+      --dur-long: 400ms;
+    }
+    body {
+      background-color: #ffffff;
+      color: #0f172a;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .bg-dot-grid {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .bg-mesh-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.07) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
+    }
+    .card-clean {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .card-clean:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+    }
+    .btn-motion {
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+    .btn-motion:hover {
+      transform: translateY(-2px);
+    }
+    .btn-motion:active {
+      transform: translateY(1px);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
+
+  <!-- Top Announcement Bar -->
+  <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase tracking-wider">Live</span>
+        <span>Transparent credit pricing: <strong>1 Credit = $0.01 USD (1 Cent)</strong>. No hidden markups.</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-5 text-slate-400">
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 1 Dedicated PM</span>
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Rollover Credits</span>
+        <a href="/calculator.html" class="text-brand-400 hover:text-white underline font-semibold">Test ROI Calculator →</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
+          <span class="text-brand-400">J</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-slate-950 text-lg tracking-tight">JDP.team</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
+          </div>
+          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+        <a href="/" class="hover:text-brand-600 transition-colors">Home</a>
+        <a href="/services.html" class="text-brand-600 font-bold border-b-2 border-brand-600 pb-0.5">Services & Pricing</a>
+        <a href="/calculator.html" class="hover:text-brand-600 transition-colors">ROI Calculator</a>
+        <a href="/proof.html" class="hover:text-brand-600 transition-colors">Proof & Reviews</a>
+        <a href="/contact.html" class="hover:text-brand-600 transition-colors">Contact & FAQ</a>
+      </nav>
+
+      <!-- Desktop CTAs -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="/contact.html" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
+          Book Intro Call
+        </a>
+        <a href="#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
+          Start with Credits
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" aria-label="Toggle Navigation" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 border border-slate-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 text-sm font-medium">
+      <a href="/" class="block py-1.5 text-slate-700 hover:text-brand-600">Home</a>
+      <a href="/services.html" class="block py-1.5 font-bold text-brand-600">Services & Pricing</a>
+      <a href="/calculator.html" class="block py-1.5 text-slate-700 hover:text-brand-600">ROI Calculator</a>
+      <a href="/proof.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
+      <a href="/contact.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Contact & FAQ</a>
+      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+        <a href="/contact.html" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
+          Book Intro Call
+        </a>
+        <a href="#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
+          Start with Credits
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-16 pb-14 md:pt-20 md:pb-20 overflow-hidden bg-mesh-glow border-b border-slate-200">
+    <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white/95 text-slate-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+        <span>Transparent Credit Conversion:</span>
+        <span class="text-brand-700 font-bold">1 Credit = $0.01 USD</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 leading-tight">
+        Services & Flat Credit Rate Card
+      </h1>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
+        Everything priced in simple credits. Unused credits roll over monthly so you never lose balance.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="#hourly-staff" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-white hover:bg-slate-800 transition">
+          Remote Staff Rates
+        </a>
+        <a href="#seo-writing" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-800 border border-slate-300 hover:border-slate-400 transition">
+          SEO Writing Packs
+        </a>
+        <a href="#press-releases" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-800 border border-slate-300 hover:border-slate-400 transition">
+          Press Releases
+        </a>
+        <a href="#pricing" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 text-white hover:bg-brand-700 transition">
+          Monthly Plans
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Hourly Remote Staff Rates -->
+  <section id="hourly-staff" class="py-16 md:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Hourly Specialist Execution</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
+            Dedicated Remote Staffing by the Hour
+          </h2>
+          <p class="text-sm text-slate-600 mt-2 max-w-xl">
+            Coordinated directly through your 1 Dedicated Project Manager. Exact minute tracking with zero inflated minimums.
+          </p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-600">
+          <span>Billing Unit:</span> <strong class="text-slate-900">Per 15-Minute Increment</strong>
+        </div>
+      </div>
+
+      <!-- 4 Staffing Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Staff 1: Junior Remote Staff -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-lg">
+                📋
+              </span>
+              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">300 pts/hr</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950 mb-1">Junior Remote Staff</h3>
+            <div class="text-3xl font-black text-brand-600 mb-3">$3.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Repetitive operations, manual formatting, and administrative support that keep agency founders bogged down.
+            </p>
+
+            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Data entry & spreadsheet cleanup</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> WordPress & Shopify blog uploads</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Web research & lead list scrubbing</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Social media post scheduling</div>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100">
+            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
+              Calculate Staff Hours →
+            </a>
+          </div>
+        </div>
+
+        <!-- Staff 2: Senior Specialist -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
+                ⚙️
+              </span>
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">500 pts/hr</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950 mb-1">Senior Specialist</h3>
+            <div class="text-3xl font-black text-indigo-600 mb-3">$5.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Higher-skill execution for technical SEO fixes, editorial copy polishing, and website layout adjustments.
+            </p>
+
+            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Technical SEO site audit fixes</div>
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Copy editing & grammar polishing</div>
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> HTML/CSS & CMS design fixes</div>
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Schema markup & tag implementation</div>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100">
+            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
+              Calculate Staff Hours →
+            </a>
+          </div>
+        </div>
+
+        <!-- Staff 3: Video Editor -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                🎬
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">500 pts/hr</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950 mb-1">Video Editor</h3>
+            <div class="text-3xl font-black text-emerald-600 mb-3">$5.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Turn raw client video into captivating social clips, animated subtitles, and polished YouTube cuts.
+            </p>
+
+            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Reels, TikToks & YouTube Shorts</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Auto-captions & animated typography</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> B-roll insertion & sound effects</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Podcast video clipping & intros</div>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100">
+            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
+              Calculate Video Hours →
+            </a>
+          </div>
+        </div>
+
+        <!-- Staff 4: SEO Staff (JetDigitalPro) -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-lg">
+                📈
+              </span>
+              <span class="text-xs font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">700 pts/hr</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950 mb-1">Dedicated SEO Staff</h3>
+            <div class="text-3xl font-black text-amber-600 mb-3">$7.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Powered by JetDigitalPro. Dedicated SEO practitioners running manual outreach, internal links, and keyword blueprints.
+            </p>
+
+            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
+              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> In-depth keyword clustering</div>
+              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Internal linking & silo optimization</div>
+              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Competitor gap analysis</div>
+              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> White-label monthly SEO reporting</div>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100">
+            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
+              Calculate SEO Hours →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: SEO Content Writing Packs -->
+  <section id="seo-writing" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Turnkey Content Fulfillment</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
+            SEO Content Writing (By JetDigitalPro)
+          </h2>
+          <p class="text-sm text-slate-600 mt-2 max-w-xl">
+            Fully researched, search-optimized articles (1,200 words each). Formatted with clear headings, royalty-free images, meta data, and internal linking anchors.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-slate-500 font-medium">Standard Word Count:</span>
+          <span class="px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-900">1,200 Words / Article</span>
+        </div>
+      </div>
+
+      <!-- Content Writing Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- 1 Article -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-slate-500 uppercase">Single Piece</span>
+              <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">3,200 pts</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-1">1 SEO Article</h3>
+            <div class="text-3xl font-black text-slate-900 mb-1">$32.00</div>
+            <div class="text-xs text-slate-500 mb-6">$32.00 per article</div>
+
+            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 1,200 words deep-researched</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Keyword & intent optimization</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Meta title & meta description</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 48h turnaround</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <span class="text-[11px] font-semibold text-slate-500 block text-center">Great for testing our quality</span>
+          </div>
+        </div>
+
+        <!-- 4 Articles Pack -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-brand-600 uppercase">Weekly Cadence</span>
+              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">12,700 pts</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-1">4 Articles Pack</h3>
+            <div class="text-3xl font-black text-brand-600 mb-1">$127.00</div>
+            <div class="text-xs text-slate-500 mb-6">$31.75 per article</div>
+
+            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 4 × 1,200 words (4,800 words)</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Topical cluster planning</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Direct CMS upload available</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 3-4 days turnaround</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <span class="text-[11px] font-semibold text-slate-500 block text-center">Perfect 1-month blog schedule</span>
+          </div>
+        </div>
+
+        <!-- 12 Articles Pack (Popular) -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white border-2 border-brand-500 shadow-md relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-600 text-white">
+            Agency Favorite
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-brand-600 uppercase">Growth Cluster</span>
+              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">31,700 pts</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-1">12 Articles Pack</h3>
+            <div class="text-3xl font-black text-brand-600 mb-1">$317.00</div>
+            <div class="text-xs text-slate-500 mb-6">$26.41 per article</div>
+
+            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 12 × 1,200 words (14,400 words)</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Full authority topical map</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Internal linking silo mapping</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Staggered delivery schedule</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <span class="text-[11px] font-semibold text-brand-600 block text-center">Save $67 vs single pieces</span>
+          </div>
+        </div>
+
+        <!-- 30 Articles Pack -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-indigo-600 uppercase">Bulk Dominance</span>
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">58,700 pts</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-1">30 Articles Pack</h3>
+            <div class="text-3xl font-black text-indigo-600 mb-1">$587.00</div>
+            <div class="text-xs text-slate-500 mb-6">$19.56 per article</div>
+
+            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> 30 × 1,200 words (36,000 words)</div>
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Multi-client campaign allocation</div>
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Turnkey WordPress upload</div>
+              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Dedicated content lead</div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <span class="text-[11px] font-semibold text-indigo-700 block text-center">Highest margin ($19.56/art)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Press Releases Distribution -->
+  <section id="press-releases" class="py-16 md:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-bold text-brand-600">High-Authority PR Syndication</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
+            Press Releases (Powered by PressWires.net)
+          </h2>
+          <p class="text-sm text-slate-600 mt-2 max-w-xl">
+            Major news network syndication for agency clients. Guaranteed publishing to EIN Presswire, ABNewswire, and Newswirejet networks.
+          </p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-600">
+          <span>Syndication Reach:</span> <strong class="text-slate-900">250+ Major News & Financial Sites</strong>
+        </div>
+      </div>
+
+      <!-- PR Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <!-- 1 Press Release -->
+        <div class="card-clean rounded-2xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Single Distribution</span>
+              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded border border-brand-200">24,000 pts</span>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-950 mb-1">1 Press Release Distribution</h3>
+            <div class="text-4xl font-black text-slate-900 mb-1">$240.00</div>
+            <p class="text-xs text-slate-500 mb-6">Complete writing + multi-network distribution</p>
+
+            <div class="space-y-3 text-xs sm:text-sm text-slate-700 border-t border-slate-100 pt-5">
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Professional 500-word PR writing included</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Syndicated to EIN Presswire network</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> ABNewswire & Newswirejet distribution</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Google News & financial news pickups</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Full white-label PDF syndication report</div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <a href="/contact.html?service=PR-Single" class="block w-full py-3 rounded-xl text-xs font-bold text-center bg-slate-900 hover:bg-slate-800 text-white btn-motion shadow-sm">
+              Request Press Release Distribution →
+            </a>
+          </div>
+        </div>
+
+        <!-- 2 Press Releases Pack -->
+        <div class="card-clean rounded-2xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-md">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Dual Distribution Pack</span>
+              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded border border-brand-200">42,000 pts</span>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-950 mb-1">2 Press Releases Pack</h3>
+            <div class="text-4xl font-black text-brand-600 mb-1">$420.00</div>
+            <p class="text-xs text-slate-500 mb-6">$210.00 per release (Save $60)</p>
+
+            <div class="space-y-3 text-xs sm:text-sm text-slate-700 border-t border-slate-100 pt-5">
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 2 × 500-word professionally written PRs</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Tier 1 syndication across EIN Presswire</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Full ABNewswire and Newswirejet reach</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Brand authority anchor links in top wire feeds</div>
+              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 2 Detailed PDF placement reports</div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <a href="/contact.html?service=PR-Pack" class="block w-full py-3 rounded-xl text-xs font-bold text-center bg-brand-600 hover:bg-brand-700 text-white btn-motion shadow-md">
+              Order 2 PR Distribution Pack →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Monthly Subscription Plans & Rollover Rules -->
+  <section id="pricing" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Monthly Fulfillment Pods</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          Monthly Credit Subscriptions
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Subscribe to a monthly credit allocation with your dedicated PM. <strong>Unused credits roll over automatically.</strong>
+        </p>
+      </div>
+
+      <!-- 3 Tier Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
+
+        <!-- Tier 1: Starter Pod -->
+        <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-slate-200 bg-white">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold text-slate-950">Starter Pod</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">Light Needs</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6">Ideal for solo founders and boutique agencies offloading routine admin.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-4xl font-black text-slate-950">$499</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+
+            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>50,000 credits</strong> per month</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>1 Dedicated Project Manager</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Access to Junior ($3/hr) & Senior ($5/hr)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>48h standard turnaround</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Credits roll over month-to-month</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <a href="/contact.html?plan=Starter" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion text-center shadow-sm">
+              Subscribe to Starter Pod
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 2: Growth Pod (Featured) -->
+        <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-xl relative bg-white">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-600 text-white shadow-sm">
+            Most Popular Pod
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold text-slate-950">Growth Pod</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">+10k Bonus</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6">Full fulfillment engine for digital agencies managing 3 to 10 active clients.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-4xl font-black text-slate-950">$999</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+
+            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-800">
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>110,000 credits</strong> (10k bonus included)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>1 Dedicated PM via private Slack channel</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Junior ($3/hr), Senior ($5/hr), Video ($5/hr)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Fast 24-48h turnaround</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Full SEO writing & technical audit access</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Rollover unused credits anytime</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <a href="/contact.html?plan=Growth" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-700 text-white shadow-md btn-motion text-center">
+              Subscribe to Growth Pod
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 3: Scale Partner -->
+        <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-slate-200 bg-white">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-bold text-slate-950">Scale Partner</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">+20k Bonus</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6">Dedicated backend pod for high-volume agencies and multiple client accounts.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-4xl font-black text-slate-950">$1,899</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+
+            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>220,000 credits</strong> (20k bonus included)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Senior Dedicated PM + Priority Queue</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Priority same-day & 24h turnaround</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Custom client portal integration</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Press releases & bulk content packs enabled</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <a href="/contact.html?plan=Scale" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion text-center shadow-sm">
+              Subscribe to Scale Partner
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pay-As-You-Go Top-Up Packs -->
+      <div class="rounded-3xl p-8 bg-white border border-slate-200 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="text-lg font-bold text-slate-950">Pay-As-You-Go (PAYG) Top-Up Packs</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              Need extra hours without changing your subscription tier? Top up credits anytime.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-brand-700 bg-brand-50 border border-brand-200 px-3 py-1 rounded-lg">Instant Balance Credit</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="p-5 rounded-2xl bg-surface-subtle border border-slate-200 flex justify-between items-center">
+            <div>
+              <div class="font-black text-slate-950 text-xl">$100</div>
+              <div class="text-xs text-slate-500 mt-0.5">10,000 Credits</div>
+            </div>
+            <a href="/contact.html?topup=100" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition">Buy Pack</a>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-surface-subtle border border-slate-200 flex justify-between items-center">
+            <div>
+              <div class="font-black text-slate-950 text-xl">$250</div>
+              <div class="text-xs text-slate-500 mt-0.5">25,000 Credits</div>
+            </div>
+            <a href="/contact.html?topup=250" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition">Buy Pack</a>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-brand-50 border border-brand-200 flex justify-between items-center">
+            <div>
+              <div class="font-black text-brand-900 text-xl">$500</div>
+              <div class="text-xs text-brand-700 font-semibold mt-0.5">55,000 Credits (+5k Bonus)</div>
+            </div>
+            <a href="/contact.html?topup=500" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition">Buy Pack</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Turnaround Times, SLAs, and Rollover Rules -->
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-white border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-lg mb-3">
+            ⏱️
+          </div>
+          <h4 class="font-bold text-sm text-slate-950 mb-1">Standard Turnaround Times</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Routine tasks (data entry, uploads, video clips) delivered in 24 to 48 hours. Priority tasks on Growth & Scale plans receive same-day attention.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-3">
+            🔄
+          </div>
+          <h4 class="font-bold text-sm text-slate-950 mb-1">Credit Rollover Rules</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Credits never expire as long as your monthly subscription is active. Rollover up to 2x your monthly subscription quota into subsequent months.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg mb-3">
+            🛡️
+          </div>
+          <h4 class="font-bold text-sm text-slate-950 mb-1">Satisfaction Guarantee SLA</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Every deliverable includes unlimited minor revisions until it meets your brief. If an output falls short, credits are refunded immediately by your PM.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Consistent Footer -->
+  <footer class="border-t border-slate-200 bg-surface-subtle py-14 text-slate-600 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-black text-sm">
+              J
+            </div>
+            <span class="font-extrabold text-slate-950 text-base">JDP.team</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Your secret remote team. 100% white-label fulfillment pod powered by JetDigitalPro.
+          </p>
+          <div class="text-xs text-slate-400 pt-2">
+            Founder: Nell VH • Legiit Level 4 Certified
+          </div>
+        </div>
+
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
+            <li><a href="/services.html" class="hover:text-brand-600 transition">Services & Pricing</a></li>
+            <li><a href="/calculator.html" class="hover:text-brand-600 transition">ROI Calculator</a></li>
+            <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof & Case Studies</a></li>
+            <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact & FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Specialist Rates</div>
+          <ul class="space-y-2 text-xs text-slate-500">
+            <li>Junior Staff: <strong class="text-slate-700">$3.00/hr</strong> (300 credits)</li>
+            <li>Senior Specialist: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
+            <li>Video Editor: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
+            <li>SEO Specialist: <strong class="text-slate-700">$7.00/hr</strong> (700 credits)</li>
+            <li>SEO Content: <strong class="text-slate-700">$32.00/art</strong> (3,200 credits)</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Contact Channels</div>
+          <ul class="space-y-2 text-xs">
+            <li>Email: <a href="mailto:team@jdp.team" class="text-brand-600 hover:underline">team@jdp.team</a></li>
+            <li>Inquiries: <a href="mailto:info@jetdigitalpro.com" class="text-brand-600 hover:underline">info@jetdigitalpro.com</a></li>
+            <li>Trustpilot: <span class="font-semibold text-slate-900">4.2 / 5.0 Rating</span></li>
+            <li>Agency: <a href="https://jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600">JetDigitalPro.com ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div>
+          &copy; 2026 JDP.team. A JetDigitalPro brand. All rights reserved.
+        </div>
+        <div class="flex items-center gap-4">
+          <span>Strict NDA Guaranteed</span>
+          <span>•</span>
+          <span>100% White-Label Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body>
+</html>

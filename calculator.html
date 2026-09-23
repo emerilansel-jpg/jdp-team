@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Task & Staffing ROI Calculator - JDP.team</title>
+  <meta name="description" content="Calculate your remote staffing savings and agency reseller margins. Compare JDP team costs ($3-$5/hr) against US benchmark in-house payroll.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
+            },
+            accent: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857'
+            },
+            surface: {
+              pure: '#ffffff',
+              subtle: '#f8fafc',
+              muted: '#f1f5f9',
+              border: '#e2e8f0',
+              borderHover: '#cbd5e1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-short: 200ms;
+      --dur-long: 400ms;
+    }
+    body {
+      background-color: #ffffff;
+      color: #0f172a;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .bg-dot-grid {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .bg-mesh-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.07) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
+    }
+    .card-clean {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .card-clean:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+    }
+    .btn-motion {
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+    .btn-motion:hover {
+      transform: translateY(-2px);
+    }
+    .btn-motion:active {
+      transform: translateY(1px);
+    }
+    .val-flash {
+      transition: color 150ms var(--ease-out), transform 150ms var(--ease-out);
+      display: inline-block;
+    }
+    .val-flash.flash {
+      color: #1d4ed8 !important;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
+
+  <!-- Top Announcement Bar -->
+  <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase tracking-wider">Live</span>
+        <span>Real-time staffing calculator based on <strong>1 Credit = $0.01 USD</strong> benchmarked vs US payroll.</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-5 text-slate-400">
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 1 Dedicated PM</span>
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Rollover Credits</span>
+        <a href="/proof.html" class="text-brand-400 hover:text-white underline font-semibold">View Case Studies →</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
+          <span class="text-brand-400">J</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-slate-950 text-lg tracking-tight">JDP.team</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
+          </div>
+          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+        <a href="/" class="hover:text-brand-600 transition-colors">Home</a>
+        <a href="/services.html" class="hover:text-brand-600 transition-colors">Services & Pricing</a>
+        <a href="/calculator.html" class="text-brand-600 font-bold border-b-2 border-brand-600 pb-0.5">ROI Calculator</a>
+        <a href="/proof.html" class="hover:text-brand-600 transition-colors">Proof & Reviews</a>
+        <a href="/contact.html" class="hover:text-brand-600 transition-colors">Contact & FAQ</a>
+      </nav>
+
+      <!-- Desktop CTAs -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="/contact.html" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
+          Book Intro Call
+        </a>
+        <a href="/services.html#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
+          Start with Credits
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" aria-label="Toggle Navigation" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 border border-slate-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 text-sm font-medium">
+      <a href="/" class="block py-1.5 text-slate-700 hover:text-brand-600">Home</a>
+      <a href="/services.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Services & Pricing</a>
+      <a href="/calculator.html" class="block py-1.5 font-bold text-brand-600">ROI Calculator</a>
+      <a href="/proof.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
+      <a href="/contact.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Contact & FAQ</a>
+      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+        <a href="/contact.html" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
+          Book Intro Call
+        </a>
+        <a href="/services.html#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
+          Start with Credits
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-16 pb-12 md:pt-20 md:pb-16 overflow-hidden bg-mesh-glow border-b border-slate-200">
+    <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white/95 text-slate-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-accent-500"></span>
+        <span>Interactive ROI Engine:</span>
+        <span class="text-brand-700 font-bold">In-House vs JDP Remote Pod</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 leading-tight">
+        Task & Staffing ROI Calculator
+      </h1>
+
+      <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
+        Model your exact monthly task volume, calculate real payroll savings, and project agency margins.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Calculator Section -->
+  <section class="py-12 md:py-20 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Mode Toggle Header: Direct Savings vs Agency Reseller Margin -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-surface-subtle border border-slate-200 mb-10 max-w-3xl mx-auto">
+        <div>
+          <div class="font-extrabold text-sm text-slate-950">Calculation Perspective</div>
+          <div class="text-xs text-slate-500">Toggle between internal cost savings or client reseller profit</div>
+        </div>
+
+        <div class="flex items-center gap-2 p-1 rounded-xl bg-white border border-slate-300">
+          <button id="modeSavingsBtn" type="button" onclick="setMode('savings')" class="px-4 py-1.5 rounded-lg text-xs font-bold transition bg-brand-600 text-white shadow-xs">
+            In-House Savings Mode
+          </button>
+          <button id="modeResellerBtn" type="button" onclick="setMode('reseller')" class="px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900">
+            Agency Reseller Mode
+          </button>
+        </div>
+      </div>
+
+      <!-- Calculator Grid (Inputs 7 cols, Results 5 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Input Sliders Column (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- Card 1: Hourly Specialists -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-surface-subtle border border-slate-200 shadow-sm">
+            <h2 class="text-lg font-bold text-slate-950 mb-1 flex items-center justify-between">
+              <span>Hourly Remote Specialist Staff</span>
+              <span class="text-xs font-semibold text-brand-600 bg-brand-50 px-2.5 py-0.5 rounded-full border border-brand-200">Minute-by-minute</span>
+            </h2>
+            <p class="text-xs text-slate-500 mb-6">Select estimated specialist hours required per month.</p>
+
+            <div class="space-y-6">
+              <!-- Slider 1: Junior Remote Staff -->
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-xs">J</span>
+                    <span class="text-slate-800">Junior Remote Staff ($3.00/hr)</span>
+                  </div>
+                  <span id="labelJunior" class="font-bold text-brand-700 val-flash">30 hrs/mo ($90)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="sliderJunior" type="range" min="0" max="100" step="5" value="30" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600">
+                  <span class="text-xs font-bold text-slate-400 w-12 text-right">100h max</span>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 flex justify-between">
+                  <span>Data entry, admin, research, uploads</span>
+                  <span class="text-slate-400">US Benchmark: $25.00/hr</span>
+                </div>
+              </div>
+
+              <!-- Slider 2: Senior Specialist -->
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold text-xs">S</span>
+                    <span class="text-slate-800">Senior Specialist ($5.00/hr)</span>
+                  </div>
+                  <span id="labelSenior" class="font-bold text-indigo-700 val-flash">20 hrs/mo ($100)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="sliderSenior" type="range" min="0" max="60" step="5" value="20" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                  <span class="text-xs font-bold text-slate-400 w-12 text-right">60h max</span>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 flex justify-between">
+                  <span>Technical SEO, copy editing, code & CMS fixes</span>
+                  <span class="text-slate-400">US Benchmark: $40.00/hr</span>
+                </div>
+              </div>
+
+              <!-- Slider 3: Video Editing Hours -->
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs">V</span>
+                    <span class="text-slate-800">Video Editing Staff ($5.00/hr)</span>
+                  </div>
+                  <span id="labelVideo" class="font-bold text-emerald-700 val-flash">15 hrs/mo ($75)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="sliderVideo" type="range" min="0" max="50" step="5" value="15" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                  <span class="text-xs font-bold text-slate-400 w-12 text-right">50h max</span>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 flex justify-between">
+                  <span>Reels, TikToks, Shorts, YouTube edits</span>
+                  <span class="text-slate-400">US Benchmark: $45.00/hr</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Deliverable Packs -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-surface-subtle border border-slate-200 shadow-sm">
+            <h2 class="text-lg font-bold text-slate-950 mb-1 flex items-center justify-between">
+              <span>Flat Deliverable Packs</span>
+              <span class="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">Fixed rate units</span>
+            </h2>
+            <p class="text-xs text-slate-500 mb-6">Estimate recurring deliverables per monthly cycle.</p>
+
+            <div class="space-y-6">
+              <!-- Slider 4: SEO Articles -->
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-800 flex items-center justify-center font-bold text-xs">A</span>
+                    <span class="text-slate-800">SEO Articles 1,200w ($32.00/ea)</span>
+                  </div>
+                  <span id="labelArticle" class="font-bold text-amber-700 val-flash">6 articles ($192)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="sliderArticle" type="range" min="0" max="30" step="1" value="6" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-600">
+                  <span class="text-xs font-bold text-slate-400 w-12 text-right">30 max</span>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 flex justify-between">
+                  <span>Researched, optimized, with images & metadata</span>
+                  <span class="text-slate-400">US Benchmark: $120.00/art</span>
+                </div>
+              </div>
+
+              <!-- Slider 5: Press Releases -->
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-rose-50 text-rose-700 flex items-center justify-center font-bold text-xs">P</span>
+                    <span class="text-slate-800">Press Releases ($240.00/ea)</span>
+                  </div>
+                  <span id="labelPR" class="font-bold text-rose-700 val-flash">1 release ($240)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="sliderPR" type="range" min="0" max="6" step="1" value="1" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-rose-600">
+                  <span class="text-xs font-bold text-slate-400 w-12 text-right">6 max</span>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 flex justify-between">
+                  <span>Syndicated to EIN Presswire & ABNewswire</span>
+                  <span class="text-slate-400">US Benchmark: $500.00/PR</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Reseller Mode Inputs (Visible when Reseller Mode active) -->
+          <div id="resellerInputsCard" class="hidden p-6 sm:p-8 rounded-3xl bg-indigo-50/70 border border-indigo-200 shadow-sm">
+            <h2 class="text-lg font-bold text-slate-950 mb-1 flex items-center justify-between">
+              <span>Agency Client Retainer Model</span>
+              <span class="text-xs font-bold text-indigo-700 bg-white px-2.5 py-0.5 rounded-full border border-indigo-200">Reseller Mode</span>
+            </h2>
+            <p class="text-xs text-slate-600 mb-6">Enter how many client accounts your agency services with this workload.</p>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-slate-800">Agency Clients Handled:</span>
+                  <span id="labelClients" class="font-bold text-indigo-800 val-flash">3 Clients</span>
+                </div>
+                <input id="sliderClients" type="range" min="1" max="20" step="1" value="3" class="w-full h-2.5 bg-indigo-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-slate-800">Average Client Retainer Billed:</span>
+                  <span id="labelRetainer" class="font-bold text-indigo-800 val-flash">$1,500 / month</span>
+                </div>
+                <input id="sliderRetainer" type="range" min="500" max="5000" step="100" value="1500" class="w-full h-2.5 bg-indigo-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Results Card (5 cols) -->
+        <div class="lg:col-span-5 sticky top-28">
+          <div class="rounded-3xl bg-slate-950 text-white p-7 sm:p-9 shadow-2xl border border-slate-800">
+
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Monthly Projection</span>
+              <span id="summaryBadge" class="text-xs font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full">
+                Savings Mode
+              </span>
+            </div>
+
+            <!-- Standard In-House Savings View -->
+            <div id="savingsView" class="space-y-5">
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400">Credits Required</span>
+                <span id="outCredits" class="font-bold text-brand-300 text-lg val-flash">69,700 pts</span>
+              </div>
+
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400">Your JDP Team Cost</span>
+                <span id="outJdpCost" class="font-black text-white text-2xl val-flash">$697.00</span>
+              </div>
+
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400">US In-House Payroll Equivalent</span>
+                <span id="outUsCost" class="font-bold text-slate-400 line-through text-lg val-flash">$3,445.00</span>
+              </div>
+
+              <div class="pt-5 border-t border-slate-800">
+                <div class="text-xs uppercase tracking-wider text-slate-400 mb-1">Your Total Monthly Savings</div>
+                <div class="flex items-baseline justify-between">
+                  <span id="outSavings" class="text-3xl sm:text-4xl font-black text-accent-400 val-flash">+$2,748.00</span>
+                  <span id="outPercent" class="text-sm font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full val-flash">Save 79.8%</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                💡 <strong>Recommended Plan:</strong> <span id="recPlanName" class="font-bold text-white">Growth Pod ($999/mo)</span> includes 110,000 credits, leaving <span id="recPlanLeft" class="font-bold text-brand-300">40,300 rollover credits</span> for next month.
+              </div>
+            </div>
+
+            <!-- Reseller Mode View (Toggle) -->
+            <div id="resellerView" class="hidden space-y-5">
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400">Gross Client Revenue</span>
+                <span id="outGrossRev" class="font-bold text-white text-xl val-flash">$4,500.00</span>
+              </div>
+
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400">JDP Pod Fulfillment Cost</span>
+                <span id="outResellerCost" class="font-bold text-rose-400 text-lg val-flash">-$697.00</span>
+              </div>
+
+              <div class="pt-5 border-t border-slate-800">
+                <div class="text-xs uppercase tracking-wider text-slate-400 mb-1">Net Agency Retainer Profit</div>
+                <div class="flex items-baseline justify-between">
+                  <span id="outNetProfit" class="text-3xl sm:text-4xl font-black text-accent-400 val-flash">+$3,803.00</span>
+                  <span id="outMargin" class="text-sm font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full val-flash">84.5% Margin</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                📈 <strong>Annual Projected Net Profit:</strong> <span id="outAnnualProfit" class="font-black text-white">$45,636 / year</span> strictly from retained agency services without adding payroll.
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="mt-8 pt-6 border-t border-slate-800 space-y-3">
+              <a id="btnGetSetup" href="/services.html#pricing" class="w-full py-4 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-500 text-white btn-motion text-center block shadow-lg shadow-brand-600/30">
+                Get This Setup with Credits →
+              </a>
+              <a href="/contact.html" class="w-full py-3 rounded-xl font-semibold text-xs border border-slate-700 hover:border-slate-600 bg-slate-900 hover:bg-slate-800 text-slate-300 btn-motion text-center block">
+                Book 15-Min Intro Call to Review Setup
+              </a>
+            </div>
+
+            <div class="mt-4 text-center">
+              <span class="text-[11px] text-slate-500">100% White-Label • Roll-Over Balance • Pause Anytime</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Benchmark Comparison Breakdown Table -->
+  <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Cost Transparency</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
+          How Our Benchmark Calculation Works
+        </h2>
+        <p class="text-sm text-slate-600 mt-2 max-w-xl mx-auto">
+          We compare real JDP credit rates against median US contractor and in-house salaries.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider text-[11px]">
+            <tr>
+              <th class="p-4 sm:p-5">Service / Role</th>
+              <th class="p-4 sm:p-5">JDP Credit Rate</th>
+              <th class="p-4 sm:p-5">JDP Dollar Equiv.</th>
+              <th class="p-4 sm:p-5">US In-House Benchmark</th>
+              <th class="p-4 sm:p-5 text-right">Agency Advantage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-800">
+            <tr>
+              <td class="p-4 sm:p-5 font-semibold">Junior Remote Staff (Admin/Research)</td>
+              <td class="p-4 sm:p-5 font-mono text-brand-600">300 pts/hr</td>
+              <td class="p-4 sm:p-5 font-bold text-slate-950">$3.00 / hr</td>
+              <td class="p-4 sm:p-5 text-slate-500">$25.00 / hr</td>
+              <td class="p-4 sm:p-5 text-right font-bold text-accent-700">88.0% Lower</td>
+            </tr>
+            <tr>
+              <td class="p-4 sm:p-5 font-semibold">Senior Specialist (Technical SEO / CMS)</td>
+              <td class="p-4 sm:p-5 font-mono text-indigo-600">500 pts/hr</td>
+              <td class="p-4 sm:p-5 font-bold text-slate-950">$5.00 / hr</td>
+              <td class="p-4 sm:p-5 text-slate-500">$40.00 / hr</td>
+              <td class="p-4 sm:p-5 text-right font-bold text-accent-700">87.5% Lower</td>
+            </tr>
+            <tr>
+              <td class="p-4 sm:p-5 font-semibold">Video Editor (Reels / Shorts / Long Cuts)</td>
+              <td class="p-4 sm:p-5 font-mono text-emerald-600">500 pts/hr</td>
+              <td class="p-4 sm:p-5 font-bold text-slate-950">$5.00 / hr</td>
+              <td class="p-4 sm:p-5 text-slate-500">$45.00 / hr</td>
+              <td class="p-4 sm:p-5 text-right font-bold text-accent-700">88.9% Lower</td>
+            </tr>
+            <tr>
+              <td class="p-4 sm:p-5 font-semibold">SEO Article (1,200 Words Researched)</td>
+              <td class="p-4 sm:p-5 font-mono text-amber-600">3,200 pts/art</td>
+              <td class="p-4 sm:p-5 font-bold text-slate-950">$32.00 / art</td>
+              <td class="p-4 sm:p-5 text-slate-500">$120.00 / art</td>
+              <td class="p-4 sm:p-5 text-right font-bold text-accent-700">73.3% Lower</td>
+            </tr>
+            <tr>
+              <td class="p-4 sm:p-5 font-semibold">Press Release Syndication (PressWires.net)</td>
+              <td class="p-4 sm:p-5 font-mono text-rose-600">24,000 pts/PR</td>
+              <td class="p-4 sm:p-5 font-bold text-slate-950">$240.00 / PR</td>
+              <td class="p-4 sm:p-5 text-slate-500">$500.00 / PR</td>
+              <td class="p-4 sm:p-5 text-right font-bold text-accent-700">52.0% Lower</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consistent Footer -->
+  <footer class="border-t border-slate-200 bg-surface-subtle py-14 text-slate-600 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-black text-sm">
+              J
+            </div>
+            <span class="font-extrabold text-slate-950 text-base">JDP.team</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Your secret remote team. 100% white-label fulfillment pod powered by JetDigitalPro.
+          </p>
+          <div class="text-xs text-slate-400 pt-2">
+            Founder: Nell VH • Legiit Level 4 Certified
+          </div>
+        </div>
+
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
+            <li><a href="/services.html" class="hover:text-brand-600 transition">Services & Pricing</a></li>
+            <li><a href="/calculator.html" class="hover:text-brand-600 transition">ROI Calculator</a></li>
+            <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof & Case Studies</a></li>
+            <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact & FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Specialist Rates</div>
+          <ul class="space-y-2 text-xs text-slate-500">
+            <li>Junior Staff: <strong class="text-slate-700">$3.00/hr</strong> (300 credits)</li>
+            <li>Senior Specialist: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
+            <li>Video Editor: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
+            <li>SEO Specialist: <strong class="text-slate-700">$7.00/hr</strong> (700 credits)</li>
+            <li>SEO Content: <strong class="text-slate-700">$32.00/art</strong> (3,200 credits)</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Contact Channels</div>
+          <ul class="space-y-2 text-xs">
+            <li>Email: <a href="mailto:team@jdp.team" class="text-brand-600 hover:underline">team@jdp.team</a></li>
+            <li>Inquiries: <a href="mailto:info@jetdigitalpro.com" class="text-brand-600 hover:underline">info@jetdigitalpro.com</a></li>
+            <li>Trustpilot: <span class="font-semibold text-slate-900">4.2 / 5.0 Rating</span></li>
+            <li>Agency: <a href="https://jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600">JetDigitalPro.com ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div>
+          &copy; 2026 JDP.team. A JetDigitalPro brand. All rights reserved.
+        </div>
+        <div class="flex items-center gap-4">
+          <span>Strict NDA Guaranteed</span>
+          <span>•</span>
+          <span>100% White-Label Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Advanced Interactive Calculator Engine -->
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    let currentMode = 'savings';
+
+    function setMode(mode) {
+      currentMode = mode;
+      const btnSavings = document.getElementById('modeSavingsBtn');
+      const btnReseller = document.getElementById('modeResellerBtn');
+      const savingsView = document.getElementById('savingsView');
+      const resellerView = document.getElementById('resellerView');
+      const resellerInputs = document.getElementById('resellerInputsCard');
+      const badge = document.getElementById('summaryBadge');
+
+      if (mode === 'savings') {
+        btnSavings.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-brand-600 text-white shadow-xs';
+        btnReseller.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900';
+        savingsView.classList.remove('hidden');
+        resellerView.classList.add('hidden');
+        resellerInputs.classList.add('hidden');
+        badge.textContent = 'Savings Mode';
+        badge.className = 'text-xs font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full';
+      } else {
+        btnReseller.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow-xs';
+        btnSavings.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900';
+        savingsView.classList.add('hidden');
+        resellerView.classList.remove('hidden');
+        resellerInputs.classList.remove('hidden');
+        badge.textContent = 'Reseller Margin Mode';
+        badge.className = 'text-xs font-bold text-indigo-300 bg-indigo-500/20 px-3 py-1 rounded-full';
+      }
+      calculateAll();
+    }
+
+    const sJunior = document.getElementById('sliderJunior');
+    const sSenior = document.getElementById('sliderSenior');
+    const sVideo = document.getElementById('sliderVideo');
+    const sArticle = document.getElementById('sliderArticle');
+    const sPR = document.getElementById('sliderPR');
+    const sClients = document.getElementById('sliderClients');
+    const sRetainer = document.getElementById('sliderRetainer');
+
+    function flashElement(el) {
+      if (!el) return;
+      el.classList.remove('flash');
+      void el.offsetWidth;
+      el.classList.add('flash');
+      setTimeout(() => el.classList.remove('flash'), 150);
+    }
+
+    function calculateAll() {
+      const jHrs = parseInt(sJunior.value, 10);
+      const sHrs = parseInt(sSenior.value, 10);
+      const vHrs = parseInt(sVideo.value, 10);
+      const artCount = parseInt(sArticle.value, 10);
+      const prCount = parseInt(sPR.value, 10);
+
+      // Labels
+      document.getElementById('labelJunior').textContent = `${jHrs} hrs/mo ($${jHrs * 3})`;
+      document.getElementById('labelSenior').textContent = `${sHrs} hrs/mo ($${sHrs * 5})`;
+      document.getElementById('labelVideo').textContent = `${vHrs} hrs/mo ($${vHrs * 5})`;
+      document.getElementById('labelArticle').textContent = `${artCount} articles ($${artCount * 32})`;
+      document.getElementById('labelPR').textContent = `${prCount} releases ($${prCount * 240})`;
+
+      // Cost & Credits
+      const jdpCost = (jHrs * 3) + (sHrs * 5) + (vHrs * 5) + (artCount * 32) + (prCount * 240);
+      const credits = jdpCost * 100;
+      const usCost = (jHrs * 25) + (sHrs * 40) + (vHrs * 45) + (artCount * 120) + (prCount * 500);
+      const savings = Math.max(0, usCost - jdpCost);
+      const percent = usCost > 0 ? ((savings / usCost) * 100).toFixed(1) : 0;
+
+      // Update Savings View
+      document.getElementById('outCredits').textContent = `${credits.toLocaleString()} pts`;
+      document.getElementById('outJdpCost').textContent = `$${jdpCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('outUsCost').textContent = `$${usCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('outSavings').textContent = `+$${savings.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('outPercent').textContent = `Save ${percent}%`;
+
+      // Recommend Plan
+      const recPlan = document.getElementById('recPlanName');
+      const recLeft = document.getElementById('recPlanLeft');
+      if (credits <= 50000) {
+        recPlan.textContent = 'Starter Pod ($499/mo)';
+        const diff = 50000 - credits;
+        recLeft.textContent = `${diff.toLocaleString()} rollover credits`;
+      } else if (credits <= 110000) {
+        recPlan.textContent = 'Growth Pod ($999/mo)';
+        const diff = 110000 - credits;
+        recLeft.textContent = `${diff.toLocaleString()} rollover credits`;
+      } else {
+        recPlan.textContent = 'Scale Partner ($1,899/mo)';
+        const diff = Math.max(0, 220000 - credits);
+        recLeft.textContent = diff > 0 ? `${diff.toLocaleString()} rollover credits` : 'Top-up credits recommended';
+      }
+
+      // Reseller Mode Calc
+      const clientCount = parseInt(sClients.value, 10);
+      const retainerPrice = parseInt(sRetainer.value, 10);
+      document.getElementById('labelClients').textContent = `${clientCount} Clients`;
+      document.getElementById('labelRetainer').textContent = `$${retainerPrice.toLocaleString()} / month`;
+
+      const grossRev = clientCount * retainerPrice;
+      const netProfit = grossRev - jdpCost;
+      const margin = grossRev > 0 ? ((netProfit / grossRev) * 100).toFixed(1) : 0;
+      const annualProfit = netProfit * 12;
+
+      document.getElementById('outGrossRev').textContent = `$${grossRev.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('outResellerCost').textContent = `-$${jdpCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('outNetProfit').textContent = `+$${netProfit.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('outMargin').textContent = `${margin}% Margin`;
+      document.getElementById('outAnnualProfit').textContent = `$${annualProfit.toLocaleString('en-US', { minimumFractionDigits: 0 })} / year`;
+    }
+
+    [sJunior, sSenior, sVideo, sArticle, sPR, sClients, sRetainer].forEach(slider => {
+      if (slider) {
+        slider.addEventListener('input', () => {
+          calculateAll();
+        });
+      }
+    });
+
+    calculateAll();
+  </script>
+</body>
+</html>
