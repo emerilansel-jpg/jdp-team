@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JDP.team — Your Secret White-Label Backend Team for Agencies</title>
-  <meta name="description" content="100% White-Label Backend for Agencies. Send us your client's SEO, content, and daily digital tasks. Scaled delivery under your logo.">
+  <title>JDP.team — 100% White-Label Backend Team for Scaling Digital Agencies</title>
+  <meta name="description" content="100% White-Label Backend for Agencies. Send us your client SEO, content, and daily digital tasks. Scaled delivery under your logo with 20-Point QA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,20 +19,36 @@
           },
           colors: {
             brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
+            },
+            accent: {
               50: '#ecfdf5',
               100: '#d1fae5',
               400: '#34d399',
               500: '#10b981',
               600: '#059669',
-              700: '#047857',
-              accent: '#38bdf8'
+              700: '#047857'
             },
-            dark: {
-              bg: '#0a0f1d',
-              card: '#111827',
-              cardBorder: '#1f293d',
-              lighter: '#1a2236'
+            surface: {
+              pure: '#ffffff',
+              subtle: '#f8fafc',
+              muted: '#f1f5f9',
+              border: '#e2e8f0',
+              borderHover: '#cbd5e1'
             }
+          },
+          letterSpacing: {
+            tighter: '-0.035em',
+            tight: '-0.02em',
           }
         }
       }
@@ -44,37 +60,44 @@
       --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
       --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
       --dur-micro: 120ms;
-      --dur-short: 220ms;
-      --dur-long: 420ms;
+      --dur-short: 200ms;
+      --dur-long: 400ms;
     }
     body {
-      background-color: #080c16;
-      color: #f1f5f9;
+      background-color: #ffffff;
+      color: #0f172a;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
-    .glow-radial {
-      background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 80%);
+    /* Crisp Dot Grid Pattern */
+    .bg-dot-grid {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 28px 28px;
     }
-    .glass-card {
-      background: rgba(17, 24, 39, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .bg-mesh-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, rgba(16, 185, 129, 0.04) 45%, transparent 75%);
     }
-    .glass-card-hover {
-      transition: transform var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
-      will-change: transform;
+
+    /* Enterprise Cards */
+    .card-clean {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+      will-change: transform, box-shadow;
     }
-    .glass-card-hover:hover {
-      border-color: rgba(16, 185, 129, 0.35);
-      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+    .card-clean:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
       transform: translateY(-2px);
     }
 
-    /* Page load reveal: Staggered sequence for hero elements */
+    /* Staggered Hero Sequence */
     @keyframes heroReveal {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(10px);
       }
       to {
         opacity: 1;
@@ -83,15 +106,15 @@
     }
     .hero-reveal {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(10px);
       animation: heroReveal var(--dur-long) var(--ease-out) forwards;
-      animation-delay: calc(var(--i, 0) * 60ms);
+      animation-delay: calc(var(--i, 0) * 70ms);
       will-change: transform, opacity;
     }
 
-    /* Button microinteraction: hover -1.5px, active 1px */
+    /* Micro-motion button */
     .btn-motion {
-      transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
       will-change: transform;
     }
     .btn-motion:hover {
@@ -99,42 +122,39 @@
     }
     .btn-motion:active {
       transform: translateY(1px);
-      transition-duration: 100ms;
+      transition-duration: 80ms;
     }
 
-    /* Pricing card hover lift & recommended pulse */
+    /* Pricing card lift & pulse */
     .pricing-card {
-      transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      transition: transform 200ms var(--ease-out), border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
       will-change: transform;
     }
     .pricing-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(52, 211, 153, 0.35);
+      transform: translateY(-4px);
     }
-    @keyframes recommendedPulse {
+    @keyframes recCardPulse {
       0% {
-        border-color: rgba(16, 185, 129, 0.4);
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.3);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.25);
       }
       50% {
-        border-color: rgba(52, 211, 153, 0.85);
-        box-shadow: 0 0 20px 2px rgba(16, 185, 129, 0.2);
+        box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.1);
       }
       100% {
-        border-color: #10b981;
-        box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.15);
+        box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.15);
       }
     }
     .pricing-card-recommended.pulse-active {
-      animation: recommendedPulse 2s var(--ease-out) forwards;
+      animation: recCardPulse 1.8s var(--ease-out) forwards;
     }
 
-    /* Accordion FAQ with CSS grid 0fr -> 1fr */
+    /* Accordion FAQ Grid */
     .faq-item {
-      transition: border-color var(--dur-short) var(--ease-out);
+      transition: border-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
     }
     .faq-item.active {
-      border-color: rgba(16, 185, 129, 0.35);
+      border-color: #93c5fd;
+      background-color: #f8fafc;
     }
     .faq-grid-wrapper {
       display: grid;
@@ -151,7 +171,7 @@
     }
     .faq-grid-wrapper.open .faq-inner {
       opacity: 1;
-      transition: opacity var(--dur-long) var(--ease-out) 40ms;
+      transition: opacity var(--dur-long) var(--ease-out) 50ms;
     }
     .faq-icon-rot {
       transition: transform var(--dur-short) var(--ease-out);
@@ -168,16 +188,31 @@
       will-change: transform, color;
     }
     .val-flash.flash {
-      color: #34d399 !important;
-      transform: translateY(-1px);
+      color: #2563eb !important;
+      transform: translateY(-1.5px);
     }
 
-    /* Reduced motion */
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 150ms !important;
+        transition-duration: 100ms !important;
         scroll-behavior: auto !important;
       }
       .hero-reveal {
@@ -197,42 +232,64 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#080c16] text-slate-100 selection:bg-brand-500 selection:text-white">
+<body class="min-h-screen bg-white text-slate-900 selection:bg-brand-500 selection:text-white">
+
+  <!-- Institutional Top Announcement Bar -->
+  <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase tracking-wider">Live</span>
+        <span>Trusted white-label backend for <strong>100+ digital agencies</strong> across US, UK & Australia.</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-4 text-slate-400">
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 100% Silent NDA</span>
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 20-Point Senior QA</span>
+        <a href="#testimonials" class="text-slate-200 hover:text-white underline font-medium">Read Reviews →</a>
+      </div>
+    </div>
+  </aside>
 
   <!-- Header / Navigation -->
-  <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-[#080c16]/90 backdrop-blur-md">
+  <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <!-- Logo -->
-      <a href="#" class="flex items-center gap-2 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:-translate-y-0.5 transition-transform duration-200">
-          <span class="font-extrabold text-xl text-white tracking-wider">J</span>
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
+          <span class="text-brand-400">J</span>
         </div>
         <div class="flex flex-col">
-          <span class="text-xl font-extrabold tracking-tight text-white flex items-center">
-            JDP<span class="text-brand-400">.team</span>
-          </span>
-          <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold -mt-1">Agency Backend</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl font-extrabold tracking-tight text-slate-950">JDP<span class="text-brand-600">.team</span></span>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
+          </div>
+          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
         </div>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#services" class="hover:text-brand-400 transition-colors">Services</a>
-        <a href="#how-it-works" class="hover:text-brand-400 transition-colors">How It Works</a>
-        <a href="#profit-flow" class="hover:text-brand-400 transition-colors">Margin Model</a>
-        <a href="#pricing" class="hover:text-brand-400 transition-colors">Pricing</a>
-        <a href="#faq" class="hover:text-brand-400 transition-colors">FAQ</a>
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-slate-600">
+        <a href="#track-record" class="hover:text-brand-600 transition-colors">Proven Scale</a>
+        <a href="#qa-standard" class="hover:text-brand-600 transition-colors">20-Point QA</a>
+        <a href="#slack-workflow" class="hover:text-brand-600 transition-colors">Slack Pod</a>
+        <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
+        <a href="#testimonials" class="hover:text-brand-600 transition-colors">Testimonials</a>
+        <a href="#profit-flow" class="hover:text-brand-600 transition-colors">Margin Model</a>
+        <a href="#pricing" class="hover:text-brand-600 transition-colors">Pricing</a>
       </nav>
 
-      <!-- Right Action CTA -->
+      <!-- Right CTAs -->
       <div class="hidden sm:flex items-center gap-3">
-        <a href="#pricing" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white shadow-lg shadow-brand-500/25 btn-motion">
-          Start 7-Day Trial
+        <button onclick="openContactModal()" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100 transition-colors">
+          Book Intro Call
+        </button>
+        <a href="#pricing" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/20 btn-motion flex items-center gap-1.5">
+          <span>Start 7-Day Trial</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobileMenuBtn" aria-label="Toggle Menu" class="md:hidden text-slate-300 hover:text-white p-2 focus:outline-none">
+      <button id="mobileMenuBtn" aria-label="Toggle Menu" class="lg:hidden text-slate-700 hover:text-slate-950 p-2 focus:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -240,641 +297,871 @@
     </div>
 
     <!-- Mobile Dropdown Menu -->
-    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 border-b border-slate-800 bg-[#0c1222] space-y-3">
-      <a href="#services" class="block py-2 text-slate-300 hover:text-brand-400 font-medium">Services</a>
-      <a href="#how-it-works" class="block py-2 text-slate-300 hover:text-brand-400 font-medium">How It Works</a>
-      <a href="#profit-flow" class="block py-2 text-slate-300 hover:text-brand-400 font-medium">Margin Model</a>
-      <a href="#pricing" class="block py-2 text-slate-300 hover:text-brand-400 font-medium">Pricing</a>
-      <a href="#faq" class="block py-2 text-slate-300 hover:text-brand-400 font-medium">FAQ</a>
-      <div class="pt-2">
-        <a href="#pricing" class="block text-center w-full py-3 rounded-lg text-sm font-bold bg-brand-500 hover:bg-brand-600 text-white shadow-lg btn-motion">
-          Start 7-Day Trial
+    <div id="mobileMenu" class="hidden lg:hidden px-4 pt-3 pb-6 border-b border-slate-200 bg-white shadow-lg space-y-2.5">
+      <a href="#track-record" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">Proven Scale</a>
+      <a href="#qa-standard" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">20-Point QA</a>
+      <a href="#slack-workflow" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">Slack Pod</a>
+      <a href="#services" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">Services</a>
+      <a href="#testimonials" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">Testimonials</a>
+      <a href="#profit-flow" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">Margin Model</a>
+      <a href="#pricing" class="block py-2 text-slate-700 hover:text-brand-600 font-semibold">Pricing</a>
+      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+        <button onclick="openContactModal()" class="w-full py-2.5 rounded-xl text-sm font-semibold border border-slate-300 text-slate-800">
+          Book 15-Min Intro Call
+        </button>
+        <a href="#pricing" class="w-full text-center py-3 rounded-xl text-sm font-bold bg-brand-600 text-white shadow-md">
+          Start 7-Day Risk-Free Trial
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative pt-16 pb-20 md:pt-28 md:pb-32 overflow-hidden glow-radial">
+  <!-- Hero Section (Light Mode Enterprise Clean) -->
+  <section class="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden bg-mesh-glow border-b border-slate-200">
+    <!-- Subtle Dot Grid Background -->
+    <div class="absolute inset-0 bg-dot-grid opacity-60 pointer-events-none"></div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
 
-      <!-- Top Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400 text-xs sm:text-sm font-semibold mb-8 shadow-inner hero-reveal" style="--i: 0;">
-        <span>🔒</span>
-        <span>100% White-Label Backend for Agencies</span>
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+      <!-- Trust Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white/90 text-slate-800 text-xs sm:text-sm font-semibold mb-8 shadow-sm hero-reveal" style="--i: 0;">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-500"></span>
+        </span>
+        <span class="text-slate-600">The Silent Backend Engine:</span>
+        <span class="text-slate-950 font-bold">100% White-Label Delivery for Digital Agencies</span>
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.12] hero-reveal" style="--i: 1;">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-slate-950 max-w-5xl mx-auto leading-[1.08] hero-reveal" style="--i: 1;">
         Your secret remote team. <br class="hidden sm:inline">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-800">
           We do the work, you take the credit.
         </span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="mt-6 text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal hero-reveal" style="--i: 2;">
-        Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
+      <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal hero-reveal" style="--i: 2;">
+        Send us your client's SEO audits, high-intent blog clusters, and technical website tasks. Our managed specialist pod delivers them 100% client-ready under your agency's logo—so you scale retainers without hiring staff.
       </p>
 
       <!-- CTAs -->
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 hero-reveal" style="--i: 3;">
-        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-500 hover:from-brand-600 hover:to-teal-600 text-white shadow-xl shadow-brand-500/25 btn-motion flex items-center justify-center gap-2">
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 hero-reveal" style="--i: 3;">
+        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-xl shadow-brand-600/25 btn-motion flex items-center justify-center gap-2">
           <span>Start 7-Day Risk-Free Trial</span>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
-        <a href="#contact-modal" onclick="openContactModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold border border-slate-700 bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 btn-motion flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <button onclick="openContactModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 shadow-sm btn-motion flex items-center justify-center gap-2">
+          <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           <span>Book 15-Min Intro Call</span>
-        </a>
+        </button>
       </div>
 
-      <!-- Trust Bar -->
-      <div class="mt-14 pt-8 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs sm:text-sm text-slate-400 font-medium hero-reveal" style="--i: 4;">
-        <div class="flex items-center gap-2">
-          <div class="flex text-amber-400">
-            ★★★★★
+      <!-- Trust Bar with Trustpilot 4.2 Score -->
+      <div class="mt-14 pt-8 border-t border-slate-200/80 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs sm:text-sm text-slate-600 font-medium hero-reveal" style="--i: 4;">
+        <!-- Official Trustpilot Badge Visual -->
+        <a href="https://www.trustpilot.com/review/jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+          <span class="font-bold text-slate-900 tracking-tight flex items-center gap-1">
+            <svg class="w-4 h-4 text-[#00b67a]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+            Trustpilot
+          </span>
+          <div class="flex gap-0.5">
+            <span class="w-4 h-4 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-bold">★</span>
+            <span class="w-4 h-4 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-bold">★</span>
+            <span class="w-4 h-4 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-bold">★</span>
+            <span class="w-4 h-4 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-bold">★</span>
+            <span class="w-4 h-4 bg-[#dcdce6] text-[#00b67a] flex items-center justify-center text-[10px] font-bold">★</span>
           </div>
-          <span class="text-slate-200 font-semibold"><span class="stat-counter" data-target="4.2" data-decimals="1">4.2</span>/5 on Trustpilot</span>
-        </div>
-        <div class="hidden sm:block text-slate-700">•</div>
+          <span class="font-bold text-slate-900"><span class="stat-counter" data-target="4.2" data-decimals="1">4.2</span>/5</span>
+          <span class="text-slate-400 text-xs">(Verified Reviews)</span>
+        </a>
+
+        <div class="hidden sm:block text-slate-300">•</div>
         <div class="flex items-center gap-2">
-          <span class="text-brand-400 font-bold">⚡</span>
-          <span>Backed by <strong class="text-slate-200">JetDigitalPro</strong></span>
+          <span class="w-6 h-6 rounded-md bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">⚡</span>
+          <span>Backed by <strong class="text-slate-900">JetDigitalPro</strong></span>
         </div>
-        <div class="hidden sm:block text-slate-700">•</div>
+
+        <div class="hidden sm:block text-slate-300">•</div>
         <div class="flex items-center gap-2">
-          <span class="text-cyan-400 font-bold">🚀</span>
-          <span><strong class="text-slate-200"><span class="stat-counter" data-target="100" data-decimals="0">100</span>+</strong> Digital Agencies Powered</span>
+          <span class="w-6 h-6 rounded-md bg-accent-50 text-accent-700 flex items-center justify-center text-xs font-bold border border-accent-200">🏢</span>
+          <span><strong class="text-slate-900"><span class="stat-counter" data-target="100" data-decimals="0">100</span>+</strong> Agencies Scaled</span>
         </div>
+
+        <div class="hidden sm:block text-slate-300">•</div>
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-800 flex items-center justify-center text-xs font-bold border border-slate-300">🛡️</span>
+          <span><strong class="text-slate-900">Zero</strong> Footprint / Silent NDA</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Proven Scale & Track Record Section (Enterprise Proof) -->
+  <section id="track-record" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Enterprise Track Record</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          Battle-Tested Across Industry Unicorns
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          The same core operational methods that fueled high-growth tech giants are applied directly to your agency's client campaigns.
+        </p>
+      </div>
+
+      <!-- Real Metrics Stat Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+        <!-- Stat 1: Canva -->
+        <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between border-slate-200 hover:border-brand-300">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">Graphic SaaS</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-brand-50 text-brand-700 border border-brand-200">Scale</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 tracking-tight">Canva</div>
+            <div class="mt-4">
+              <div class="text-3xl font-black text-brand-600 tracking-tight">
+                +<span class="stat-counter" data-target="36667" data-decimals="0" data-format="comma">36,667</span>%
+              </div>
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">Organic Growth</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 mt-4 pt-4 border-t border-slate-100 leading-relaxed">
+            Scaled organic search presence from 6,000 to over 2.2M monthly visitors via programmatic intent mapping.
+          </p>
+        </div>
+
+        <!-- Stat 2: Traveloka -->
+        <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between border-slate-200 hover:border-accent-400">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">OTA Unicorn</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-accent-50 text-accent-700 border border-accent-200">Dominance</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 tracking-tight">Traveloka</div>
+            <div class="mt-4">
+              <div class="text-3xl font-black text-accent-600 tracking-tight">
+                #1 Ranked
+              </div>
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">Commercial SERPs</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 mt-4 pt-4 border-t border-slate-100 leading-relaxed">
+            Secured and defended top positions across Southeast Asia's most competitive flight, hotel, and booking clusters.
+          </p>
+        </div>
+
+        <!-- Stat 3: Tokopedia -->
+        <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between border-slate-200 hover:border-brand-300">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">E-Commerce Giant</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-brand-50 text-brand-700 border border-brand-200">Sustained</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 tracking-tight">Tokopedia</div>
+            <div class="mt-4">
+              <div class="text-3xl font-black text-slate-900 tracking-tight">
+                5+ Years
+              </div>
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">Continuous #1 Rank</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 mt-4 pt-4 border-t border-slate-100 leading-relaxed">
+            Maintained dominant search presence across 12,000+ commercial categories through rigorous automated technical QA.
+          </p>
+        </div>
+
+        <!-- Stat 4: KlikDokter -->
+        <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between border-slate-200 hover:border-accent-400">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">Health Portal</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-accent-50 text-accent-700 border border-accent-200">E-E-A-T</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 tracking-tight">KlikDokter</div>
+            <div class="mt-4">
+              <div class="text-3xl font-black text-accent-600 tracking-tight">
+                6x Traffic
+              </div>
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">Verified Pageviews</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 mt-4 pt-4 border-t border-slate-100 leading-relaxed">
+            Multiplied traffic from 1.2M to 7.2M monthly sessions adhering to strict medical accuracy & editorial hygiene.
+          </p>
+        </div>
+
+        <!-- Stat 5: ShopBack -->
+        <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between border-slate-200 hover:border-brand-300">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">Rewards Platform</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-brand-50 text-brand-700 border border-brand-200">Speed</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 tracking-tight">ShopBack</div>
+            <div class="mt-4">
+              <div class="text-3xl font-black text-brand-600 tracking-tight">
+                +<span class="stat-counter" data-target="212" data-decimals="0">212</span>%
+              </div>
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">Organic Influx</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 mt-4 pt-4 border-t border-slate-100 leading-relaxed">
+            Accelerated commercial user acquisition within 6 months via rapid search intent clustering and competitive tear-downs.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Visual 3-Step Profit Flow Section -->
-  <section id="profit-flow" class="py-16 md:py-24 bg-dark-bg border-y border-slate-800/60 relative">
+  <!-- Visual Proof: 20-Point QA Inspection Report Card & Client-Ready Deliverable -->
+  <section id="qa-standard" class="py-16 md:py-24 bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-400">The Agency Arbitrage Math</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-accent-700">Institutional Rigor</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          Never Proofread at Midnight Again: The 20-Point Senior QA Standard
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Every piece of content, code patch, or technical audit is reviewed by an in-house Senior QA Lead before you ever lay eyes on it.
+        </p>
+      </div>
+
+      <!-- Interactive QA Deliverable Mockup Card -->
+      <div class="max-w-5xl mx-auto rounded-3xl border border-slate-300 bg-white shadow-xl shadow-slate-900/5 overflow-hidden">
+
+        <!-- Top Inspector Window Header -->
+        <div class="bg-slate-900 px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+            </div>
+            <span class="text-xs font-mono text-slate-300">Deliverable #JDP-8842 // White-Label Verified</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              PASSED SENIOR QA (20/20 CHECKS)
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Lead: S. Kowalski (Sr. QA)</span>
+          </div>
+        </div>
+
+        <!-- Deliverable Metadata Bar -->
+        <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+          <div class="flex flex-wrap items-center gap-6">
+            <div>
+              <span class="text-slate-500 font-medium">Deliverable Title:</span>
+              <span class="ml-1.5 font-bold text-slate-900">Q1 Dental Group Technical Audit & Pillar Hub (2,400w)</span>
+            </div>
+            <div>
+              <span class="text-slate-500 font-medium">Agency Partner:</span>
+              <span class="ml-1.5 font-bold text-slate-900">Apex Digital Media (White-Label)</span>
+            </div>
+            <div>
+              <span class="text-slate-500 font-medium">Turnaround:</span>
+              <span class="ml-1.5 font-bold text-emerald-700">22 hrs (ETA Met)</span>
+            </div>
+          </div>
+
+          <!-- Share Button with Copy Feedback -->
+          <button id="copyShareBtn" onclick="copyDeliverableLink()" class="px-3.5 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-bold text-xs flex items-center gap-1.5 shadow-sm btn-motion">
+            <svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            <span id="copyShareText">Copy Unbranded Client Link</span>
+          </button>
+        </div>
+
+        <!-- 20-Point Checklist Columns -->
+        <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Column 1: Technical & On-Page -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                <span class="w-6 h-6 rounded-md bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">1</span>
+                Technical & Architecture
+              </h3>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">7/7 OK</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Core Web Vitals scan:</strong> 0 render-blocking CSS/JS.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Schema validation:</strong> JSON-LD tested on Google Rich Snippet validator.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Canonical tag hygiene:</strong> Absolute URLs, 0 self-referencing loops.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Internal linking:</strong> Minimum 4 contextual in-content anchors mapped.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Robots & indexing:</strong> Verified crawl directives & sitemap XML entry.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 2: Editorial & Intent -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                <span class="w-6 h-6 rounded-md bg-accent-100 text-accent-700 flex items-center justify-center text-xs font-bold">2</span>
+                Content & Intent Match
+              </h3>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">7/7 OK</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Search intent alignment:</strong> Top 3 SERP competitor gaps addressed.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Human voice check:</strong> Zero synthetic repetitive patterns or fluff.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Plagiarism scan:</strong> 100% original via enterprise Copyscape.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Fact-check verification:</strong> Statistics verified with live citations.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Readability scoring:</strong> Flesch Reading Ease score &gt; 65.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 3: White-Label Sanitation -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                <span class="w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">3</span>
+                White-Label Sanitation
+              </h3>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">6/6 OK</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Zero JDP metadata:</strong> Exif, PDF author, and Google Doc owners sanitized.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Agency branding:</strong> Formatted cleanly with your agency logo and palette.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Direct export formats:</strong> Editable Google Doc + client-ready unbranded PDF.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Client-ready summary:</strong> 3-bullet executive overview included for fast forwarding.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                <span><strong>Revisions included:</strong> Priority 12-hour turnaround on any fine-tuning.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Bottom Audit Proof Footnote -->
+        <div class="px-6 py-4 bg-slate-100/70 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs text-slate-600">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600 font-bold">🔒 Certified Silent Delivery:</span>
+            <span>Your clients never know JDP exists. You look like an agency with a 50-person in-house operations floor.</span>
+          </div>
+          <span class="font-mono text-slate-500">ISO-style Agency SOP v4.2</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Slack Workflow & Dedicated PM Pod (Interactive Mockup) -->
+  <section id="slack-workflow" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Frictionless Operations</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          1 Dedicated PM in Slack. An Entire Specialist Engine Behind Them.
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          No managing 7 disjointed freelancers. You message one senior manager who routes, audits, and delivers.
+        </p>
+      </div>
+
+      <!-- Slack Interface Card Mockup -->
+      <div class="max-w-4xl mx-auto rounded-3xl border border-slate-300 bg-white shadow-xl shadow-slate-900/5 overflow-hidden">
+
+        <!-- Slack Header -->
+        <div class="bg-[#1a1d21] text-white px-6 py-3.5 flex items-center justify-between border-b border-slate-800">
+          <div class="flex items-center gap-3">
+            <span class="text-slate-400 font-mono text-lg">#</span>
+            <div class="flex flex-col">
+              <span class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
+                jdp-apex-media-ops
+                <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
+              </span>
+              <span class="text-[11px] text-slate-400">Private Dedicated Pod • 1 Agency Founder + 1 JDP PM + Senior QA Lead</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-800/80 px-3 py-1 rounded-md border border-slate-700">
+            <span>⚡ SLA: Under 15m Response</span>
+          </div>
+        </div>
+
+        <!-- Slack Message Stream -->
+        <div class="p-6 sm:p-8 space-y-6 bg-white text-slate-900 text-sm">
+
+          <!-- Message 1: Agency Founder -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 shadow-sm text-sm">
+              MR
+            </div>
+            <div class="flex-1">
+              <div class="flex items-baseline gap-2">
+                <span class="font-extrabold text-slate-950">Mark R.</span>
+                <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">Agency Founder</span>
+                <span class="text-xs text-slate-400">09:14 AM</span>
+              </div>
+              <p class="mt-1.5 text-slate-700 leading-relaxed">
+                Morning team! Just closed a <strong>$3,500/mo dental group retainer</strong>. Need to hit the ground running:
+                <br>1) Complete technical on-page audit for 4 locations
+                <br>2) 4 pillar blog briefs (1,500w each, local intent)
+                <br>3) Schema markup updates for their WordPress setup
+                <br>Can we get first draft by Wednesday 4 PM so I can review before the client call?
+              </p>
+            </div>
+          </div>
+
+          <!-- Message 2: Dedicated PM -->
+          <div class="flex items-start gap-4 bg-brand-50/50 -mx-4 sm:-mx-6 p-4 sm:p-6 rounded-2xl border border-brand-100">
+            <div class="w-10 h-10 rounded-xl bg-slate-950 text-brand-400 font-bold flex items-center justify-center shrink-0 shadow-sm text-sm border border-slate-800">
+              NP
+            </div>
+            <div class="flex-1">
+              <div class="flex items-baseline gap-2">
+                <span class="font-extrabold text-slate-950">Nell P.</span>
+                <span class="text-[10px] font-bold text-brand-700 bg-brand-100 px-1.5 py-0.5 rounded border border-brand-200">Your Dedicated PM</span>
+                <span class="text-xs text-slate-400">09:18 AM</span>
+              </div>
+              <p class="mt-1.5 text-slate-800 leading-relaxed">
+                Congratulations on closing the retainer, Mark! 🎯
+                <br>Brief accepted. Scoped at <strong>14,000 credits</strong>:
+                <br>• Technical SEO specialist is pulling the Screaming Frog & CWV reports now.
+                <br>• Senior healthcare copywriter is assigned for the 4 dental pillar briefs.
+                <br>Wednesday 4 PM EST is locked. Deliverables will be pre-screened with our <strong>20-Point QA</strong> before landing in your hands.
+              </p>
+              <div class="mt-2.5 flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white text-slate-700 text-xs border border-slate-200 shadow-xs">
+                  🚀 2
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-white text-slate-700 text-xs border border-slate-200 shadow-xs">
+                  🎯 1
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message 3: Senior QA Lead Delivery -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-bold flex items-center justify-center shrink-0 shadow-sm text-sm">
+              SK
+            </div>
+            <div class="flex-1">
+              <div class="flex items-baseline gap-2">
+                <span class="font-extrabold text-slate-950">Sarah K.</span>
+                <span class="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Senior QA Lead</span>
+                <span class="text-xs text-slate-400">Wednesday 03:42 PM</span>
+              </div>
+              <p class="mt-1.5 text-slate-700 leading-relaxed">
+                Ready 18 minutes ahead of schedule! ✅ All 4 locations inspected against our 20-Point QA checklist:
+                <br>• Zero duplicate metadata or canonical errors detected
+                <br>• 100% human-edited dental content with verified medical citations
+                <br>• Formatted in your custom agency template:
+              </p>
+
+              <!-- Deliverable Attachment Link -->
+              <div class="mt-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between max-w-lg">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
+                    📄
+                  </div>
+                  <div>
+                    <div class="font-bold text-xs text-slate-950">ApexMedia_DentalGroup_Q1Audit_Final.pdf</div>
+                    <div class="text-[11px] text-slate-500">100% White-Label • 4.2 MB • Google Doc Source Included</div>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-brand-600 hover:text-brand-700 cursor-pointer">Preview →</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message 4: Agency Founder Happy -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 shadow-sm text-sm">
+              MR
+            </div>
+            <div class="flex-1">
+              <div class="flex items-baseline gap-2">
+                <span class="font-extrabold text-slate-950">Mark R.</span>
+                <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">Agency Founder</span>
+                <span class="text-xs text-slate-400">03:55 PM</span>
+              </div>
+              <p class="mt-1 text-slate-700 leading-relaxed font-medium">
+                You guys are absolute lifesavers. Formatting is immaculate. Forwarding this straight to the client right now 🔥
+              </p>
+              <div class="mt-2 flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs border border-slate-200">
+                  🔥 4
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs border border-slate-200">
+                  🙌 2
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Slack Card Footer -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between text-xs text-slate-600">
+          <span class="font-semibold text-slate-900">Your Communication Channels:</span>
+          <span>Private Slack • Asana • Trello • ClickUp • Email • Custom Portal</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Real JetDigitalPro Testimonials Section (High Authority Social Proof) -->
+  <section id="testimonials" class="py-16 md:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold mb-3">
+          <span>★★★★★</span> Verified JetDigitalPro Client Reviews
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
+          What Agency Founders & Business Owners Say
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Unfiltered feedback from agency leaders who scaled their retainer margins using our remote backend talent.
+        </p>
+      </div>
+
+      <!-- Testimonials Masonry / Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Testimonial 1: Michael Hodgdon -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex text-amber-500 text-sm">★★★★★</div>
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">SEO Agency</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-950 mb-2 leading-snug">
+              “Exceptional Content — Full Turnkey Process”
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “After working with countless vendors for client content, Jet Digital Pro is the only team that truly exceeded our standards. Their process is completely turnkey: from deep keyword research to high-authority writing and seamless publishing. We scaled 12 client campaigns without hiring a single internal writer.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-slate-950">Michael Hodgdon</div>
+              <div class="text-xs text-slate-500">Business Owner</div>
+            </div>
+            <a href="https://eliteseoconsulting.com" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-600 hover:text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-200">
+              EliteSEOConsulting.com ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Testimonial 2: Peter Baranik -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex text-amber-500 text-sm">★★★★★</div>
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">SaaS & Ecom</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-950 mb-2 leading-snug">
+              “40% Lower Cost Per Acquisition!”
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “Premium SEO agencies wanted $5K+ monthly for content that took forever. JetDigitalPro hit that sweet spot — cost per acquisition dropped 40% while our organic footprint tripled. They are the best-kept secret for agency margins.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-slate-950">Peter Baranik</div>
+              <div class="text-xs text-slate-500">Founder</div>
+            </div>
+            <a href="https://colorwee.com" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-600 hover:text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-200">
+              Colorwee.com ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Testimonial 3: Jose Jimenez -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex text-amber-500 text-sm">★★★★★</div>
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Full Agency</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-950 mb-2 leading-snug">
+              “Blog Growing on Autopilot!”
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “Truly hands-off. Handles everything from keyword research to publishing directly on WordPress. The quality is so consistent that my clients think I have an in-house team of 10 people working in the back office.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-slate-950">Jose Jimenez</div>
+              <div class="text-xs text-slate-500">Agency Owner</div>
+            </div>
+            <a href="https://jolidigital.com" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-600 hover:text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-200">
+              JoliDigital.com ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Testimonial 4: Omar -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex text-amber-500 text-sm">★★★★★</div>
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Digital Brand</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-950 mb-2 leading-snug">
+              “65% Traffic Increase in 4 Months!”
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “Finding reliable content creation was my biggest challenge. The JDP team delivered structured, high-intent articles that started ranking within weeks. Revenue followed immediately.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-slate-950">Omar</div>
+              <div class="text-xs text-slate-500">Business Owner</div>
+            </div>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              Verified Client
+            </span>
+          </div>
+        </div>
+
+        <!-- Testimonial 5: Jake L -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex text-amber-500 text-sm">★★★★★</div>
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">SEO Scale</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-950 mb-2 leading-snug">
+              “Outstanding Customer Service!”
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “Nell was accommodating, we used his VAs service for several months. Good work and great customer service. Whenever we had a tight deadline or complex technical task, they stepped up and delivered.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-slate-950">Jake L</div>
+              <div class="text-xs text-slate-500">Founder</div>
+            </div>
+            <a href="https://scalerankings.com" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-600 hover:text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-200">
+              ScaleRankings.com ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Testimonial 6: Roger Yin -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex text-amber-500 text-sm">★★★★★</div>
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Growth Lead</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-950 mb-2 leading-snug">
+              “Best Content Writer I've Ever Found!”
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “Hands down the best content writer... 100% original and authoritative. I've tested over 30 writers and agencies across 5 years, and nobody matches their attention to technical SEO nuances.”
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <div class="font-bold text-sm text-slate-950">Roger Yin</div>
+              <div class="text-xs text-slate-500">Growth Hacker</div>
+            </div>
+            <a href="https://daluoseo.com" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-600 hover:text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-200">
+              DaluoSeo.com ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Testimonial 7: Aman Dwivedi (Span 3 on large or card) -->
+        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between border-slate-200 md:col-span-2 lg:col-span-3 bg-gradient-to-r from-white via-brand-50/20 to-white">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div class="flex text-amber-500 text-sm">★★★★★</div>
+                <span class="text-xs font-bold text-slate-900">“Reliable VA — Worth Every Penny!”</span>
+              </div>
+              <a href="https://mckayn.com" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-600 hover:text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-200">
+                McKayn.com ↗
+              </a>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              “Inbox management, scheduling, research — my VA covers it all. Freed up 25+ hours of my week so I could focus purely on signing high-ticket agency retainer clients. The return on investment has been immediate.”
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span class="font-bold text-slate-900">Aman Dwivedi — Founder at McKayn.com</span>
+            <span>Verified Ongoing Retainer Partner</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual 3-Step Profit Flow Section (Clean White) -->
+  <section id="profit-flow" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">The Agency Arbitrage Math</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
           How You 3x Your Retainer Margin
         </h2>
-        <p class="text-slate-400 mt-3 text-base sm:text-lg">
-          Zero employee taxes, zero training overhead, pure recurring agency profit.
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Zero employee payroll taxes, zero training overhead, pure recurring agency bottom-line profit.
         </p>
       </div>
 
       <!-- Step Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-        
+
         <!-- Step 1 -->
-        <div class="glass-card glass-card-hover rounded-2xl p-8 relative overflow-hidden group border border-slate-800 hover:border-slate-700">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-            <span>Step 01</span>
-            <span class="text-slate-500">Client Facing</span>
+        <div class="card-clean rounded-3xl p-8 relative flex flex-col justify-between bg-white border-slate-200">
+          <div>
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center justify-between">
+              <span>Step 01</span>
+              <span class="text-slate-500">Client Facing</span>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center font-bold text-2xl mb-5">
+              💼
+            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-2">1. You Sell Retainers</h3>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+              Close client retainers for SEO, monthly blogs, and website maintenance at standard market rates ($2.5k–$5k).
+            </p>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-xl mb-5">
-            💼
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">1. You Sell Retainers</h3>
-          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-            Close client retainers for SEO, monthly blogs, and website upkeep at market rates.
-          </p>
-          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-baseline justify-between">
-            <span class="text-xs font-semibold text-slate-400">Client Pays You</span>
-            <span class="text-2xl font-black text-blue-400">$<span class="stat-counter" data-target="3000" data-decimals="0" data-format="comma">3,000</span><span class="text-xs font-normal text-slate-400">/mo</span></span>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-baseline justify-between">
+            <span class="text-xs font-semibold text-slate-500">Client Pays You</span>
+            <span class="text-2xl font-black text-slate-900">$<span class="stat-counter" data-target="3000" data-decimals="0" data-format="comma">3,000</span><span class="text-xs font-normal text-slate-500">/mo</span></span>
           </div>
         </div>
 
         <!-- Step 2 -->
-        <div class="glass-card glass-card-hover rounded-2xl p-8 relative overflow-hidden group border border-slate-800 hover:border-brand-500/40">
-          <div class="text-xs font-bold text-brand-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-            <span>Step 02</span>
-            <span class="text-brand-400 font-semibold">Behind The Scenes</span>
+        <div class="card-clean rounded-3xl p-8 relative flex flex-col justify-between bg-white border-slate-200">
+          <div>
+            <div class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-3 flex items-center justify-between">
+              <span>Step 02</span>
+              <span class="text-brand-600 font-semibold">Behind The Scenes</span>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 border border-brand-200 flex items-center justify-center font-bold text-2xl mb-5">
+              ⚡
+            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-2">2. JDP.team Executes</h3>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+              Drop briefs into your dedicated PM Slack pod. We deliver QA-verified deliverables in 24–48h under your agency branding.
+            </p>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center font-bold text-xl mb-5">
-            ⚡
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">2. JDP.team Executes</h3>
-          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-            Drop tasks into your dedicated PM dashboard. We deliver QA-verified assets in 24-48h.
-          </p>
-          <div class="p-4 rounded-xl bg-slate-900/90 border border-brand-500/30 flex items-baseline justify-between">
-            <span class="text-xs font-semibold text-slate-400">Your JDP Pod Cost</span>
-            <span class="text-2xl font-black text-slate-200">$<span class="stat-counter" data-target="999" data-decimals="0">999</span><span class="text-xs font-normal text-slate-400">/mo</span></span>
+          <div class="p-4 rounded-2xl bg-brand-50/70 border border-brand-200 flex items-baseline justify-between">
+            <span class="text-xs font-semibold text-brand-800">Your JDP Pod Cost</span>
+            <span class="text-2xl font-black text-brand-700">$<span class="stat-counter" data-target="999" data-decimals="0">999</span><span class="text-xs font-normal text-brand-600">/mo</span></span>
           </div>
         </div>
 
         <!-- Step 3 -->
-        <div class="glass-card glass-card-hover rounded-2xl p-8 relative overflow-hidden group border border-emerald-500/30 bg-gradient-to-b from-dark-card to-emerald-950/20">
-          <div class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-            <span>Step 03</span>
-            <span class="text-emerald-400 font-semibold">Net Bottom Line</span>
-          </div>
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-xl mb-5">
-            💰
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">3. You Keep The Spread</h3>
-          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-            Deliver under your brand. Client is thrilled, retention stays high, you bank the profit.
-          </p>
-          <div class="p-4 rounded-xl bg-emerald-950/50 border border-emerald-500/40 flex items-baseline justify-between">
-            <span class="text-xs font-semibold text-emerald-300">Your Net Margin</span>
-            <span class="text-2xl font-black text-emerald-400">+$<span class="stat-counter" data-target="2001" data-decimals="0" data-format="comma">2,001</span><span class="text-xs font-normal text-emerald-300">/mo (<span class="stat-counter" data-target="67" data-decimals="0">67</span>%)</span></span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Problem / Solution (Comparison) -->
-  <section class="py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Scale Without Agony</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
-          Stop Hiring Freelancers Who Disappear
-        </h2>
-        <p class="text-slate-400 mt-3 text-base sm:text-lg">
-          Compare the headache of managing loose talent vs plug-and-play agency infrastructure.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Without JDP -->
-        <div class="rounded-2xl border border-red-500/20 bg-gradient-to-b from-red-950/10 to-transparent p-6 sm:p-8">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center font-bold">✕</div>
-            <h3 class="text-xl font-bold text-red-200">The Traditional Agency Trap</h3>
-          </div>
-          <ul class="space-y-4 text-slate-300 text-sm">
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">✕</span>
-              <span><strong>FTE payroll burden:</strong> $4,500/mo + taxes, benefits, hardware, and onboarding time.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">✕</span>
-              <span><strong>Freelancer ghosting:</strong> Upwork contractors vanish right before critical client deadlines.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">✕</span>
-              <span><strong>QA exhaustion:</strong> You spend late nights proofreading, formatting, and fixing messy deliverables.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">✕</span>
-              <span><strong>Growth ceiling:</strong> You cannot take on 5 new clients without risking current client quality.</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- With JDP -->
-        <div class="rounded-2xl border border-brand-500/30 bg-gradient-to-b from-brand-950/20 to-transparent p-6 sm:p-8 shadow-xl shadow-brand-500/5">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold">✓</div>
-            <h3 class="text-xl font-bold text-white">With JDP.team White-Label</h3>
-          </div>
-          <ul class="space-y-4 text-slate-200 text-sm">
-            <li class="flex items-start gap-3">
-              <span class="text-brand-400 font-bold mt-0.5">✓</span>
-              <span><strong>Predictable flat subscription:</strong> Predictable cost from $499/mo, pause or cancel anytime.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-brand-400 font-bold mt-0.5">✓</span>
-              <span><strong>1 Dedicated Account PM:</strong> One single point of contact who directs tech specialists & writers.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-brand-400 font-bold mt-0.5">✓</span>
-              <span><strong>Internal Senior QA:</strong> Every piece of content, code, or design is reviewed before it reaches you.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-brand-400 font-bold mt-0.5">✓</span>
-              <span><strong>Instant elasticity:</strong> Double client intake tomorrow with zero hiring lag.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How It Works Section (Dedicated PM Diagram) -->
-  <section id="how-it-works" class="py-16 md:py-24 bg-[#0a0f1d] border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Streamlined Workflow</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
-          1 Dedicated PM. An Entire Engine Behind Them.
-        </h2>
-        <p class="text-slate-400 mt-3 text-base sm:text-lg">
-          You don't need to juggle 8 different specialists. You talk to one dedicated manager.
-        </p>
-      </div>
-
-      <!-- Flow Architecture Diagram -->
-      <div class="max-w-4xl mx-auto glass-card rounded-3xl p-6 sm:p-12 border border-slate-800 relative">
-        
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative z-10">
-          
-          <!-- Node 1: Agency (You) -->
-          <div class="flex-1 w-full text-center p-6 rounded-2xl bg-slate-900 border border-slate-700/80 shadow-lg">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-2xl mb-3">
-              👤
-            </div>
-            <h4 class="font-bold text-white text-base">You (The Agency)</h4>
-            <p class="text-xs text-slate-400 mt-1">Submit briefs via Slack, Trello, or Portal</p>
-            <div class="mt-3 inline-block px-2.5 py-1 rounded bg-blue-500/10 text-blue-300 text-[11px] font-semibold">
-              Client Contact Only
-            </div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="text-slate-600 rotate-90 md:rotate-0 flex items-center justify-center">
-            <svg class="w-8 h-8 text-brand-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-            </svg>
-          </div>
-
-          <!-- Node 2: Dedicated PM (Central Core) -->
-          <div class="flex-1 w-full text-center p-6 rounded-2xl bg-gradient-to-b from-brand-950/40 to-slate-900 border-2 border-brand-500/50 shadow-xl shadow-brand-500/10 scale-105">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-2xl mb-3">
-              🎯
-            </div>
-            <h4 class="font-bold text-white text-base">Dedicated JDP Manager</h4>
-            <p class="text-xs text-brand-200 mt-1">Scopes, schedules, conducts, and coordinates</p>
-            <div class="mt-3 inline-block px-2.5 py-1 rounded bg-brand-500/20 text-brand-300 text-[11px] font-semibold">
-              Your Single Contact
-            </div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="text-slate-600 rotate-90 md:rotate-0 flex items-center justify-center">
-            <svg class="w-8 h-8 text-brand-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-            </svg>
-          </div>
-
-          <!-- Node 3: Specialist Pod -->
-          <div class="flex-1 w-full p-4 rounded-2xl bg-slate-900 border border-slate-700/80 shadow-lg space-y-2">
-            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider text-center mb-2">Specialist Engine</div>
-            
-            <div class="p-2 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center gap-2 text-xs">
-              <span class="text-emerald-400">🛡️</span>
-              <span class="font-medium text-slate-200">Senior QA Lead</span>
-            </div>
-            <div class="p-2 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center gap-2 text-xs">
-              <span class="text-cyan-400">⚙️</span>
-              <span class="font-medium text-slate-200">Junior Tech Specialists</span>
-            </div>
-            <div class="p-2 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center gap-2 text-xs">
-              <span class="text-purple-400">🤖</span>
-              <span class="font-medium text-slate-200">AI Prompt Conductors</span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-slate-800 text-center text-xs text-slate-400">
-          Result: You receive finished, 100% white-labeled work ready to hand directly to your client.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services / What We Take Off Your Plate -->
-  <section id="services" class="py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Capabilities</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
-          What We Take Off Your Plate
-        </h2>
-        <p class="text-slate-400 mt-3 text-base sm:text-lg">
-          From technical SEO audits to monthly blog clusters and WordPress tweaks.
-        </p>
-      </div>
-
-      <!-- Services Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Service 1: SEO & Web -->
-        <div class="glass-card glass-card-hover rounded-2xl p-8 border border-slate-800 transition duration-200">
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-6">
-            📈
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">SEO & Technical Web</h3>
-          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-            Data-backed search optimization to rank client sites and protect domain authority.
-          </p>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2.5">
-              <span class="text-brand-400 font-bold">•</span>
-              <span>Keyword clustering & search intent mapping</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-brand-400 font-bold">•</span>
-              <span>On-page audits, meta tag optimization, schema</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-brand-400 font-bold">•</span>
-              <span>Core Web Vitals & speed cleanup</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-brand-400 font-bold">•</span>
-              <span>Internal linking & canonical bug fixes</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Service 2: Content & Copy -->
-        <div class="glass-card glass-card-hover rounded-2xl p-8 border border-slate-800 transition duration-200">
-          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-6">
-            ✍️
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Content & Long-Form Copy</h3>
-          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-            High-ranking articles, comparison pages, and email sequences that sound human.
-          </p>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2.5">
-              <span class="text-cyan-400 font-bold">•</span>
-              <span>1,200 - 2,500 word deeply researched SEO guides</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-cyan-400 font-bold">•</span>
-              <span>High-converting landing page copywriting</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-cyan-400 font-bold">•</span>
-              <span>Lead magnet creation (checklists, whitepapers)</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-cyan-400 font-bold">•</span>
-              <span>Email nurturing sequences & newsletters</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Service 3: General Digital Support -->
-        <div class="glass-card glass-card-hover rounded-2xl p-8 border border-slate-800 transition duration-200">
-          <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-6">
-            🛠️
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Daily Digital Operations</h3>
-          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-            All the tedious digital tasks that drain your agency's billable hours.
-          </p>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-center gap-2.5">
-              <span class="text-purple-400 font-bold">•</span>
-              <span>CMS updates (WordPress, Webflow, Shopify)</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-purple-400 font-bold">•</span>
-              <span>Banner graphics & Canva social asset creation</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-purple-400 font-bold">•</span>
-              <span>Monthly reporting decks & analytics consolidation</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-purple-400 font-bold">•</span>
-              <span>Data entry, CRM hygiene & link validation</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="py-16 md:py-24 bg-dark-bg border-t border-slate-800 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Simple, Transparent Pricing</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
-          Predictable Monthly Subscriptions
-        </h2>
-        <p class="text-slate-400 mt-3 text-base sm:text-lg">
-          No hourly overages. Pause or cancel with 1 click. Full credit transparency.
-        </p>
-      </div>
-
-      <!-- Pricing Cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-
-        <!-- Tier 1: Starter Desk -->
-        <div class="glass-card pricing-card rounded-3xl p-8 border border-slate-800 flex flex-col justify-between hover:border-slate-700">
+        <div class="card-clean rounded-3xl p-8 relative flex flex-col justify-between bg-white border-accent-300 shadow-md">
           <div>
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xl font-bold text-white">Starter Desk</h3>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">Light Needs</span>
+            <div class="text-xs font-bold text-accent-700 uppercase tracking-widest mb-3 flex items-center justify-between">
+              <span>Step 03</span>
+              <span class="text-accent-700 font-semibold">Net Retained Margin</span>
             </div>
-            <p class="text-slate-400 text-xs mb-6">Ideal for boutique agencies managing 1–3 client retainers.</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-extrabold text-white">$499</span>
-              <span class="text-slate-400 text-sm">/month</span>
+            <div class="w-12 h-12 rounded-2xl bg-accent-50 text-accent-700 border border-accent-200 flex items-center justify-center font-bold text-2xl mb-5">
+              💰
             </div>
-
-            <div class="space-y-3.5 border-t border-slate-800 pt-6 text-sm text-slate-300">
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>50,000 credits</strong> per month</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>1 active slot</strong> (worked sequentially)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>48h</strong> average turnaround</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Dedicated Account PM</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Senior QA review before delivery</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>100% White-Label guarantee</span>
-              </div>
-            </div>
+            <h3 class="text-xl font-bold text-slate-950 mb-2">3. You Keep The Spread</h3>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+              Forward finished work to your client. Retention stays high, your client is thrilled, and you bank the recurring spread.
+            </p>
           </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-800">
-            <button onclick="selectPlan('Starter Desk', '$499/mo')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 btn-motion">
-              Start 7-Day Trial
-            </button>
-          </div>
-        </div>
-
-        <!-- Tier 2: Growth Pod (Most Popular) -->
-        <div class="glass-card pricing-card pricing-card-recommended rounded-3xl p-8 border-2 border-brand-500 flex flex-col justify-between relative shadow-2xl shadow-brand-500/10 scale-105 z-10 bg-gradient-to-b from-dark-card to-emerald-950/20">
-          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-brand-500 to-emerald-600 text-white text-xs font-black tracking-wide uppercase shadow-md">
-            Most Popular for Agencies
-          </div>
-          <div>
-            <div class="flex justify-between items-center mb-4 mt-2">
-              <h3 class="text-xl font-bold text-white">Growth Pod</h3>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-300 border border-brand-500/30">Scale Workhorse</span>
-            </div>
-            <p class="text-slate-300 text-xs mb-6">For scaling agencies running 4–10 ongoing clients.</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-extrabold text-white">$999</span>
-              <span class="text-slate-400 text-sm">/month</span>
-            </div>
-
-            <div class="space-y-3.5 border-t border-slate-800 pt-6 text-sm text-slate-200">
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>110,000 credits</strong> (10k bonus included)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>2 active parallel slots</strong></span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>24h</strong> fast turnaround</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Dedicated PM via private Slack/Portal</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Unlimited revisions</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Full SEO + Tech + Copy access</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-800">
-            <button onclick="selectPlan('Growth Pod', '$999/mo')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white shadow-lg shadow-brand-500/30 btn-motion">
-              Start 7-Day Trial (Growth)
-            </button>
-          </div>
-        </div>
-
-        <!-- Tier 3: Scale Partner -->
-        <div class="glass-card pricing-card rounded-3xl p-8 border border-slate-800 flex flex-col justify-between hover:border-slate-700">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xl font-bold text-white">Scale Partner</h3>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">High Volume</span>
-            </div>
-            <p class="text-slate-400 text-xs mb-6">Full department replacement for established multi-client agencies.</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-extrabold text-white">$1,899</span>
-              <span class="text-slate-400 text-sm">/month</span>
-            </div>
-
-            <div class="space-y-3.5 border-t border-slate-800 pt-6 text-sm text-slate-300">
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>220,000 credits</strong> (20k bonus)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>4 active parallel slots</strong></span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span><strong>Same-day / priority</strong> turnaround</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Lead Strategist + Dedicated PM</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Custom client portal integration</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-400 font-bold">✓</span>
-                <span>Phone / video brief check-ins</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-800">
-            <button onclick="selectPlan('Scale Partner', '$1,899/mo')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 btn-motion">
-              Start 7-Day Trial
-            </button>
+          <div class="p-4 rounded-2xl bg-accent-50 border border-accent-300 flex items-baseline justify-between">
+            <span class="text-xs font-semibold text-accent-800">Your Net Margin</span>
+            <span class="text-2xl font-black text-accent-700">+$<span class="stat-counter" data-target="2001" data-decimals="0" data-format="comma">2,001</span><span class="text-xs font-bold text-accent-600">/mo (<span class="stat-counter" data-target="67" data-decimals="0">67</span>%)</span></span>
           </div>
         </div>
 
       </div>
 
-      <!-- Credit Burn Rates Explained -->
-      <div class="mt-16 glass-card rounded-2xl p-6 sm:p-8 border border-slate-800">
-        <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-          <span>📊</span> How Credits Work (Transparent Burn Rates)
-        </h3>
-        <p class="text-xs sm:text-sm text-slate-400 mb-6">
-          Credits represent dedicated specialist hours and flat task units. No guessing.
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-            <div class="text-brand-400 font-bold text-lg mb-1">1,000 credits / hr</div>
-            <div class="font-semibold text-white">Junior Tech & Daily Tasks</div>
-            <div class="text-xs text-slate-400 mt-1">CMS updates, image resizing, data entry, upload formatting.</div>
-          </div>
-          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-            <div class="text-cyan-400 font-bold text-lg mb-1">2,000 credits / hr</div>
-            <div class="font-semibold text-white">Senior Specialist & Dev</div>
-            <div class="text-xs text-slate-400 mt-1">Technical SEO audit, custom JS/CSS fixes, schema coding, strategic planning.</div>
-          </div>
-          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-            <div class="text-purple-400 font-bold text-lg mb-1">4,000 credits flat</div>
-            <div class="font-semibold text-white">1,200w SEO Pillar Article</div>
-            <div class="text-xs text-slate-400 mt-1">Fully researched, keyword optimized, meta description included, QA proofread.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Interactive Reseller ROI Calculator Box -->
-      <div class="mt-12 glass-card rounded-3xl p-6 sm:p-10 border border-brand-500/30 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/30">
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div class="max-w-xl">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Interactive Profit Calculator</span>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">
-              Reseller Margin Sandbox
+      <!-- Interactive Reseller ROI Sandbox Calculator -->
+      <div class="mt-16 rounded-3xl p-6 sm:p-10 border border-slate-200 bg-white shadow-lg">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div class="max-w-xl w-full">
+            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Live ROI Sandbox</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
+              Test Your Agency's Retainer Profit
             </h3>
-            <p class="text-slate-300 text-sm mt-3 leading-relaxed">
-              Slide to see how many client retainers you plan to deliver each month through JDP.
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Adjust your client count and average monthly retainer price to project your recurring net profit.
             </p>
 
-            <div class="mt-6 space-y-4">
+            <div class="mt-8 space-y-6">
               <div>
                 <div class="flex justify-between text-sm font-semibold mb-2">
-                  <span class="text-slate-300">Client Retainers Handled:</span>
-                  <span id="clientCountLabel" class="text-brand-400 font-bold text-base val-flash">3 Clients</span>
+                  <span class="text-slate-700">Client Retainers Handled:</span>
+                  <span id="clientCountLabel" class="text-brand-700 font-bold text-base val-flash">3 Clients</span>
                 </div>
-                <input id="clientSlider" type="range" min="1" max="10" value="3" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-500">
+                <input id="clientSlider" type="range" min="1" max="10" value="3" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600">
               </div>
 
               <div>
                 <div class="flex justify-between text-sm font-semibold mb-2">
-                  <span class="text-slate-300">Your Average Retainer Price:</span>
-                  <span id="priceLabel" class="text-cyan-400 font-bold text-base val-flash">$1,250 / client</span>
+                  <span class="text-slate-700">Your Average Retainer Price:</span>
+                  <span id="priceLabel" class="text-indigo-700 font-bold text-base val-flash">$1,250 / client</span>
                 </div>
-                <input id="priceSlider" type="range" min="800" max="3000" step="50" value="1250" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                <input id="priceSlider" type="range" min="800" max="3000" step="50" value="1250" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
               </div>
             </div>
           </div>
 
           <!-- Dynamic ROI Results Card -->
-          <div class="w-full lg:w-96 rounded-2xl bg-slate-950 p-6 border border-slate-800 shadow-2xl flex flex-col justify-between">
+          <div class="w-full lg:w-96 rounded-2xl bg-slate-950 p-6 text-white shadow-xl flex flex-col justify-between">
             <div class="space-y-4">
               <div class="flex justify-between items-center text-sm">
                 <span class="text-slate-400">Gross Client Revenue</span>
@@ -882,34 +1169,407 @@
               </div>
               <div class="flex justify-between items-center text-sm">
                 <span class="text-slate-400">JDP Pod Cost</span>
-                <span id="jdpCost" class="font-bold text-red-400 text-lg val-flash">-$999</span>
+                <span id="jdpCost" class="font-bold text-rose-400 text-lg val-flash">-$999</span>
               </div>
               <div class="pt-4 border-t border-slate-800 flex justify-between items-baseline">
                 <span class="text-sm font-bold text-slate-300">Your Monthly Profit</span>
-                <span id="netProfit" class="text-3xl font-black text-brand-400 val-flash">+$2,751</span>
+                <span id="netProfit" class="text-3xl font-black text-accent-400 val-flash">+$2,751</span>
               </div>
               <div class="text-right">
-                <span id="profitMargin" class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full val-flash">73% Profit Margin</span>
+                <span id="profitMargin" class="text-xs font-bold text-accent-300 bg-accent-500/20 px-2.5 py-1 rounded-full val-flash">73% Profit Margin</span>
               </div>
             </div>
 
-            <button onclick="openContactModal()" class="mt-6 w-full py-3 rounded-xl font-bold text-xs bg-brand-500 hover:bg-brand-600 text-white btn-motion">
+            <button onclick="openContactModal()" class="mt-6 w-full py-3.5 rounded-xl font-bold text-xs bg-brand-600 hover:bg-brand-500 text-white btn-motion shadow-md">
               Lock In This Margin Model →
             </button>
           </div>
         </div>
       </div>
 
-      <!-- 7-Day Risk-Free Test Drive Guarantee box -->
-      <div class="mt-12 rounded-2xl border border-brand-500/40 bg-gradient-to-r from-brand-950/30 via-slate-900 to-brand-950/30 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
-        <div class="w-16 h-16 rounded-2xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-3xl shrink-0">
+    </div>
+  </section>
+
+  <!-- Problem / Solution (Comparison) -->
+  <section class="py-16 md:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Scale Without Agony</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          Stop Hiring Freelancers Who Disappear
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Compare the chaos of managing loose talent vs plug-and-play white-label infrastructure.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Without JDP -->
+        <div class="rounded-3xl border border-rose-200 bg-rose-50/40 p-6 sm:p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold">✕</div>
+            <h3 class="text-xl font-bold text-rose-950">The Traditional Agency Trap</h3>
+          </div>
+          <ul class="space-y-4 text-slate-700 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-rose-600 font-bold mt-0.5">✕</span>
+              <span><strong>FTE payroll burden:</strong> $4,500/mo salary + taxes, benefits, onboarding time, and vacation lag.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rose-600 font-bold mt-0.5">✕</span>
+              <span><strong>Freelancer ghosting:</strong> Upwork/Fiverr contractors vanish right before critical client review deadlines.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rose-600 font-bold mt-0.5">✕</span>
+              <span><strong>Midnight QA exhaustion:</strong> You spend late nights fixing broken markup, bad grammar, and sloppy styling.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rose-600 font-bold mt-0.5">✕</span>
+              <span><strong>Growth ceiling:</strong> You cannot take on 5 new clients without risking existing client deliverable quality.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- With JDP -->
+        <div class="rounded-3xl border border-emerald-200 bg-emerald-50/40 p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">✓</div>
+            <h3 class="text-xl font-bold text-emerald-950">With JDP.team White-Label</h3>
+          </div>
+          <ul class="space-y-4 text-slate-800 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-700 font-bold mt-0.5">✓</span>
+              <span><strong>Predictable flat subscription:</strong> Low predictable cost from $499/mo, pause or cancel anytime with 1 click.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-700 font-bold mt-0.5">✓</span>
+              <span><strong>1 Dedicated Account PM:</strong> One single point of contact who directs technical specialists and writers.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-700 font-bold mt-0.5">✓</span>
+              <span><strong>Internal Senior QA:</strong> Every piece of content, code patch, or audit is reviewed before it reaches you.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-700 font-bold mt-0.5">✓</span>
+              <span><strong>Instant elasticity:</strong> Double your client intake tomorrow with zero hiring friction or lag.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities / What We Take Off Your Plate -->
+  <section id="services" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Full Capabilities</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          What We Take Off Your Plate
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          From deep technical SEO audits to monthly blog clusters and routine CMS maintenance.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Service 1: SEO & Technical Web -->
+        <div class="card-clean rounded-3xl p-8 bg-white border-slate-200">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center text-2xl mb-6">
+            📈
+          </div>
+          <h3 class="text-xl font-bold text-slate-950 mb-3">SEO & Technical Web</h3>
+          <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+            Data-backed search optimization to rank client sites and protect domain authority across all updates.
+          </p>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li class="flex items-center gap-2.5">
+              <span class="text-brand-600 font-bold">•</span>
+              <span>Keyword clustering & search intent mapping</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-brand-600 font-bold">•</span>
+              <span>On-page audits, meta tag optimization, schema</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-brand-600 font-bold">•</span>
+              <span>Core Web Vitals & speed hygiene</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-brand-600 font-bold">•</span>
+              <span>Internal linking & canonical bug fixes</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 2: Content & Copy -->
+        <div class="card-clean rounded-3xl p-8 bg-white border-slate-200">
+          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center text-2xl mb-6">
+            ✍️
+          </div>
+          <h3 class="text-xl font-bold text-slate-950 mb-3">Content & Long-Form Copy</h3>
+          <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+            High-ranking articles, comparison pages, and email sequences that sound human and convert.
+          </p>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li class="flex items-center gap-2.5">
+              <span class="text-blue-600 font-bold">•</span>
+              <span>1,200 – 2,500 word deeply researched SEO guides</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-blue-600 font-bold">•</span>
+              <span>High-converting landing page copywriting</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-blue-600 font-bold">•</span>
+              <span>Lead magnet creation (checklists, whitepapers)</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-blue-600 font-bold">•</span>
+              <span>Email nurturing sequences & newsletters</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service 3: General Digital Support -->
+        <div class="card-clean rounded-3xl p-8 bg-white border-slate-200">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center justify-center text-2xl mb-6">
+            🛠️
+          </div>
+          <h3 class="text-xl font-bold text-slate-950 mb-3">Daily Digital Operations</h3>
+          <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+            All the tedious digital tasks that drain your agency's billable hours and creative energy.
+          </p>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li class="flex items-center gap-2.5">
+              <span class="text-indigo-600 font-bold">•</span>
+              <span>CMS updates (WordPress, Webflow, Shopify)</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-indigo-600 font-bold">•</span>
+              <span>Banner graphics & Canva social asset creation</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-indigo-600 font-bold">•</span>
+              <span>Monthly reporting decks & analytics consolidation</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-indigo-600 font-bold">•</span>
+              <span>Data entry, CRM hygiene & broken link validation</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section (Crisp White & Transparent) -->
+  <section id="pricing" class="py-16 md:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Transparent Subscriptions</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          Predictable Monthly Pod Pricing
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          No hourly surprises. Pause or cancel with 1 click. Full credit burn transparency.
+        </p>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+
+        <!-- Tier 1: Starter Desk -->
+        <div class="card-clean pricing-card rounded-3xl p-8 border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold text-slate-950">Starter Desk</h3>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">Boutique</span>
+            </div>
+            <p class="text-slate-500 text-xs mb-6">Ideal for boutique agencies managing 1–3 client retainers.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-4xl font-black text-slate-950">$499</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+
+            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>50,000 credits</strong> per month</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>1 active slot</strong> (worked sequentially)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>48h</strong> average turnaround</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Dedicated Account PM</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Senior QA review before delivery</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>100% White-Label guarantee</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button onclick="selectPlan('Starter Desk', '$499/mo')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion shadow-sm">
+              Start 7-Day Trial
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 2: Growth Pod (Most Popular) -->
+        <div class="pricing-card pricing-card-recommended rounded-3xl p-8 border-2 border-brand-600 flex flex-col justify-between relative shadow-xl shadow-brand-600/10 scale-105 z-10 bg-white">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-600 text-white text-xs font-black tracking-wide uppercase shadow-md">
+            Most Popular for Agencies
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-4 mt-2">
+              <h3 class="text-xl font-bold text-slate-950">Growth Pod</h3>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">Scale Workhorse</span>
+            </div>
+            <p class="text-slate-500 text-xs mb-6">For scaling agencies running 4–10 ongoing clients.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-4xl font-black text-brand-600">$999</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+
+            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-800">
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>110,000 credits</strong> (10k bonus included)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>2 active parallel slots</strong></span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>24h</strong> fast turnaround</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Dedicated PM via private Slack channel</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Unlimited revisions & edits</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Full SEO + Tech + Copywriter access</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button onclick="selectPlan('Growth Pod', '$999/mo')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/25 btn-motion">
+              Start 7-Day Trial (Growth)
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 3: Scale Partner -->
+        <div class="card-clean pricing-card rounded-3xl p-8 border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold text-slate-950">Scale Partner</h3>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">High Volume</span>
+            </div>
+            <p class="text-slate-500 text-xs mb-6">Full department replacement for established multi-client agencies.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-4xl font-black text-slate-950">$1,899</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+
+            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>220,000 credits</strong> (20k bonus)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>4 active parallel slots</strong></span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span><strong>Same-day / priority</strong> turnaround</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Lead Strategist + Dedicated PM</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Custom client portal integration</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="text-brand-600 font-bold">✓</span>
+                <span>Bi-weekly strategy check-in calls</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button onclick="selectPlan('Scale Partner', '$1,899/mo')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion shadow-sm">
+              Start 7-Day Trial
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Credit Burn Rates Breakdown -->
+      <div class="mt-16 rounded-2xl p-6 sm:p-8 border border-slate-200 bg-surface-subtle">
+        <h3 class="text-lg font-bold text-slate-950 mb-2 flex items-center gap-2">
+          <span>📊</span> How Credits Work (Transparent Flat Burn Rates)
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mb-6">
+          Credits represent dedicated specialist hours and flat task units. No guessing or inflated timesheets.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+          <div class="p-4 rounded-xl bg-white border border-slate-200">
+            <div class="text-brand-600 font-bold text-lg mb-1">1,000 credits / hr</div>
+            <div class="font-semibold text-slate-900">Junior Tech & Daily Tasks</div>
+            <div class="text-xs text-slate-500 mt-1">CMS updates, image resizing, data entry, upload formatting, routine maintenance.</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white border border-slate-200">
+            <div class="text-indigo-600 font-bold text-lg mb-1">2,000 credits / hr</div>
+            <div class="font-semibold text-slate-900">Senior Specialist & Dev</div>
+            <div class="text-xs text-slate-500 mt-1">Technical SEO audit, custom JS/CSS fixes, schema coding, strategic planning.</div>
+          </div>
+          <div class="p-4 rounded-xl bg-white border border-slate-200">
+            <div class="text-accent-700 font-bold text-lg mb-1">4,000 credits flat</div>
+            <div class="font-semibold text-slate-900">1,200w SEO Pillar Article</div>
+            <div class="text-xs text-slate-500 mt-1">Deep research, keyword optimization, meta description, internal links, QA verified.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7-Day Risk-Free Guarantee Banner -->
+      <div class="mt-12 rounded-2xl border border-accent-300 bg-accent-50/50 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
+        <div class="w-16 h-16 rounded-2xl bg-accent-100 text-accent-700 flex items-center justify-center text-3xl shrink-0 border border-accent-200">
           🛡️
         </div>
         <div>
-          <h4 class="text-lg font-bold text-white mb-1">
+          <h4 class="text-lg font-bold text-slate-950 mb-1">
             7-Day Risk-Free Test Drive Guarantee
           </h4>
-          <p class="text-slate-300 text-sm leading-relaxed">
+          <p class="text-slate-700 text-sm leading-relaxed">
             Test JDP.team with your toughest real-world client brief for a full 7 days. If the quality, speed, or communication doesn't exceed your expectations, let us know within 7 days for a 100% courteous refund. No awkward questions asked.
           </p>
         </div>
@@ -919,90 +1579,105 @@
   </section>
 
   <!-- Interactive FAQ Accordion -->
-  <section id="faq" class="py-16 md:py-24">
+  <section id="faq" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Got Questions?</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Got Questions?</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
           Frequently Asked Questions
         </h2>
-        <p class="text-slate-400 mt-3 text-base">
-          Everything you need to know about working with your white-label backend.
+        <p class="text-slate-600 mt-3 text-base">
+          Everything you need to know about working with your silent white-label backend.
         </p>
       </div>
 
       <div class="space-y-4" id="faqAccordion">
 
         <!-- FAQ 1 -->
-        <div class="glass-card faq-item rounded-2xl border border-slate-800 overflow-hidden">
-          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:text-brand-400 btn-motion">
+        <div class="card-clean faq-item rounded-2xl border-slate-200 overflow-hidden bg-white">
+          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-slate-950 flex justify-between items-center focus:outline-none hover:text-brand-600 btn-motion">
             <span>Is this truly 100% white-label? Will my clients ever see JDP?</span>
             <span class="faq-icon faq-icon-rot text-slate-400 text-xl font-mono leading-none">+</span>
           </button>
           <div class="faq-grid-wrapper">
             <div class="faq-inner">
-              <div class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/60 pt-4">
-                Never. We operate as a silent ghost partner. Every report, spreadsheet, article, or design file is delivered completely unbranded or with your agency’s branding. We sign strict NDAs upon request and will never contact or pitch your clients.
+              <div class="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                Never. We operate strictly as a ghost backend. Every report, spreadsheet, article, or design file is delivered completely unbranded or with your agency’s branding applied. We sign strict non-disclosure agreements (NDAs) upon request and will never contact or pitch your clients under any circumstance.
               </div>
             </div>
           </div>
         </div>
 
         <!-- FAQ 2 -->
-        <div class="glass-card faq-item rounded-2xl border border-slate-800 overflow-hidden">
-          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:text-brand-400 btn-motion">
-            <span>How does the 7-day trial work?</span>
+        <div class="card-clean faq-item rounded-2xl border-slate-200 overflow-hidden bg-white">
+          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-slate-950 flex justify-between items-center focus:outline-none hover:text-brand-600 btn-motion">
+            <span>How does the 7-day risk-free trial work?</span>
             <span class="faq-icon faq-icon-rot text-slate-400 text-xl font-mono leading-none">+</span>
           </button>
           <div class="faq-grid-wrapper">
             <div class="faq-inner">
-              <div class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/60 pt-4">
-                When you subscribe to any plan, your 7-day test drive begins immediately. You get assigned a dedicated PM and can submit real briefs right away. If you aren’t completely thrilled with the speed and output quality within the first 7 days, email your PM for an immediate full refund.
+              <div class="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                When you subscribe to any plan, your 7-day test drive begins immediately. You get assigned a dedicated PM and can submit real client briefs right away. If you aren’t completely thrilled with our speed and output quality within the first 7 days, email your PM for an immediate full refund.
               </div>
             </div>
           </div>
         </div>
 
         <!-- FAQ 3 -->
-        <div class="glass-card faq-item rounded-2xl border border-slate-800 overflow-hidden">
-          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:text-brand-400 btn-motion">
-            <span>How do we submit tasks and communicate?</span>
+        <div class="card-clean faq-item rounded-2xl border-slate-200 overflow-hidden bg-white">
+          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-slate-950 flex justify-between items-center focus:outline-none hover:text-brand-600 btn-motion">
+            <span>How do we submit tasks and communicate with our pod?</span>
             <span class="faq-icon faq-icon-rot text-slate-400 text-xl font-mono leading-none">+</span>
           </button>
           <div class="faq-grid-wrapper">
             <div class="faq-inner">
-              <div class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/60 pt-4">
-                We adapt to your agency workflow. Most partners communicate with their dedicated PM via a private Slack channel, Trello, ClickUp, Asana, or our clean client portal. Just drop a brief, Loom video, or task link, and we take it from there.
+              <div class="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                We adapt directly to your agency workflow. Most partners communicate with their dedicated PM via a private Slack channel, Trello, ClickUp, Asana, or our clean client portal. Just drop a brief, Loom video, or task link, and we take care of the rest.
               </div>
             </div>
           </div>
         </div>
 
         <!-- FAQ 4 -->
-        <div class="glass-card faq-item rounded-2xl border border-slate-800 overflow-hidden">
-          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:text-brand-400 btn-motion">
+        <div class="card-clean faq-item rounded-2xl border-slate-200 overflow-hidden bg-white">
+          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-slate-950 flex justify-between items-center focus:outline-none hover:text-brand-600 btn-motion">
             <span>What happens if a deliverable needs revisions?</span>
             <span class="faq-icon faq-icon-rot text-slate-400 text-xl font-mono leading-none">+</span>
           </button>
           <div class="faq-grid-wrapper">
             <div class="faq-inner">
-              <div class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/60 pt-4">
-                Revisions are unlimited. If copy needs a different tone, or a WordPress layout needs minor styling adjustments, simply leave comments and our team will adjust until you and your client are 100% happy.
+              <div class="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                Revisions are completely unlimited. If copy needs a different tone, or a WordPress layout needs minor styling adjustments, simply leave comments and our team will adjust until you and your client are 100% happy.
               </div>
             </div>
           </div>
         </div>
 
         <!-- FAQ 5 -->
-        <div class="glass-card faq-item rounded-2xl border border-slate-800 overflow-hidden">
-          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:text-brand-400 btn-motion">
+        <div class="card-clean faq-item rounded-2xl border-slate-200 overflow-hidden bg-white">
+          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-slate-950 flex justify-between items-center focus:outline-none hover:text-brand-600 btn-motion">
             <span>Can I pause or upgrade my plan as client volume changes?</span>
             <span class="faq-icon faq-icon-rot text-slate-400 text-xl font-mono leading-none">+</span>
           </button>
           <div class="faq-grid-wrapper">
             <div class="faq-inner">
-              <div class="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/60 pt-4">
-                Yes. Agencies experience seasonal client influxes. You can pause your subscription with 1-click in your billing dashboard or scale up to Growth Pod / Scale Partner when closing new retainers.
+              <div class="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                Yes. Agencies experience seasonal client influxes. You can pause your subscription with 1-click in your billing dashboard or scale up to Growth Pod / Scale Partner whenever you close new retainers.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="card-clean faq-item rounded-2xl border-slate-200 overflow-hidden bg-white">
+          <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-slate-950 flex justify-between items-center focus:outline-none hover:text-brand-600 btn-motion">
+            <span>What is the difference between JDP.team and JetDigitalPro?</span>
+            <span class="faq-icon faq-icon-rot text-slate-400 text-xl font-mono leading-none">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner">
+              <div class="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                JetDigitalPro is our parent brand that provides direct digital and VA solutions. JDP.team is the dedicated white-label B2B infrastructure division built specifically for marketing and digital agencies requiring unbranded delivery, dedicated PM pods, and strict client NDA firewalls.
               </div>
             </div>
           </div>
@@ -1012,109 +1687,111 @@
     </div>
   </section>
 
-  <!-- Bottom CTA Section -->
-  <section class="py-20 bg-gradient-to-b from-[#080c16] via-[#0c1324] to-[#080c16] relative overflow-hidden border-t border-slate-800">
+  <!-- Bottom High-Impact CTA Section -->
+  <section class="py-20 bg-slate-950 text-white relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-semibold mb-6">
-        🚀 Ready to Scale Agency Revenue?
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-brand-400 text-xs font-bold mb-6">
+        🚀 Scale Your Agency Margin Today
       </div>
-      <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
         Take on more clients without <br class="hidden sm:inline">
-        taking on more stress.
+        taking on more payroll headaches.
       </h2>
-      <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
-        Join 100+ digital agencies that rely on JDP.team as their secret fulfillment engine.
+      <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+        Join 100+ digital agencies that rely on JDP.team as their confidential fulfillment engine.
       </p>
 
       <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white shadow-xl shadow-brand-500/30 btn-motion">
+        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-brand-600 hover:bg-brand-500 text-white shadow-xl shadow-brand-600/30 btn-motion">
           Start Your 7-Day Risk-Free Trial
         </a>
-        <button onclick="openContactModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 btn-motion">
+        <button onclick="openContactModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-200 btn-motion">
           Book 15-Min Intro Call
         </button>
       </div>
       <p class="mt-4 text-xs text-slate-500">
-        No setup fees • Cancel or pause anytime • Full NDA protection
+        No setup fees • Cancel or pause anytime with 1 click • Strict NDA protection
       </p>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-800/80 bg-[#060911] py-12 text-slate-400 text-xs sm:text-sm">
+  <!-- Footer (Clean Light Slate) -->
+  <footer class="border-t border-slate-200 bg-surface-subtle py-12 text-slate-600 text-xs sm:text-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center font-bold text-white text-sm">
+        <div class="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-black text-sm">
           J
         </div>
-        <span class="font-bold text-white text-base">JDP.team</span>
-        <span class="text-slate-500">| An agency backend powered by JetDigitalPro</span>
+        <span class="font-extrabold text-slate-950 text-base">JDP.team</span>
+        <span class="text-slate-400">| Powered by JetDigitalPro</span>
       </div>
 
-      <div class="flex flex-wrap items-center gap-6 text-slate-400">
-        <a href="#services" class="hover:text-white transition">Services</a>
-        <a href="#how-it-works" class="hover:text-white transition">How It Works</a>
-        <a href="#pricing" class="hover:text-white transition">Pricing</a>
-        <a href="#faq" class="hover:text-white transition">FAQ</a>
-        <a href="mailto:hello@jdp.team" class="hover:text-white transition">hello@jdp.team</a>
+      <div class="flex flex-wrap items-center gap-6 text-slate-600 font-medium">
+        <a href="#track-record" class="hover:text-slate-950 transition">Scale</a>
+        <a href="#qa-standard" class="hover:text-slate-950 transition">20-Point QA</a>
+        <a href="#services" class="hover:text-slate-950 transition">Services</a>
+        <a href="#testimonials" class="hover:text-slate-950 transition">Testimonials</a>
+        <a href="#pricing" class="hover:text-slate-950 transition">Pricing</a>
+        <a href="#faq" class="hover:text-slate-950 transition">FAQ</a>
+        <a href="mailto:hello@jdp.team" class="hover:text-slate-950 transition">hello@jdp.team</a>
       </div>
 
-      <div class="text-slate-500 text-xs">
+      <div class="text-slate-400 text-xs">
         &copy; <span id="year">2026</span> JDP.team. All rights reserved.
       </div>
     </div>
   </footer>
 
   <!-- Lead / Booking Modal -->
-  <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="glass-card bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-lg w-full relative shadow-2xl">
-      <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl focus:outline-none">
+  <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full relative shadow-2xl">
+      <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-2xl focus:outline-none">
         &times;
       </button>
 
       <div class="text-center mb-6">
-        <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mx-auto mb-3">
+        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 border border-brand-200 flex items-center justify-center text-xl mx-auto mb-3">
           🚀
         </div>
-        <h3 id="modalTitle" class="text-xl font-bold text-white">Book 15-Min Intro Call</h3>
-        <p class="text-xs text-slate-400 mt-1">Talk to our lead operations strategist about scaling your agency.</p>
+        <h3 id="modalTitle" class="text-xl font-bold text-slate-950">Book 15-Min Intro Call</h3>
+        <p class="text-xs text-slate-500 mt-1">Talk to our lead operations strategist about scaling your agency backend.</p>
       </div>
 
       <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
         <input type="hidden" id="selectedPlanInput" name="plan" value="General Inquiry">
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Your Name</label>
-          <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-500 placeholder-slate-500" placeholder="Alex Morgan">
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Your Name</label>
+          <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-brand-600 placeholder-slate-400" placeholder="Alex Morgan">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Agency Work Email</label>
-          <input type="email" required class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-500 placeholder-slate-500" placeholder="alex@youragency.com">
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Agency Work Email</label>
+          <input type="email" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-brand-600 placeholder-slate-400" placeholder="alex@youragency.com">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Agency Website / URL</label>
-          <input type="url" required class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-500 placeholder-slate-500" placeholder="https://youragency.com">
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Agency Website / URL</label>
+          <input type="url" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-brand-600 placeholder-slate-400" placeholder="https://youragency.com">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Current Active Client Count</label>
-          <select class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-500">
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Current Active Client Count</label>
+          <select class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-brand-600">
             <option value="1-3">1 - 3 clients</option>
             <option value="4-10" selected>4 - 10 clients</option>
             <option value="11-25">11 - 25 clients</option>
             <option value="25+">25+ clients</option>
           </select>
         </div>
-        <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 text-white shadow-lg shadow-brand-500/25 btn-motion">
+        <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/25 btn-motion">
           Confirm Intro Request
         </button>
       </form>
 
       <div id="formSuccess" class="hidden text-center py-6">
         <div class="text-4xl mb-3">✅</div>
-        <h4 class="text-lg font-bold text-white">We’ve Received Your Request!</h4>
-        <p class="text-xs text-slate-300 mt-2">
+        <h4 class="text-lg font-bold text-slate-950">We’ve Received Your Request!</h4>
+        <p class="text-xs text-slate-600 mt-2">
           Your dedicated strategist will review your agency site and email your booking calendar within 2 hours.
         </p>
-        <button onclick="closeContactModal()" class="mt-4 px-5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white btn-motion">
+        <button onclick="closeContactModal()" class="mt-4 px-5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white btn-motion">
           Close
         </button>
       </div>
@@ -1124,52 +1801,52 @@
   <!-- Vanilla JS Interactive Handlers -->
   <script>
     // Current Year
-    document.getElementById(‘year’).textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     // prefers-reduced-motion check
-    const prefersReducedMotion = window.matchMedia(‘(prefers-reduced-motion: reduce)’).matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Mobile Navigation Toggle
-    const mobileMenuBtn = document.getElementById(‘mobileMenuBtn’);
-    const mobileMenu = document.getElementById(‘mobileMenu’);
-    mobileMenuBtn.addEventListener(‘click’, () => {
-      mobileMenu.classList.toggle(‘hidden’);
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
 
     // Close mobile menu on link click
-    mobileMenu.querySelectorAll(‘a’).forEach(link => {
-      link.addEventListener(‘click’, () => {
-        mobileMenu.classList.add(‘hidden’);
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
       });
     });
 
     // FAQ Accordion with CSS Grid 0fr -> 1fr
-    const faqItems = document.querySelectorAll(‘.faq-item’);
+    const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
-      const toggle = item.querySelector(‘.faq-toggle’);
-      const gridWrapper = item.querySelector(‘.faq-grid-wrapper’);
-      const icon = item.querySelector(‘.faq-icon’);
+      const toggle = item.querySelector('.faq-toggle');
+      const gridWrapper = item.querySelector('.faq-grid-wrapper');
+      const icon = item.querySelector('.faq-icon');
 
-      toggle.addEventListener(‘click’, () => {
-        const isOpen = gridWrapper.classList.contains(‘open’);
+      toggle.addEventListener('click', () => {
+        const isOpen = gridWrapper.classList.contains('open');
 
         // Close all other items
         faqItems.forEach(other => {
           if (other !== item) {
-            other.classList.remove(‘active’);
-            other.querySelector(‘.faq-grid-wrapper’).classList.remove(‘open’);
-            other.querySelector(‘.faq-icon’).classList.remove(‘rotated’);
+            other.classList.remove('active');
+            other.querySelector('.faq-grid-wrapper').classList.remove('open');
+            other.querySelector('.faq-icon').classList.remove('rotated');
           }
         });
 
         if (isOpen) {
-          item.classList.remove(‘active’);
-          gridWrapper.classList.remove(‘open’);
-          icon.classList.remove(‘rotated’);
+          item.classList.remove('active');
+          gridWrapper.classList.remove('open');
+          icon.classList.remove('rotated');
         } else {
-          item.classList.add(‘active’);
-          gridWrapper.classList.add(‘open’);
-          icon.classList.add(‘rotated’);
+          item.classList.add('active');
+          gridWrapper.classList.add('open');
+          icon.classList.add('rotated');
         }
       });
     });
@@ -1178,10 +1855,10 @@
     function animateCounter(el) {
       if (prefersReducedMotion) return;
 
-      const target = parseFloat(el.getAttribute(‘data-target’));
+      const target = parseFloat(el.getAttribute('data-target'));
       if (isNaN(target)) return;
-      const decimals = parseInt(el.getAttribute(‘data-decimals’) || ‘0’, 10);
-      const useComma = el.getAttribute(‘data-format’) === ‘comma’;
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const useComma = el.getAttribute('data-format') === 'comma';
       const duration = 1200;
       const startTime = performance.now();
 
@@ -1224,20 +1901,20 @@
           animateCounter(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll(‘.stat-counter’).forEach(counter => {
+    document.querySelectorAll('.stat-counter').forEach(counter => {
       counterObserver.observe(counter);
     });
 
     // Recommended pricing card subtle one-shot border pulse on viewport entry
-    const recCard = document.querySelector(‘.pricing-card-recommended’);
+    const recCard = document.querySelector('.pricing-card-recommended');
     if (recCard && !prefersReducedMotion) {
       const pulseObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             obs.unobserve(entry.target);
-            entry.target.classList.add(‘pulse-active’);
+            entry.target.classList.add('pulse-active');
           }
         });
       }, { threshold: 0.25 });
@@ -1245,14 +1922,14 @@
     }
 
     // Reseller ROI Sandbox Calculator
-    const clientSlider = document.getElementById(‘clientSlider’);
-    const priceSlider = document.getElementById(‘priceSlider’);
-    const clientCountLabel = document.getElementById(‘clientCountLabel’);
-    const priceLabel = document.getElementById(‘priceLabel’);
-    const grossRevenue = document.getElementById(‘grossRevenue’);
-    const jdpCost = document.getElementById(‘jdpCost’);
-    const netProfit = document.getElementById(‘netProfit’);
-    const profitMargin = document.getElementById(‘profitMargin’);
+    const clientSlider = document.getElementById('clientSlider');
+    const priceSlider = document.getElementById('priceSlider');
+    const clientCountLabel = document.getElementById('clientCountLabel');
+    const priceLabel = document.getElementById('priceLabel');
+    const grossRevenue = document.getElementById('grossRevenue');
+    const jdpCost = document.getElementById('jdpCost');
+    const netProfit = document.getElementById('netProfit');
+    const profitMargin = document.getElementById('profitMargin');
 
     const flashElements = [clientCountLabel, priceLabel, grossRevenue, jdpCost, netProfit, profitMargin];
     let flashTimeout;
@@ -1260,13 +1937,13 @@
     function flashResults() {
       if (prefersReducedMotion) return;
       flashElements.forEach(el => {
-        el.classList.remove(‘flash’);
+        el.classList.remove('flash');
         void el.offsetWidth;
-        el.classList.add(‘flash’);
+        el.classList.add('flash');
       });
       clearTimeout(flashTimeout);
       flashTimeout = setTimeout(() => {
-        flashElements.forEach(el => el.classList.remove(‘flash’));
+        flashElements.forEach(el => el.classList.remove('flash'));
       }, 140);
     }
 
@@ -1274,7 +1951,7 @@
       const clients = parseInt(clientSlider.value, 10);
       const price = parseInt(priceSlider.value, 10);
 
-      clientCountLabel.textContent = `${clients} Client${clients > 1 ? ‘s’ : ‘’}`;
+      clientCountLabel.textContent = `${clients} Client${clients > 1 ? 's' : ''}`;
       priceLabel.textContent = `$${price.toLocaleString()} / client`;
 
       const gross = clients * price;
@@ -1300,39 +1977,55 @@
       flashResults();
     }
 
-    clientSlider.addEventListener(‘input’, calculateROI);
-    priceSlider.addEventListener(‘input’, calculateROI);
+    clientSlider.addEventListener('input', calculateROI);
+    priceSlider.addEventListener('input', calculateROI);
     calculateROI();
 
+    // Copy Unbranded Client Link Interaction
+    function copyDeliverableLink() {
+      const btnText = document.getElementById('copyShareText');
+      navigator.clipboard.writeText("https://reports.apexmedia.co/dental-audit-q1").then(() => {
+        btnText.textContent = "Link Copied to Clipboard! ✓";
+        setTimeout(() => {
+          btnText.textContent = "Copy Unbranded Client Link";
+        }, 2200);
+      }).catch(() => {
+        btnText.textContent = "Copied! ✓";
+        setTimeout(() => {
+          btnText.textContent = "Copy Unbranded Client Link";
+        }, 2200);
+      });
+    }
+
     // Modal Control
-    const contactModal = document.getElementById(‘contactModal’);
-    const modalTitle = document.getElementById(‘modalTitle’);
-    const selectedPlanInput = document.getElementById(‘selectedPlanInput’);
-    const leadForm = document.getElementById(‘leadForm’);
-    const formSuccess = document.getElementById(‘formSuccess’);
+    const contactModal = document.getElementById('contactModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const selectedPlanInput = document.getElementById('selectedPlanInput');
+    const leadForm = document.getElementById('leadForm');
+    const formSuccess = document.getElementById('formSuccess');
 
     function openContactModal() {
       modalTitle.textContent = "Book 15-Min Intro Call";
       selectedPlanInput.value = "Intro Call";
-      leadForm.classList.remove(‘hidden’);
-      formSuccess.classList.add(‘hidden’);
-      contactModal.classList.remove(‘hidden’);
+      leadForm.classList.remove('hidden');
+      formSuccess.classList.add('hidden');
+      contactModal.classList.remove('hidden');
     }
 
     function selectPlan(planName, price) {
       modalTitle.textContent = `Start 7-Day Trial — ${planName}`;
       selectedPlanInput.value = `${planName} (${price})`;
-      leadForm.classList.remove(‘hidden’);
-      formSuccess.classList.add(‘hidden’);
-      contactModal.classList.remove(‘hidden’);
+      leadForm.classList.remove('hidden');
+      formSuccess.classList.add('hidden');
+      contactModal.classList.remove('hidden');
     }
 
     function closeContactModal() {
-      contactModal.classList.add(‘hidden’);
+      contactModal.classList.add('hidden');
     }
 
     // Close modal on click outside
-    contactModal.addEventListener(‘click’, (e) => {
+    contactModal.addEventListener('click', (e) => {
       if (e.target === contactModal) {
         closeContactModal();
       }
@@ -1340,8 +2033,8 @@
 
     function handleFormSubmit(e) {
       e.preventDefault();
-      leadForm.classList.add(‘hidden’);
-      formSuccess.classList.remove(‘hidden’);
+      leadForm.classList.add('hidden');
+      formSuccess.classList.remove('hidden');
     }
   </script>
 </body>
