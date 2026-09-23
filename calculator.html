@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/motion.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -101,6 +102,8 @@
   </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
 
   <!-- Top Announcement Bar -->
   <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
@@ -199,7 +202,7 @@
   </section>
 
   <!-- Main Calculator Section -->
-  <section class="py-12 md:py-20 bg-white border-b border-slate-200">
+  <section class="py-12 md:py-20 bg-white border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Mode Toggle Header: Direct Savings vs Agency Reseller Margin -->
@@ -209,11 +212,12 @@
           <div class="text-xs text-slate-500">Toggle between internal cost savings or client reseller profit</div>
         </div>
 
-        <div class="flex items-center gap-2 p-1 rounded-xl bg-white border border-slate-300">
-          <button id="modeSavingsBtn" type="button" onclick="setMode('savings')" class="px-4 py-1.5 rounded-lg text-xs font-bold transition bg-brand-600 text-white shadow-xs">
+        <div class="pill-tab-container relative inline-flex items-center p-1 rounded-xl bg-slate-100 border border-slate-300">
+          <div class="pill-tab-indicator"></div>
+          <button id="modeSavingsBtn" type="button" onclick="setMode('savings')" class="pill-tab-btn is-active px-4 py-1.5 rounded-lg text-xs font-bold transition">
             In-House Savings Mode
           </button>
-          <button id="modeResellerBtn" type="button" onclick="setMode('reseller')" class="px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900">
+          <button id="modeResellerBtn" type="button" onclick="setMode('reseller')" class="pill-tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900">
             Agency Reseller Mode
           </button>
         </div>
@@ -403,7 +407,29 @@
                 <div class="text-xs uppercase tracking-wider text-slate-400 mb-1">Your Total Monthly Savings</div>
                 <div class="flex items-baseline justify-between">
                   <span id="outSavings" class="text-3xl sm:text-4xl font-black text-accent-400 val-flash">+$2,748.00</span>
-                  <span id="outPercent" class="text-sm font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full val-flash">Save 79.8%</span>
+                  <span id="outPercent" class="text-sm font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full val-flash transition-all">Save 79.8%</span>
+                </div>
+              </div>
+
+              <!-- Visual Cost Comparison Animated Bars -->
+              <div class="mt-4 pt-3 border-t border-slate-800 space-y-2.5">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-400 mb-1">
+                    <span>Your JDP Team Cost</span>
+                    <span id="calcBarJdpText" class="text-white font-bold">$697.00</span>
+                  </div>
+                  <div class="cost-bar-track">
+                    <div id="calcBarJdp" class="cost-bar-fill bg-brand-500" style="width: 20.2%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-400 mb-1">
+                    <span>US In-House Payroll Equivalent</span>
+                    <span id="calcBarUsText" class="text-slate-400 font-bold">$3,445.00</span>
+                  </div>
+                  <div class="cost-bar-track">
+                    <div id="calcBarUs" class="cost-bar-fill bg-slate-600" style="width: 100%;"></div>
+                  </div>
                 </div>
               </div>
 
@@ -429,6 +455,19 @@
                 <div class="flex items-baseline justify-between">
                   <span id="outNetProfit" class="text-3xl sm:text-4xl font-black text-accent-400 val-flash">+$3,803.00</span>
                   <span id="outMargin" class="text-sm font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full val-flash">84.5% Margin</span>
+                </div>
+              </div>
+
+              <!-- Visual Reseller Margin Comparison Animated Bar -->
+              <div class="mt-4 pt-3 border-t border-slate-800 space-y-2.5">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-400 mb-1">
+                    <span>Net Margin Retention</span>
+                    <span id="resellerBarText" class="text-accent-400 font-bold">84.5% Profit</span>
+                  </div>
+                  <div class="cost-bar-track">
+                    <div id="resellerBarFill" class="cost-bar-fill bg-accent-500" style="width: 84.5%;"></div>
+                  </div>
                 </div>
               </div>
 
@@ -610,23 +649,32 @@
       const resellerView = document.getElementById('resellerView');
       const resellerInputs = document.getElementById('resellerInputsCard');
       const badge = document.getElementById('summaryBadge');
+      const indicator = document.querySelector('.pill-tab-indicator');
 
       if (mode === 'savings') {
-        btnSavings.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-brand-600 text-white shadow-xs';
-        btnReseller.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900';
+        btnSavings.classList.add('is-active');
+        btnReseller.classList.remove('is-active');
         savingsView.classList.remove('hidden');
         resellerView.classList.add('hidden');
         resellerInputs.classList.add('hidden');
         badge.textContent = 'Savings Mode';
         badge.className = 'text-xs font-bold text-accent-300 bg-accent-500/20 px-3 py-1 rounded-full';
+        if (indicator) {
+          indicator.style.width = `${btnSavings.offsetWidth}px`;
+          indicator.style.transform = `translateX(0px)`;
+        }
       } else {
-        btnReseller.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow-xs';
-        btnSavings.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900';
+        btnReseller.classList.add('is-active');
+        btnSavings.classList.remove('is-active');
         savingsView.classList.add('hidden');
         resellerView.classList.remove('hidden');
         resellerInputs.classList.remove('hidden');
         badge.textContent = 'Reseller Margin Mode';
         badge.className = 'text-xs font-bold text-indigo-300 bg-indigo-500/20 px-3 py-1 rounded-full';
+        if (indicator) {
+          indicator.style.width = `${btnReseller.offsetWidth}px`;
+          indicator.style.transform = `translateX(${btnReseller.offsetLeft - btnSavings.offsetLeft}px)`;
+        }
       }
       calculateAll();
     }
@@ -673,7 +721,32 @@
       document.getElementById('outJdpCost').textContent = `$${jdpCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
       document.getElementById('outUsCost').textContent = `$${usCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
       document.getElementById('outSavings').textContent = `+$${savings.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-      document.getElementById('outPercent').textContent = `Save ${percent}%`;
+      
+      const outPercentEl = document.getElementById('outPercent');
+      outPercentEl.textContent = `Save ${percent}%`;
+
+      // Visual Comparison Bars update
+      const barJdp = document.getElementById('calcBarJdp');
+      const barJdpText = document.getElementById('calcBarJdpText');
+      const barUsText = document.getElementById('calcBarUsText');
+      if (barJdp && barJdpText && barUsText) {
+        barJdpText.textContent = `$${jdpCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        barUsText.textContent = `$${usCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        const jdpPct = usCost > 0 ? Math.min(100, Math.max(6, (jdpCost / usCost) * 100)).toFixed(1) : 10;
+        barJdp.style.width = `${jdpPct}%`;
+      }
+
+      // Confetti celebration on high savings (>=80%)
+      if (parseFloat(percent) >= 80) {
+        outPercentEl.classList.add('celebration-active');
+        if (!window.calcConfettiFired && typeof window.triggerConfetti === 'function') {
+          window.triggerConfetti();
+          window.calcConfettiFired = true;
+        }
+      } else {
+        outPercentEl.classList.remove('celebration-active');
+        window.calcConfettiFired = false;
+      }
 
       // Recommend Plan
       const recPlan = document.getElementById('recPlanName');
@@ -708,6 +781,14 @@
       document.getElementById('outNetProfit').textContent = `+$${netProfit.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
       document.getElementById('outMargin').textContent = `${margin}% Margin`;
       document.getElementById('outAnnualProfit').textContent = `$${annualProfit.toLocaleString('en-US', { minimumFractionDigits: 0 })} / year`;
+
+      // Reseller Margin bar
+      const resFill = document.getElementById('resellerBarFill');
+      const resText = document.getElementById('resellerBarText');
+      if (resFill && resText) {
+        resText.textContent = `${margin}% Profit Margin`;
+        resFill.style.width = `${Math.min(100, Math.max(5, margin))}%`;
+      }
     }
 
     [sJunior, sSenior, sVideo, sArticle, sPR, sClients, sRetainer].forEach(slider => {
@@ -720,5 +801,7 @@
 
     calculateAll();
   </script>
+  <!-- Hallmark & Taste Motion System Script -->
+  <script src="/motion.js" defer></script>
 </body>
 </html>

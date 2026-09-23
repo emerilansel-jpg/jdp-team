@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/motion.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -93,6 +94,8 @@
   </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
 
   <!-- Top Announcement Bar -->
   <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
@@ -191,7 +194,7 @@
   </section>
 
   <!-- Section 1: Nell VH Founder Profile & Official Credentials -->
-  <section class="py-16 md:py-24 bg-white border-b border-slate-200">
+  <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="rounded-3xl border border-slate-200 bg-surface-subtle p-8 sm:p-12 shadow-sm">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -232,8 +235,8 @@
                 <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Legiit Certified Agency</div>
               </div>
               <div class="p-4 rounded-xl bg-white border border-slate-200 text-center">
-                <div class="text-xl font-black text-emerald-600">4.2 / 5.0</div>
-                <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Trustpilot Score (50+ Reviews)</div>
+                <div class="text-xl font-black text-emerald-600"><span data-counter="4.2" data-decimals="1">4.2</span> / 5.0</div>
+                <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Trustpilot Score (<span data-counter="50" data-suffix="+">50+</span> Reviews)</div>
               </div>
               <div class="p-4 rounded-xl bg-white border border-slate-200 text-center">
                 <div class="text-xl font-black text-indigo-600">Certified</div>
@@ -261,7 +264,7 @@
   </section>
 
   <!-- Section 2: Real JetDigitalPro Client Case Studies -->
-  <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+  <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Documented Results</span>
@@ -276,14 +279,14 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <!-- Case 1: PR Agency Client -->
-        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between">
+        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between reveal-on-scroll stagger-1">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">PR Agency Client</span>
               <span class="text-xs font-bold text-slate-500">Domain Rating: DR 35</span>
             </div>
             <h3 class="text-2xl font-bold text-slate-950 mb-2">
-              86.95% Keyword Coverage Captured in 7.5 Weeks
+              <span data-counter="86.95" data-suffix="%" data-decimals="2">86.95%</span> Keyword Coverage Captured in 7.5 Weeks
             </h3>
             <div class="p-4 rounded-xl bg-brand-50/50 border border-brand-100 my-4">
               <div class="text-xs text-brand-800 font-semibold mb-1">Challenge & Execution:</div>
@@ -292,7 +295,7 @@
               </p>
             </div>
             <div class="space-y-2 text-xs sm:text-sm text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong>86.95%</strong> target terms reached Page 1</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong data-counter="86.95" data-suffix="%" data-decimals="2">86.95%</strong> target terms reached Page 1</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Fast 7.5 weeks timeline from zero baseline</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 100% white-label client reporting provided</div>
             </div>
@@ -304,14 +307,14 @@
         </div>
 
         <!-- Case 2: Medical Finance Brand -->
-        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between">
+        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between reveal-on-scroll stagger-2">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">Medical Finance</span>
               <span class="text-xs font-bold text-slate-500">Strict YMYL Niche</span>
             </div>
             <h3 class="text-2xl font-bold text-slate-950 mb-2">
-              46.15% Keywords Ranked in 6.5 Weeks (12 Top-3)
+              <span data-counter="46.15" data-suffix="%" data-decimals="2">46.15%</span> Keywords Ranked in 6.5 Weeks (12 Top-3)
             </h3>
             <div class="p-4 rounded-xl bg-rose-50/50 border border-rose-100 my-4">
               <div class="text-xs text-rose-800 font-semibold mb-1">Challenge & Execution:</div>
@@ -321,7 +324,7 @@
             </div>
             <div class="space-y-2 text-xs sm:text-sm text-slate-700">
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong>12 Top-3</strong> Google US positions captured</div>
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong>46.15%</strong> overall keyword footprint ranked</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong data-counter="46.15" data-suffix="%" data-decimals="2">46.15%</strong> overall keyword footprint ranked</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Comprehensive medical reference citations</div>
             </div>
           </div>
@@ -332,23 +335,23 @@
         </div>
 
         <!-- Case 3: Home Security Niche -->
-        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between">
+        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between reveal-on-scroll stagger-3">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">Home Security</span>
-              <span class="text-xs font-bold text-slate-500">Fresh Domain (DR 0)</span>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">Fresh Domain (DR 0)</span>
+              <span class="text-xs font-bold text-slate-500">Zero Inbound Links</span>
             </div>
             <h3 class="text-2xl font-bold text-slate-950 mb-2">
-              40% Keyword Universe Captured in Under 45 Days
+              <span data-counter="40.0" data-suffix="%" data-decimals="1">40.0%</span> Keyword Capture in 45 Days from DR 0
             </h3>
             <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-100 my-4">
-              <div class="text-xs text-amber-800 font-semibold mb-1">Challenge & Execution:</div>
+              <div class="text-xs text-amber-900 font-semibold mb-1">Challenge & Execution:</div>
               <p class="text-xs text-slate-600 leading-relaxed">
-                Starting from a completely new domain with zero domain authority. JDP deployed a high-velocity cluster sprint of 30 researched articles mapped to low-competition, high-intent buyer terms.
+                New brand with no established authority or backlink history. We deployed a topical cluster blueprint covering 30 high-intent transactional queries with structured schema markup.
               </p>
             </div>
             <div class="space-y-2 text-xs sm:text-sm text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong>40%</strong> targeted search capture in 45 days</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong data-counter="40.0" data-suffix="%" data-decimals="1">40%</strong> targeted search capture in 45 days</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 30 Articles delivered and uploaded cleanly</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Indexed across Google in first 3 weeks</div>
             </div>
@@ -360,14 +363,14 @@
         </div>
 
         <!-- Case 4: Telecom Operator -->
-        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between">
+        <div class="card-clean rounded-3xl p-8 bg-white flex flex-col justify-between reveal-on-scroll stagger-4">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">Telecom Operator</span>
               <span class="text-xs font-bold text-slate-500">High Search Volume</span>
             </div>
             <h3 class="text-2xl font-bold text-slate-950 mb-2">
-              62.11% Targeted Terms in Top 100 in 12 Weeks
+              <span data-counter="62.11" data-suffix="%" data-decimals="2">62.11%</span> Targeted Terms in Top 100 in 12 Weeks
             </h3>
             <div class="p-4 rounded-xl bg-indigo-50/50 border border-indigo-100 my-4">
               <div class="text-xs text-indigo-800 font-semibold mb-1">Challenge & Execution:</div>
@@ -376,7 +379,7 @@
               </p>
             </div>
             <div class="space-y-2 text-xs sm:text-sm text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong>62.11%</strong> terms reached Top 100 within 12 weeks</div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <strong data-counter="62.11" data-suffix="%" data-decimals="2">62.11%</strong> terms reached Top 100 within 12 weeks</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Eliminated 140+ duplicate cannibalization urls</div>
               <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Ongoing recurring SEO pod maintenance</div>
             </div>
@@ -392,9 +395,9 @@
   </section>
 
   <!-- Section 3: Wall of Love / Testimonials with REAL Photos -->
-  <section class="py-16 md:py-24 bg-white border-b border-slate-200">
+  <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="text-center max-w-3xl mx-auto mb-10">
         <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Wall of Love</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
           12 Real Client Reviews with Verified Avatars
@@ -404,11 +407,30 @@
         </p>
       </div>
 
+      <!-- Interactive Filter Pill Slider -->
+      <div class="flex justify-center mb-10">
+        <div class="pill-tab-container relative inline-flex items-center p-1 rounded-xl bg-slate-100 border border-slate-300">
+          <div class="pill-tab-indicator"></div>
+          <button type="button" onclick="filterReviews('all', this)" class="pill-tab-btn is-active px-4 py-1.5 rounded-lg text-xs font-bold transition">
+            All Reviews (12)
+          </button>
+          <button type="button" onclick="filterReviews('agency', this)" class="pill-tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900">
+            Agencies (6)
+          </button>
+          <button type="button" onclick="filterReviews('founder', this)" class="pill-tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900">
+            Founders & Ecom (4)
+          </button>
+          <button type="button" onclick="filterReviews('marketing', this)" class="pill-tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900">
+            Marketing & Tech (2)
+          </button>
+        </div>
+      </div>
+
       <!-- 12 Real Testimonials Grid (3 cols desktop) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="reviewsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- 1: Michael Hodgdon -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="agency" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-1">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2026/02/image00000084.jpg" alt="Michael Hodgdon" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -430,7 +452,7 @@
         </div>
 
         <!-- 2: Peter Baranik -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="founder" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-2">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2026/01/peter-baranik-2sessions-sro-150x150-1.jpg" alt="Peter Baranik" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -452,7 +474,7 @@
         </div>
 
         <!-- 3: Jose Jimenez -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="agency" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-3">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2026/01/Jose-About-us-3.jpg" alt="Jose Jimenez" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -474,7 +496,7 @@
         </div>
 
         <!-- 4: Jake L -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="founder" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-4">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2026/01/scalerankings.jpg" alt="Jake L" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -496,7 +518,7 @@
         </div>
 
         <!-- 5: AnnieLu -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="founder" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-1">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2026/01/Screenshot_2.png" alt="AnnieLu" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -518,7 +540,7 @@
         </div>
 
         <!-- 6: Omar -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="agency" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-2">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2025/05/WhatsApp_Image_2025-04-30_at_17.35.26_c106f66b.jpg" alt="Omar" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -540,7 +562,7 @@
         </div>
 
         <!-- 7: Roger Yin -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="agency" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-3">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2023/04/RogerYin.webp" alt="Roger Yin" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -562,7 +584,7 @@
         </div>
 
         <!-- 8: Aman Dwivedi -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="founder" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-4">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-12.20.55-PM.jpeg" alt="Aman Dwivedi" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -584,7 +606,7 @@
         </div>
 
         <!-- 9: Daniele Craig -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="marketing" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-1">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2023/04/65b51aa5-dcc6-42e0-a02b-245180d34c4a.webp" alt="Daniele Craig" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -606,7 +628,7 @@
         </div>
 
         <!-- 10: Nirav Shah -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="agency" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-2">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2025/01/Nirav.png" alt="Nirav Shah" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -628,7 +650,7 @@
         </div>
 
         <!-- 11: Andy -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="marketing" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-3">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2025/10/Andy.png" alt="Andy" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -650,7 +672,7 @@
         </div>
 
         <!-- 12: Ken C -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div data-review-cat="agency" class="card-clean rounded-2xl p-7 flex flex-col justify-between reveal-on-scroll stagger-4">
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img src="https://jetdigitalpro.com/wp-content/uploads/2025/04/user_assets_6V5XPW0Z_uploads_images_screenshot1-1743575319.jpg" alt="Ken C" class="w-12 h-12 rounded-full object-cover border border-slate-200">
@@ -676,7 +698,7 @@
   </section>
 
   <!-- Bottom CTA -->
-  <section class="py-20 bg-slate-950 text-white relative overflow-hidden">
+  <section class="py-20 bg-slate-950 text-white relative overflow-hidden reveal-on-scroll">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
         Ready to scale your agency without <br class="hidden sm:inline">
@@ -773,6 +795,34 @@
         mobileMenu.classList.toggle('hidden');
       });
     }
+
+    // Category Filter for Reviews with Pill Indicator update
+    function filterReviews(category, btn) {
+      const cards = document.querySelectorAll('#reviewsGrid > div');
+      const buttons = document.querySelectorAll('.pill-tab-btn');
+      const indicator = document.querySelector('.pill-tab-indicator');
+
+      buttons.forEach(b => b.classList.remove('is-active'));
+      if (btn) {
+        btn.classList.add('is-active');
+        if (indicator) {
+          indicator.style.width = `${btn.offsetWidth}px`;
+          indicator.style.transform = `translateX(${btn.offsetLeft - btn.parentElement.offsetLeft - 4}px)`;
+        }
+      }
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-review-cat');
+        if (category === 'all' || cat === category) {
+          card.style.display = 'flex';
+          card.classList.add('is-revealed');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
   </script>
+  <!-- Hallmark & Taste Motion System Script -->
+  <script src="/motion.js" defer></script>
 </body>
 </html>

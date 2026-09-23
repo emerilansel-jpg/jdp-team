@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/motion.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -110,6 +111,8 @@
   </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
 
   <!-- Top Announcement Bar -->
   <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
@@ -208,7 +211,7 @@
   </section>
 
   <!-- Main Contact & Scheduler Section -->
-  <section id="booking-form" class="py-16 md:py-24 bg-white border-b border-slate-200">
+  <section id="booking-form" class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
@@ -384,7 +387,7 @@
   </section>
 
   <!-- Comprehensive Onboarding & Rollover FAQ Section -->
-  <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200">
+  <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Clear Guidelines</span>
@@ -545,8 +548,20 @@
 
     function handleForm(e) {
       e.preventDefault();
-      document.getElementById('contactPageForm').classList.add('hidden');
-      document.getElementById('formFeedback').classList.remove('hidden');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending Booking Request...';
+        submitBtn.classList.add('opacity-75');
+      }
+      setTimeout(() => {
+        document.getElementById('contactPageForm').classList.add('hidden');
+        const feedback = document.getElementById('formFeedback');
+        if (feedback) {
+          feedback.classList.remove('hidden');
+          feedback.classList.add('reveal-on-scroll', 'is-revealed');
+        }
+      }, 400);
     }
 
     // Auto-select plan from query string if present
@@ -564,5 +579,7 @@
       }
     }
   </script>
+  <!-- Hallmark & Taste Motion System Script -->
+  <script src="/motion.js" defer></script>
 </body>
 </html>
