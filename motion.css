@@ -333,7 +333,374 @@
   transform: rotate(45deg);
 }
 
-/* 12. Accessibility: Prefers-Reduced-Motion */
+/* 12. Clay.com · Fluid Sliding Pill Navigation Menu */
+.nav-pill-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(248, 250, 252, 0.85);
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 3px;
+  backdrop-filter: blur(8px);
+}
+
+#nav-pill-indicator {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.06);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: transform 260ms var(--ease-out),
+              width 260ms var(--ease-out),
+              opacity 180ms var(--ease-out);
+  will-change: transform, width, opacity;
+}
+
+.nav-pill-link {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  transition: color 180ms var(--ease-out);
+  white-space: nowrap;
+}
+
+.nav-pill-link:hover,
+.nav-pill-link.is-active {
+  color: #0f172a;
+}
+
+.nav-pill-link.is-active {
+  color: #2563eb;
+}
+
+/* 13. Gumloop.com & Kimi Work · Animated Node Workflow Canvas */
+.workflow-canvas-container {
+  position: relative;
+  width: 100%;
+  border-radius: 1.5rem;
+  background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.04) 0%, transparent 70%), #ffffff;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.flow-svg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flow-path-base {
+  stroke: #cbd5e1;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 4 4;
+}
+
+.flow-path-pulse {
+  stroke: #2563eb;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 8 16;
+  stroke-linecap: round;
+  animation: flowPulseLoop 1.8s linear infinite;
+}
+
+@keyframes flowPulseLoop {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.workflow-node {
+  position: relative;
+  z-index: 2;
+  transition: transform 220ms var(--ease-out),
+              box-shadow 220ms var(--ease-out),
+              border-color 220ms var(--ease-out);
+  will-change: transform;
+}
+
+.workflow-node:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 14px 28px -6px rgba(37, 99, 235, 0.14), 0 0 0 1.5px rgba(37, 99, 235, 0.3);
+}
+
+.workflow-node.node-highlighted {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
+}
+
+.node-port {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background-color: #2563eb;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+
+/* 14. Upscayl.org · Interactive Before/After Comparison Slider */
+.comparison-slider-container {
+  position: relative;
+  width: 100%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.25);
+  --split-pos: 50%;
+}
+
+.comparison-pane-before {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f8fafc;
+}
+
+.comparison-pane-after {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  color: #0f172a;
+  clip-path: inset(0 0 0 var(--split-pos));
+  -webkit-clip-path: inset(0 0 0 var(--split-pos));
+  will-change: clip-path;
+}
+
+.comparison-divider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split-pos);
+  width: 2px;
+  background: #2563eb;
+  transform: translateX(-50%);
+  z-index: 30;
+  pointer-events: none;
+  box-shadow: 0 0 12px 1px rgba(37, 99, 235, 0.7);
+  will-change: left;
+}
+
+.comparison-drag-handle {
+  position: absolute;
+  top: 50%;
+  left: var(--split-pos);
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #0f172a;
+  border: 2px solid #2563eb;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  z-index: 35;
+  transition: transform 140ms var(--ease-out);
+  will-change: left, transform;
+}
+
+.comparison-drag-handle:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.comparison-drag-handle:active {
+  transform: translate(-50%, -50%) scale(0.96);
+}
+
+/* 15. RankSurge.us · Live SEO Ranking & Performance Ticker Badges */
+.badge-ranksurge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.05);
+}
+
+.badge-ranksurge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateX(-150%);
+  animation: badgeShimmer 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes badgeShimmer {
+  0% { transform: translateX(-150%); }
+  35%, 100% { transform: translateX(250%); }
+}
+
+.pulse-dot-green {
+  position: relative;
+  display: flex;
+  width: 6px;
+  height: 6px;
+}
+
+.pulse-dot-green span:first-child {
+  position: absolute;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: #10b981;
+  opacity: 0.75;
+  animation: pingGreen 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.pulse-dot-green span:last-child {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  width: 6px;
+  height: 6px;
+  background-color: #059669;
+}
+
+@keyframes pingGreen {
+  75%, 100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* 16. PayPal.com · Live Wallet Balance & Deduction Card */
+.wallet-card {
+  position: relative;
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  color: #ffffff;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.wallet-deduct-tag {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fb7185;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+.wallet-deduct-tag.is-animating {
+  animation: walletDeductFloat 1.2s var(--ease-out) forwards;
+}
+
+@keyframes walletDeductFloat {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+  30% {
+    opacity: 1;
+    transform: translate3d(0, -10px, 0) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -32px, 0) scale(1.15);
+  }
+}
+
+.wallet-task-pill {
+  transition: transform 160ms var(--ease-out),
+              background-color 160ms var(--ease-out),
+              border-color 160ms var(--ease-out);
+  will-change: transform;
+}
+
+.wallet-task-pill:hover {
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+  background-color: rgba(30, 41, 59, 0.9);
+}
+
+.wallet-task-pill:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* 17. Antigravity.google · 3D Card Tilt on Mousemove */
+.tilt-card-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 180ms var(--ease-out);
+}
+
+/* 18. Karyawan.ai · JDP Academy & AI Conductor / Vibe Coding Teaser */
+.ai-conductor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: conductorGlow 2.8s infinite var(--ease-in-out);
+}
+
+@keyframes conductorGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+    border-color: rgba(59, 130, 246, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 16px 2px rgba(37, 99, 235, 0.3);
+    border-color: rgba(96, 165, 250, 0.7);
+  }
+}
+
+/* 19. Accessibility: Prefers-Reduced-Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -351,6 +718,22 @@
     animation: none !important;
     transform: none !important;
   }
+  .flow-path-pulse {
+    animation: none !important;
+  }
+  .badge-ranksurge::after {
+    display: none !important;
+  }
+  .pulse-dot-green span:first-child {
+    display: none !important;
+  }
+  .ai-conductor-badge {
+    animation: none !important;
+  }
+  .tilt-card-3d {
+    transform: none !important;
+    transition: none !important;
+  }
   .spotlight-card::before,
   .card-clean::before,
   .spotlight-card::after,
@@ -358,6 +741,9 @@
     display: none !important;
   }
   #progress-bar {
+    display: none !important;
+  }
+  #nav-pill-indicator {
     display: none !important;
   }
 }

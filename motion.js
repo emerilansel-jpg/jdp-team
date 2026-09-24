@@ -391,6 +391,354 @@
   };
 
   // ==========================================
+  // 10. Clay.com · Fluid Sliding Pill Navigation Menu
+  // ==========================================
+  function initNavPill() {
+    const nav = document.querySelector('.nav-pill-wrapper') || document.querySelector('#desktop-nav');
+    if (!nav) return;
+
+    let indicator = nav.querySelector('#nav-pill-indicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'nav-pill-indicator';
+      nav.prepend(indicator);
+    }
+
+    const links = nav.querySelectorAll('.nav-pill-link, a:not(#nav-pill-indicator)');
+    if (links.length === 0) return;
+
+    // Detect active page link based on current path
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+    let activeLink = null;
+
+    links.forEach(link => {
+      const rawHref = link.getAttribute('href') || '';
+      const linkPath = rawHref.split('#')[0].replace(/\/$/, '') || '/';
+      if (linkPath === currentPath || (currentPath === '/' && (linkPath === '/' || linkPath === '/index.html'))) {
+        activeLink = link;
+        link.classList.add('is-active');
+      }
+    });
+
+    if (!activeLink && links.length > 0) {
+      activeLink = nav.querySelector('.is-active') || links[0];
+    }
+
+    function movePillTo(target, instant = false) {
+      if (!indicator || !target) {
+        if (indicator) indicator.style.opacity = '0';
+        return;
+      }
+      const navRect = nav.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const left = targetRect.left - navRect.left;
+      const width = targetRect.width;
+
+      if (width <= 0) return;
+
+      if (instant || prefersReduced) {
+        const prevTransition = indicator.style.transition;
+        indicator.style.transition = 'none';
+        indicator.style.width = `${width}px`;
+        indicator.style.transform = `translate3d(${left}px, 0, 0)`;
+        indicator.style.opacity = '1';
+        if (!prefersReduced) {
+          requestAnimationFrame(() => {
+            indicator.style.transition = prevTransition || '';
+          });
+        }
+      } else {
+        indicator.style.width = `${width}px`;
+        indicator.style.transform = `translate3d(${left}px, 0, 0)`;
+        indicator.style.opacity = '1';
+      }
+    }
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => movePillTo(link));
+      link.addEventListener('focus', () => movePillTo(link));
+    });
+
+    nav.addEventListener('mouseleave', () => {
+      movePillTo(activeLink);
+    });
+
+    window.addEventListener('resize', () => {
+      movePillTo(activeLink, true);
+    }, { passive: true });
+
+    // Initial position after render
+    setTimeout(() => {
+      movePillTo(activeLink, true);
+    }, 60);
+  }
+
+  // ==========================================
+  // 11. Upscayl.org · Interactive Before/After Comparison Slider
+  // ==========================================
+  function initComparisonSlider() {
+    const containers = document.querySelectorAll('.comparison-slider-container');
+    containers.forEach(container => {
+      const handle = container.querySelector('.comparison-drag-handle');
+      if (!handle) return;
+
+      let isDragging = false;
+
+      function setPosition(percent) {
+        const clamped = Math.min(95, Math.max(5, percent));
+        container.style.setProperty('--split-pos', `${clamped}%`);
+        handle.setAttribute('aria-valuenow', Math.round(clamped).toString());
+      }
+
+      function updateFromPointer(clientX) {
+        const rect = container.getBoundingClientRect();
+        if (rect.width <= 0) return;
+        const offsetX = clientX - rect.left;
+        const percent = (offsetX / rect.width) * 100;
+        setPosition(percent);
+      }
+
+      handle.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        handle.setPointerCapture(e.pointerId);
+        container.classList.add('is-dragging');
+        e.preventDefault();
+      });
+
+      handle.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        updateFromPointer(e.clientX);
+      });
+
+      function onPointerEnd(e) {
+        if (isDragging) {
+          isDragging = false;
+          container.classList.remove('is-dragging');
+          try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+        }
+      }
+
+      handle.addEventListener('pointerup', onPointerEnd);
+      handle.addEventListener('pointercancel', onPointerEnd);
+
+      // Keyboard navigation for accessibility
+      handle.setAttribute('tabindex', '0');
+      handle.setAttribute('role', 'slider');
+      handle.setAttribute('aria-label', 'Comparison slider');
+      handle.setAttribute('aria-valuemin', '5');
+      handle.setAttribute('aria-valuemax', '95');
+      handle.setAttribute('aria-valuenow', '50');
+
+      handle.addEventListener('keydown', (e) => {
+        const current = parseFloat(getComputedStyle(container).getPropertyValue('--split-pos')) || 50;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+          setPosition(current - 5);
+          e.preventDefault();
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+          setPosition(current + 5);
+          e.preventDefault();
+        }
+      });
+
+      // Quick preset buttons if present
+      const wrapper = container.closest('section') || container.parentElement;
+      if (wrapper) {
+        const presets = wrapper.querySelectorAll('[data-slider-set]');
+        presets.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const targetPos = parseFloat(btn.getAttribute('data-slider-set'));
+            if (!isNaN(targetPos)) {
+              presets.forEach(b => {
+                b.classList.remove('bg-brand-600', 'text-white');
+                b.classList.add('bg-white', 'text-slate-700');
+              });
+              btn.classList.add('bg-brand-600', 'text-white');
+              btn.classList.remove('bg-white', 'text-slate-700');
+              setPosition(targetPos);
+            }
+          });
+        });
+      }
+    });
+  }
+
+  // ==========================================
+  // 12. PayPal.com · Live Wallet Balance & Deduction Card
+  // ==========================================
+  function initCreditWalletSimulator() {
+    const sim = document.getElementById('creditWalletSim');
+    if (!sim) return;
+
+    const balanceNumEl = sim.querySelector('#walletBalanceNumber');
+    const currencyValEl = sim.querySelector('#walletCurrencyVal');
+    const deductTagEl = sim.querySelector('#walletDeductTag');
+    const ledgerListEl = sim.querySelector('#walletLedgerList');
+    const resetBtn = sim.querySelector('#walletResetBtn');
+    const taskButtons = sim.querySelectorAll('.wallet-task-pill');
+
+    const INITIAL_CREDITS = 110000;
+    let currentBalance = INITIAL_CREDITS;
+
+    function formatNumber(num) {
+      return Math.round(num).toLocaleString('en-US');
+    }
+
+    function formatCurrency(credits) {
+      const dollars = credits * 0.01;
+      return `$${dollars.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function updateDisplay(newBalance) {
+      const prev = currentBalance;
+      currentBalance = Math.max(0, newBalance);
+      if (window.tweenNumber && balanceNumEl) {
+        window.tweenNumber(balanceNumEl, prev, currentBalance, 400, formatNumber);
+      } else if (balanceNumEl) {
+        balanceNumEl.textContent = formatNumber(currentBalance);
+      }
+      if (currencyValEl) {
+        currencyValEl.textContent = formatCurrency(currentBalance);
+      }
+    }
+
+    taskButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cost = parseInt(btn.getAttribute('data-deduct-credits') || '0', 10);
+        const taskName = btn.getAttribute('data-deduct-task') || 'Task execution';
+        if (cost <= 0) return;
+
+        if (currentBalance < cost) {
+          if (balanceNumEl && balanceNumEl.parentElement) {
+            balanceNumEl.parentElement.classList.add('animate-pulse');
+            setTimeout(() => balanceNumEl.parentElement.classList.remove('animate-pulse'), 800);
+          }
+          return;
+        }
+
+        const newBal = currentBalance - cost;
+
+        // Floating deduction badge
+        if (deductTagEl) {
+          deductTagEl.textContent = `-${formatNumber(cost)} cr`;
+          deductTagEl.classList.remove('is-animating');
+          void deductTagEl.offsetWidth; // trigger reflow
+          deductTagEl.classList.add('is-animating');
+        }
+
+        // Update balance
+        updateDisplay(newBal);
+
+        // Append to ledger list
+        if (ledgerListEl) {
+          const now = new Date();
+          const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between py-2 border-b border-slate-800/80 text-xs text-slate-300';
+          row.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span class="font-medium text-slate-200">${taskName}</span>
+              <span class="text-[10px] text-slate-500 font-mono">${timeStr}</span>
+            </div>
+            <span class="font-mono font-bold text-rose-400">-${formatNumber(cost)} cr</span>
+          `;
+          ledgerListEl.prepend(row);
+
+          // Keep max 5 entries
+          while (ledgerListEl.children.length > 5) {
+            ledgerListEl.removeChild(ledgerListEl.lastChild);
+          }
+        }
+      });
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        updateDisplay(INITIAL_CREDITS);
+        if (ledgerListEl) {
+          ledgerListEl.innerHTML = `
+            <div class="py-2 text-xs text-slate-500 italic text-center">
+              Credit pack renewed: 110,000 credits available ($1,100.00 USD).
+            </div>
+          `;
+        }
+      });
+    }
+  }
+
+  // ==========================================
+  // 13. Antigravity.google · 3D Card Tilt Physics
+  // ==========================================
+  function initTilt3D() {
+    if (prefersReduced) return;
+    const cards = document.querySelectorAll('.tilt-card-3d');
+
+    cards.forEach(card => {
+      const maxTilt = parseFloat(card.getAttribute('data-tilt-max') || '6');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const tiltX = -y * maxTilt;
+        const tiltY = x * maxTilt;
+        card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateZ(6px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      });
+    });
+  }
+
+  // ==========================================
+  // 14. Gumloop.com & Kimi Work · Node Workflow Canvas
+  // ==========================================
+  function initWorkflowCanvas() {
+    const canvas = document.querySelector('.workflow-canvas-container');
+    if (!canvas) return;
+
+    const nodes = canvas.querySelectorAll('.workflow-node');
+    const pulsePaths = canvas.querySelectorAll('.flow-path-pulse');
+
+    nodes.forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        const downstream = node.getAttribute('data-downstream') || '';
+        const downstreamIds = downstream.split(',').map(s => s.trim()).filter(Boolean);
+
+        nodes.forEach(n => {
+          const id = n.getAttribute('data-node-id');
+          if (n === node || downstreamIds.includes(id)) {
+            n.classList.add('node-highlighted');
+          } else {
+            n.style.opacity = '0.55';
+          }
+        });
+
+        pulsePaths.forEach(path => {
+          path.style.stroke = '#2563eb';
+          path.style.strokeWidth = '3.5';
+          path.style.animationDuration = '0.8s';
+        });
+      });
+
+      node.addEventListener('mouseleave', () => {
+        nodes.forEach(n => {
+          n.classList.remove('node-highlighted');
+          n.style.opacity = '1';
+        });
+
+        pulsePaths.forEach(path => {
+          path.style.stroke = '';
+          path.style.strokeWidth = '';
+          path.style.animationDuration = '';
+        });
+      });
+    });
+  }
+
+  // ==========================================
   // Initialize Everything on DOMContentLoaded
   // ==========================================
   function initAll() {
@@ -401,6 +749,11 @@
     initBackToTop();
     initLiveTaskSimulation();
     initPillTabs();
+    initNavPill();
+    initComparisonSlider();
+    initCreditWalletSimulator();
+    initTilt3D();
+    initWorkflowCanvas();
   }
 
   if (document.readyState === 'loading') {

@@ -147,13 +147,14 @@
         </div>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
-        <a href="/" class="text-brand-600 font-bold border-b-2 border-brand-600 pb-0.5">Home</a>
-        <a href="/services.html" class="hover:text-brand-600 transition-colors">Services & Pricing</a>
-        <a href="/calculator.html" class="hover:text-brand-600 transition-colors">ROI Calculator</a>
-        <a href="/proof.html" class="hover:text-brand-600 transition-colors">Proof & Reviews</a>
-        <a href="/contact.html" class="hover:text-brand-600 transition-colors">Contact & FAQ</a>
+      <!-- Desktop Nav with Clay.com Fluid Sliding Pill -->
+      <nav id="desktop-nav" class="nav-pill-wrapper hidden md:inline-flex items-center">
+        <div id="nav-pill-indicator"></div>
+        <a href="/" class="nav-pill-link is-active">Home</a>
+        <a href="/services.html" class="nav-pill-link">Services & Pricing</a>
+        <a href="/calculator.html" class="nav-pill-link">ROI Calculator</a>
+        <a href="/proof.html" class="nav-pill-link">Proof & Reviews</a>
+        <a href="/contact.html" class="nav-pill-link">Contact & FAQ</a>
       </nav>
 
       <!-- Desktop CTAs -->
@@ -342,7 +343,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Audience 1: Digital Agencies -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div class="card-clean tilt-card-3d rounded-2xl p-7 flex flex-col justify-between" data-tilt-max="6">
           <div>
             <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 border border-brand-100 flex items-center justify-center text-xl mb-4 font-bold">
               🏢
@@ -359,7 +360,7 @@
         </div>
 
         <!-- Audience 2: Online Business Owners -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div class="card-clean tilt-card-3d rounded-2xl p-7 flex flex-col justify-between" data-tilt-max="6">
           <div>
             <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-xl mb-4 font-bold">
               🛒
@@ -376,7 +377,7 @@
         </div>
 
         <!-- Audience 3: Solo Founders -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
+        <div class="card-clean tilt-card-3d rounded-2xl p-7 flex flex-col justify-between" data-tilt-max="6">
           <div>
             <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center text-xl mb-4 font-bold">
               🚀
@@ -408,94 +409,118 @@
         </p>
       </div>
 
-      <!-- Visual Workflow Diagram Box -->
-      <div class="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+      <!-- Visual Workflow Diagram Box with Gumloop-Style Interactive Node Canvas -->
+      <div class="workflow-canvas-container p-6 sm:p-10 mb-8 relative">
+        <!-- Connecting SVG Pulse Network Layer -->
+        <svg class="flow-svg-layer hidden lg:block" viewBox="0 0 1100 240" fill="none" preserveAspectRatio="none">
+          <!-- Path 1: Client Input to Dedicated PM -->
+          <path class="flow-path-base" d="M 235 120 C 270 120, 280 120, 315 120" />
+          <path class="flow-path-pulse" d="M 235 120 C 270 120, 280 120, 315 120" />
 
-          <!-- Stage 1: Agency / Founder (3 cols) -->
-          <div class="lg:col-span-3 text-center">
-            <div class="card-clean rounded-2xl p-6 bg-white border-2 border-brand-200 shadow-md">
-              <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center mx-auto mb-3 text-lg">
-                👤
+          <!-- Path 2: Dedicated PM to Execution Pod -->
+          <path class="flow-path-base" d="M 545 120 C 575 120, 585 120, 615 120" />
+          <path class="flow-path-pulse" d="M 545 120 C 575 120, 585 120, 615 120" />
+
+          <!-- Path 3: Execution Pod to White-Label Delivery -->
+          <path class="flow-path-base" d="M 845 120 C 875 120, 885 120, 915 120" />
+          <path class="flow-path-pulse" d="M 845 120 C 875 120, 885 120, 915 120" />
+        </svg>
+
+        <!-- 4-Stage Interactive Gumloop Nodes Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch relative z-10">
+
+          <!-- Node 1: Client Task Input -->
+          <div class="workflow-node card-clean rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative cursor-pointer" data-node-id="node-input" data-downstream="node-pm,node-exec,node-delivery">
+            <span class="node-port absolute -right-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700">Stage 01</span>
+                <span class="text-xs font-mono font-semibold text-brand-600">Brief In</span>
               </div>
-              <h3 class="font-extrabold text-slate-950 text-base">You (Agency / Founder)</h3>
-              <p class="text-xs text-slate-500 mt-1">Submit briefs via Slack, ClickUp, Trello, or Email</p>
-              <div class="mt-4 inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-brand-50 text-brand-700 border border-brand-200">
-                1 Point of Contact
+              <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 border border-brand-100 flex items-center justify-center text-xl mb-3 font-bold">
+                📥
               </div>
+              <h3 class="font-extrabold text-slate-950 text-base">Client Task Input</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                Drop raw briefs, Loom recordings, ClickUp tickets, or Slack messages.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-medium text-slate-600">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+              <span>Multi-channel intake</span>
             </div>
           </div>
 
-          <!-- Connector 1 -->
-          <div class="lg:col-span-1 flex justify-center py-2 lg:py-0">
-            <div class="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center font-bold text-slate-400">
-              →
-            </div>
-          </div>
-
-          <!-- Stage 2: 1 Dedicated PM (4 cols) -->
-          <div class="lg:col-span-4 text-center">
-            <div class="card-clean rounded-2xl p-6 bg-slate-950 text-white shadow-xl border border-slate-800 relative">
-              <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-accent-500 text-slate-950">
-                Core Hub
+          <!-- Node 2: 1 Dedicated PM Hub (Core Hub) -->
+          <div class="workflow-node card-clean rounded-2xl p-6 bg-slate-950 text-white border border-slate-800 shadow-xl flex flex-col justify-between relative cursor-pointer" data-node-id="node-pm" data-downstream="node-exec,node-delivery">
+            <span class="node-port absolute -left-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
+            <span class="node-port absolute -right-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-accent-500 text-slate-950">Core Hub</span>
+                <span class="text-xs font-mono font-semibold text-accent-300">1 PM Gate</span>
               </div>
-              <div class="w-14 h-14 rounded-2xl bg-brand-600 text-white font-extrabold flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+              <div class="w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center text-xl mb-3 shadow-inner">
                 👔
               </div>
-              <h3 class="font-extrabold text-white text-lg">1 Dedicated PM</h3>
-              <p class="text-xs text-slate-300 mt-1">Single operational manager assigned to your account</p>
-              <ul class="mt-4 space-y-1.5 text-xs text-slate-300 text-left bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
-                <li class="flex items-center gap-2"><span class="text-accent-400">✓</span> Scopes tasks and confirms brief</li>
-                <li class="flex items-center gap-2"><span class="text-accent-400">✓</span> Dispatches to matching specialists</li>
-                <li class="flex items-center gap-2"><span class="text-accent-400">✓</span> Verifies accuracy and deadlines</li>
-                <li class="flex items-center gap-2"><span class="text-accent-400">✓</span> Returns completed client deliverables</li>
-              </ul>
+              <h3 class="font-extrabold text-white text-base">1 Dedicated PM Hub</h3>
+              <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                Single operational conductor. Scopes hours, assigns specialists, and runs QA.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800 flex items-center gap-1.5 text-[11px] font-medium text-accent-300">
+              <span class="w-2 h-2 rounded-full bg-accent-400 task-pulse inline-block"></span>
+              <span>Zero client micromanagement</span>
             </div>
           </div>
 
-          <!-- Connector 2 -->
-          <div class="lg:col-span-1 flex justify-center py-2 lg:py-0">
-            <div class="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center font-bold text-slate-400">
-              →
+          <!-- Node 3: Execution Pod -->
+          <div class="workflow-node card-clean rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative cursor-pointer" data-node-id="node-exec" data-downstream="node-delivery">
+            <span class="node-port absolute -left-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
+            <span class="node-port absolute -right-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700">Stage 03</span>
+                <span class="text-xs font-mono font-semibold text-indigo-600">Specialist Pod</span>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center text-xl mb-3 font-bold">
+                ⚡
+              </div>
+              <h3 class="font-extrabold text-slate-950 text-base">Execution Specialists</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                Junior $3/hr, Senior $5/hr, Video $5/hr, and dedicated SEO $7/hr.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-medium text-slate-600">
+              <span class="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
+              <span>AI Conductors + human rigor</span>
             </div>
           </div>
 
-          <!-- Stage 3: Specialist Pod (3 cols) -->
-          <div class="lg:col-span-3 space-y-2.5">
-            <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between">
-              <div>
-                <div class="font-bold text-xs text-slate-900">Junior Remote Staff</div>
-                <div class="text-[11px] text-slate-500">Admin, data entry, research</div>
+          <!-- Node 4: White-Label Delivery -->
+          <div class="workflow-node card-clean rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative cursor-pointer" data-node-id="node-delivery" data-downstream="">
+            <span class="node-port absolute -left-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800">Final Gate</span>
+                <span class="text-xs font-mono font-semibold text-emerald-600">Ready</span>
               </div>
-              <span class="text-xs font-black text-brand-600 bg-brand-50 px-2 py-0.5 rounded">$3.00/hr</span>
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-xl mb-3 font-bold">
+                🚀
+              </div>
+              <h3 class="font-extrabold text-slate-950 text-base">White-Label Delivery</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                100% verified, zero-rework client deliverables ready under your brand name.
+              </p>
             </div>
-
-            <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between">
-              <div>
-                <div class="font-bold text-xs text-slate-900">Senior Specialist</div>
-                <div class="text-[11px] text-slate-500">Technical SEO, CMS fixes</div>
-              </div>
-              <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">$5.00/hr</span>
-            </div>
-
-            <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between">
-              <div>
-                <div class="font-bold text-xs text-slate-900">Video Editor</div>
-                <div class="text-[11px] text-slate-500">Reels, Shorts, YouTube</div>
-              </div>
-              <span class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">$5.00/hr</span>
-            </div>
-
-            <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between">
-              <div>
-                <div class="font-bold text-xs text-slate-900">Dedicated SEO</div>
-                <div class="text-[11px] text-slate-500">By JetDigitalPro</div>
-              </div>
-              <span class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded">$7.00/hr</span>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-medium text-emerald-700">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+              <span>100% confidential NDA</span>
             </div>
           </div>
 
         </div>
+      </div>
 
         <!-- Interactive Live Task Simulation Stream -->
         <div id="liveTaskSim" class="mt-8 pt-6 border-t border-slate-200">
@@ -545,7 +570,128 @@
     </div>
   </section>
 
-  <!-- Real JetDigitalPro Verified Track Record -->
+  <!-- Upscayl.org-Style Interactive Before & After Comparison Slider -->
+  <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">The Operational Shift</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
+          Unmanaged Freelancers vs. JDP Managed Pod
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Drag the interactive divider handle to compare traditional contractor friction with our dedicated white-label pod.
+        </p>
+
+        <!-- Preset Quick Selectors -->
+        <div class="mt-6 inline-flex p-1 rounded-full bg-slate-100 border border-slate-200">
+          <button type="button" data-slider-set="15" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-slate-700 hover:text-slate-950 transition cursor-pointer">
+            Freelancers View
+          </button>
+          <button type="button" data-slider-set="50" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-brand-600 text-white shadow-xs transition cursor-pointer">
+            Split 50/50
+          </button>
+          <button type="button" data-slider-set="85" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-slate-700 hover:text-slate-950 transition cursor-pointer">
+            JDP Pod View
+          </button>
+        </div>
+      </div>
+
+      <!-- Comparison Slider Box -->
+      <div class="comparison-slider-container relative rounded-3xl overflow-hidden border border-slate-300 shadow-xl" style="--split-pos: 50%;">
+        <!-- Left Side / Base: Unmanaged Freelancers (Before) -->
+        <div class="comparison-pane-before p-8 sm:p-12 min-h-[460px] flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 mb-4">
+              <span>✕</span> Traditional Freelancer Chaos
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              The Old Way: High Stress & Unpredictable Quality
+            </h3>
+            <p class="text-slate-300 text-sm mt-2 max-w-xl">
+              Juggling 4 to 8 independent contractors across Upwork and Fiverr drains 15+ founder hours every single week.
+            </p>
+
+            <ul class="mt-8 space-y-3.5 max-w-lg text-sm text-slate-300">
+              <li class="flex items-start gap-3">
+                <span class="text-rose-400 font-bold text-base leading-none">✕</span>
+                <span><strong>Fragmented briefs:</strong> Repeating identical instructions to 5 different disconnected freelancers.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-400 font-bold text-base leading-none">✕</span>
+                <span><strong>Unpredictable rates:</strong> Paying $25 to $50/hr with surprise timesheet billings and invoice disputes.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-400 font-bold text-base leading-none">✕</span>
+                <span><strong>Missed deadlines:</strong> Unannounced ghosting and delays right before major client presentations.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-400 font-bold text-base leading-none">✕</span>
+                <span><strong>Continuous QA burden:</strong> Founders spending weekends rewriting and fixing sloppy work.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-400 font-bold text-base leading-none">✕</span>
+                <span><strong>Zero accountability:</strong> When a deliverable fails, everyone blames the other contractor.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-800 text-xs font-mono text-slate-400">
+            Result: Bottlenecked growth, wasted agency margins, constant founder burnout.
+          </div>
+        </div>
+
+        <!-- Right Side / Overlay: JDP Managed Pod (After) -->
+        <div class="comparison-pane-after p-8 sm:p-12 min-h-[460px] flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-4">
+              <span>✓</span> JDP Managed Pod
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+              The JDP Way: 1 Dedicated Slack PM & Instant Scale
+            </h3>
+            <p class="text-slate-600 text-sm mt-2 max-w-xl">
+              Submit one brief. Your dedicated PM scopes, routes, verifies, and returns client-ready deliverables silently.
+            </p>
+
+            <ul class="mt-8 space-y-3.5 max-w-lg text-sm text-slate-800">
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
+                <span><strong>1 Slack point of contact:</strong> Zero freelancer management or timesheet tracking on your plate.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
+                <span><strong>True wholesale rates:</strong> Junior staff from $3/hr, senior specialists from $5/hr, video at $5/hr.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
+                <span><strong>Predictable 24-48h turnaround:</strong> Rigorous internal PM checkpoints guarantee delivery on schedule.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
+                <span><strong>100% White-label output:</strong> Ready to hand straight to your clients under your own agency brand.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
+                <span><strong>Credit rollover guarantee:</strong> Never lose what you paid for; unused credits roll over every month.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-200 text-xs font-mono text-slate-600">
+            Result: 70%+ net delivery margins, zero stress, scalable agency operations.
+          </div>
+        </div>
+
+        <!-- Draggable Divider Line & Handle -->
+        <div class="comparison-divider-line"></div>
+        <div class="comparison-drag-handle" title="Drag left/right to compare">
+          <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l-4 3 4 3m8-6l4 3-4 3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-14">
@@ -558,7 +704,7 @@
         </p>
       </div>
 
-      <!-- Real Case Studies Grid -->
+      <!-- Real Case Studies Grid with RankSurge-Style Live SEO Badges -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <!-- Case 1 -->
         <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between reveal-on-scroll stagger-1">
@@ -571,6 +717,10 @@
               <span data-counter="86.95" data-suffix="%" data-decimals="2">86.95%</span>
             </div>
             <div class="text-xs font-semibold text-slate-900 mt-1">Keyword Coverage Captured</div>
+            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 86.95% coverage</span>
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +14 pos</span>
+            </div>
             <p class="text-xs text-slate-600 mt-3 leading-relaxed">
               Targeted commercial terms indexed and ranking on Page 1 within 7.5 weeks of continuous content deployment.
             </p>
@@ -591,6 +741,10 @@
               <span data-counter="46.15" data-suffix="%" data-decimals="2">46.15%</span>
             </div>
             <div class="text-xs font-semibold text-slate-900 mt-1">Keywords Ranked in 6.5 Weeks</div>
+            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 12 Top-3</span>
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +212% traffic</span>
+            </div>
             <p class="text-xs text-slate-600 mt-3 leading-relaxed">
               12 high-intent keywords secured Top-3 spots in Google US within 6.5 weeks under strict medical compliance.
             </p>
@@ -611,6 +765,10 @@
               <span data-counter="40.0" data-suffix="%" data-decimals="1">40.0%</span>
             </div>
             <div class="text-xs font-semibold text-slate-900 mt-1">Keyword Capture in 45 Days</div>
+            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ DR 0 to DR 28</span>
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 6x pageviews</span>
+            </div>
             <p class="text-xs text-slate-600 mt-3 leading-relaxed">
               Starting from DR 0, our cluster content blueprint claimed 40% of target keyword universe in under 45 days.
             </p>
@@ -631,11 +789,56 @@
               <span data-counter="62.11" data-suffix="%" data-decimals="2">62.11%</span>
             </div>
             <div class="text-xs font-semibold text-slate-900 mt-1">Target Terms in Top 100</div>
+            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +1,420 keywords</span>
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ Top 100 sweep</span>
+            </div>
             <p class="text-xs text-slate-600 mt-3 leading-relaxed">
               Multi-region technical SEO mapping delivered 62.11% of target keywords into Top 100 within 12 weeks.
             </p>
           </div>
           <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] font-medium text-slate-500">
+            Timeline: 12 Weeks
+          </div>
+        </div>
+      </div>
+
+      <!-- Karyawan.ai Reference · JDP Academy & AI Conductor / Vibe Coding Banner -->
+      <div class="mb-12 rounded-3xl p-6 sm:p-8 bg-slate-950 text-white border border-slate-800 shadow-xl reveal-on-scroll">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div class="max-w-2xl">
+            <div class="flex flex-wrap items-center gap-2.5 mb-3">
+              <span class="ai-conductor-badge">
+                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                AI Conductor Certified
+              </span>
+              <span class="text-xs text-slate-400 font-mono">JDP Academy Standard</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+              Trained in Modern Vibe Coding & Agentic AI Tools
+            </h3>
+            <p class="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
+              JDP remote specialists are not traditional manual VAs. Through internal JDP Academy rigor, each specialist is trained as an active <strong>AI Conductor</strong> - utilizing Claude Code, Cursor, Manus, and agentic workflows to deliver 5x output velocity under strict human PM quality supervision.
+            </p>
+          </div>
+
+          <!-- AI Tools Tag Strip -->
+          <div class="flex flex-wrap gap-2 lg:max-w-xs">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
+              ⚡ Manus & Cowork
+            </span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
+              🤖 Claude Code
+            </span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
+              💻 Cursor Vibe Coding
+            </span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
+              🎯 Human PM QA Gate
+            </span>
+          </div>
+        </div>
+      </div>
             Timeline: 12 Weeks
           </div>
         </div>
@@ -750,6 +953,103 @@
                 Open Full Interactive ROI Calculator →
               </a>
               <span class="text-[11px] text-slate-400 text-center">Includes Agency Reseller Margin Simulation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PayPal.com Style Live Credit Wallet Deduction Simulator -->
+        <div id="creditWalletSim" class="mt-10 rounded-2xl bg-slate-950 p-6 sm:p-8 text-white border border-slate-800 shadow-xl relative overflow-hidden">
+          <div id="walletDeductTag" class="wallet-deduct-tag">-3,200 cr</div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-brand-500 inline-block"></span>
+                <span class="font-mono text-xs font-bold text-slate-300">Live Credit Wallet Simulator</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Active Pod</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Click demo tasks below to watch credits deduct from your live balance in real time.</p>
+            </div>
+
+            <!-- Live Balance Display -->
+            <div class="text-left sm:text-right bg-slate-900/90 px-4 py-3 rounded-xl border border-slate-800">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Available Pod Balance</div>
+              <div class="flex items-baseline gap-2 mt-0.5">
+                <span id="walletBalanceNumber" class="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight">110,000</span>
+                <span class="text-xs font-bold text-slate-300">credits</span>
+                <span id="walletCurrencyVal" class="text-xs font-mono text-slate-400">($1,100.00)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clickable Task Deductions Grid -->
+          <div class="py-5">
+            <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-3">
+              Simulate Submitting Client Tasks:
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <button type="button" class="wallet-task-pill p-3 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer" data-deduct-credits="3200" data-deduct-task="1 SEO Pillar Article (1,500 words)">
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">1 SEO Pillar Article</div>
+                  <div class="text-[11px] text-slate-400">1,500 words + Surfer 85+</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-3,200 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer" data-deduct-credits="600" data-deduct-task="2h Junior Tech VA Support">
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">2h Junior Tech VA</div>
+                  <div class="text-[11px] text-slate-400">Shopify catalog & CRM formatting</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-600 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer" data-deduct-credits="2000" data-deduct-task="4 Short-Form TikTok Reels">
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">4 TikTok Reels</div>
+                  <div class="text-[11px] text-slate-400">Subtitles, motion cuts, audio sync</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-2,000 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer" data-deduct-credits="1500" data-deduct-task="500 Verified B2B Leads List">
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">500 B2B Leads</div>
+                  <div class="text-[11px] text-slate-400">Apollo / LinkedIn verified emails</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-1,500 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer" data-deduct-credits="1000" data-deduct-task="2h Senior Tech VA Dev Support">
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">2h Senior Tech Dev</div>
+                  <div class="text-[11px] text-slate-400">WordPress plugin & CSS debugging</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-1,000 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer" data-deduct-credits="24000" data-deduct-task="Full Tier 1 Press Release Distribution">
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">Press Release Syndicate</div>
+                  <div class="text-[11px] text-slate-400">Google News + 450 authority media</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-24,000 cr</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Activity Ledger & Reset -->
+          <div class="pt-4 border-t border-slate-800/80">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Live Pod Activity Ledger:</span>
+              <button type="button" id="walletResetBtn" class="text-xs text-brand-400 hover:text-brand-300 font-semibold underline cursor-pointer">
+                Reset to 110,000 credits
+              </button>
+            </div>
+            <div id="walletLedgerList" class="space-y-1 max-h-36 overflow-y-auto">
+              <div class="py-2 text-xs text-slate-500 italic text-center">
+                Credit wallet ready: 110,000 credits loaded. Click any task above to simulate instant execution.
+              </div>
             </div>
           </div>
         </div>
@@ -918,7 +1218,7 @@
   <!-- Real Founder Authority Block: Nell VH -->
   <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl border border-slate-200 bg-surface-subtle p-8 sm:p-12 shadow-sm">
+      <div class="rounded-3xl border border-slate-200 bg-surface-subtle p-8 sm:p-12 shadow-sm tilt-card-3d" data-tilt-max="4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
           <!-- Founder Photo & Badge (4 cols) -->
@@ -1040,7 +1340,7 @@
         </div>
 
         <!-- Tier 2: Growth Pod (Featured) -->
-        <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-xl relative bg-white">
+        <div class="card-clean tilt-card-3d rounded-3xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-xl relative bg-white" data-tilt-max="5">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-600 text-white shadow-sm">
             Most Popular Pod
           </div>
