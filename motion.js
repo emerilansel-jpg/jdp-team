@@ -870,7 +870,9 @@
     let currentTaskIdx = 0;
     let autoCycleTimer = null;
     let progressAnimTimer = null;
+    let rafProgressId = null;
     let isUserInteracting = false;
+    let userPauseTimer = null;
 
     function renderTask(idx, triggerProgress = true) {
       currentTaskIdx = idx;
@@ -900,8 +902,9 @@
         copyBtn.setAttribute('data-link', data.link);
       }
 
-      // Progress animation
+      // Cancel any ongoing progress animation
       if (progressAnimTimer) clearTimeout(progressAnimTimer);
+      if (rafProgressId) cancelAnimationFrame(rafProgressId);
 
       if (prefersReduced || !triggerProgress) {
         if (progressBarEl) progressBarEl.style.width = '100%';
@@ -910,38 +913,36 @@
         return;
       }
 
+      // Reset progress to 0% and force reflow
       if (progressBarEl) {
         progressBarEl.style.transition = 'none';
         progressBarEl.style.width = '0%';
+        void progressBarEl.offsetWidth; // Force layout recalculation
       }
       if (percentEl) percentEl.textContent = '0%';
       if (progressLabelEl) progressLabelEl.textContent = data.progressInit;
 
-      // Animate progress smoothly to 100%
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          if (progressBarEl) {
-            progressBarEl.style.transition = 'width 2.4s cubic-bezier(0.16, 1, 0.3, 1)';
-            progressBarEl.style.width = '100%';
-          }
+      // Animate progress smoothly to 100% over 2.2 seconds
+      const duration = 2200;
+      if (progressBarEl) {
+        progressBarEl.style.transition = `width ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`;
+        progressBarEl.style.width = '100%';
+      }
 
-          const start = performance.now();
-          const duration = 2400;
-
-          function updateNum(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
-            const pct = Math.round(ease * 100);
-            if (percentEl) percentEl.textContent = `${pct}%`;
-            if (progress < 1) {
-              requestAnimationFrame(updateNum);
-            } else {
-              if (progressLabelEl) progressLabelEl.textContent = data.progressDone;
-            }
-          }
-          requestAnimationFrame(updateNum);
-        });
-      });
+      const start = performance.now();
+      function updateNum(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const pct = Math.round(ease * 100);
+        if (percentEl) percentEl.textContent = `${pct}%`;
+        if (progress < 1) {
+          rafProgressId = requestAnimationFrame(updateNum);
+        } else {
+          if (percentEl) percentEl.textContent = '100%';
+          if (progressLabelEl) progressLabelEl.textContent = data.progressDone;
+        }
+      }
+      rafProgressId = requestAnimationFrame(updateNum);
     }
 
     function startAutoCycle() {
@@ -952,28 +953,19 @@
           const next = (currentTaskIdx + 1) % tasksData.length;
           renderTask(next, true);
         }
-      }, 4200);
+      }, 3800);
     }
 
     taskButtons.forEach((btn, i) => {
       btn.addEventListener('click', () => {
+        if (userPauseTimer) clearTimeout(userPauseTimer);
         isUserInteracting = true;
         renderTask(i, true);
-        // Resume auto-cycle after 8s of user inactivity
-        if (autoCycleTimer) clearInterval(autoCycleTimer);
-        setTimeout(() => {
+        // Resume continuous auto-cycle after 5s of user inactivity
+        userPauseTimer = setTimeout(() => {
           isUserInteracting = false;
-          startAutoCycle();
-        }, 8000);
+        }, 5000);
       });
-    });
-
-    consoleCard.addEventListener('mouseenter', () => {
-      isUserInteracting = true;
-    });
-
-    consoleCard.addEventListener('mouseleave', () => {
-      isUserInteracting = false;
     });
 
     // Copy White-Label Link button handler
@@ -998,7 +990,7 @@
       });
     }
 
-    // Initial render
+    // Initial render and immediate continuous autoplay
     renderTask(0, true);
     startAutoCycle();
   }
