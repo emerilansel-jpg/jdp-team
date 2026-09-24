@@ -739,6 +739,341 @@
   }
 
   // ==========================================
+  // 15. Hero Dynamic Typewriter Headline
+  // ==========================================
+  function initHeroTypewriter() {
+    const textEl = document.getElementById('heroTypewriterText');
+    if (!textEl) return;
+
+    const phrases = [
+      "SEO Execution.",
+      "Content Writing.",
+      "Video Editing.",
+      "Digital Operations.",
+      "Agency Scale."
+    ];
+
+    if (prefersReduced) {
+      textEl.textContent = phrases[0];
+      return;
+    }
+
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let timer = null;
+
+    function tick() {
+      const currentPhrase = phrases[phraseIdx];
+
+      if (!isDeleting) {
+        textEl.textContent = currentPhrase.substring(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === currentPhrase.length) {
+          isDeleting = true;
+          timer = setTimeout(tick, 2200);
+          return;
+        }
+        timer = setTimeout(tick, 45);
+      } else {
+        textEl.textContent = currentPhrase.substring(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          timer = setTimeout(tick, 350);
+          return;
+        }
+        timer = setTimeout(tick, 24);
+      }
+    }
+
+    timer = setTimeout(tick, 500);
+  }
+
+  // ==========================================
+  // 16. Interactive Live Dispatch Pod Console
+  // ==========================================
+  function initHeroConsole() {
+    const consoleCard = document.getElementById('heroConsoleCard');
+    if (!consoleCard) return;
+
+    const taskButtons = consoleCard.querySelectorAll('.hero-task-btn');
+    const inputEl = document.getElementById('heroConsoleInput');
+    const clientEl = document.getElementById('heroConsoleClient');
+    const routerEl = document.getElementById('heroConsoleRouter');
+    const assigneeEl = document.getElementById('heroConsoleAssignee');
+    const progressLabelEl = document.getElementById('heroConsoleProgressLabel');
+    const elapsedEl = document.getElementById('heroConsoleElapsed');
+    const percentEl = document.getElementById('heroConsolePercent');
+    const progressBarEl = document.getElementById('heroConsoleProgressBar');
+    const outputEl = document.getElementById('heroConsoleOutput');
+    const creditsEl = document.getElementById('heroConsoleCredits');
+    const copyBtn = document.getElementById('heroCopyLinkBtn');
+    const copyTextEl = document.getElementById('heroCopyLinkText');
+
+    const tasksData = [
+      {
+        tabLabel: "⚡ Technical SEO",
+        client: "Client: ApexMedia",
+        input: "Audit & resolve 42 orphan URLs + deploy Schema JSON-LD markup",
+        router: "Alex R. (Dedicated PM)",
+        assignee: "Senior Specialist ($5.00/hr)",
+        progressInit: "Running Screaming Frog & Schema Validator...",
+        progressDone: "Validation complete · All checks passed",
+        elapsed: "1h 45m",
+        output: "Schema JSON-LD deployed + White-label audit PDF (ApexMedia branding)",
+        credits: "-875 cr ($8.75)",
+        link: "https://jdp.team/report/apexmedia-seo-audit"
+      },
+      {
+        tabLabel: "📝 1,500w Article",
+        client: "Client: PayFlow",
+        input: 'B2B Fintech Pillar: "Automated ACH Reconciliation Guide"',
+        router: "Alex R. (Dedicated PM)",
+        assignee: "Senior SEO Writer ($32.00/art)",
+        progressInit: "Writing & optimizing NLP keywords in SurferSEO...",
+        progressDone: "SurferSEO score 88/100 · 3 infographics formatted",
+        elapsed: "14h total",
+        output: "Google Doc ready + SurferSEO 88/100 + Meta tags + 3 custom graphics",
+        credits: "-3,200 cr ($32.00)",
+        link: "https://jdp.team/doc/payflow-ach-pillar-article"
+      },
+      {
+        tabLabel: "🎬 3x Short Reels",
+        client: "Client: ScaleX Studio",
+        input: "Cut 3 high-hook Reels from 45m podcast with sound fx & kinetic captions",
+        router: "Alex R. (Dedicated PM)",
+        assignee: "Video Editor ($5.00/hr)",
+        progressInit: "Trimming narrative hooks, sound design & B-roll sync...",
+        progressDone: "Color grade & audio normalization complete",
+        elapsed: "4h total",
+        output: "3x 4K MP4 deliverables (Frame.io preview + raw premiere assets)",
+        credits: "-2,000 cr ($20.00)",
+        link: "https://jdp.team/review/scalex-3x-reels"
+      },
+      {
+        tabLabel: "📊 Client Report",
+        client: "Client: Elevate Agency",
+        input: "Generate monthly SEO & organic traffic slide deck with client logo",
+        router: "Alex R. (Dedicated PM)",
+        assignee: "Junior Staff ($3.00/hr)",
+        progressInit: "Consolidating rankings, traffic delta & GSC index rates...",
+        progressDone: "Deck exported with unbranded white-label theme",
+        elapsed: "1h 15m",
+        output: "24-slide white-label PDF deck + executive video loom brief",
+        credits: "-375 cr ($3.75)",
+        link: "https://jdp.team/deck/elevate-monthly-report"
+      }
+    ];
+
+    let currentTaskIdx = 0;
+    let autoCycleTimer = null;
+    let progressAnimTimer = null;
+    let isUserInteracting = false;
+
+    function renderTask(idx, triggerProgress = true) {
+      currentTaskIdx = idx;
+      const data = tasksData[idx];
+
+      // Update Tab Buttons UI
+      taskButtons.forEach((btn, i) => {
+        const isActive = i === idx;
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        if (isActive) {
+          btn.className = 'hero-task-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-brand-600 text-white shadow-sm transition-all whitespace-nowrap';
+        } else {
+          btn.className = 'hero-task-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-all whitespace-nowrap';
+        }
+      });
+
+      // Update Text Elements
+      if (inputEl) inputEl.textContent = data.input;
+      if (clientEl) clientEl.textContent = data.client;
+      if (routerEl) routerEl.textContent = data.router;
+      if (assigneeEl) assigneeEl.textContent = data.assignee;
+      if (elapsedEl) elapsedEl.textContent = data.elapsed;
+      if (outputEl) outputEl.textContent = data.output;
+      if (creditsEl) creditsEl.textContent = data.credits;
+
+      if (copyBtn) {
+        copyBtn.setAttribute('data-link', data.link);
+      }
+
+      // Progress animation
+      if (progressAnimTimer) clearTimeout(progressAnimTimer);
+
+      if (prefersReduced || !triggerProgress) {
+        if (progressBarEl) progressBarEl.style.width = '100%';
+        if (percentEl) percentEl.textContent = '100%';
+        if (progressLabelEl) progressLabelEl.textContent = data.progressDone;
+        return;
+      }
+
+      if (progressBarEl) {
+        progressBarEl.style.transition = 'none';
+        progressBarEl.style.width = '0%';
+      }
+      if (percentEl) percentEl.textContent = '0%';
+      if (progressLabelEl) progressLabelEl.textContent = data.progressInit;
+
+      // Animate progress smoothly to 100%
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (progressBarEl) {
+            progressBarEl.style.transition = 'width 2.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            progressBarEl.style.width = '100%';
+          }
+
+          const start = performance.now();
+          const duration = 2400;
+
+          function updateNum(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const pct = Math.round(ease * 100);
+            if (percentEl) percentEl.textContent = `${pct}%`;
+            if (progress < 1) {
+              requestAnimationFrame(updateNum);
+            } else {
+              if (progressLabelEl) progressLabelEl.textContent = data.progressDone;
+            }
+          }
+          requestAnimationFrame(updateNum);
+        });
+      });
+    }
+
+    function startAutoCycle() {
+      if (prefersReduced) return;
+      if (autoCycleTimer) clearInterval(autoCycleTimer);
+      autoCycleTimer = setInterval(() => {
+        if (!isUserInteracting) {
+          const next = (currentTaskIdx + 1) % tasksData.length;
+          renderTask(next, true);
+        }
+      }, 4200);
+    }
+
+    taskButtons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        isUserInteracting = true;
+        renderTask(i, true);
+        // Resume auto-cycle after 8s of user inactivity
+        if (autoCycleTimer) clearInterval(autoCycleTimer);
+        setTimeout(() => {
+          isUserInteracting = false;
+          startAutoCycle();
+        }, 8000);
+      });
+    });
+
+    consoleCard.addEventListener('mouseenter', () => {
+      isUserInteracting = true;
+    });
+
+    consoleCard.addEventListener('mouseleave', () => {
+      isUserInteracting = false;
+    });
+
+    // Copy White-Label Link button handler
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const link = copyBtn.getAttribute('data-link') || tasksData[currentTaskIdx].link;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(link);
+          }
+        } catch (_) {}
+
+        if (copyTextEl) copyTextEl.textContent = 'Link Copied!';
+        copyBtn.classList.add('bg-slate-900');
+        copyBtn.classList.remove('bg-emerald-600');
+
+        setTimeout(() => {
+          if (copyTextEl) copyTextEl.textContent = 'Copy White-Label Link';
+          copyBtn.classList.remove('bg-slate-900');
+          copyBtn.classList.add('bg-emerald-600');
+        }, 2000);
+      });
+    }
+
+    // Initial render
+    renderTask(0, true);
+    startAutoCycle();
+  }
+
+  // ==========================================
+  // 17. Hero Mouse Parallax & Background Radial Aura
+  // ==========================================
+  function initHeroParallax() {
+    if (prefersReduced) return;
+    const heroSection = document.getElementById('heroSection');
+    const heroCard = document.getElementById('heroConsoleCard');
+    const heroAura = document.getElementById('heroMouseAura');
+    const badge1 = document.getElementById('heroBadge1');
+    const badge2 = document.getElementById('heroBadge2');
+    const badge3 = document.getElementById('heroBadge3');
+
+    if (!heroSection || !heroCard) return;
+
+    let ticking = false;
+
+    heroSection.addEventListener('mousemove', (e) => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const rect = heroSection.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Update background radial aura position
+        if (heroAura) {
+          heroAura.style.setProperty('--hero-mouse-x', `${mouseX}px`);
+          heroAura.style.setProperty('--hero-mouse-y', `${mouseY}px`);
+        }
+
+        // 3D perspective tilt on central console card
+        const cardRect = heroCard.getBoundingClientRect();
+        const cardCenterX = cardRect.left + cardRect.width / 2;
+        const cardCenterY = cardRect.top + cardRect.height / 2;
+        const deltaX = Math.max(-1, Math.min(1, (e.clientX - cardCenterX) / (cardRect.width / 2)));
+        const deltaY = Math.max(-1, Math.min(1, (e.clientY - cardCenterY) / (cardRect.height / 2)));
+
+        const tiltX = -deltaY * 4.5;
+        const tiltY = deltaX * 4.5;
+
+        heroCard.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateZ(4px)`;
+
+        // Parallax shift on micro-badges
+        if (badge1) {
+          badge1.style.transform = `translate3d(${(-deltaX * 6).toFixed(1)}px, ${(-deltaY * 6).toFixed(1)}px, 0)`;
+        }
+        if (badge2) {
+          badge2.style.transform = `translate3d(${(deltaX * 7).toFixed(1)}px, ${(deltaY * 7).toFixed(1)}px, 0)`;
+        }
+        if (badge3) {
+          badge3.style.transform = `translate3d(${(-deltaX * 5).toFixed(1)}px, ${(deltaY * 5).toFixed(1)}px, 0)`;
+        }
+
+        ticking = false;
+      });
+    }, { passive: true });
+
+    heroSection.addEventListener('mouseleave', () => {
+      heroCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      if (badge1) badge1.style.transform = '';
+      if (badge2) badge2.style.transform = '';
+      if (badge3) badge3.style.transform = '';
+      if (heroAura) {
+        heroAura.style.setProperty('--hero-mouse-x', '50%');
+        heroAura.style.setProperty('--hero-mouse-y', '35%');
+      }
+    });
+  }
+
+  // ==========================================
   // Initialize Everything on DOMContentLoaded
   // ==========================================
   function initAll() {
@@ -754,6 +1089,9 @@
     initCreditWalletSimulator();
     initTilt3D();
     initWorkflowCanvas();
+    initHeroTypewriter();
+    initHeroConsole();
+    initHeroParallax();
   }
 
   if (document.readyState === 'loading') {

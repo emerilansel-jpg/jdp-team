@@ -700,7 +700,110 @@
   }
 }
 
-/* 19. Accessibility: Prefers-Reduced-Motion */
+/* 19. Hero Dynamic Motion Elements · Hallmark & Taste Compliant */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  background-color: #1d4ed8;
+  margin-left: 4px;
+  vertical-align: -0.05em;
+  animation: cursorBlink 800ms infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+@keyframes float-slow-reverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 9px, 0);
+  }
+}
+
+@keyframes float-slow-delay {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+.float-slow {
+  animation: float-slow 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-slow-reverse {
+  animation: float-slow-reverse 6.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-slow-delay {
+  animation: float-slow-delay 5.8s ease-in-out 1.2s infinite;
+  will-change: transform;
+}
+
+.hero-console-wrapper {
+  perspective: 1200px;
+  position: relative;
+}
+
+.hero-3d-tilt {
+  transform-style: preserve-3d;
+  transition: transform 180ms var(--ease-out);
+  will-change: transform;
+}
+
+.hero-parallax-badge {
+  transition: transform 220ms var(--ease-out);
+  will-change: transform;
+}
+
+.hero-mouse-aura {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    650px circle at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 35%),
+    rgba(29, 78, 216, 0.08),
+    rgba(16, 185, 129, 0.03) 45%,
+    transparent 70%
+  );
+  transition: opacity var(--dur-normal) var(--ease-out);
+  z-index: 1;
+}
+
+.hero-task-btn {
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.hero-task-btn:hover {
+  transform: translateY(-1px);
+}
+
+.hero-task-btn:active {
+  transform: scale(0.97);
+}
+
+/* 20. Accessibility: Prefers-Reduced-Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -730,9 +833,28 @@
   .ai-conductor-badge {
     animation: none !important;
   }
-  .tilt-card-3d {
+  .tilt-card-3d,
+  .hero-3d-tilt,
+  .hero-parallax-badge {
     transform: none !important;
     transition: none !important;
+  }
+  .float-slow,
+  .float-slow-reverse,
+  .float-slow-delay {
+    animation: none !important;
+    transform: none !important;
+  }
+  .typewriter-cursor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .hero-mouse-aura {
+    background: radial-gradient(
+      600px circle at 50% 30%,
+      rgba(29, 78, 216, 0.06),
+      transparent 70%
+    ) !important;
   }
   .spotlight-card::before,
   .card-clean::before,
