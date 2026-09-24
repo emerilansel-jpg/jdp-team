@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>JDP.team - Your Secret Remote Team | Scroll-Story</title>
-  <meta name="description" content="Your secret remote team. We do the work, you take the credit. Dedicated PM, junior staff from $3/hr, senior specialists, video editing, and SEO fulfillment.">
+  <title>JDP.team - Your Secret Remote Team | Cinematic Experience</title>
+  <meta name="description" content="Your secret remote team. We do the work, you take the credit. Dedicated PM, junior staff from $3/hr, senior specialists from $5/hr, video editing, and SEO fulfillment under your brand.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/motion.css?v=20260924">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -18,34 +18,29 @@
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             display: ['"Inter Tight"', '"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
+            obsidian: {
+              950: '#05070a',
+              900: '#07090e',
+              850: '#0b0f17',
+              800: '#111726',
+              700: '#1a2236'
+            },
             brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              300: '#93c5fd',
               400: '#60a5fa',
-              500: '#2563eb',
-              600: '#1d4ed8',
-              700: '#1e40af',
-              800: '#1e3a8a',
-              900: '#172554'
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8'
             },
-            accent: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
+            cyanGlow: {
+              400: '#22d3ee',
+              500: '#06b6d4'
+            },
+            emeraldGlow: {
               400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857'
-            },
-            surface: {
-              pure: '#ffffff',
-              subtle: '#f8fafc',
-              muted: '#f1f5f9',
-              border: '#e2e8f0',
-              borderHover: '#cbd5e1'
+              500: '#10b981'
             }
           }
         }
@@ -54,73 +49,103 @@
   </script>
   <style>
     :root {
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --dur-short: 200ms;
-      --dur-long: 400ms;
+      --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
     html, body {
+      margin: 0;
+      padding: 0;
       overflow-x: clip;
       max-width: 100vw;
-      background-color: #ffffff;
-      color: #0f172a;
+      background-color: #07090e;
+      color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    h1, h2, h3, .font-heading {
+    h1, h2, h3, h4, .font-heading {
       font-family: 'Inter Tight', 'Plus Jakarta Sans', sans-serif;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
     }
-    .hero-title-clamp {
-      font-size: clamp(2.2rem, 5.5vw, 4.75rem);
+    .hero-title-fluid {
+      font-size: clamp(2.25rem, 6.2vw, 5.25rem);
+      line-height: 1.05;
+    }
+    .scene-title-fluid {
+      font-size: clamp(2rem, 5vw, 4.25rem);
       line-height: 1.08;
     }
-    .scene-title-clamp {
-      font-size: clamp(1.85rem, 4.5vw, 3.75rem);
-      line-height: 1.12;
+    /* Sleek Thine Glass Surfaces */
+    .thine-glass {
+      background: rgba(11, 15, 23, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
-    .bg-dot-grid {
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 28px 28px;
+    .thine-glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: border-color 240ms var(--ease-out), transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
     }
-    .card-clean {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    .thine-glass-card:hover {
+      border-color: rgba(96, 165, 250, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
     }
-    .card-clean:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
-      transform: translateY(-2px);
+    /* Stage Acts Visibility Controller */
+    .stage-act {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(24px) scale(0.98);
+      transition: opacity 400ms var(--ease-cinematic), transform 400ms var(--ease-cinematic);
+      will-change: opacity, transform;
     }
-    .btn-motion {
+    .stage-act.is-active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    /* High Contrast Video Scrim */
+    .thine-vignette {
+      background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.35) 0%, rgba(7, 9, 14, 0.75) 60%, rgba(7, 9, 14, 0.98) 100%);
+    }
+    /* Subtle Glowing Grid Lines */
+    .grid-lines {
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    /* Micro Glow Accent */
+    .glow-cyan {
+      text-shadow: 0 0 30px rgba(34, 211, 238, 0.4);
+    }
+    .glow-blue {
+      text-shadow: 0 0 35px rgba(59, 130, 246, 0.45);
+    }
+    /* Touch Target Helper */
+    .min-touch {
+      min-width: 44px;
       min-height: 44px;
-      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
     }
-    .btn-motion:hover {
-      transform: translateY(-2px);
-    }
-    .btn-motion:active {
-      transform: translateY(1px);
-    }
-    /* Thine Sticky Stage Scrim */
-    .thine-video-scrim {
-      background: linear-gradient(to bottom, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.92) 100%);
-    }
-    /* Scroll down indicator pulse */
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateY(0); opacity: 0.9; }
-      50% { transform: translateY(6px); opacity: 0.4; }
-    }
-    .scroll-cue-anim {
-      animation: scrollBounce 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    /* FAQ expansion */
+    /* FAQ Accordion */
     .faq-grid-wrapper {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 300ms var(--ease-out);
+      transition: grid-template-rows 300ms var(--ease-cinematic);
     }
     .faq-grid-wrapper.open {
       grid-template-rows: 1fr;
@@ -129,1732 +154,1297 @@
       overflow: hidden;
     }
     .faq-icon-rot {
-      transition: transform 250ms var(--ease-out);
+      transition: transform 250ms var(--ease-cinematic);
     }
     .faq-icon-rot.rotated {
       transform: rotate(45deg);
     }
-    /* Touch target guarantee */
-    .min-touch {
-      min-width: 44px;
-      min-height: 44px;
+    /* Pulse Rings */
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring {
+      animation: pulseRing 3s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
-  <!-- Reading Progress Bar -->
-  <div id="progress-bar"></div>
+<body class="selection:bg-brand-500 selection:text-white">
 
-  <!-- Announcement Bar -->
-  <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase tracking-wider">Live</span>
-        <span>Confidential remote fulfillment pod for <strong>Digital Agencies, Online Businesses & Solo Founders</strong>.</span>
-      </div>
-      <div class="hidden sm:flex items-center gap-5 text-slate-400">
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 1 Dedicated PM</span>
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 100% White-Label</span>
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Rollover Credits</span>
-        <a href="/proof.html" class="text-brand-400 hover:text-white underline font-semibold">View Proof & Case Studies →</a>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Sticky Top Navigation with Clay.com Fluid Sliding Pill -->
-  <header class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group min-touch" aria-label="JDP.team Homepage">
-        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
-          <span class="text-brand-400">J</span>
+  <!-- ======================================================== -->
+  <!-- 1. ULTRA-MINIMALIST FLOATING GLASS HEADER (THINE AESTHETIC) -->
+  <!-- NO ANNOUNCEMENT BAR. JUST SLEEK CAPSULE NAVBAR -->
+  <!-- ======================================================== -->
+  <header class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
+    <nav class="thine-glass rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between border border-white/10 shadow-2xl">
+      <!-- Brand Pill -->
+      <a href="/" class="flex items-center gap-2.5 group min-touch" aria-label="JDP.team Homepage">
+        <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-black text-sm text-blue-400 group-hover:scale-105 transition-transform shadow-inner">
+          J
         </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-slate-950 text-lg tracking-tight">JDP.team</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
-          </div>
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
+        <div class="flex items-center gap-2">
+          <span class="font-extrabold text-white text-base tracking-tight">JDP<span class="text-blue-400">.team</span></span>
+          <span class="text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 font-mono font-semibold">White-Label</span>
         </div>
       </a>
 
-      <!-- Desktop Nav with Clay.com Fluid Sliding Pill Indicator -->
-      <nav id="desktop-nav" class="nav-pill-wrapper hidden md:inline-flex items-center">
-        <div id="nav-pill-indicator"></div>
-        <a href="/" class="nav-pill-link">Home</a>
-        <a href="/homepage2.html" class="nav-pill-link is-active">Story Tour</a>
-        <a href="/services.html" class="nav-pill-link">Services & Pricing</a>
-        <a href="/calculator.html" class="nav-pill-link">ROI Calculator</a>
-        <a href="/proof.html" class="nav-pill-link">Proof & Reviews</a>
-        <a href="/contact.html" class="nav-pill-link">Contact & FAQ</a>
-      </nav>
-
-      <!-- Desktop CTAs -->
-      <div class="hidden sm:flex items-center gap-3">
-        <a href="/contact.html" class="px-4 py-2.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion flex items-center justify-center">
-          Book Intro Call
-        </a>
-        <a href="/services.html#pricing" class="px-4 py-2.5 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion flex items-center justify-center">
-          Start with Credits
-        </a>
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <a href="#act-1" class="hover:text-white transition-colors">Story</a>
+        <a href="#services-pipeline" class="hover:text-white transition-colors">Services</a>
+        <a href="#calculator-act" class="hover:text-white transition-colors">Calculator</a>
+        <a href="#proof-act" class="hover:text-white transition-colors">Proof</a>
+        <a href="#pricing-act" class="hover:text-white transition-colors">Pricing</a>
       </div>
 
-      <!-- Mobile Hamburger Button -->
-      <button id="mobileMenuBtn" aria-label="Toggle Navigation" class="md:hidden p-2.5 rounded-lg text-slate-600 hover:text-slate-900 border border-slate-200 min-touch flex items-center justify-center">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-    </div>
-
-    <!-- Mobile Drawer Menu -->
-    <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 text-sm font-medium shadow-xl">
-      <a href="/" class="block py-2 text-slate-700 hover:text-brand-600 font-medium">Home</a>
-      <a href="/homepage2.html" class="block py-2 font-bold text-brand-600">Story Tour (Interactive)</a>
-      <a href="/services.html" class="block py-2 text-slate-700 hover:text-brand-600">Services & Pricing</a>
-      <a href="/calculator.html" class="block py-2 text-slate-700 hover:text-brand-600">ROI Calculator</a>
-      <a href="/proof.html" class="block py-2 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
-      <a href="/contact.html" class="block py-2 text-slate-700 hover:text-brand-600">Contact & FAQ</a>
-      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <a href="/contact.html" class="w-full py-3 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center btn-motion flex items-center justify-center">
-          Book Intro Call
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white transition-colors">
+          Book Intro
         </a>
-        <a href="/services.html#pricing" class="w-full py-3 rounded-lg text-xs font-bold bg-brand-600 text-white text-center btn-motion flex items-center justify-center">
-          Start with Credits
+        <a href="#pricing-act" class="px-4 sm:px-5 py-2 rounded-full text-xs font-bold bg-white hover:bg-slate-200 text-slate-950 transition-transform active:scale-95 shadow-md flex items-center gap-1.5 min-touch">
+          <span>Get Started</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
       </div>
-    </div>
+    </nav>
   </header>
 
   <!-- ======================================================== -->
-  <!-- THINE.COM ARCHITECTURE: STICKY FULL-SCREEN VIDEO STAGE   -->
+  <!-- 2. FULL-BLEED PINNED CINEMATIC STAGE (ACT I, II, III) -->
+  <!-- 300vh Container with Pinned 100vh Sticky Viewport Stage -->
   <!-- ======================================================== -->
-  <div class="sticky top-0 left-0 w-full h-[100dvh] overflow-hidden -z-10 pointer-events-none" aria-hidden="true">
-    <!-- Local Ambient Abstract Tech Nodes Video -->
-    <video id="ambientVideo" autoplay loop muted playsinline disablepictureinpicture class="absolute inset-0 w-full h-full object-cover">
-      <source src="/assets/video/abstract-nodes.webm" type="video/webm">
-    </video>
+  <div id="cinematic-stage-container" class="relative w-full" style="height: 300vh;">
 
-    <!-- Canvas Fallback / Ambient Particle Mesh (active if video is paused or in battery saver mode) -->
-    <canvas id="ambientCanvas" class="absolute inset-0 w-full h-full object-cover opacity-60"></canvas>
+    <!-- Sticky 100vh Viewport -->
+    <div id="pinned-viewport" class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-obsidian-900 grid-lines">
 
-    <!-- Subtle White Gradient Scrim Overlay for 100% WCAG AA High Contrast -->
-    <div class="absolute inset-0 thine-video-scrim"></div>
-    <div class="absolute inset-0 bg-dot-grid opacity-35"></div>
+      <!-- Crisp Dynamic Ambient Video Background -->
+      <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <video id="bgVideo" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-75 filter contrast-125 brightness-110">
+          <source src="assets/video/abstract-nodes.webm" type="video/webm">
+          <source src="assets/video/abstract-nodes.mp4" type="video/mp4">
+        </video>
+        <!-- Dynamic Interactive Canvas Constellation Layer -->
+        <canvas id="particleCanvas" class="absolute inset-0 w-full h-full opacity-60"></canvas>
+        <!-- High-Contrast Cinematic Scrim Vignette -->
+        <div class="absolute inset-0 thine-vignette"></div>
+      </div>
+
+      <!-- Stage Step Floating Indicator (Right Side) -->
+      <aside aria-label="Story Acts Progress" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 hidden sm:flex flex-col gap-3">
+        <button type="button" onclick="jumpToAct(1)" id="dot-act-1" class="group flex items-center gap-2 text-right focus:outline-none" aria-label="Act 1: Scale">
+          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity opacity-0 group-hover:opacity-100">01 SCALE</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-blue-500/20 transition-all duration-300"></span>
+        </button>
+        <button type="button" onclick="jumpToAct(2)" id="dot-act-2" class="group flex items-center gap-2 text-right focus:outline-none" aria-label="Act 2: Factory">
+          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity opacity-0 group-hover:opacity-100">02 POD</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+        </button>
+        <button type="button" onclick="jumpToAct(3)" id="dot-act-3" class="group flex items-center gap-2 text-right focus:outline-none" aria-label="Act 3: Invisible">
+          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity opacity-0 group-hover:opacity-100">03 INVISIBLE</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+        </button>
+      </aside>
+
+      <!-- Content Stage Layers -->
+      <div class="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
+
+        <!-- ACT I (Screen 1) -->
+        <div id="act-1" class="stage-act is-active text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-xs font-mono font-medium mb-6 backdrop-blur-md shadow-lg">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span class="text-slate-400">Act I ·</span>
+            <span class="text-white font-semibold">We do the work, you take the credit.</span>
+          </div>
+
+          <h1 class="hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto">
+            Your secret remote team scales without burnout.
+          </h1>
+
+          <p class="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+            Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#pricing-act" class="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
+              <span>Start with Credits</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
+              <span>Watch How It Works</span>
+              <svg class="w-4 h-4 text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </button>
+          </div>
+
+          <!-- Bottom Micro Scroll Cue -->
+          <div class="mt-14 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
+            <span>Scroll to Enter The Pod Factory</span>
+            <svg class="w-3.5 h-3.5 animate-pulse text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+
+        <!-- ACT II (Screen 2) -->
+        <div id="act-2" class="stage-act text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyanGlow-500/30 bg-cyanGlow-500/10 text-cyanGlow-400 text-xs font-mono font-medium mb-5 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-cyanGlow-400"></span>
+            <span class="text-slate-400">Act II ·</span>
+            <span class="text-white font-semibold">Managed Pod Infrastructure</span>
+          </div>
+
+          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto">
+            The private factory behind your brand.
+          </h2>
+
+          <p class="mt-4 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            You close deals and lead client strategy. We supply the dedicated operational muscle to fulfill every brief with precision.
+          </p>
+
+          <!-- 3 High-Contrast Glass Floating Nodes -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 w-full max-w-4xl mx-auto text-left">
+            <!-- Node 1 -->
+            <div class="thine-glass-card rounded-2xl p-6 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-all"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-lg text-blue-400">💬</span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300 px-2 py-0.5 rounded bg-blue-900/40 border border-blue-500/20">Slack / ClickUp</span>
+              </div>
+              <h3 class="text-lg font-bold text-white tracking-tight">1 Dedicated PM</h3>
+              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+                Single point of contact in Slack. Scopes hours, assigns specialists, and runs thorough QA. Zero micromanagement on your plate.
+              </p>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="thine-glass-card rounded-2xl p-6 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-cyanGlow-500/10 rounded-full blur-xl group-hover:bg-cyanGlow-500/20 transition-all"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="w-10 h-10 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-lg text-cyan-400">⚡</span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-300 px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20">$3 - $5 / hr</span>
+              </div>
+              <h3 class="text-lg font-bold text-white tracking-tight">Specialist Pod</h3>
+              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+                Junior Staff <strong class="text-white">$3/hr</strong>, Senior Specialists <strong class="text-white">$5/hr</strong>, Video Editors <strong class="text-white">$5/hr</strong>. Trained as AI Conductors.
+              </p>
+            </div>
+
+            <!-- Node 3 -->
+            <div class="thine-glass-card rounded-2xl p-6 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-emeraldGlow-500/10 rounded-full blur-xl group-hover:bg-emeraldGlow-500/20 transition-all"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-lg text-emerald-400">🎯</span>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/20">Express SLA</span>
+              </div>
+              <h3 class="text-lg font-bold text-white tracking-tight">24h Turnaround</h3>
+              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+                Instant scalability. Deliverables come back polished, verified, and client-ready without endless revision cycles.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACT III (Screen 3) -->
+        <div id="act-3" class="stage-act text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emeraldGlow-500/30 bg-emeraldGlow-500/10 text-emeraldGlow-400 text-xs font-mono font-medium mb-5 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-emeraldGlow-400"></span>
+            <span class="text-slate-400">Act III ·</span>
+            <span class="text-white font-semibold">100% White-Label</span>
+          </div>
+
+          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto">
+            100% Invisible to your clients.
+          </h2>
+
+          <p class="mt-4 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Everything we build is delivered under your logo, your templates, and your brand guidelines. You bill the client $3,000. We fulfill for $999. You keep the profit and your sanity.
+          </p>
+
+          <!-- High-Contrast Margin Breakdown Card -->
+          <div class="mt-8 thine-glass rounded-3xl p-6 sm:p-8 max-w-3xl w-full mx-auto border border-white/10 shadow-2xl text-left">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+              <!-- Client Bill -->
+              <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">You Bill The Client</span>
+                <div class="text-3xl font-black text-white mt-1">$3,000</div>
+                <span class="text-xs text-slate-400 mt-1 block">Your agency retainer</span>
+              </div>
+
+              <!-- JDP Fulfillment -->
+              <div class="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300">We Fulfill Pod</span>
+                <div class="text-3xl font-black text-blue-400 mt-1">$999</div>
+                <span class="text-xs text-blue-200/70 mt-1 block">110k wholesale credits</span>
+              </div>
+
+              <!-- Retained Profit -->
+              <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300">You Keep Sanity & Profit</span>
+                <div class="text-3xl font-black text-emerald-400 mt-1">+$2,001</div>
+                <span class="text-xs text-emerald-300/80 mt-1 block">66.7% Net Agency Margin</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Strict Non-Disclosure Agreement (NDA) on file</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Direct CMS upload under your staff guest accounts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Button to Enter Next Act -->
+          <div class="mt-8">
+            <a href="#services-pipeline" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-white transition-colors">
+              <span>Continue to Interactive Console & Calculator</span>
+              <span>↓</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
   <!-- ======================================================== -->
-  <!-- SCROLL-STORY TRACK (MULTI-SCREEN NARRATIVE OVER VIDEO)    -->
+  <!-- 3. ACT IV: INTERACTIVE WORKFLOW PIPELINE & CALCULATOR -->
   <!-- ======================================================== -->
-  <main class="relative z-10 -mt-[100dvh]">
+  <main class="relative z-20 bg-obsidian-950 border-t border-white/10 text-white">
 
-    <!-- SCENE 1: THE CORE PROPOSITION -->
-    <section id="scene-1" class="min-h-[100dvh] flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 relative pt-12 pb-20">
-      <div class="max-w-5xl mx-auto my-auto">
-        <!-- Eyebrow Pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200/90 bg-white/90 text-slate-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm backdrop-blur-md">
-          <span class="flex h-2 w-2 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-500"></span>
-          </span>
-          <span class="text-slate-600">Scene 01 ·</span>
-          <span class="text-slate-950 font-bold">We do the work, you take the credit.</span>
+    <!-- 3A. GUMLOOP STYLE 1 PM NODE PIPELINE -->
+    <section id="services-pipeline" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">Autonomous Pod Conductor</span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
+            How You Work With Us: 1 PM Node Flow
+          </h2>
+          <p class="text-slate-400 mt-4 text-base sm:text-lg">
+            Never manage 5 different freelancers across Upwork. Submit a brief to your single Slack channel, and our internal pod handles the entire chain.
+          </p>
         </div>
 
-        <!-- Headline with Fluid Clamp Scale -->
-        <h1 class="hero-title-clamp font-black text-slate-950 tracking-tight max-w-4xl mx-auto">
-          Your secret remote team scales without burnout.
-        </h1>
-
-        <!-- Subheadline -->
-        <p class="mt-6 text-base sm:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed font-normal">
-          Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
-        </p>
-
-        <!-- Action Buttons -->
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-xl shadow-brand-600/25 btn-motion flex items-center justify-center gap-2 min-touch">
-            <span>Get Started with Credits</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
-          <a href="/services.html#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold border border-slate-300 bg-white/95 hover:bg-white text-slate-800 shadow-sm btn-motion flex items-center justify-center gap-2 backdrop-blur-sm min-touch">
-            <span>Explore Pricing & Rates</span>
-            <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-
-        <!-- Scroll Cue Indicator -->
-        <div class="mt-14 inline-flex flex-col items-center text-xs font-semibold text-slate-500 scroll-cue-anim">
-          <span>Scroll to uncover the story</span>
-          <svg class="w-4 h-4 mt-1 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- SCENE 2: THE PRIVATE FACTORY -->
-    <section id="scene-2" class="min-h-[100dvh] flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 relative py-20">
-      <div class="max-w-5xl mx-auto my-auto">
-        <!-- Eyebrow Pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-200/90 bg-white/90 text-brand-700 text-xs sm:text-sm font-semibold mb-6 shadow-sm backdrop-blur-md">
-          <span class="w-2 h-2 rounded-full bg-brand-600"></span>
-          <span class="font-mono text-slate-500">Scene 02 ·</span>
-          <span class="font-bold">Managed Execution Pod</span>
-        </div>
-
-        <!-- Headline -->
-        <h2 class="scene-title-clamp font-black text-slate-950 tracking-tight max-w-4xl mx-auto">
-          A private factory behind your brand.
-        </h2>
-
-        <!-- Subheadline -->
-        <p class="mt-6 text-base sm:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed">
-          You close deals. Your 1 Dedicated PM manages the rest. Junior staff at $3/hr and Senior Specialists at $5/hr execute at 3x speed.
-        </p>
-
-        <!-- 3 Mini Badge Pills -->
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 max-w-2xl mx-auto">
-          <div class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/95 border border-slate-200 shadow-md backdrop-blur-md text-xs sm:text-sm font-bold text-slate-900">
-            <span class="text-brand-600 text-base">💬</span>
-            <span>1 Dedicated PM in Slack</span>
-          </div>
-          <div class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/95 border border-slate-200 shadow-md backdrop-blur-md text-xs sm:text-sm font-bold text-slate-900">
-            <span class="text-emerald-600 text-base">🎯</span>
-            <span>Zero Micromanagement</span>
-          </div>
-          <div class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/95 border border-slate-200 shadow-md backdrop-blur-md text-xs sm:text-sm font-bold text-slate-900">
-            <span class="text-indigo-600 text-base">⚡</span>
-            <span>24h Express Turnaround</span>
-          </div>
-        </div>
-
-        <!-- Visual Pod Highlight Card -->
-        <div class="mt-10 max-w-3xl mx-auto card-clean rounded-2xl p-6 sm:p-8 bg-white/95 backdrop-blur-md shadow-xl border border-slate-200 text-left">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div class="border-b sm:border-b-0 sm:border-r border-slate-100 pb-4 sm:pb-0 sm:pr-4">
-              <div class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Direct Contact</div>
-              <div class="text-base font-bold text-slate-950 mt-1">1 Dedicated PM</div>
-              <p class="text-xs text-slate-500 mt-1">US timezone overlap, daily check-ins, single Slack channel.</p>
+        <!-- 4-Stage Interactive Gumloop Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Stage 1 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-2 py-0.5 rounded bg-white/5">Stage 01</span>
+                <span class="text-xs font-mono text-blue-400 font-bold">Intake</span>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-4">
+                📥
+              </div>
+              <h3 class="text-base font-bold text-white">Brief Submission</h3>
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                Drop raw Google Docs, Loom videos, ClickUp tickets, or Slack voice notes.
+              </p>
             </div>
-            <div class="border-b sm:border-b-0 sm:border-r border-slate-100 pb-4 sm:pb-0 sm:pr-4">
-              <div class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Transparent Rates</div>
-              <div class="text-base font-bold text-brand-600 mt-1">$3 to $5 / hr</div>
-              <p class="text-xs text-slate-500 mt-1">Junior admin $3/hr, Senior Specialists $5/hr, Video $5/hr.</p>
+            <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Multi-channel intake
+            </div>
+          </div>
+
+          <!-- Stage 2 (Hub) -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-blue-500/40 bg-blue-950/20 shadow-xl relative">
+            <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-blue-600 text-white font-bold">
+              Core Conductor
             </div>
             <div>
-              <div class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Guaranteed Rigor</div>
-              <div class="text-base font-bold text-emerald-600 mt-1">100% Quality QA</div>
-              <p class="text-xs text-slate-500 mt-1">Every brief thoroughly inspected before reaching your desk.</p>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300 px-2 py-0.5 rounded bg-blue-900/30">Stage 02</span>
+                <span class="text-xs font-mono text-cyan-400 font-bold">1 PM Hub</span>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-blue-600/30 border border-blue-400/40 text-blue-300 flex items-center justify-center text-xl mb-4 shadow-lg">
+                👔
+              </div>
+              <h3 class="text-base font-bold text-white">1 Dedicated PM Gate</h3>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                Scopes the scope, sets timeline, assigns staff, and inspects quality.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-blue-300 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+              Zero micromanagement
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-2 py-0.5 rounded bg-white/5">Stage 03</span>
+                <span class="text-xs font-mono text-purple-400 font-bold">Execution</span>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-4">
+                ⚡
+              </div>
+              <h3 class="text-base font-bold text-white">Specialist Pod</h3>
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                Junior Staff ($3/hr), Senior Specialists ($5/hr), Video ($5/hr), SEO ($7/hr).
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              AI Conductor speed
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-emerald-500/30">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 px-2 py-0.5 rounded bg-emerald-950/30">Stage 04</span>
+                <span class="text-xs font-mono text-emerald-400 font-bold">Delivery</span>
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                🚀
+              </div>
+              <h3 class="text-base font-bold text-white">Client-Ready Deliverable</h3>
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                QA-passed, white-labeled, formatted in your client's template, ready to forward.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              100% White-label NDA
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- SCENE 3: 100% INVISIBLE FULFILLMENT -->
-    <section id="scene-3" class="min-h-[100dvh] flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 relative py-20">
-      <div class="max-w-5xl mx-auto my-auto">
-        <!-- Eyebrow Pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-200/90 bg-white/90 text-emerald-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm backdrop-blur-md">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span class="font-mono text-slate-500">Scene 03 ·</span>
-          <span class="font-bold">Confidential White-Label</span>
-        </div>
-
-        <!-- Headline -->
-        <h2 class="scene-title-clamp font-black text-slate-950 tracking-tight max-w-4xl mx-auto">
-          100% Invisible to your clients.
-        </h2>
-
-        <!-- Subheadline -->
-        <p class="mt-6 text-base sm:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed">
-          Every document, article, audit, and video edit is formatted to your exact brand guidelines. Your clients see only your logo.
-        </p>
-
-        <!-- White-Label Mockup Showcase -->
-        <div class="mt-10 max-w-3xl mx-auto card-clean rounded-2xl p-6 sm:p-8 bg-white/95 backdrop-blur-md shadow-2xl border border-slate-200 text-left">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 font-bold text-lg">
-                🛡️
-              </div>
-              <div>
-                <div class="text-sm font-bold text-slate-950">Enterprise White-Label Guarantee</div>
-                <div class="text-xs text-slate-500">Strict Non-Disclosure Agreement (NDA) on file</div>
-              </div>
+        <!-- Live Task Terminal Simulation -->
+        <div class="mt-10 thine-glass rounded-2xl p-5 sm:p-6 border border-white/10 shadow-2xl">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span class="font-mono text-slate-400 ml-2">Live Pod Execution Simulator</span>
             </div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              Zero Footprint
+            <span class="font-mono text-emerald-400 flex items-center gap-1.5 text-[11px]">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Pod Online
             </span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 text-xs text-slate-600">
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
-              <span class="text-emerald-600 font-bold text-sm">✓</span>
-              <span><strong>Your Brand Assets:</strong> Reports, audit PDFs, and spreadsheets exported directly with your client's typography and color codes.</span>
-            </div>
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
-              <span class="text-emerald-600 font-bold text-sm">✓</span>
-              <span><strong>Direct CMS Uploads:</strong> We publish directly to WordPress, Webflow, Shopify, or Ghost using designated guest contributor credentials.</span>
-            </div>
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
-              <span class="text-emerald-600 font-bold text-sm">✓</span>
-              <span><strong>Uncut Reseller Margins:</strong> Bill clients $1,500 to $4,000 monthly retainers while our wholesale pod fulfills it for $300 to $600.</span>
-            </div>
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
-              <span class="text-emerald-600 font-bold text-sm">✓</span>
-              <span><strong>Rollover Hours Protection:</strong> Any unused credits automatically roll over month-to-month so you never waste retainer capital.</span>
+          <div class="py-4 font-mono text-xs sm:text-sm">
+            <div class="text-slate-400 mb-1 font-bold text-[11px] uppercase tracking-wider">Active Client Task:</div>
+            <div class="bg-obsidian-900 rounded-xl p-3.5 border border-white/5 text-slate-200 min-h-[48px] flex items-center">
+              <span id="sim-text" class="text-blue-300"></span>
+              <span class="animate-pulse ml-1 text-blue-400">▍</span>
             </div>
           </div>
+
+          <div class="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-slate-400">Role:</span>
+              <span id="sim-role" class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">Senior Specialist</span>
+              <span class="text-slate-400 ml-2">Rate:</span>
+              <span id="sim-rate" class="px-2 py-0.5 rounded bg-white/5 text-white">$5.00/hr</span>
+              <span class="text-slate-400 ml-2">Turnaround:</span>
+              <span id="sim-time" class="text-emerald-400">Delivered in 12h</span>
+            </div>
+            <span class="text-[11px] text-slate-400">Under Agency White-Label</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3B. GRANULAR TASK & STAFFING CALCULATOR -->
+    <section id="calculator-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs font-mono uppercase tracking-widest text-emeraldGlow-400 font-bold">Financial Efficiency</span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
+            Granular Task & Staffing Calculator
+          </h2>
+          <p class="text-slate-400 mt-4 text-base sm:text-lg">
+            Slide hours to calculate credits and compare against typical US in-house benchmark costs.
+          </p>
         </div>
 
-        <!-- Transition CTA into Deep Dive Sections Below -->
-        <div class="mt-12 text-center">
-          <a href="#pipeline-section" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-950 text-white font-bold text-xs sm:text-sm hover:bg-slate-900 transition-colors shadow-lg min-touch">
-            <span>Explore The Interactive Pod Pipeline Below</span>
-            <span>↓</span>
-          </a>
+        <div class="thine-glass rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Controls (7 cols) -->
+            <div class="lg:col-span-7 space-y-6">
+              <!-- Junior Staff -->
+              <div>
+                <div class="flex justify-between items-center text-xs sm:text-sm font-semibold mb-2">
+                  <span class="text-slate-300">Junior Remote Staff ($3.00/hr):</span>
+                  <span id="calcJuniorLabel" class="text-blue-400 font-mono font-bold">20 hrs/mo ($60)</span>
+                </div>
+                <input id="calcJunior" type="range" min="0" max="80" step="5" value="20" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500 min-touch">
+                <span class="text-[11px] text-slate-400">Admin, data entry, CRM updates, CMS publishing</span>
+              </div>
+
+              <!-- Senior Specialist -->
+              <div>
+                <div class="flex justify-between items-center text-xs sm:text-sm font-semibold mb-2">
+                  <span class="text-slate-300">Senior Specialist ($5.00/hr):</span>
+                  <span id="calcSeniorLabel" class="text-cyan-400 font-mono font-bold">15 hrs/mo ($75)</span>
+                </div>
+                <input id="calcSenior" type="range" min="0" max="60" step="5" value="15" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500 min-touch">
+                <span class="text-[11px] text-slate-400">Technical SEO, web design, Zapier automations, script debugging</span>
+              </div>
+
+              <!-- Video Editor -->
+              <div>
+                <div class="flex justify-between items-center text-xs sm:text-sm font-semibold mb-2">
+                  <span class="text-slate-300">Video Editing ($5.00/hr):</span>
+                  <span id="calcVideoLabel" class="text-purple-400 font-mono font-bold">10 hrs/mo ($50)</span>
+                </div>
+                <input id="calcVideo" type="range" min="0" max="50" step="5" value="10" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500 min-touch">
+                <span class="text-[11px] text-slate-400">Short-form Reels, TikToks, YouTube shorts with motion captions</span>
+              </div>
+
+              <!-- SEO Content -->
+              <div>
+                <div class="flex justify-between items-center text-xs sm:text-sm font-semibold mb-2">
+                  <span class="text-slate-300">SEO Content Writing ($32.00/article):</span>
+                  <span id="calcArticlesLabel" class="text-emerald-400 font-mono font-bold">4 articles ($128)</span>
+                </div>
+                <input id="calcArticles" type="range" min="0" max="20" step="1" value="4" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500 min-touch">
+                <span class="text-[11px] text-slate-400">1,200+ words, SurferSEO score 85+, plagiarism checked</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Outputs (5 cols) -->
+            <div class="lg:col-span-5 bg-obsidian-900 rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Credits Needed:</span>
+                  <span id="outCredits" class="font-mono font-bold text-blue-400 text-lg">31,300 pts</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Your JDP Pod Cost:</span>
+                  <span id="outJdpCost" class="font-mono font-bold text-white text-xl">$313/mo</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">US In-House Benchmark:</span>
+                  <span id="outUsCost" class="font-mono font-bold text-slate-500 line-through text-base">$2,030/mo</span>
+                </div>
+
+                <div class="pt-4 border-t border-white/10 flex justify-between items-baseline">
+                  <span class="text-sm font-bold text-slate-300">Estimated Net Savings:</span>
+                  <span id="outSavings" class="text-2xl sm:text-3xl font-black font-mono text-emerald-400">+$1,717/mo</span>
+                </div>
+
+                <div class="text-right">
+                  <span id="outPercent" class="inline-block text-xs font-mono font-bold text-emerald-300 bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-500/30">
+                    Save 84.6%
+                  </span>
+                </div>
+
+                <!-- Animated Cost Comparison Bar -->
+                <div class="pt-4 space-y-2">
+                  <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                    <span>JDP Cost Ratio</span>
+                    <span id="barText">15.4% of US cost</span>
+                  </div>
+                  <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="costBar" class="h-full bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full transition-all duration-300" style="width: 15.4%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 pt-5 border-t border-white/10">
+                <a href="#pricing-act" class="w-full py-3.5 rounded-full font-bold text-xs font-mono uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-1.5 min-touch">
+                  <span>Lock in This Pod Configuration</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================== -->
-    <!-- BELOW THE VIDEO STORY: INTERACTIVE TOOLS, CALCULATORS & PROOF -->
+    <!-- 4. ACT V: PROOF, NELL VH AUTHORITY & CLIENT TESTIMONIALS -->
     <!-- ======================================================== -->
-    <div class="bg-white border-t border-slate-200 relative z-20">
-
-      <!-- SUPPORTED PLATFORMS INFINITE TICKER -->
-      <section class="py-5 bg-slate-950 border-b border-slate-800 overflow-hidden reveal-on-scroll" aria-label="Supported Platforms and Tools">
-        <div class="max-w-7xl mx-auto px-4 mb-2 flex items-center justify-between text-xs text-slate-400">
-          <span class="font-bold uppercase tracking-wider text-[11px] text-slate-400">Fulfillment Across Your Daily Stack:</span>
-          <span class="text-[11px] text-slate-500">Auto-synced into your client workflows</span>
-        </div>
-        <div class="marquee-wrapper">
-          <div class="marquee-track py-2">
-            <!-- Set 1 -->
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Slack
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-purple-400"></span> ClickUp
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-slate-300"></span> Notion
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-blue-400"></span> WordPress
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-orange-400"></span> Ahrefs
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-amber-400"></span> Semrush
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-orange-500"></span> HubSpot
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-blue-500"></span> Google Analytics
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Legiit Certified
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-sky-400"></span> EIN Presswire
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Stripe
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-blue-600"></span> PayPal
-            </div>
-            <!-- Set 2 for seamless infinite loop -->
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Slack
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-purple-400"></span> ClickUp
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-slate-300"></span> Notion
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-blue-400"></span> WordPress
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-orange-400"></span> Ahrefs
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-amber-400"></span> Semrush
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-orange-500"></span> HubSpot
-            </div>
-            <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-              <span class="w-2 h-2 rounded-full bg-blue-500"></span> Google Analytics
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 1. GUMLOOP-STYLE 1 PM INTERACTIVE NODE PIPELINE -->
-      <section id="pipeline-section" class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Autonomous Conductor Pipeline</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-              How You Work With Us: 1 Dedicated PM Pod
-            </h2>
-            <p class="text-slate-600 mt-3 text-base sm:text-lg">
-              You never juggle multiple freelancers or micromanage timesheets. Your Dedicated Project Manager coordinates everything.
-            </p>
-          </div>
-
-          <!-- Gumloop Visual Workflow Container -->
-          <div class="workflow-canvas-container p-6 sm:p-10 mb-8 relative rounded-3xl border border-slate-200 bg-surface-subtle shadow-lg">
-            <!-- Connecting SVG Pulse Network Layer -->
-            <svg class="flow-svg-layer hidden lg:block" viewBox="0 0 1100 240" fill="none" preserveAspectRatio="none">
-              <path class="flow-path-base" d="M 235 120 C 270 120, 280 120, 315 120" />
-              <path class="flow-path-pulse" d="M 235 120 C 270 120, 280 120, 315 120" />
-              <path class="flow-path-base" d="M 545 120 C 575 120, 585 120, 615 120" />
-              <path class="flow-path-pulse" d="M 545 120 C 575 120, 585 120, 615 120" />
-              <path class="flow-path-base" d="M 845 120 C 875 120, 885 120, 915 120" />
-              <path class="flow-path-pulse" d="M 845 120 C 875 120, 885 120, 915 120" />
-            </svg>
-
-            <!-- 4-Stage Interactive Gumloop Nodes Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch relative z-10">
-
-              <!-- Node 1: Client Task Input -->
-              <div class="workflow-node card-clean rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative cursor-pointer" data-node-id="node-input" data-downstream="node-pm,node-exec,node-delivery">
-                <span class="node-port absolute -right-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700">Stage 01</span>
-                    <span class="text-xs font-mono font-semibold text-brand-600">Brief In</span>
-                  </div>
-                  <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 border border-brand-100 flex items-center justify-center text-xl mb-3 font-bold">
-                    📥
-                  </div>
-                  <h3 class="font-extrabold text-slate-950 text-base">Client Task Input</h3>
-                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                    Drop raw briefs, Loom recordings, ClickUp tickets, or Slack messages.
-                  </p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-medium text-slate-600">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-                  <span>Multi-channel intake</span>
-                </div>
-              </div>
-
-              <!-- Node 2: 1 Dedicated PM Hub (Core Hub) -->
-              <div class="workflow-node card-clean rounded-2xl p-6 bg-slate-950 text-white border border-slate-800 shadow-xl flex flex-col justify-between relative cursor-pointer" data-node-id="node-pm" data-downstream="node-exec,node-delivery">
-                <span class="node-port absolute -left-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
-                <span class="node-port absolute -right-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-accent-500 text-slate-950">Core Hub</span>
-                    <span class="text-xs font-mono font-semibold text-accent-300">1 PM Gate</span>
-                  </div>
-                  <div class="w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center text-xl mb-3 shadow-inner">
-                    👔
-                  </div>
-                  <h3 class="font-extrabold text-white text-base">1 Dedicated PM Hub</h3>
-                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                    Single operational conductor. Scopes hours, assigns specialists, and runs QA.
-                  </p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-800 flex items-center gap-1.5 text-[11px] font-medium text-accent-300">
-                  <span class="w-2 h-2 rounded-full bg-accent-400 task-pulse inline-block"></span>
-                  <span>Zero client micromanagement</span>
-                </div>
-              </div>
-
-              <!-- Node 3: Execution Pod -->
-              <div class="workflow-node card-clean rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative cursor-pointer" data-node-id="node-exec" data-downstream="node-delivery">
-                <span class="node-port absolute -left-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
-                <span class="node-port absolute -right-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700">Stage 03</span>
-                    <span class="text-xs font-mono font-semibold text-indigo-600">Specialist Pod</span>
-                  </div>
-                  <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center text-xl mb-3 font-bold">
-                    ⚡
-                  </div>
-                  <h3 class="font-extrabold text-slate-950 text-base">Execution Specialists</h3>
-                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                    Junior $3/hr, Senior $5/hr, Video $5/hr, and dedicated SEO $7/hr.
-                  </p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-medium text-slate-600">
-                  <span class="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
-                  <span>AI Conductors + human rigor</span>
-                </div>
-              </div>
-
-              <!-- Node 4: White-Label Delivery -->
-              <div class="workflow-node card-clean rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative cursor-pointer" data-node-id="node-delivery" data-downstream="">
-                <span class="node-port absolute -left-1.5 top-1/2 -translate-y-1/2 hidden lg:block"></span>
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800">Final Gate</span>
-                    <span class="text-xs font-mono font-semibold text-emerald-600">Ready</span>
-                  </div>
-                  <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-xl mb-3 font-bold">
-                    🚀
-                  </div>
-                  <h3 class="font-extrabold text-slate-950 text-base">White-Label Delivery</h3>
-                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                    100% verified, zero-rework client deliverables ready under your brand name.
-                  </p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-medium text-emerald-700">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-                  <span>100% confidential NDA</span>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Interactive Live Task Simulation Stream -->
-            <div id="liveTaskSim" class="mt-8 pt-6 border-t border-slate-200">
-              <div class="rounded-2xl bg-slate-950 p-5 sm:p-6 text-white border border-slate-800 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
-                  <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-                    <span class="ml-2 font-mono text-xs font-bold text-slate-300">Live Pod Task Simulation</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-accent-400 task-pulse"></span>
-                    <span class="text-xs font-semibold text-accent-300">1 Dedicated PM + Specialist Pod Active</span>
-                  </div>
-                </div>
-
-                <div class="py-4">
-                  <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1.5">
-                    Incoming Client Task Brief:
-                  </div>
-                  <div class="bg-slate-900/90 rounded-xl p-3.5 border border-slate-800/80 min-h-[52px] flex items-center">
-                    <span class="sim-task-text text-sm sm:text-base font-mono text-slate-100 font-medium"></span>
-                    <span class="typing-cursor"></span>
-                  </div>
-                </div>
-
-                <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/80 text-xs">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-slate-400">Assigned:</span>
-                    <span class="sim-role-badge px-2.5 py-0.5 rounded-md font-bold bg-brand-500/20 text-brand-300 border border-brand-500/30">Video Editor</span>
-                    <span class="text-slate-400 ml-1">Rate:</span>
-                    <span class="sim-rate-badge px-2 py-0.5 rounded-md font-mono font-bold bg-slate-800 text-slate-200">$5.00/hr</span>
-                    <span class="text-slate-400 ml-1">Billing:</span>
-                    <span class="sim-credits px-2 py-0.5 rounded-md font-semibold text-slate-300">4,000 credits ($40)</span>
-                  </div>
-                  <div>
-                    <span class="sim-status-badge px-2.5 py-1 rounded-md font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      Completed in 8h
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- 2. UPSCAYL-STYLE BEFORE & AFTER COMPARISON SLIDER -->
-      <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto mb-12">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">The Operational Shift</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-              Unmanaged Freelancers vs. JDP Managed Pod
-            </h2>
-            <p class="text-slate-600 mt-3 text-base sm:text-lg">
-              Drag the interactive divider handle to compare traditional contractor friction with our dedicated white-label pod.
-            </p>
-
-            <!-- Preset Quick Selectors -->
-            <div class="mt-6 inline-flex p-1 rounded-full bg-slate-200/80 border border-slate-300">
-              <button type="button" data-slider-set="15" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-slate-700 hover:text-slate-950 transition cursor-pointer min-touch">
-                Freelancers View
-              </button>
-              <button type="button" data-slider-set="50" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-brand-600 text-white shadow-xs transition cursor-pointer min-touch">
-                Split 50/50
-              </button>
-              <button type="button" data-slider-set="85" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-slate-700 hover:text-slate-950 transition cursor-pointer min-touch">
-                JDP Pod View
-              </button>
-            </div>
-          </div>
-
-          <!-- Comparison Slider Box -->
-          <div class="comparison-slider-container relative rounded-3xl overflow-hidden border border-slate-300 shadow-2xl" style="--split-pos: 50%;">
-            <!-- Left Side / Base: Unmanaged Freelancers (Before) -->
-            <div class="comparison-pane-before p-8 sm:p-12 min-h-[460px] flex flex-col justify-between">
-              <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 mb-4">
-                  <span>✕</span> Traditional Freelancer Chaos
-                </div>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                  The Old Way: High Stress & Unpredictable Quality
-                </h3>
-                <p class="text-slate-300 text-sm mt-2 max-w-xl">
-                  Juggling 4 to 8 independent contractors across Upwork and Fiverr drains 15+ founder hours every single week.
-                </p>
-
-                <ul class="mt-8 space-y-3.5 max-w-lg text-sm text-slate-300">
-                  <li class="flex items-start gap-3">
-                    <span class="text-rose-400 font-bold text-base leading-none">✕</span>
-                    <span><strong>Fragmented briefs:</strong> Repeating identical instructions to 5 different disconnected freelancers.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-rose-400 font-bold text-base leading-none">✕</span>
-                    <span><strong>Unpredictable rates:</strong> Paying $25 to $50/hr with surprise timesheet billings and invoice disputes.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-rose-400 font-bold text-base leading-none">✕</span>
-                    <span><strong>Missed deadlines:</strong> Unannounced ghosting and delays right before major client presentations.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-rose-400 font-bold text-base leading-none">✕</span>
-                    <span><strong>Continuous QA burden:</strong> Founders spending weekends rewriting and fixing sloppy work.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-rose-400 font-bold text-base leading-none">✕</span>
-                    <span><strong>Zero accountability:</strong> When a deliverable fails, everyone blames the other contractor.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="pt-6 mt-6 border-t border-slate-800 text-xs font-mono text-slate-400">
-                Result: Bottlenecked growth, wasted agency margins, constant founder burnout.
-              </div>
-            </div>
-
-            <!-- Right Side / Overlay: JDP Managed Pod (After) -->
-            <div class="comparison-pane-after p-8 sm:p-12 min-h-[460px] flex flex-col justify-between">
-              <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-4">
-                  <span>✓</span> JDP Managed Pod
-                </div>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
-                  The JDP Way: 1 Dedicated Slack PM & Instant Scale
-                </h3>
-                <p class="text-slate-600 text-sm mt-2 max-w-xl">
-                  Submit one brief. Your dedicated PM scopes, routes, verifies, and returns client-ready deliverables silently.
-                </p>
-
-                <ul class="mt-8 space-y-3.5 max-w-lg text-sm text-slate-800">
-                  <li class="flex items-start gap-3">
-                    <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
-                    <span><strong>1 Slack point of contact:</strong> Zero freelancer management or timesheet tracking on your plate.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
-                    <span><strong>True wholesale rates:</strong> Junior staff from $3/hr, senior specialists from $5/hr, video at $5/hr.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
-                    <span><strong>Predictable 24-48h turnaround:</strong> Rigorous internal PM checkpoints guarantee delivery on schedule.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
-                    <span><strong>100% White-label output:</strong> Ready to hand straight to your clients under your own agency brand.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-emerald-600 font-bold text-base leading-none">✓</span>
-                    <span><strong>Credit rollover guarantee:</strong> Never lose what you paid for; unused credits roll over every month.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="pt-6 mt-6 border-t border-slate-200 text-xs font-mono text-slate-600">
-                Result: 70%+ net delivery margins, zero stress, scalable agency operations.
-              </div>
-            </div>
-
-            <!-- Draggable Divider Line & Handle -->
-            <div class="comparison-divider-line"></div>
-            <div class="comparison-drag-handle" title="Drag left/right to compare" aria-label="Comparison slider handle">
-              <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l-4 3 4 3m8-6l4 3-4 3"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. INTERACTIVE CREDIT WALLET DEDUCTION SIMULATOR (PAYPAL STYLE) -->
-      <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto mb-12">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Live Interaction</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-              Interactive Credit Wallet Deduction Simulator
-            </h2>
-            <p class="text-slate-600 mt-3 text-base sm:text-lg">
-              See how our transparent credit balance works in real time. Click tasks below to simulate instant deductions from your wallet.
-            </p>
-          </div>
-
-          <!-- PayPal-Style Live Credit Wallet Card -->
-          <div id="creditWalletSim" class="rounded-3xl bg-slate-950 p-6 sm:p-10 text-white border border-slate-800 shadow-2xl relative overflow-hidden">
-            <div id="walletDeductTag" class="wallet-deduct-tag">-3,200 cr</div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="w-3 h-3 rounded-full bg-brand-500 inline-block"></span>
-                  <span class="font-mono text-xs font-bold text-slate-300">Live Credit Wallet Simulator</span>
-                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Active Pod</span>
-                </div>
-                <p class="text-xs text-slate-400 mt-1">Click demo tasks below to watch credits deduct from your live balance in real time.</p>
-              </div>
-
-              <!-- Live Balance Display -->
-              <div class="text-left sm:text-right bg-slate-900/90 px-5 py-3.5 rounded-2xl border border-slate-800">
-                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Available Pod Balance</div>
-                <div class="flex items-baseline gap-2 mt-0.5">
-                  <span id="walletBalanceNumber" class="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight">110,000</span>
-                  <span class="text-xs font-bold text-slate-300">credits</span>
-                  <span id="walletCurrencyVal" class="text-xs font-mono text-slate-400">($1,100.00)</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Clickable Task Deductions Grid -->
-            <div class="py-6">
-              <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-3">
-                Simulate Submitting Client Tasks (Click to Burn):
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer hover:border-brand-500/50 transition-colors min-touch" data-deduct-credits="3200" data-deduct-task="1 SEO Pillar Article (1,500 words)">
-                  <div>
-                    <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">1 SEO Pillar Article</div>
-                    <div class="text-[11px] text-slate-400">1,500 words + Surfer 85+</div>
-                  </div>
-                  <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-3,200 cr</span>
-                </button>
-
-                <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer hover:border-brand-500/50 transition-colors min-touch" data-deduct-credits="600" data-deduct-task="2h Junior Tech VA Support">
-                  <div>
-                    <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">2h Junior Tech VA</div>
-                    <div class="text-[11px] text-slate-400">Shopify catalog & CRM formatting</div>
-                  </div>
-                  <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-600 cr</span>
-                </button>
-
-                <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer hover:border-brand-500/50 transition-colors min-touch" data-deduct-credits="2000" data-deduct-task="4 Short-Form TikTok Reels">
-                  <div>
-                    <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">4 TikTok Reels</div>
-                    <div class="text-[11px] text-slate-400">Subtitles, motion cuts, audio sync</div>
-                  </div>
-                  <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-2,000 cr</span>
-                </button>
-
-                <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer hover:border-brand-500/50 transition-colors min-touch" data-deduct-credits="1500" data-deduct-task="500 Verified B2B Leads List">
-                  <div>
-                    <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">500 B2B Leads</div>
-                    <div class="text-[11px] text-slate-400">Apollo / LinkedIn verified emails</div>
-                  </div>
-                  <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-1,500 cr</span>
-                </button>
-
-                <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer hover:border-brand-500/50 transition-colors min-touch" data-deduct-credits="1000" data-deduct-task="2h Senior Tech VA Dev Support">
-                  <div>
-                    <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">2h Senior Tech Dev</div>
-                    <div class="text-[11px] text-slate-400">WordPress plugin & CSS debugging</div>
-                  </div>
-                  <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-1,000 cr</span>
-                </button>
-
-                <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-left flex items-center justify-between group cursor-pointer hover:border-brand-500/50 transition-colors min-touch" data-deduct-credits="24000" data-deduct-task="Full Tier 1 Press Release Distribution">
-                  <div>
-                    <div class="text-xs font-bold text-slate-200 group-hover:text-brand-300 transition-colors">Press Release Syndicate</div>
-                    <div class="text-[11px] text-slate-400">Google News + 450 authority media</div>
-                  </div>
-                  <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20">-24,000 cr</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Activity Ledger & Reset -->
-            <div class="pt-4 border-t border-slate-800/80">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Live Pod Activity Ledger:</span>
-                <button type="button" id="walletResetBtn" class="text-xs text-brand-400 hover:text-brand-300 font-semibold underline cursor-pointer min-touch flex items-center">
-                  Reset to 110,000 credits
-                </button>
-              </div>
-              <div id="walletLedgerList" class="space-y-1 max-h-36 overflow-y-auto">
-                <div class="py-2 text-xs text-slate-500 italic text-center">
-                  Credit wallet ready: 110,000 credits loaded. Click any task above to simulate instant execution.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. ADVANCED TASK & STAFFING CALCULATOR WITH LIVE US COMPARISON -->
-      <section id="calculator-section" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="rounded-3xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xl">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
-              <div class="max-w-xl w-full">
-                <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Quick Estimate</span>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mt-1">
-                  Interactive Mini Task & Staffing Calculator
-                </h3>
-                <p class="text-slate-600 text-sm mt-2 leading-relaxed">
-                  Estimate monthly credits and see how much you save compared to typical US in-house staffing costs.
-                </p>
-
-                <div class="mt-8 space-y-5">
-                  <div>
-                    <div class="flex justify-between text-xs sm:text-sm font-semibold mb-1.5">
-                      <span class="text-slate-700">Junior Remote Staff ($3/hr):</span>
-                      <span id="previewJuniorVal" class="text-brand-700 font-bold">20 hrs/mo ($60)</span>
-                    </div>
-                    <input id="previewJunior" type="range" min="0" max="80" step="5" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600 min-touch">
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between text-xs sm:text-sm font-semibold mb-1.5">
-                      <span class="text-slate-700">Senior Specialist ($5/hr):</span>
-                      <span id="previewSeniorVal" class="text-brand-700 font-bold">15 hrs/mo ($75)</span>
-                    </div>
-                    <input id="previewSenior" type="range" min="0" max="60" step="5" value="15" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600 min-touch">
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between text-xs sm:text-sm font-semibold mb-1.5">
-                      <span class="text-slate-700">Video Editing ($5/hr):</span>
-                      <span id="previewVideoVal" class="text-brand-700 font-bold">10 hrs/mo ($50)</span>
-                    </div>
-                    <input id="previewVideo" type="range" min="0" max="50" step="5" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600 min-touch">
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between text-xs sm:text-sm font-semibold mb-1.5">
-                      <span class="text-slate-700">SEO Content Writing ($32/article):</span>
-                      <span id="previewArticleVal" class="text-brand-700 font-bold">4 articles ($128)</span>
-                    </div>
-                    <input id="previewArticle" type="range" min="0" max="20" step="1" value="4" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600 min-touch">
-                  </div>
-                </div>
-              </div>
-
-              <!-- Dynamic ROI Results Box -->
-              <div class="w-full lg:w-96 rounded-2xl bg-slate-950 p-6 sm:p-7 text-white shadow-2xl flex flex-col justify-between">
-                <div class="space-y-4">
-                  <div class="flex justify-between items-center text-sm">
-                    <span class="text-slate-400">Total Credits Needed</span>
-                    <span id="previewCredits" class="font-bold text-brand-300 text-lg">31,300 pts</span>
-                  </div>
-                  <div class="flex justify-between items-center text-sm">
-                    <span class="text-slate-400">Your JDP Team Cost</span>
-                    <span id="previewJdpCost" class="font-bold text-white text-xl">$313/mo</span>
-                  </div>
-                  <div class="flex justify-between items-center text-sm">
-                    <span class="text-slate-400">US In-House Benchmark</span>
-                    <span id="previewUsCost" class="font-bold text-slate-400 line-through text-lg">$2,030/mo</span>
-                  </div>
-                  <div class="pt-4 border-t border-slate-800 flex justify-between items-baseline">
-                    <span class="text-sm font-bold text-slate-300">Estimated Savings</span>
-                    <span id="previewSavings" class="text-2xl font-black text-accent-400">$1,717/mo</span>
-                  </div>
-                  <div class="text-right">
-                    <span id="previewPercent" class="text-xs font-bold text-accent-300 bg-accent-500/20 px-2.5 py-1 rounded-full transition-all">Save 84.6%</span>
-                  </div>
-
-                  <!-- Visual Cost Comparison Animated Bars -->
-                  <div class="mt-4 pt-3 border-t border-slate-800 space-y-2.5">
-                    <div>
-                      <div class="flex justify-between text-xs text-slate-400 mb-1">
-                        <span>Your JDP Cost</span>
-                        <span id="previewBarJdpText" class="text-white font-bold">$313/mo</span>
-                      </div>
-                      <div class="cost-bar-track">
-                        <div id="previewBarJdp" class="cost-bar-fill bg-brand-500" style="width: 15.4%;"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex justify-between text-xs text-slate-400 mb-1">
-                        <span>US In-House Benchmark</span>
-                        <span id="previewBarUsText" class="text-slate-400 font-bold">$2,030/mo</span>
-                      </div>
-                      <div class="cost-bar-track">
-                        <div id="previewBarUs" class="cost-bar-fill bg-slate-600" style="width: 100%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mt-6 pt-5 border-t border-slate-800 flex flex-col gap-2">
-                  <a href="/calculator.html" class="w-full py-3.5 rounded-xl font-bold text-xs bg-brand-600 hover:bg-brand-500 text-white btn-motion text-center shadow-md min-touch flex items-center justify-center">
-                    Open Full Interactive ROI Calculator →
-                  </a>
-                  <span class="text-[11px] text-slate-400 text-center">Includes Agency Reseller Margin Simulation</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. 4 REAL JETDIGITALPRO CASE STUDIES -->
-      <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto mb-14">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Documented Client Results</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-              Real Verified Client Case Studies
-            </h2>
-            <p class="text-slate-600 mt-3 text-base sm:text-lg">
-              No generic claims. These are real fulfillment campaigns managed and delivered by JetDigitalPro specialists.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <!-- Case 1: PR Agency -->
-            <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between reveal-on-scroll stagger-1">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">PR Agency Client</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-50 text-brand-700 border border-brand-200">DR 35</span>
-                </div>
-                <div class="text-3xl font-black text-brand-600 tracking-tight">
-                  <span data-counter="86.95" data-suffix="%" data-decimals="2">86.95%</span>
-                </div>
-                <div class="text-xs font-semibold text-slate-900 mt-1">Keyword Coverage Captured</div>
-                <div class="flex flex-wrap items-center gap-1.5 mt-2">
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 86.95% coverage</span>
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +14 pos</span>
-                </div>
-                <p class="text-xs text-slate-600 mt-3 leading-relaxed">
-                  Targeted commercial terms indexed and ranking on Page 1 within 7.5 weeks of continuous content deployment.
-                </p>
-              </div>
-              <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] font-medium text-slate-500">
-                Timeline: 7.5 Weeks
-              </div>
-            </div>
-
-            <!-- Case 2: Medical Finance -->
-            <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between reveal-on-scroll stagger-2">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Medical Finance</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">YMYL Niche</span>
-                </div>
-                <div class="text-3xl font-black text-emerald-600 tracking-tight">
-                  <span data-counter="46.15" data-suffix="%" data-decimals="2">46.15%</span>
-                </div>
-                <div class="text-xs font-semibold text-slate-900 mt-1">Keywords Ranked in 6.5 Weeks</div>
-                <div class="flex flex-wrap items-center gap-1.5 mt-2">
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 12 Top-3</span>
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +212% traffic</span>
-                </div>
-                <p class="text-xs text-slate-600 mt-3 leading-relaxed">
-                  12 high-intent keywords secured Top-3 spots in Google US within 6.5 weeks under strict medical compliance.
-                </p>
-              </div>
-              <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] font-medium text-slate-500">
-                Result: 12 Top-3 Rankings
-              </div>
-            </div>
-
-            <!-- Case 3: Home Security -->
-            <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between reveal-on-scroll stagger-3">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Home Security</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">Fresh Domain (DR 0)</span>
-                </div>
-                <div class="text-3xl font-black text-indigo-600 tracking-tight">
-                  <span data-counter="40.0" data-suffix="%" data-decimals="1">40.0%</span>
-                </div>
-                <div class="text-xs font-semibold text-slate-900 mt-1">Keyword Capture in 45 Days</div>
-                <div class="flex flex-wrap items-center gap-1.5 mt-2">
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ DR 0 to DR 28</span>
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 6x pageviews</span>
-                </div>
-                <p class="text-xs text-slate-600 mt-3 leading-relaxed">
-                  Starting from DR 0, our cluster content blueprint claimed 40% of target keyword universe in under 45 days.
-                </p>
-              </div>
-              <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] font-medium text-slate-500">
-                Timeline: 45 Days from DR 0
-              </div>
-            </div>
-
-            <!-- Case 4: Telecom Operator -->
-            <div class="card-clean rounded-2xl p-6 bg-white flex flex-col justify-between reveal-on-scroll stagger-4">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Telecom Operator</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">High Volume</span>
-                </div>
-                <div class="text-3xl font-black text-brand-600 tracking-tight">
-                  <span data-counter="62.11" data-suffix="%" data-decimals="2">62.11%</span>
-                </div>
-                <div class="text-xs font-semibold text-slate-900 mt-1">Target Terms in Top 100</div>
-                <div class="flex flex-wrap items-center gap-1.5 mt-2">
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +1,420 keywords</span>
-                  <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ Top 100 sweep</span>
-                </div>
-                <p class="text-xs text-slate-600 mt-3 leading-relaxed">
-                  Multi-region technical SEO mapping delivered 62.11% of target keywords into Top 100 within 12 weeks.
-                </p>
-              </div>
-              <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] font-medium text-slate-500">
-                Timeline: 12 Weeks
-              </div>
-            </div>
-          </div>
-
-          <!-- JDP Academy AI Conductor Banner -->
-          <div class="mb-8 rounded-3xl p-6 sm:p-8 bg-slate-950 text-white border border-slate-800 shadow-xl reveal-on-scroll">
-            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-              <div class="max-w-2xl">
-                <div class="flex flex-wrap items-center gap-2.5 mb-3">
-                  <span class="ai-conductor-badge">
-                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-                    AI Conductor Certified
-                  </span>
-                  <span class="text-xs text-slate-400 font-mono">JDP Academy Standard</span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                  Trained in Modern Vibe Coding & Agentic AI Tools
-                </h3>
-                <p class="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
-                  JDP remote specialists are not traditional manual VAs. Through internal JDP Academy rigor, each specialist is trained as an active <strong>AI Conductor</strong> - utilizing Claude Code, Cursor, Manus, and agentic workflows to deliver 5x output velocity under strict human PM quality supervision.
-                </p>
-              </div>
-
-              <!-- AI Tools Tag Strip -->
-              <div class="flex flex-wrap gap-2 lg:max-w-xs">
-                <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
-                  ⚡ Manus & Cowork
-                </span>
-                <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
-                  🤖 Claude Code
-                </span>
-                <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
-                  💻 Cursor Vibe Coding
-                </span>
-                <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-900 border border-slate-800 text-slate-200">
-                  🎯 Human PM QA Gate
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="text-center">
-            <a href="/proof.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 bg-white border border-slate-300 px-5 py-2.5 rounded-xl shadow-xs hover:border-slate-400 transition min-touch">
-              <span>Explore All Verified Case Studies & Screenshots</span>
-              <span>→</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6. WALL OF LOVE WITH AUTHENTIC CLIENT PHOTO AVATARS -->
-      <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Client Reviews</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-              What Agency Founders Say About JDP
-            </h2>
-            <p class="text-slate-600 mt-3 text-base sm:text-lg">
-              Real verified feedback from agency directors and founders scaling with JetDigitalPro.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <!-- Michael Hodgdon -->
-            <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-              <div>
-                <div class="flex items-center gap-3 mb-4">
-                  <img src="assets/img/michael-hodgdon.jpg" alt="Michael Hodgdon" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\' viewBox=\'0 0 96 96\'><rect width=\'96\' height=\'96\' rx=\'48\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'32\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>MH</text></svg>';" class="w-12 h-12 rounded-full object-cover border border-slate-200">
-                  <div>
-                    <div class="font-bold text-sm text-slate-950">Michael Hodgdon</div>
-                    <div class="text-xs text-slate-500">EliteSEOConsulting.com</div>
-                  </div>
-                  <div class="ml-auto text-amber-500 text-xs">★★★★★</div>
-                </div>
-                <h3 class="text-sm font-bold text-slate-900 mb-2">Exceptional Content - Turnkey Delivery</h3>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  "After working with countless vendors for client content, Jet Digital Pro is the only team that truly exceeded our standards. From deep keyword research to high-authority writing and seamless publishing, we scaled 12 client campaigns without hiring an internal writer."
-                </p>
-              </div>
-              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-semibold">
-                <span>Verified Agency Review</span>
-                <span>12 Client Campaigns</span>
-              </div>
-            </div>
-
-            <!-- Peter Baranik -->
-            <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-              <div>
-                <div class="flex items-center gap-3 mb-4">
-                  <img src="assets/img/peter-baranik.jpg" alt="Peter Baranik" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\' viewBox=\'0 0 96 96\'><rect width=\'96\' height=\'96\' rx=\'48\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'32\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>PB</text></svg>';" class="w-12 h-12 rounded-full object-cover border border-slate-200">
-                  <div>
-                    <div class="font-bold text-sm text-slate-950">Peter Baranik</div>
-                    <div class="text-xs text-slate-500">2Sessions SRO</div>
-                  </div>
-                  <div class="ml-auto text-amber-500 text-xs">★★★★★</div>
-                </div>
-                <h3 class="text-sm font-bold text-slate-900 mb-2">40% Lower Cost Per Acquisition</h3>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  "Premium agencies wanted $5K+ monthly for content that took forever. JetDigitalPro hit that sweet spot. Cost per acquisition dropped 40% while our organic footprint tripled. They are the best-kept secret for agency margins."
-                </p>
-              </div>
-              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-emerald-700 font-semibold">
-                <span>Verified Agency Review</span>
-                <span>-40% Acquisition Cost</span>
-              </div>
-            </div>
-
-            <!-- Jose Jimenez -->
-            <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-              <div>
-                <div class="flex items-center gap-3 mb-4">
-                  <img src="assets/img/jose-jimenez.jpg" alt="Jose Jimenez" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\' viewBox=\'0 0 96 96\'><rect width=\'96\' height=\'96\' rx=\'48\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'32\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>JJ</text></svg>';" class="w-12 h-12 rounded-full object-cover border border-slate-200">
-                  <div>
-                    <div class="font-bold text-sm text-slate-950">Jose Jimenez</div>
-                    <div class="text-xs text-slate-500">Digital Marketing Agency</div>
-                  </div>
-                  <div class="ml-auto text-amber-500 text-xs">★★★★★</div>
-                </div>
-                <h3 class="text-sm font-bold text-slate-900 mb-2">Dependable Extension of My Agency</h3>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  "They communicate clearly, hit turnaround deadlines consistently, and integrate directly into our workflow. It feels like having my own in-house operations department without the overhead."
-                </p>
-              </div>
-              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-semibold">
-                <span>Verified Agency Review</span>
-                <span>Full Retainer Scaled</span>
-              </div>
-            </div>
-
-            <!-- Jake L -->
-            <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-              <div>
-                <div class="flex items-center gap-3 mb-4">
-                  <img src="assets/img/jake-l.jpg" alt="Jake L" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\' viewBox=\'0 0 96 96\'><rect width=\'96\' height=\'96\' rx=\'48\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'32\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>JL</text></svg>';" class="w-12 h-12 rounded-full object-cover border border-slate-200">
-                  <div>
-                    <div class="font-bold text-sm text-slate-950">Jake L</div>
-                    <div class="text-xs text-slate-500">ScaleRankings.com</div>
-                  </div>
-                  <div class="ml-auto text-amber-500 text-xs">★★★★★</div>
-                </div>
-                <h3 class="text-sm font-bold text-slate-900 mb-2">High Volume Without Quality Drop</h3>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  "We run high-velocity SEO projects across multiple sectors. JDP handles technical audits and content production without dropping quality. Deliverables are always spot-on and ready to forward to clients."
-                </p>
-              </div>
-              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-indigo-700 font-semibold">
-                <span>Verified Agency Review</span>
-                <span>100% White-Label</span>
-              </div>
-            </div>
-
-            <!-- AnnieLu -->
-            <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-              <div>
-                <div class="flex items-center gap-3 mb-4">
-                  <img src="assets/img/annielu.png" alt="AnnieLu" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\' viewBox=\'0 0 96 96\'><rect width=\'96\' height=\'96\' rx=\'48\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'32\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>AL</text></svg>';" class="w-12 h-12 rounded-full object-cover border border-slate-200">
-                  <div>
-                    <div class="font-bold text-sm text-slate-950">AnnieLu</div>
-                    <div class="text-xs text-slate-500">E-Commerce Founder</div>
-                  </div>
-                  <div class="ml-auto text-amber-500 text-xs">★★★★★</div>
-                </div>
-                <h3 class="text-sm font-bold text-slate-900 mb-2">Freed 25 Hours of My Week</h3>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  "Delegating product catalog formatting, blog uploading, and routine website tweaks to JDP Junior Staff gave me back my sanity. The dedicated PM makes request submission effortless."
-                </p>
-              </div>
-              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-emerald-700 font-semibold">
-                <span>Verified Founder Review</span>
-                <span>25 hrs/week saved</span>
-              </div>
-            </div>
-
-            <!-- Omar -->
-            <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-              <div>
-                <div class="flex items-center gap-3 mb-4">
-                  <img src="assets/img/omar.jpg" alt="Omar" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'96\' height=\'96\' viewBox=\'0 0 96 96\'><rect width=\'96\' height=\'96\' rx=\'48\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'32\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>OM</text></svg>';" class="w-12 h-12 rounded-full object-cover border border-slate-200">
-                  <div>
-                    <div class="font-bold text-sm text-slate-950">Omar</div>
-                    <div class="text-xs text-slate-500">Agency Director</div>
-                  </div>
-                  <div class="ml-auto text-amber-500 text-xs">★★★★★</div>
-                </div>
-                <h3 class="text-sm font-bold text-slate-900 mb-2">Prompt Communication in WhatsApp</h3>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  "Direct messaging with our dedicated project manager keeps everything moving fast. When a client requests urgent changes, the team handles them without any friction."
-                </p>
-              </div>
-              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-semibold">
-                <span>Verified Agency Review</span>
-                <span>Same-Day Response</span>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="text-center mt-12">
-            <a href="/proof.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 underline min-touch">
-              View all 12 client profiles, verified ratings, and case studies on our Proof page →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7. FOUNDER AUTHORITY: NELL VH -->
-      <section class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="rounded-3xl border border-slate-200 bg-surface-subtle p-8 sm:p-12 shadow-sm tilt-card-3d" data-tilt-max="4">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-
-              <!-- Founder Photo & Badge (4 cols) -->
-              <div class="lg:col-span-4 text-center">
-                <div class="relative inline-block">
-                  <img src="assets/img/nell-vh.png" alt="Nell VH - Founder of JetDigitalPro" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'200\' height=\'200\' rx=\'24\' fill=\'%230284c7\'/><text x=\'50%25\' y=\'54%25\' font-size=\'64\' font-family=\'sans-serif\' font-weight=\'bold\' fill=\'%23ffffff\' text-anchor=\'middle\' dominant-baseline=\'middle\'>NVH</text></svg>';" class="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl object-cover border-4 border-white shadow-xl mx-auto">
-                  <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold bg-slate-950 text-white whitespace-nowrap shadow-md">
-                    Nell VH • Founder
-                  </div>
-                </div>
-                <div class="mt-6 text-xs text-slate-500 font-medium">
-                  Founder & Operations Director, JetDigitalPro
-                </div>
-              </div>
-
-              <!-- Credentials & Bio (8 cols) -->
-              <div class="lg:col-span-8">
-                <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Founder & Operator Authority</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
-                  Built by an Agency Operator for Agency Operators
-                </h2>
-                <p class="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
-                  JDP.team is powered by JetDigitalPro, founded by Nell VH. Having scaled digital delivery across dozens of international client campaigns, Nell created JDP.team to solve the single greatest obstacle facing growing agencies: the expensive, unpredictable trap of managing disparate freelancers.
-                </p>
-
-                <!-- Verified Metrics Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-                  <div class="p-3.5 rounded-xl bg-white border border-slate-200 text-center">
-                    <div class="text-lg font-black text-brand-600">Level 4</div>
-                    <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Legiit Certified Agency</div>
-                  </div>
-                  <div class="p-3.5 rounded-xl bg-white border border-slate-200 text-center">
-                    <div class="text-lg font-black text-emerald-600"><span data-counter="4.2" data-decimals="1">4.2</span> / 5.0</div>
-                    <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Trustpilot Score</div>
-                  </div>
-                  <div class="p-3.5 rounded-xl bg-white border border-slate-200 text-center">
-                    <div class="text-lg font-black text-indigo-600">Certified</div>
-                    <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Google Certified</div>
-                  </div>
-                  <div class="p-3.5 rounded-xl bg-white border border-slate-200 text-center">
-                    <div class="text-lg font-black text-amber-600">Inbound</div>
-                    <div class="text-[11px] font-semibold text-slate-600 mt-0.5">HubSpot Certified</div>
-                  </div>
-                </div>
-
-                <!-- Certification Badges Display -->
-                <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center gap-6">
-                  <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Official Certifications:</span>
-                  <img src="assets/img/legit-certified-agency.png" alt="Legiit Certified Agency" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.style.display='none';" class="h-10 object-contain">
-                  <img src="assets/img/google-certified.png" alt="Google Certified" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.style.display='none';" class="h-10 object-contain">
-                  <img src="assets/img/hubspot-certified.png" alt="HubSpot Certified" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.style.display='none';" class="h-10 object-contain">
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8. TRANSPARENT CREDIT PRICING -->
-      <section id="pricing" class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto mb-14">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Transparent Pricing</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-              Flexible Credit Packs With Unused Hours Rollover
-            </h2>
-            <p class="text-slate-600 mt-3 text-base sm:text-lg">
-              Simple transparent system: <strong>1 Credit = $0.01 USD (1 Cent)</strong>. Unused credits roll over each month.
-            </p>
-          </div>
-
-          <!-- 3 Tier Cards Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-
-            <!-- Tier 1: Starter Pod -->
-            <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-slate-200 bg-white">
-              <div>
-                <div class="flex justify-between items-center mb-3">
-                  <h3 class="text-xl font-bold text-slate-950">Starter Pod</h3>
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">Light Needs</span>
-                </div>
-                <p class="text-xs text-slate-500 mb-6">Ideal for solo founders and boutique agencies offloading routine admin.</p>
-                <div class="flex items-baseline gap-1 mb-6">
-                  <span class="text-4xl font-black text-slate-950">$499</span>
-                  <span class="text-slate-500 text-sm">/month</span>
-                </div>
-
-                <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span><strong><span data-counter="50000">50,000</span> credits</strong> per month</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>1 Dedicated Project Manager</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Access to Junior ($3/hr) & Senior ($5/hr)</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>48h standard turnaround</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Credits roll over month-to-month</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-8 pt-6 border-t border-slate-100">
-                <a href="/contact.html?plan=Starter" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion text-center shadow-sm min-touch flex items-center justify-center">
-                  Start with Starter Pod
-                </a>
-              </div>
-            </div>
-
-            <!-- Tier 2: Growth Pod (Featured) -->
-            <div class="card-clean tilt-card-3d rounded-3xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-2xl relative bg-white" data-tilt-max="5">
-              <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-600 text-white shadow-sm">
-                Most Popular Pod
-              </div>
-
-              <div>
-                <div class="flex justify-between items-center mb-3">
-                  <h3 class="text-xl font-bold text-slate-950">Growth Pod</h3>
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">+10k Bonus</span>
-                </div>
-                <p class="text-xs text-slate-500 mb-6">Full fulfillment engine for digital agencies managing 3 to 10 active clients.</p>
-                <div class="flex items-baseline gap-1 mb-6">
-                  <span class="text-4xl font-black text-slate-950">$999</span>
-                  <span class="text-slate-500 text-sm">/month</span>
-                </div>
-
-                <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-800">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span><strong><span data-counter="110000">110,000</span> credits</strong> (10k bonus included)</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>1 Dedicated PM via private Slack channel</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Junior ($3/hr), Senior ($5/hr), Video ($5/hr)</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Fast 24-48h turnaround</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Full SEO writing & technical audit access</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Rollover unused credits anytime</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-8 pt-6 border-t border-slate-100">
-                <a href="/contact.html?plan=Growth" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-700 text-white shadow-md btn-motion text-center min-touch flex items-center justify-center">
-                  Start with Growth Pod
-                </a>
-              </div>
-            </div>
-
-            <!-- Tier 3: Scale Partner -->
-            <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-slate-200 bg-white">
-              <div>
-                <div class="flex justify-between items-center mb-3">
-                  <h3 class="text-xl font-bold text-slate-950">Scale Partner</h3>
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">+20k Bonus</span>
-                </div>
-                <p class="text-xs text-slate-500 mb-6">Dedicated backend pod for high-volume agencies and multiple client accounts.</p>
-                <div class="flex items-baseline gap-1 mb-6">
-                  <span class="text-4xl font-black text-slate-950">$1,899</span>
-                  <span class="text-slate-500 text-sm">/month</span>
-                </div>
-
-                <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span><strong><span data-counter="220000">220,000</span> credits</strong> (20k bonus included)</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Senior Dedicated PM + Priority Queue</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Priority same-day & 24h turnaround</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Custom client portal integration</span>
-                  </div>
-                  <div class="flex items-center gap-2.5">
-                    <span class="text-brand-600 font-bold">✓</span>
-                    <span>Press releases & bulk content packs enabled</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-8 pt-6 border-t border-slate-100">
-                <a href="/contact.html?plan=Scale" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion text-center shadow-sm min-touch flex items-center justify-center">
-                  Start with Scale Partner
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="text-center mt-12">
-            <a href="/services.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 bg-surface-subtle border border-slate-300 px-5 py-2.5 rounded-xl min-touch">
-              <span>See Full Services & Credit Rate Card (Articles, PRs & Top-ups)</span>
-              <span>→</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 9. FAQ ACCORDION -->
-      <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Got Questions?</span>
-            <h2 class="text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div class="space-y-4" id="faqAccordion">
-
-            <!-- FAQ 1 -->
-            <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
-              <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-                <span class="font-bold text-sm sm:text-base text-slate-950">How do credits work and what is the dollar value?</span>
-                <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
-              </button>
-              <div class="faq-grid-wrapper">
-                <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                  1 Credit is exactly equal to $0.01 USD (1 Cent). When you subscribe to a plan, your balance is credited with points. For example, 1 hour of Junior Staff is 300 credits ($3.00), 1 hour of Senior Specialist is 500 credits ($5.00), and 1 SEO Article (1,200 words) is 3,200 credits ($32.00). Unused credits roll over automatically while your subscription is active.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ 2 -->
-            <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
-              <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-                <span class="font-bold text-sm sm:text-base text-slate-950">How does the 1 Dedicated PM model work?</span>
-                <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
-              </button>
-              <div class="faq-grid-wrapper">
-                <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                  Upon subscribing, you are assigned a single Dedicated Project Manager as your primary point of contact. You communicate with them directly via Slack, ClickUp, Trello, or email. You simply submit your task briefs; your PM scopes the hours, assigns the appropriate specialists (data entry, video, SEO, or tech), and returns the finished, verified deliverables to you.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ 3 -->
-            <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
-              <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-                <span class="font-bold text-sm sm:text-base text-slate-950">Is our agency relationship 100% white-label and confidential?</span>
-                <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
-              </button>
-              <div class="faq-grid-wrapper">
-                <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                  Yes, 100%. We operate completely behind the scenes under strict NDA. We never contact your clients, place our branding on deliverables, or claim credit for your campaigns. Deliverables are provided in clean documents or uploaded directly to your CMS under your agency accounts.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ 4 -->
-            <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
-              <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-                <span class="font-bold text-sm sm:text-base text-slate-950">Can I pause or cancel my subscription at any time?</span>
-                <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
-              </button>
-              <div class="faq-grid-wrapper">
-                <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                  Yes. There are no lock-in contracts or long-term commitments. You can upgrade, downgrade, pause, or cancel anytime with one click in your billing dashboard.
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- 10. CLOSING BOTTOM CTA -->
-      <section class="py-20 bg-slate-950 text-white relative overflow-hidden reveal-on-scroll">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-            Take on more clients without <br class="hidden sm:inline">
-            taking on more payroll headaches.
+    <section id="proof-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">Battle-Tested Results</span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
+            Real Documented Case Studies
           </h2>
-          <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
-            Join digital agencies and online founders who rely on JDP.team as their secret fulfillment engine.
-          </p>
-
-          <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/services.html#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-brand-600 hover:bg-brand-500 text-white shadow-xl shadow-brand-600/30 btn-motion min-touch flex items-center justify-center">
-              Get Started with Credits
-            </a>
-            <a href="/contact.html" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-200 btn-motion min-touch flex items-center justify-center">
-              Book 15-Min Intro Call
-            </a>
-          </div>
-          <p class="mt-4 text-xs text-slate-500">
-            No setup fees • Cancel or pause anytime • Strict NDA protection
+          <p class="text-slate-400 mt-4 text-base sm:text-lg">
+            No mockups or vanity metrics. These are real fulfillment campaigns managed and executed by JetDigitalPro pods.
           </p>
         </div>
-      </section>
 
-      <!-- CONSISTENT FOOTER -->
-      <footer class="border-t border-slate-200 bg-surface-subtle py-14 text-slate-600 text-xs sm:text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            <!-- Col 1: Brand -->
-            <div class="space-y-3">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-black text-sm">
-                  J
-                </div>
-                <span class="font-extrabold text-slate-950 text-base">JDP.team</span>
+        <!-- 4 Verified Case Studies Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+          <!-- Case 1 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">PR Agency</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">DR 35</span>
               </div>
-              <p class="text-xs text-slate-500 leading-relaxed">
-                Your secret remote team. 100% white-label fulfillment pod powered by JetDigitalPro.
+              <div class="text-3xl font-black text-blue-400 tracking-tight font-mono">86.95%</div>
+              <div class="text-xs font-bold text-white mt-1">Keyword Coverage Captured</div>
+              <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                Target commercial terms indexed on Page 1 within 7.5 weeks of consistent cluster content.
               </p>
-              <div class="text-xs text-slate-400 pt-2">
-                Founder: Nell VH • Legiit Level 4 Certified
-              </div>
             </div>
-
-            <!-- Col 2: Navigation -->
-            <div>
-              <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
-              <ul class="space-y-2 text-xs">
-                <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
-                <li><a href="/homepage2.html" class="hover:text-brand-600 transition font-bold text-brand-600">Story Tour</a></li>
-                <li><a href="/services.html" class="hover:text-brand-600 transition">Services & Pricing</a></li>
-                <li><a href="/calculator.html" class="hover:text-brand-600 transition">ROI Calculator</a></li>
-                <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof & Case Studies</a></li>
-                <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact & FAQ</a></li>
-              </ul>
-            </div>
-
-            <!-- Col 3: Specialist Rates -->
-            <div>
-              <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Specialist Rates</div>
-              <ul class="space-y-2 text-xs text-slate-500">
-                <li>Junior Staff: <strong class="text-slate-700">$3.00/hr</strong> (300 credits)</li>
-                <li>Senior Specialist: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
-                <li>Video Editor: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
-                <li>SEO Specialist: <strong class="text-slate-700">$7.00/hr</strong> (700 credits)</li>
-                <li>SEO Content: <strong class="text-slate-700">$32.00/art</strong> (3,200 credits)</li>
-              </ul>
-            </div>
-
-            <!-- Col 4: Contact & Verification -->
-            <div>
-              <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Contact Channels</div>
-              <ul class="space-y-2 text-xs">
-                <li>Email: <a href="mailto:team@jdp.team" class="text-brand-600 hover:underline">team@jdp.team</a></li>
-                <li>Inquiries: <a href="mailto:info@jetdigitalpro.com" class="text-brand-600 hover:underline">info@jetdigitalpro.com</a></li>
-                <li>Trustpilot: <span class="font-semibold text-slate-900">4.2 / 5.0 Rating</span></li>
-                <li>Agency: <a href="https://jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600">JetDigitalPro.com ↗</a></li>
-              </ul>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-500">
+              Timeline: 7.5 Weeks
             </div>
           </div>
 
-          <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <!-- Case 2 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
             <div>
-              &copy; 2026 JDP.team. A JetDigitalPro brand. All rights reserved.
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Medical Finance</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/20">YMYL Niche</span>
+              </div>
+              <div class="text-3xl font-black text-emerald-400 tracking-tight font-mono">46.15%</div>
+              <div class="text-xs font-bold text-white mt-1">Top-3 Rankings Secured</div>
+              <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                12 high-intent keywords secured Top-3 spots in Google US under strict compliance review.
+              </p>
             </div>
-            <div class="flex items-center gap-4">
-              <span>Strict NDA Guaranteed</span>
-              <span>•</span>
-              <span>100% White-Label Delivery</span>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-500">
+              Timeline: 6.5 Weeks
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Home Security</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">DR 0 Domain</span>
+              </div>
+              <div class="text-3xl font-black text-cyan-400 tracking-tight font-mono">40.0%</div>
+              <div class="text-xs font-bold text-white mt-1">Keyword Space Claimed</div>
+              <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                From a fresh DR 0 domain, our blueprint captured 40% of the target search volume in 45 days.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-500">
+              Timeline: 45 Days
+            </div>
+          </div>
+
+          <!-- Case 4 -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Telecom Operator</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">High Volume</span>
+              </div>
+              <div class="text-3xl font-black text-purple-400 tracking-tight font-mono">62.11%</div>
+              <div class="text-xs font-bold text-white mt-1">Target Terms in Top 100</div>
+              <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                Multi-region technical SEO mapping swept +1,420 keywords into Top 100 within 12 weeks.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-500">
+              Timeline: 12 Weeks
             </div>
           </div>
         </div>
-      </footer>
 
-    </div>
+        <!-- Founder Authority Profile: Nell VH -->
+        <div class="thine-glass rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl mb-14">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Photo (4 cols) -->
+            <div class="lg:col-span-4 text-center">
+              <div class="relative inline-block">
+                <img src="assets/img/nell-vh.png" alt="Nell VH - Founder of JetDigitalPro" loading="lazy" class="w-48 h-48 sm:w-52 sm:h-52 rounded-3xl object-cover border-2 border-white/20 shadow-2xl mx-auto">
+                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-bold font-mono bg-blue-600 text-white whitespace-nowrap shadow-lg">
+                  Nell VH · Founder
+                </div>
+              </div>
+              <div class="mt-5 text-xs text-slate-400">
+                Founder & Operations Director, JetDigitalPro
+              </div>
+            </div>
+
+            <!-- Authority Copy & Badges (8 cols) -->
+            <div class="lg:col-span-8">
+              <span class="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">Operator Track Record</span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1 tracking-tight">
+                Built by an Agency Operator for Agency Operators
+              </h3>
+              <p class="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
+                Having scaled digital operations across hundreds of client campaigns, Nell created JDP.team to solve the single greatest friction point in agency growth: unmanaged contractors and unpredictable delivery quality.
+              </p>
+
+              <!-- Metrics Strip -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+                <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 text-center">
+                  <div class="text-base font-black text-blue-400">Level 4</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">Legiit Certified</div>
+                </div>
+                <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 text-center">
+                  <div class="text-base font-black text-emerald-400">4.2 / 5.0</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">Trustpilot Score</div>
+                </div>
+                <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 text-center">
+                  <div class="text-base font-black text-cyan-400">Certified</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">Google Certified</div>
+                </div>
+                <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 text-center">
+                  <div class="text-base font-black text-amber-400">Inbound</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">HubSpot Certified</div>
+                </div>
+              </div>
+
+              <!-- Official Badges -->
+              <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center gap-5">
+                <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Accreditations:</span>
+                <img src="assets/img/legit-certified-agency.png" alt="Legiit Certified" loading="lazy" class="h-8 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                <img src="assets/img/google-certified.png" alt="Google Certified" loading="lazy" class="h-8 object-contain opacity-80 hover:opacity-100 transition-opacity">
+                <img src="assets/img/hubspot-certified.png" alt="HubSpot Certified" loading="lazy" class="h-8 object-contain opacity-80 hover:opacity-100 transition-opacity">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Client Testimonials (Wall of Love) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Michael Hodgdon -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/img/michael-hodgdon.jpg" alt="Michael Hodgdon" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-white/20">
+                <div>
+                  <div class="text-sm font-bold text-white">Michael Hodgdon</div>
+                  <div class="text-[11px] text-slate-400">EliteSEOConsulting.com</div>
+                </div>
+                <div class="ml-auto text-amber-400 text-xs">★★★★★</div>
+              </div>
+              <h4 class="text-xs font-bold text-blue-300 mb-1">Turnkey Client Fulfillment</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                "Jet Digital Pro is the only team that truly exceeded our standards. From deep keyword research to seamless publishing, we scaled 12 client campaigns without hiring an internal writer."
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-blue-400">
+              Verified Agency Partner
+            </div>
+          </div>
+
+          <!-- Peter Baranik -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/img/peter-baranik.jpg" alt="Peter Baranik" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-white/20">
+                <div>
+                  <div class="text-sm font-bold text-white">Peter Baranik</div>
+                  <div class="text-[11px] text-slate-400">2Sessions SRO</div>
+                </div>
+                <div class="ml-auto text-amber-400 text-xs">★★★★★</div>
+              </div>
+              <h4 class="text-xs font-bold text-emerald-300 mb-1">40% Lower Acquisition Cost</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                "Other agencies wanted $5K+ monthly for sluggish turnarounds. JDP hit the sweet spot: acquisition costs dropped 40% while our organic footprint tripled."
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-emerald-400">
+              Verified Agency Partner
+            </div>
+          </div>
+
+          <!-- Jose Jimenez -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/img/jose-jimenez.jpg" alt="Jose Jimenez" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-white/20">
+                <div>
+                  <div class="text-sm font-bold text-white">Jose Jimenez</div>
+                  <div class="text-[11px] text-slate-400">Marketing Agency Founder</div>
+                </div>
+                <div class="ml-auto text-amber-400 text-xs">★★★★★</div>
+              </div>
+              <h4 class="text-xs font-bold text-cyan-300 mb-1">Dependable Extension of My Firm</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                "They communicate clearly in Slack, hit deadlines consistently, and integrate directly into our workflow. It feels like having my own in-house operations department."
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-cyan-400">
+              Verified Agency Partner
+            </div>
+          </div>
+
+          <!-- Jake L -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/img/jake-l.jpg" alt="Jake L" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-white/20">
+                <div>
+                  <div class="text-sm font-bold text-white">Jake L</div>
+                  <div class="text-[11px] text-slate-400">ScaleRankings.com</div>
+                </div>
+                <div class="ml-auto text-amber-400 text-xs">★★★★★</div>
+              </div>
+              <h4 class="text-xs font-bold text-purple-300 mb-1">High Volume Without Quality Drop</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                "We run high-velocity SEO projects across multiple sectors. JDP handles technical audits and content production without dropping quality. Deliverables are always spot-on."
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-purple-400">
+              Verified Agency Partner
+            </div>
+          </div>
+
+          <!-- AnnieLu -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/img/annielu.png" alt="AnnieLu" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-white/20">
+                <div>
+                  <div class="text-sm font-bold text-white">AnnieLu</div>
+                  <div class="text-[11px] text-slate-400">E-Commerce Brand Director</div>
+                </div>
+                <div class="ml-auto text-amber-400 text-xs">★★★★★</div>
+              </div>
+              <h4 class="text-xs font-bold text-blue-300 mb-1">Freed 25 Hours of My Week</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                "Delegating product catalog formatting, blog uploading, and routine website tweaks to JDP Junior Staff gave me back my sanity. The dedicated PM makes requests effortless."
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-blue-400">
+              Verified Founder Review
+            </div>
+          </div>
+
+          <!-- Omar -->
+          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <img src="assets/img/omar.jpg" alt="Omar" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-white/20">
+                <div>
+                  <div class="text-sm font-bold text-white">Omar</div>
+                  <div class="text-[11px] text-slate-400">Agency Director</div>
+                </div>
+                <div class="ml-auto text-amber-400 text-xs">★★★★★</div>
+              </div>
+              <h4 class="text-xs font-bold text-emerald-300 mb-1">Fast Turnaround in Slack</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                "Direct messaging with our dedicated project manager keeps everything moving fast. When a client requests urgent changes, the team handles them without any friction."
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-emerald-400">
+              Verified Agency Partner
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 5. ACT VI: PRICING, FAQ & MINIMALIST FOOTER -->
+    <!-- ======================================================== -->
+    <section id="pricing-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">Predictable Wholesale Retainer</span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
+            Transparent Credit Packs
+          </h2>
+          <p class="text-slate-400 mt-4 text-base sm:text-lg">
+            100 Credits = $1.00 USD. Unused credits automatically roll over every month. Cancel or pause anytime.
+          </p>
+        </div>
+
+        <!-- 3 Tiers Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          
+          <!-- Starter Pod -->
+          <div class="thine-glass-card rounded-3xl p-8 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-white">Starter Pod</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">Light Needs</span>
+              </div>
+              <p class="text-xs text-slate-400 mb-6">Ideal for boutique founders offloading routine digital administration.</p>
+              <div class="flex items-baseline gap-1 mb-6">
+                <span class="text-4xl font-black text-white">$499</span>
+                <span class="text-xs font-mono text-slate-400">/month</span>
+              </div>
+
+              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span><strong>50,000 credits</strong> per month</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>1 Dedicated Project Manager</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>Junior ($3/hr) & Senior ($5/hr) Access</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>48h standard delivery turnaround</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>Unused hours roll over automatically</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="/contact.html?plan=Starter" class="block w-full py-3.5 rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                Start Starter Pod
+              </a>
+            </div>
+          </div>
+
+          <!-- Growth Pod (Featured) -->
+          <div class="thine-glass rounded-3xl p-8 flex flex-col justify-between border-2 border-blue-500 shadow-2xl relative bg-blue-950/20">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white shadow-lg">
+              Most Popular Pod
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-white">Growth Pod</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">+10k Bonus</span>
+              </div>
+              <p class="text-xs text-slate-300 mb-6">Complete fulfillment engine for agencies servicing 3 to 10 client retainers.</p>
+              <div class="flex items-baseline gap-1 mb-6">
+                <span class="text-4xl font-black text-white">$999</span>
+                <span class="text-xs font-mono text-slate-400">/month</span>
+              </div>
+
+              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-200">
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span><strong>110,000 credits</strong> (10k bonus included)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>1 Dedicated PM via private Slack channel</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>Junior ($3/hr), Senior ($5/hr), Video ($5/hr)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>Fast 24-48h turnaround</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>Full SEO content & technical audit support</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-blue-400 font-bold">✓</span>
+                  <span>Credits roll over month-to-month</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="/contact.html?plan=Growth" class="block w-full py-3.5 rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-transform active:scale-95 min-touch flex items-center justify-center">
+                Start Growth Pod
+              </a>
+            </div>
+          </div>
+
+          <!-- Scale Partner -->
+          <div class="thine-glass-card rounded-3xl p-8 flex flex-col justify-between border-white/10">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-white">Scale Partner</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">+20k Bonus</span>
+              </div>
+              <p class="text-xs text-slate-400 mb-6">Dedicated backend pod for high-volume agencies and demanding client accounts.</p>
+              <div class="flex items-baseline gap-1 mb-6">
+                <span class="text-4xl font-black text-white">$1,899</span>
+                <span class="text-xs font-mono text-slate-400">/month</span>
+              </div>
+
+              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span><strong>220,000 credits</strong> (20k bonus included)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Senior Dedicated PM + Priority Queue</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Priority same-day & 24h turnaround</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Custom client portal integration</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Press release syndication enabled</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="/contact.html?plan=Scale" class="block w-full py-3.5 rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                Start Scale Partner
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ ACCORDION -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-400 font-bold">Clarity</span>
+          <h2 class="text-2xl sm:text-4xl font-black text-white mt-1 tracking-tight">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="space-y-3" id="faqAccordion">
+          <!-- FAQ 1 -->
+          <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
+            <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
+              <span class="font-bold text-sm text-white">How do credits work and what is the dollar rate?</span>
+              <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
+            </button>
+            <div class="faq-grid-wrapper">
+              <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+                1 Credit equals exactly $0.01 USD. For instance, 1 hour of Junior Staff is 300 credits ($3.00), 1 hour of Senior Specialist is 500 credits ($5.00), and 1 comprehensive SEO Article is 3,200 credits ($32.00). Unused credits roll over automatically each month as long as your plan remains active.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
+            <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
+              <span class="font-bold text-sm text-white">How does the 1 Dedicated PM relationship work?</span>
+              <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
+            </button>
+            <div class="faq-grid-wrapper">
+              <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+                You are paired with a single Dedicated Project Manager in a private Slack channel. Whenever you have client deliverables (writing, video, formatting, tech audits), simply send the brief. Your PM assigns the right specialists, conducts thorough QA, and returns finished, white-labeled files directly to you.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
+            <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
+              <span class="font-bold text-sm text-white">Is our partnership 100% white-label and confidential?</span>
+              <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
+            </button>
+            <div class="faq-grid-wrapper">
+              <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+                Yes, strictly 100%. We operate under a formal Non-Disclosure Agreement (NDA). We never contact your clients, place our logo on your deliverables, or publicize your agency. Deliverables are provided in clean documents or uploaded directly to your CMS under your guest credentials.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
+            <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
+              <span class="font-bold text-sm text-white">Can I pause or cancel my subscription anytime?</span>
+              <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
+            </button>
+            <div class="faq-grid-wrapper">
+              <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+                Yes. There are no lock-in contracts or termination fees. You can upgrade, downgrade, pause, or cancel at any moment from your billing dashboard with one click.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINIMALIST FOOTER -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10 text-xs text-slate-400">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-400/40 flex items-center justify-center font-bold text-xs text-blue-300">
+            J
+          </div>
+          <span class="text-white font-extrabold text-sm tracking-tight">JDP.team</span>
+          <span class="text-slate-500 font-mono text-[11px]">· Powered by JetDigitalPro</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 font-mono text-[11px] text-slate-400">
+          <a href="/services.html" class="hover:text-white transition">Services</a>
+          <a href="/calculator.html" class="hover:text-white transition">Calculator</a>
+          <a href="/proof.html" class="hover:text-white transition">Proof & Case Studies</a>
+          <a href="/contact.html" class="hover:text-white transition">Contact</a>
+        </div>
+
+        <div class="text-[11px] font-mono text-slate-500">
+          &copy; 2026 JDP.team · Strict NDA Guaranteed
+        </div>
+      </div>
+    </footer>
+
   </main>
 
-  <!-- Interactive Scripts -->
+  <!-- ======================================================== -->
+  <!-- 6. HIGH-PERFORMANCE SCRIPTS (SCROLL STORY & INTERACTIVITY) -->
+  <!-- ======================================================== -->
   <script>
-    // 1. Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+    // 1. PINNED VIEWPORT SCROLL STORYTELLER
+    const stageContainer = document.getElementById('cinematic-stage-container');
+    const act1 = document.getElementById('act-1');
+    const act2 = document.getElementById('act-2');
+    const act3 = document.getElementById('act-3');
+    const dot1 = document.getElementById('dot-act-1')?.querySelector('span:last-child');
+    const dot2 = document.getElementById('dot-act-2')?.querySelector('span:last-child');
+    const dot3 = document.getElementById('dot-act-3')?.querySelector('span:last-child');
+
+    function updateScrollStory() {
+      if (!stageContainer) return;
+      const rect = stageContainer.getBoundingClientRect();
+      const totalScrollable = stageContainer.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+
+      // Act thresholds
+      // Act 1: 0.0 to 0.33
+      // Act 2: 0.33 to 0.66
+      // Act 3: 0.66 to 1.0
+      if (progress < 0.33) {
+        setActActive(1);
+      } else if (progress < 0.66) {
+        setActActive(2);
+      } else {
+        setActActive(3);
+      }
+    }
+
+    function setActActive(actNum) {
+      act1?.classList.toggle('is-active', actNum === 1);
+      act2?.classList.toggle('is-active', actNum === 2);
+      act3?.classList.toggle('is-active', actNum === 3);
+
+      if (dot1 && dot2 && dot3) {
+        dot1.className = actNum === 1 ? 'w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-blue-500/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
+        dot2.className = actNum === 2 ? 'w-2.5 h-2.5 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
+        dot3.className = actNum === 3 ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
+      }
+    }
+
+    function jumpToAct(actNum) {
+      if (!stageContainer) return;
+      const totalScrollable = stageContainer.offsetHeight - window.innerHeight;
+      let targetY = 0;
+      if (actNum === 1) targetY = 0;
+      if (actNum === 2) targetY = totalScrollable * 0.45;
+      if (actNum === 3) targetY = totalScrollable * 0.85;
+
+      window.scrollTo({
+        top: stageContainer.offsetTop + targetY,
+        behavior: 'smooth'
       });
     }
 
-    // 2. FAQ Accordion Toggle
-    function toggleFaq(button) {
-      const wrapper = button.nextElementSibling;
-      const icon = button.querySelector('.faq-icon-rot');
-      const isOpen = wrapper.classList.contains('open');
+    window.addEventListener('scroll', updateScrollStory, { passive: true });
+    updateScrollStory();
+
+    // 2. DYNAMIC CANVAS CONSTELLATION ENGINE
+    const canvas = document.getElementById('particleCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      function initParticles() {
+        particles = [];
+        const count = Math.floor(Math.min(width, 1400) / 22);
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            radius: Math.random() * 1.6 + 0.8,
+            alpha: Math.random() * 0.6 + 0.2
+          });
+        }
+      }
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+        // Draw links
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 110) {
+              ctx.strokeStyle = `rgba(59, 130, 246, ${0.18 * (1 - dist / 110)})`;
+              ctx.lineWidth = 0.8;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        // Draw points
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.fillStyle = `rgba(147, 197, 253, ${p.alpha})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(animateCanvas);
+      }
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        initParticles();
+      });
+
+      initParticles();
+      animateCanvas();
+    }
+
+    // 3. LIVE SIMULATION TERMINAL STREAM
+    const simTextEl = document.getElementById('sim-text');
+    const simRoleEl = document.getElementById('sim-role');
+    const simRateEl = document.getElementById('sim-rate');
+    const simTimeEl = document.getElementById('sim-time');
+
+    const simTasks = [
+      { text: "Write 1,500w SEO Pillar on Medical Billing Software", role: "Senior SEO Specialist", rate: "$5.00/hr", time: "Delivered in 12h" },
+      { text: "Format & publish 25 Shopify e-commerce catalog items", role: "Junior Tech Staff", rate: "$3.00/hr", time: "Delivered in 4h" },
+      { text: "Cut 4 TikTok Reels with motion subtitles & sound design", role: "Video Editor", rate: "$5.00/hr", time: "Delivered in 8h" },
+      { text: "Run Core Web Vitals audit & CSS layout shift fix", role: "Senior Tech Dev", rate: "$5.00/hr", time: "Delivered in 6h" }
+    ];
+    let simIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+
+    function tickSimulator() {
+      const current = simTasks[simIdx];
+      if (!isDeleting) {
+        charIdx++;
+        simTextEl.textContent = current.text.substring(0, charIdx);
+        if (charIdx === current.text.length) {
+          isDeleting = true;
+          setTimeout(tickSimulator, 2500);
+          return;
+        }
+      } else {
+        charIdx--;
+        simTextEl.textContent = current.text.substring(0, charIdx);
+        if (charIdx === 0) {
+          isDeleting = false;
+          simIdx = (simIdx + 1) % simTasks.length;
+          const next = simTasks[simIdx];
+          simRoleEl.textContent = next.role;
+          simRateEl.textContent = next.rate;
+          simTimeEl.textContent = next.time;
+          setTimeout(tickSimulator, 500);
+          return;
+        }
+      }
+      setTimeout(tickSimulator, isDeleting ? 20 : 45);
+    }
+    tickSimulator();
+
+    // 4. GRANULAR STAFFING CALCULATOR
+    const cJunior = document.getElementById('calcJunior');
+    const cSenior = document.getElementById('calcSenior');
+    const cVideo = document.getElementById('calcVideo');
+    const cArticles = document.getElementById('calcArticles');
+
+    function updateCalculator() {
+      const jHrs = parseInt(cJunior?.value || '20', 10);
+      const sHrs = parseInt(cSenior?.value || '15', 10);
+      const vHrs = parseInt(cVideo?.value || '10', 10);
+      const artCount = parseInt(cArticles?.value || '4', 10);
+
+      const jCost = jHrs * 3;
+      const sCost = sHrs * 5;
+      const vCost = vHrs * 5;
+      const artCost = artCount * 32;
+
+      document.getElementById('calcJuniorLabel').textContent = `${jHrs} hrs/mo ($${jCost})`;
+      document.getElementById('calcSeniorLabel').textContent = `${sHrs} hrs/mo ($${sCost})`;
+      document.getElementById('calcVideoLabel').textContent = `${vHrs} hrs/mo ($${vCost})`;
+      document.getElementById('calcArticlesLabel').textContent = `${artCount} articles ($${artCost})`;
+
+      const totalJdp = jCost + sCost + vCost + artCost;
+      const totalCredits = (totalJdp * 100).toLocaleString();
+
+      // US Benchmarks: Junior $25/hr, Senior $45/hr, Video $40/hr, Article $120/ea
+      const usJunior = jHrs * 25;
+      const usSenior = sHrs * 45;
+      const usVideo = vHrs * 40;
+      const usArticle = artCount * 120;
+      const totalUs = usJunior + usSenior + usVideo + usArticle;
+
+      const savings = Math.max(0, totalUs - totalJdp);
+      const pct = totalUs > 0 ? ((savings / totalUs) * 100).toFixed(1) : '0';
+
+      document.getElementById('outCredits').textContent = `${totalCredits} pts`;
+      document.getElementById('outJdpCost').textContent = `$${totalJdp}/mo`;
+      document.getElementById('outUsCost').textContent = `$${totalUs}/mo`;
+      document.getElementById('outSavings').textContent = `+$${savings}/mo`;
+      document.getElementById('outPercent').textContent = `Save ${pct}%`;
+
+      const ratio = totalUs > 0 ? Math.min(100, Math.max(8, (totalJdp / totalUs) * 100)).toFixed(1) : '15';
+      const costBar = document.getElementById('costBar');
+      const barText = document.getElementById('barText');
+      if (costBar) costBar.style.width = `${ratio}%`;
+      if (barText) barText.textContent = `${ratio}% of US benchmark cost`;
+    }
+
+    [cJunior, cSenior, cVideo, cArticles].forEach(input => {
+      input?.addEventListener('input', updateCalculator);
+    });
+    updateCalculator();
+
+    // 5. FAQ TOGGLE
+    function toggleFaq(btn) {
+      const parent = btn.closest('.thine-glass-card');
+      const wrapper = parent?.querySelector('.faq-grid-wrapper');
+      const icon = btn.querySelector('.faq-icon-rot');
+      const isOpen = wrapper?.classList.contains('open');
 
       document.querySelectorAll('.faq-grid-wrapper').forEach(w => w.classList.remove('open'));
       document.querySelectorAll('.faq-icon-rot').forEach(i => i.classList.remove('rotated'));
 
       if (!isOpen) {
-        wrapper.classList.add('open');
-        if (icon) icon.classList.add('rotated');
+        wrapper?.classList.add('open');
+        icon?.classList.add('rotated');
       }
     }
-
-    // 3. Mini Task Calculator Logic
-    const pJunior = document.getElementById('previewJunior');
-    const pSenior = document.getElementById('previewSenior');
-    const pVideo = document.getElementById('previewVideo');
-    const pArticle = document.getElementById('previewArticle');
-
-    function updatePreviewCalc() {
-      if (!pJunior || !pSenior || !pVideo || !pArticle) return;
-      const jHrs = parseInt(pJunior.value, 10);
-      const sHrs = parseInt(pSenior.value, 10);
-      const vHrs = parseInt(pVideo.value, 10);
-      const artCount = parseInt(pArticle.value, 10);
-
-      document.getElementById('previewJuniorVal').textContent = `${jHrs} hrs/mo ($${jHrs * 3})`;
-      document.getElementById('previewSeniorVal').textContent = `${sHrs} hrs/mo ($${sHrs * 5})`;
-      document.getElementById('previewVideoVal').textContent = `${vHrs} hrs/mo ($${vHrs * 5})`;
-      document.getElementById('previewArticleVal').textContent = `${artCount} articles ($${artCount * 32})`;
-
-      const jdpCost = (jHrs * 3) + (sHrs * 5) + (vHrs * 5) + (artCount * 32);
-      const credits = jdpCost * 100;
-      const usCost = (jHrs * 25) + (sHrs * 40) + (vHrs * 45) + (artCount * 120);
-      const savings = Math.max(0, usCost - jdpCost);
-      const percent = usCost > 0 ? ((savings / usCost) * 100).toFixed(1) : 0;
-
-      document.getElementById('previewCredits').textContent = `${credits.toLocaleString()} pts`;
-      document.getElementById('previewJdpCost').textContent = `$${jdpCost.toLocaleString()}/mo`;
-      document.getElementById('previewUsCost').textContent = `$${usCost.toLocaleString()}/mo`;
-      document.getElementById('previewSavings').textContent = `$${savings.toLocaleString()}/mo`;
-
-      const percentEl = document.getElementById('previewPercent');
-      percentEl.textContent = `Save ${percent}%`;
-
-      const barJdp = document.getElementById('previewBarJdp');
-      const barJdpText = document.getElementById('previewBarJdpText');
-      const barUsText = document.getElementById('previewBarUsText');
-      if (barJdp && barJdpText && barUsText) {
-        barJdpText.textContent = `$${jdpCost.toLocaleString()}/mo`;
-        barUsText.textContent = `$${usCost.toLocaleString()}/mo`;
-        const jdpBarWidth = usCost > 0 ? Math.min(100, Math.max(8, (jdpCost / usCost) * 100)).toFixed(1) : 10;
-        barJdp.style.width = `${jdpBarWidth}%`;
-      }
-    }
-
-    [pJunior, pSenior, pVideo, pArticle].forEach(el => {
-      if (el) el.addEventListener('input', updatePreviewCalc);
-    });
-    updatePreviewCalc();
-
-    // 4. Interactive Ambient Canvas Tech Nodes Stream (Runs seamlessly underneath or if video pauses)
-    (function initAmbientCanvas() {
-      const canvas = document.getElementById('ambientCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let W, H;
-      function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize, { passive: true });
-      resize();
-
-      const nodeCount = Math.min(32, Math.floor(window.innerWidth / 40));
-      const nodes = [];
-      for (let i = 0; i < nodeCount; i++) {
-        nodes.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.6,
-          vy: (Math.random() - 0.5) * 0.6,
-          radius: 2 + Math.random() * 3,
-          color: i % 3 === 0 ? '#2563eb' : (i % 3 === 1 ? '#059669' : '#6366f1')
-        });
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        // Connect nearby nodes
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const dx = nodes[i].x - nodes[j].x;
-            const dy = nodes[i].y - nodes[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 160) {
-              const alpha = (1 - dist / 160) * 0.35;
-              ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(nodes[i].x, nodes[i].y);
-              ctx.lineTo(nodes[j].x, nodes[j].y);
-              ctx.stroke();
-            }
-          }
-        }
-
-        // Draw nodes
-        nodes.forEach(n => {
-          n.x += n.vx;
-          n.y += n.vy;
-          if (n.x < 0 || n.x > W) n.vx *= -1;
-          if (n.y < 0 || n.y > H) n.vy *= -1;
-
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-          ctx.fillStyle = n.color;
-          ctx.fill();
-        });
-
-        requestAnimationFrame(draw);
-      }
-      requestAnimationFrame(draw);
-    })();
   </script>
-
-  <!-- Hallmark & Taste Motion System Script -->
-  <script src="/motion.js?v=20260924" defer></script>
 </body>
 </html>
