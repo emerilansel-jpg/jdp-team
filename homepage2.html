@@ -1265,6 +1265,24 @@
     window.addEventListener('scroll', updateScrollStory, { passive: true });
     updateScrollStory();
 
+    // 1B. ROBUST VIDEO AUTOPLAY HANDLER
+    const bgVideo = document.getElementById('bgVideo');
+    if (bgVideo) {
+      bgVideo.muted = true;
+      const tryPlay = () => {
+        const p = bgVideo.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            // Browser blocked autoplay without user gesture; attach listeners
+            window.addEventListener('scroll', () => { bgVideo.play(); }, { once: true, passive: true });
+            window.addEventListener('touchstart', () => { bgVideo.play(); }, { once: true, passive: true });
+            window.addEventListener('click', () => { bgVideo.play(); }, { once: true });
+          });
+        }
+      };
+      tryPlay();
+    }
+
     // 2. DYNAMIC CANVAS CONSTELLATION ENGINE
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
