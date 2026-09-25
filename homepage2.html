@@ -72,12 +72,12 @@
       letter-spacing: -0.035em;
     }
     .hero-title-fluid {
-      font-size: clamp(2.25rem, 6.2vw, 5.25rem);
-      line-height: 1.05;
+      font-size: clamp(1.75rem, 5.5vw, 4.5rem);
+      line-height: 1.08;
     }
     .scene-title-fluid {
-      font-size: clamp(2rem, 5vw, 4.25rem);
-      line-height: 1.08;
+      font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+      line-height: 1.1;
     }
     /* Sleek Thine Glass Surfaces */
     .thine-glass {
@@ -112,11 +112,27 @@
       transform: translateY(24px) scale(0.98);
       transition: opacity 400ms var(--ease-cinematic), transform 400ms var(--ease-cinematic);
       will-change: opacity, transform;
+      padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
+      padding-bottom: max(4rem, calc(env(safe-area-inset-bottom) + 3.5rem));
+      overflow-y: auto;
+      max-height: 100dvh;
+      -webkit-overflow-scrolling: touch;
     }
     .stage-act.is-active {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0) scale(1);
+    }
+    /* Touch Range Slider Thumb */
+    input[type="range"]::-webkit-slider-thumb {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
     }
     /* High Contrast Video Scrim */
     .thine-vignette {
@@ -176,16 +192,16 @@
   <!-- 1. ULTRA-MINIMALIST FLOATING GLASS HEADER (THINE AESTHETIC) -->
   <!-- NO ANNOUNCEMENT BAR. JUST SLEEK CAPSULE NAVBAR -->
   <!-- ======================================================== -->
-  <header class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
-    <nav class="thine-glass rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between border border-white/10 shadow-2xl">
+  <header class="fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-5xl">
+    <nav class="thine-glass rounded-full px-3.5 sm:px-6 py-2 sm:py-3 flex items-center justify-between border border-white/10 shadow-2xl">
       <!-- Brand Pill -->
-      <a href="/" class="flex items-center gap-2.5 group min-touch" aria-label="JDP.team Homepage">
-        <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-black text-sm text-blue-400 group-hover:scale-105 transition-transform shadow-inner">
+      <a href="/" class="flex items-center gap-2 group min-touch" aria-label="JDP.team Homepage">
+        <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-black text-sm text-blue-400 group-hover:scale-105 transition-transform shadow-inner shrink-0">
           J
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 sm:gap-2">
           <span class="font-extrabold text-white text-base tracking-tight">JDP<span class="text-blue-400">.team</span></span>
-          <span class="text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 font-mono font-semibold">White-Label</span>
+          <span class="text-[9px] uppercase tracking-widest px-1.5 sm:px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 font-mono font-semibold">White-Label</span>
         </div>
       </a>
 
@@ -198,31 +214,54 @@
         <a href="#pricing-act" class="hover:text-white transition-colors">Pricing</a>
       </div>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="/contact.html" class="hidden sm:inline-flex px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white transition-colors">
+      <!-- Action Button & Mobile Toggle -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white transition-colors min-touch items-center">
           Book Intro
         </a>
-        <a href="#pricing-act" class="px-4 sm:px-5 py-2 rounded-full text-xs font-bold bg-white hover:bg-slate-200 text-slate-950 transition-transform active:scale-95 shadow-md flex items-center gap-1.5 min-touch">
+        <a href="#pricing-act" class="px-3.5 sm:px-5 py-2 rounded-full text-xs font-bold bg-white hover:bg-slate-200 text-slate-950 transition-transform active:scale-95 shadow-md flex items-center gap-1.5 min-touch">
           <span>Get Started</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn2" type="button" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="mobileMenu2" class="md:hidden p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition flex items-center justify-center min-touch">
+          <svg id="mobileMenuIcon2" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </nav>
+
+    <!-- Mobile Glass Drawer Menu -->
+    <div id="mobileMenu2" class="hidden md:hidden mt-2 thine-glass rounded-2xl p-4 border border-white/10 shadow-2xl flex flex-col gap-1 text-sm font-mono font-medium transition-all">
+      <a href="#act-1" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-blue-400 bg-blue-500/10 border border-blue-500/20">01 · Story & Vision</a>
+      <a href="#services-pipeline" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">02 · Pod Services Pipeline</a>
+      <a href="#calculator-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">03 · ROI Calculator</a>
+      <a href="#proof-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">04 · Proof & Case Studies</a>
+      <a href="#pricing-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">05 · Wholesale Pricing</a>
+      <a href="/contact.html" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">06 · Contact Concierge</a>
+      <div class="pt-3 mt-1 border-t border-white/10 flex flex-col gap-2">
+        <a href="#pricing-act" class="w-full py-3 min-touch rounded-xl text-xs font-bold font-mono uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center flex items-center justify-center shadow-lg">
+          Start with Credits
+        </a>
+        <a href="/contact.html" class="w-full py-3 min-touch rounded-xl text-xs font-semibold text-slate-300 hover:text-white border border-white/10 hover:bg-white/5 text-center flex items-center justify-center">
+          Book Intro Call
+        </a>
+      </div>
+    </div>
   </header>
 
   <!-- ======================================================== -->
   <!-- 2. FULL-BLEED PINNED CINEMATIC STAGE (ACT I, II, III) -->
-  <!-- 300vh Container with Pinned 100vh Sticky Viewport Stage -->
+  <!-- 300vh Container with Pinned 100dvh Sticky Viewport Stage -->
   <!-- ======================================================== -->
   <div id="cinematic-stage-container" class="relative w-full" style="height: 300vh;">
 
-    <!-- Sticky 100vh Viewport -->
-    <div id="pinned-viewport" class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-obsidian-900 grid-lines">
+    <!-- Sticky 100dvh Viewport -->
+    <div id="pinned-viewport" class="sticky top-0 h-[100dvh] min-h-[100dvh] w-full overflow-hidden flex items-center justify-center bg-obsidian-900 grid-lines">
 
       <!-- Crisp Dynamic Ambient Video Background -->
       <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <video id="bgVideo" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-75 filter contrast-125 brightness-110">
+        <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="w-full h-full object-cover opacity-75 filter contrast-125 brightness-110">
           <source src="assets/video/abstract-nodes.webm" type="video/webm">
           <source src="assets/video/abstract-nodes.mp4" type="video/mp4">
         </video>
@@ -230,6 +269,14 @@
         <canvas id="particleCanvas" class="absolute inset-0 w-full h-full opacity-60"></canvas>
         <!-- High-Contrast Cinematic Scrim Vignette -->
         <div class="absolute inset-0 thine-vignette"></div>
+      </div>
+
+      <!-- Mobile Act Progress Indicator (Bottom Pill) -->
+      <div class="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex sm:hidden items-center gap-2 px-3 py-1.5 rounded-full thine-glass border border-white/10">
+        <button type="button" onclick="jumpToAct(1)" id="mobile-dot-act-1" class="w-2.5 h-2.5 rounded-full bg-blue-500 ring-2 ring-blue-500/30 transition-all" aria-label="Act 1"></button>
+        <button type="button" onclick="jumpToAct(2)" id="mobile-dot-act-2" class="w-2.5 h-2.5 rounded-full bg-slate-700 transition-all" aria-label="Act 2"></button>
+        <button type="button" onclick="jumpToAct(3)" id="mobile-dot-act-3" class="w-2.5 h-2.5 rounded-full bg-slate-700 transition-all" aria-label="Act 3"></button>
+        <span id="mobileActLabel" class="text-[10px] font-mono text-slate-300 ml-1">Act 1/3</span>
       </div>
 
       <!-- Stage Step Floating Indicator (Right Side) -->
@@ -253,8 +300,8 @@
 
         <!-- ACT I (Screen 1) -->
         <div id="act-1" class="stage-act is-active text-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-xs font-mono font-medium mb-6 backdrop-blur-md shadow-lg">
-            <span class="relative flex h-2 w-2">
+          <div class="inline-flex flex-wrap items-center justify-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-xs font-mono font-medium mb-4 sm:mb-6 backdrop-blur-md shadow-lg max-w-full">
+            <span class="relative flex h-2 w-2 shrink-0">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
@@ -262,27 +309,27 @@
             <span class="text-white font-semibold">We do the work, you take the credit.</span>
           </div>
 
-          <h1 class="hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto">
+          <h1 class="hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto px-2">
             Your secret remote team scales without burnout.
           </h1>
 
-          <p class="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+          <p class="mt-4 sm:mt-6 text-sm sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal px-2">
             Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
           </p>
 
-          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#pricing-act" class="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
+          <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
+            <a href="#pricing-act" class="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-full text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
               <span>Start with Credits</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
-            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
+            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-full text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
               <span>Watch How It Works</span>
               <svg class="w-4 h-4 text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
             </button>
           </div>
 
           <!-- Bottom Micro Scroll Cue -->
-          <div class="mt-14 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
+          <div class="mt-8 sm:mt-14 inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
             <span>Scroll to Enter The Pod Factory</span>
             <svg class="w-3.5 h-3.5 animate-pulse text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
@@ -290,101 +337,112 @@
 
         <!-- ACT II (Screen 2) -->
         <div id="act-2" class="stage-act text-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyanGlow-500/30 bg-cyanGlow-500/10 text-cyanGlow-400 text-xs font-mono font-medium mb-5 backdrop-blur-md">
-            <span class="w-2 h-2 rounded-full bg-cyanGlow-400"></span>
+          <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-cyanGlow-500/30 bg-cyanGlow-500/10 text-cyanGlow-400 text-xs font-mono font-medium mb-3 sm:mb-5 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-cyanGlow-400 shrink-0"></span>
             <span class="text-slate-400">Act II ·</span>
             <span class="text-white font-semibold">Managed Pod Infrastructure</span>
           </div>
 
-          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto">
+          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto px-2">
             The private factory behind your brand.
           </h2>
 
-          <p class="mt-4 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p class="mt-2.5 sm:mt-4 text-xs sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
             You close deals and lead client strategy. We supply the dedicated operational muscle to fulfill every brief with precision.
           </p>
 
-          <!-- 3 High-Contrast Glass Floating Nodes -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 w-full max-w-4xl mx-auto text-left">
+          <!-- Mobile Swipe Hint -->
+          <div class="flex md:hidden items-center justify-center gap-1.5 text-[10px] font-mono text-cyanGlow-400 mt-3 mb-0.5">
+            <span>← Swipe pod nodes (1 to 3) →</span>
+          </div>
+
+          <!-- 3 High-Contrast Glass Floating Nodes (Swipeable on Mobile, Grid on Desktop) -->
+          <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 gap-3.5 sm:gap-5 mt-3 sm:mt-8 w-full max-w-4xl mx-auto text-left no-scrollbar touch-pan-x pb-2 md:pb-0">
             <!-- Node 1 -->
-            <div class="thine-glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="thine-glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden group min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1 flex flex-col justify-between">
               <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-all"></div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-lg text-blue-400">💬</span>
-                <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300 px-2 py-0.5 rounded bg-blue-900/40 border border-blue-500/20">Slack / ClickUp</span>
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-base sm:text-lg text-blue-400 shrink-0">💬</span>
+                  <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300 px-2 py-0.5 rounded bg-blue-900/40 border border-blue-500/20">Slack / ClickUp</span>
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">1 Dedicated PM</h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                  Single point of contact in Slack. Scopes hours, assigns specialists, and runs thorough QA. Zero micromanagement on your plate.
+                </p>
               </div>
-              <h3 class="text-lg font-bold text-white tracking-tight">1 Dedicated PM</h3>
-              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-                Single point of contact in Slack. Scopes hours, assigns specialists, and runs thorough QA. Zero micromanagement on your plate.
-              </p>
             </div>
 
             <!-- Node 2 -->
-            <div class="thine-glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="thine-glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden group min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1 flex flex-col justify-between">
               <div class="absolute -right-6 -top-6 w-24 h-24 bg-cyanGlow-500/10 rounded-full blur-xl group-hover:bg-cyanGlow-500/20 transition-all"></div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="w-10 h-10 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-lg text-cyan-400">⚡</span>
-                <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-300 px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20">$3 - $5 / hr</span>
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-base sm:text-lg text-cyan-400 shrink-0">⚡</span>
+                  <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-300 px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20">$3 - $5 / hr</span>
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">Specialist Pod</h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                  Junior Staff <strong class="text-white">$3/hr</strong>, Senior Specialists <strong class="text-white">$5/hr</strong>, Video Editors <strong class="text-white">$5/hr</strong>. Trained as AI Conductors.
+                </p>
               </div>
-              <h3 class="text-lg font-bold text-white tracking-tight">Specialist Pod</h3>
-              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-                Junior Staff <strong class="text-white">$3/hr</strong>, Senior Specialists <strong class="text-white">$5/hr</strong>, Video Editors <strong class="text-white">$5/hr</strong>. Trained as AI Conductors.
-              </p>
             </div>
 
             <!-- Node 3 -->
-            <div class="thine-glass-card rounded-2xl p-6 relative overflow-hidden group">
+            <div class="thine-glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden group min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1 flex flex-col justify-between">
               <div class="absolute -right-6 -top-6 w-24 h-24 bg-emeraldGlow-500/10 rounded-full blur-xl group-hover:bg-emeraldGlow-500/20 transition-all"></div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-lg text-emerald-400">🎯</span>
-                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/20">Express SLA</span>
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-base sm:text-lg text-emerald-400 shrink-0">🎯</span>
+                  <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/20">Express SLA</span>
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">24h Turnaround</h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                  Instant scalability. Deliverables come back polished, verified, and client-ready without endless revision cycles.
+                </p>
               </div>
-              <h3 class="text-lg font-bold text-white tracking-tight">24h Turnaround</h3>
-              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-                Instant scalability. Deliverables come back polished, verified, and client-ready without endless revision cycles.
-              </p>
             </div>
           </div>
         </div>
 
         <!-- ACT III (Screen 3) -->
         <div id="act-3" class="stage-act text-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emeraldGlow-500/30 bg-emeraldGlow-500/10 text-emeraldGlow-400 text-xs font-mono font-medium mb-5 backdrop-blur-md">
-            <span class="w-2 h-2 rounded-full bg-emeraldGlow-400"></span>
+          <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-emeraldGlow-500/30 bg-emeraldGlow-500/10 text-emeraldGlow-400 text-xs font-mono font-medium mb-3 sm:mb-5 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-emeraldGlow-400 shrink-0"></span>
             <span class="text-slate-400">Act III ·</span>
             <span class="text-white font-semibold">100% White-Label</span>
           </div>
 
-          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto">
+          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto px-2">
             100% Invisible to your clients.
           </h2>
 
-          <p class="mt-4 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p class="mt-2.5 sm:mt-4 text-xs sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
             Everything we build is delivered under your logo, your templates, and your brand guidelines. You bill the client $3,000. We fulfill for $999. You keep the profit and your sanity.
           </p>
 
           <!-- High-Contrast Margin Breakdown Card -->
-          <div class="mt-8 thine-glass rounded-3xl p-6 sm:p-8 max-w-3xl w-full mx-auto border border-white/10 shadow-2xl text-left">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <div class="mt-5 sm:mt-8 thine-glass rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-3xl w-full mx-auto border border-white/10 shadow-2xl text-left">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 text-center">
               <!-- Client Bill -->
-              <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <div class="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10">
                 <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">You Bill The Client</span>
-                <div class="text-3xl font-black text-white mt-1">$3,000</div>
-                <span class="text-xs text-slate-400 mt-1 block">Your agency retainer</span>
+                <div class="text-2xl sm:text-3xl font-black text-white mt-1">$3,000</div>
+                <span class="text-[11px] sm:text-xs text-slate-400 mt-1 block">Your agency retainer</span>
               </div>
 
               <!-- JDP Fulfillment -->
-              <div class="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20">
+              <div class="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-blue-500/10 border border-blue-500/20">
                 <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300">We Fulfill Pod</span>
-                <div class="text-3xl font-black text-blue-400 mt-1">$999</div>
-                <span class="text-xs text-blue-200/70 mt-1 block">110k wholesale credits</span>
+                <div class="text-2xl sm:text-3xl font-black text-blue-400 mt-1">$999</div>
+                <span class="text-[11px] sm:text-xs text-blue-200/70 mt-1 block">110k wholesale credits</span>
               </div>
 
               <!-- Retained Profit -->
-              <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+              <div class="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
                 <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300">You Keep Sanity & Profit</span>
-                <div class="text-3xl font-black text-emerald-400 mt-1">+$2,001</div>
-                <span class="text-xs text-emerald-300/80 mt-1 block">66.7% Net Agency Margin</span>
+                <div class="text-2xl sm:text-3xl font-black text-emerald-400 mt-1">+$2,001</div>
+                <span class="text-[11px] sm:text-xs text-emerald-300/80 mt-1 block">66.7% Net Agency Margin</span>
               </div>
             </div>
 
@@ -432,10 +490,18 @@
           </p>
         </div>
 
-        <!-- 4-Stage Interactive Gumloop Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Mobile Swipe Indicator Hint -->
+        <div class="flex items-center justify-between gap-2 text-xs font-semibold text-blue-400 mb-3 md:hidden px-1">
+          <span class="inline-flex items-center gap-1.5 text-[11px] bg-blue-950/60 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20 font-mono">
+            <span>←</span> Swipe pipeline stages (1 to 4) <span>→</span>
+          </span>
+          <span class="text-[10px] text-slate-500 font-mono">1 PM Conductor</span>
+        </div>
+
+        <!-- 4-Stage Interactive Gumloop Grid (Swipeable on Mobile, Grid on Desktop) -->
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:pb-0 items-stretch no-scrollbar touch-pan-x">
           <!-- Stage 1 -->
-          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+          <div class="thine-glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between border-white/10 min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-2 py-0.5 rounded bg-white/5">Stage 01</span>
@@ -456,7 +522,7 @@
           </div>
 
           <!-- Stage 2 (Hub) -->
-          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-blue-500/40 bg-blue-950/20 shadow-xl relative">
+          <div class="thine-glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between border-blue-500/40 bg-blue-950/20 shadow-xl relative min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1">
             <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-blue-600 text-white font-bold">
               Core Conductor
             </div>
@@ -480,7 +546,7 @@
           </div>
 
           <!-- Stage 3 -->
-          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-white/10">
+          <div class="thine-glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between border-white/10 min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-2 py-0.5 rounded bg-white/5">Stage 03</span>
@@ -501,7 +567,7 @@
           </div>
 
           <!-- Stage 4 -->
-          <div class="thine-glass-card rounded-2xl p-6 flex flex-col justify-between border-emerald-500/30">
+          <div class="thine-glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between border-emerald-500/30 min-w-[260px] xs:min-w-[285px] md:min-w-0 snap-center shrink-0 md:shrink flex-1">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 px-2 py-0.5 rounded bg-emerald-950/30">Stage 04</span>
@@ -519,6 +585,8 @@
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
               100% White-label NDA
             </div>
+          </div>
+        </div>
           </div>
         </div>
 
@@ -967,11 +1035,11 @@
           </p>
         </div>
 
-        <!-- 3 Tiers Grid -->
+        <!-- 3 Tiers Grid (Stacked on Mobile, 3-Col on Desktop) -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-          
+
           <!-- Starter Pod -->
-          <div class="thine-glass-card rounded-3xl p-8 flex flex-col justify-between border-white/10">
+          <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
             <div>
               <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-white">Starter Pod</h3>
@@ -1008,15 +1076,15 @@
             </div>
 
             <div class="mt-8 pt-6 border-t border-white/10">
-              <a href="/contact.html?plan=Starter" class="block w-full py-3.5 rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+              <a href="/contact.html?plan=Starter" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
                 Start Starter Pod
               </a>
             </div>
           </div>
 
           <!-- Growth Pod (Featured) -->
-          <div class="thine-glass rounded-3xl p-8 flex flex-col justify-between border-2 border-blue-500 shadow-2xl relative bg-blue-950/20">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white shadow-lg">
+          <div class="thine-glass rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-blue-500 shadow-2xl relative bg-blue-950/20">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white shadow-lg whitespace-nowrap">
               Most Popular Pod
             </div>
 
@@ -1060,14 +1128,14 @@
             </div>
 
             <div class="mt-8 pt-6 border-t border-white/10">
-              <a href="/contact.html?plan=Growth" class="block w-full py-3.5 rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-transform active:scale-95 min-touch flex items-center justify-center">
+              <a href="/contact.html?plan=Growth" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-transform active:scale-95 min-touch flex items-center justify-center">
                 Start Growth Pod
               </a>
             </div>
           </div>
 
           <!-- Scale Partner -->
-          <div class="thine-glass-card rounded-3xl p-8 flex flex-col justify-between border-white/10">
+          <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
             <div>
               <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-white">Scale Partner</h3>
@@ -1077,6 +1145,38 @@
               <div class="flex items-baseline gap-1 mb-6">
                 <span class="text-4xl font-black text-white">$1,899</span>
                 <span class="text-xs font-mono text-slate-400">/month</span>
+              </div>
+
+              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span><strong>220,000 credits</strong> (20k bonus included)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Senior Dedicated PM + Priority Queue</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Priority same-day & 24h turnaround</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Custom client portal integration</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-purple-400 font-bold">✓</span>
+                  <span>Press release syndication enabled</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="/contact.html?plan=Scale" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                Start Scale Partner
+              </a>
+            </div>
+          </div>
               </div>
 
               <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
@@ -1191,15 +1291,18 @@
           <span class="text-slate-500 font-mono text-[11px]">· Powered by JetDigitalPro</span>
         </div>
 
-        <div class="flex flex-wrap items-center gap-6 font-mono text-[11px] text-slate-400">
+        <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-[11px] text-slate-400">
           <a href="/services.html" class="hover:text-white transition">Services</a>
           <a href="/calculator.html" class="hover:text-white transition">Calculator</a>
           <a href="/proof.html" class="hover:text-white transition">Proof & Case Studies</a>
           <a href="/contact.html" class="hover:text-white transition">Contact</a>
         </div>
 
-        <div class="text-[11px] font-mono text-slate-500">
-          &copy; 2026 JDP.team · Strict NDA Guaranteed
+        <div class="flex items-center gap-4">
+          <span class="text-[11px] font-mono text-slate-500">&copy; 2026 JDP.team · Strict NDA</span>
+          <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 text-slate-400 hover:text-white hover:bg-white/5 transition font-mono text-[11px] min-touch" aria-label="Back to top">
+            <span>↑ Top</span>
+          </button>
         </div>
       </div>
     </footer>
@@ -1210,6 +1313,55 @@
   <!-- 6. HIGH-PERFORMANCE SCRIPTS (SCROLL STORY & INTERACTIVITY) -->
   <!-- ======================================================== -->
   <script>
+    // 0. MOBILE MENU TOGGLE LOGIC
+    const mobileMenuBtn2 = document.getElementById('mobileMenuBtn2');
+    const mobileMenu2 = document.getElementById('mobileMenu2');
+    const mobileMenuIcon2 = document.getElementById('mobileMenuIcon2');
+
+    function closeMobileMenu2() {
+      if (!mobileMenu2 || mobileMenu2.classList.contains('hidden')) return;
+      mobileMenu2.classList.add('hidden');
+      if (mobileMenuBtn2) mobileMenuBtn2.setAttribute('aria-expanded', 'false');
+      if (mobileMenuIcon2) {
+        mobileMenuIcon2.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>';
+      }
+    }
+
+    if (mobileMenuBtn2 && mobileMenu2) {
+      mobileMenuBtn2.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = mobileMenu2.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu2.classList.remove('hidden');
+          mobileMenuBtn2.setAttribute('aria-expanded', 'true');
+          if (mobileMenuIcon2) {
+            mobileMenuIcon2.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>';
+          }
+        } else {
+          closeMobileMenu2();
+        }
+      });
+
+      // Close menu when clicking nav links
+      document.querySelectorAll('#mobileMenu2 a').forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu2();
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobileMenu2.contains(e.target) && !mobileMenuBtn2.contains(e.target)) {
+          closeMobileMenu2();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeMobileMenu2();
+        }
+      });
+    }
+
     // 1. PINNED VIEWPORT SCROLL STORYTELLER
     const stageContainer = document.getElementById('cinematic-stage-container');
     const act1 = document.getElementById('act-1');
@@ -1248,6 +1400,19 @@
         dot1.className = actNum === 1 ? 'w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-blue-500/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
         dot2.className = actNum === 2 ? 'w-2.5 h-2.5 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
         dot3.className = actNum === 3 ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
+      }
+
+      const mDot1 = document.getElementById('mobile-dot-act-1');
+      const mDot2 = document.getElementById('mobile-dot-act-2');
+      const mDot3 = document.getElementById('mobile-dot-act-3');
+      const mLabel = document.getElementById('mobileActLabel');
+      if (mDot1 && mDot2 && mDot3) {
+        mDot1.className = actNum === 1 ? 'w-2.5 h-2.5 rounded-full bg-blue-500 ring-2 ring-blue-500/30 transition-all' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all';
+        mDot2.className = actNum === 2 ? 'w-2.5 h-2.5 rounded-full bg-cyanGlow-400 ring-2 ring-cyanGlow-400/30 transition-all' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all';
+        mDot3.className = actNum === 3 ? 'w-2.5 h-2.5 rounded-full bg-emeraldGlow-400 ring-2 ring-emeraldGlow-400/30 transition-all' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all';
+      }
+      if (mLabel) {
+        mLabel.textContent = `Act ${actNum}/3`;
       }
     }
 
