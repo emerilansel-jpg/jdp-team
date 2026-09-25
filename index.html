@@ -133,6 +133,22 @@
     .faq-icon-rot.rotated {
       transform: rotate(45deg);
     }
+    #heroSection > div.max-w-7xl {
+      width: 100% !important;
+      max-width: 80rem !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+    }
+    #heroSection h1,
+    #heroSection p,
+    #heroConsoleCard,
+    .hero-console-wrapper {
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
@@ -222,7 +238,7 @@
     <div class="hero-mouse-aura" id="heroMouseAura"></div>
     <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 my-auto">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 my-auto min-w-0 box-border">
       <!-- Eyebrow Badge -->
       <div class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white/95 text-slate-800 text-[11px] sm:text-xs font-semibold mb-4 sm:mb-6 shadow-sm max-w-full text-center">
         <span class="flex h-2 w-2 relative shrink-0">

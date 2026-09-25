@@ -109,24 +109,122 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(24px) scale(0.98);
-      transition: opacity 400ms var(--ease-cinematic), transform 400ms var(--ease-cinematic);
+      transform: translate3d(0, 28px, 0) scale(0.97);
+      transition: opacity 450ms var(--ease-cinematic), transform 450ms var(--ease-cinematic);
       will-change: opacity, transform;
-      padding-top: max(4.5rem, calc(env(safe-area-inset-top) + 3.5rem));
-      padding-bottom: max(3.5rem, calc(env(safe-area-inset-bottom) + 2.5rem));
-      overflow-y: auto;
+      padding-top: max(4.25rem, calc(env(safe-area-inset-top) + 3.25rem));
+      padding-bottom: max(3.25rem, calc(env(safe-area-inset-bottom) + 2.25rem));
+      touch-action: pan-y;
+      box-sizing: border-box;
       max-height: 100dvh;
-      -webkit-overflow-scrolling: touch;
     }
     .stage-act.is-active {
       opacity: 1;
       pointer-events: auto;
-      transform: translateY(0) scale(1);
+      transform: translate3d(0, 0, 0) scale(1);
     }
     .stage-act.is-passed {
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-30px) scale(0.98);
+      transform: translate3d(0, -32px, 0) scale(0.97);
+    }
+    /* Ambient Luminous Mesh Breathing Gradient Orbs */
+    .ambient-mesh-orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(75px);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+      animation: ambient-glow 16s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .orb-primary {
+      width: min(650px, 85vw);
+      height: min(650px, 85vw);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, rgba(37, 99, 235, 0) 70%);
+      top: 5%;
+      left: 10%;
+      animation-duration: 18s;
+    }
+    .orb-cyan {
+      width: min(600px, 80vw);
+      height: min(600px, 80vw);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.42) 0%, rgba(6, 182, 212, 0) 70%);
+      top: 35%;
+      right: 5%;
+      animation-duration: 22s;
+      animation-delay: -6s;
+    }
+    .orb-indigo {
+      width: min(550px, 75vw);
+      height: min(550px, 75vw);
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(99, 102, 241, 0) 70%);
+      bottom: 15%;
+      left: 20%;
+      animation-duration: 20s;
+      animation-delay: -12s;
+    }
+    .orb-accent {
+      width: min(420px, 55vw);
+      height: min(420px, 55vw);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0) 70%);
+      top: 25%;
+      right: 30%;
+      animation-duration: 24s;
+      animation-delay: -3s;
+    }
+    @keyframes ambient-glow {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 0.45;
+      }
+      33% {
+        transform: translate3d(45px, -35px, 0) scale(1.15) rotate(8deg);
+        opacity: 0.65;
+      }
+      66% {
+        transform: translate3d(-35px, 45px, 0) scale(0.92) rotate(-6deg);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate3d(25px, 25px, 0) scale(1.08) rotate(4deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* Hero Cinematic Reveal on Load */
+    @keyframes cinematic-reveal {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0) scale(0.97);
+        filter: blur(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0px);
+      }
+    }
+    .cinematic-reveal-1 {
+      animation: cinematic-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.08s;
+    }
+    .cinematic-reveal-2 {
+      animation: cinematic-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.2s;
+    }
+    .cinematic-reveal-3 {
+      animation: cinematic-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.35s;
+    }
+    .cinematic-reveal-4 {
+      animation: cinematic-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.5s;
+    }
+    .cinematic-reveal-5 {
+      animation: cinematic-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.65s;
     }
     @keyframes float-slow {
       0%, 100% { transform: translateY(0px); }
@@ -166,12 +264,103 @@
     }
     /* High Contrast Video Scrim */
     .thine-vignette {
-      background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.35) 0%, rgba(7, 9, 14, 0.75) 60%, rgba(7, 9, 14, 0.98) 100%);
+      background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.25) 0%, rgba(7, 9, 14, 0.70) 65%, rgba(7, 9, 14, 0.95) 100%);
     }
     @media (max-width: 767px) {
       .thine-vignette {
-        background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.70) 0%, rgba(7, 9, 14, 0.88) 60%, rgba(7, 9, 14, 0.98) 100%);
+        background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.35) 0%, rgba(7, 9, 14, 0.75) 65%, rgba(7, 9, 14, 0.96) 100%);
       }
+    }
+    /* Upscayl Comparison Slider Styling */
+    .comparison-slider-container {
+      position: relative;
+      width: 100%;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+      background-color: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+      --split-pos: 50%;
+    }
+    .comparison-pane-before {
+      position: relative;
+      width: 100%;
+      background: linear-gradient(135deg, #090d16 0%, #111827 100%);
+      color: #f8fafc;
+    }
+    .comparison-pane-after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      color: #0f172a;
+      clip-path: inset(0 0 0 var(--split-pos));
+      -webkit-clip-path: inset(0 0 0 var(--split-pos));
+      will-change: clip-path;
+    }
+    .comparison-divider-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--split-pos);
+      width: 2.5px;
+      background: #3b82f6;
+      transform: translateX(-50%);
+      z-index: 30;
+      pointer-events: none;
+      box-shadow: 0 0 14px 2px rgba(59, 130, 246, 0.8);
+      will-change: left;
+    }
+    .comparison-drag-handle {
+      position: absolute;
+      top: 50%;
+      left: var(--split-pos);
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      background: #ffffff;
+      color: #0f172a;
+      border: 2px solid #2563eb;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: ew-resize;
+      z-index: 35;
+      transition: transform 140ms var(--ease-out);
+      will-change: left, transform;
+    }
+    .comparison-drag-handle:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .comparison-drag-handle:active {
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+    /* PayPal Wallet Simulator Tags */
+    .wallet-deduct-tag {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fb7185;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(0, 0, 0);
+    }
+    .wallet-deduct-tag.is-animating {
+      animation: walletDeductFloat 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes walletDeductFloat {
+      0% { opacity: 1; transform: translate3d(0, 0, 0) scale(0.9); }
+      30% { opacity: 1; transform: translate3d(0, -10px, 0) scale(1.05); }
+      100% { opacity: 0; transform: translate3d(0, -32px, 0) scale(1.15); }
     }
     /* Subtle Glowing Grid Lines */
     .grid-lines {
@@ -241,9 +430,10 @@
       </a>
 
       <!-- Desktop Nav Links -->
-      <div class="hidden md:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slate-300">
+      <div class="hidden md:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider text-slate-300">
         <a href="#act-1" class="hover:text-white transition-colors">Story</a>
         <a href="#services-pipeline" class="hover:text-white transition-colors">Services</a>
+        <a href="#comparison-act" class="hover:text-white transition-colors">Comparison</a>
         <a href="#calculator-act" class="hover:text-white transition-colors">Calculator</a>
         <a href="#proof-act" class="hover:text-white transition-colors">Proof</a>
         <a href="#pricing-act" class="hover:text-white transition-colors">Pricing</a>
@@ -270,10 +460,11 @@
     <div id="mobileMenu2" class="hidden md:hidden mt-2 thine-glass rounded-2xl p-4 border border-white/10 shadow-2xl flex flex-col gap-1 text-sm font-mono font-medium transition-all">
       <a href="#act-1" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-blue-400 bg-blue-500/10 border border-blue-500/20">01 · Story & Vision</a>
       <a href="#services-pipeline" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">02 · Pod Services Pipeline</a>
-      <a href="#calculator-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">03 · ROI Calculator</a>
-      <a href="#proof-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">04 · Proof & Case Studies</a>
-      <a href="#pricing-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">05 · Wholesale Pricing</a>
-      <a href="/contact.html" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">06 · Contact Concierge</a>
+      <a href="#comparison-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">03 · Operational Shift</a>
+      <a href="#calculator-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">04 · ROI Calculator</a>
+      <a href="#proof-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">05 · Proof & Case Studies</a>
+      <a href="#pricing-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">06 · Wholesale Pricing & Wallet</a>
+      <a href="/contact.html" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">07 · Contact Concierge</a>
       <div class="pt-3 mt-1 border-t border-white/10 flex flex-col gap-2">
         <a href="#pricing-act" class="w-full py-3 min-touch rounded-xl text-xs font-bold font-mono uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center flex items-center justify-center shadow-lg">
           Start with Credits
@@ -285,15 +476,26 @@
     </div>
   </header>
 
-  <!-- Crisp Dynamic Ambient Video Background (Fixed for both mobile & desktop) -->
+  <!-- Crisp Dynamic Ambient Video Background (Guaranteed 60fps & Ambient Luminous Mesh) -->
   <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
-    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="w-full h-full object-cover opacity-85 filter contrast-125 brightness-110">
-      <source src="assets/video/abstract-nodes.webm" type="video/webm">
+    <!-- Ambient Luminous Mesh Breathing Gradient Orbs (CSS Keyframe Driven) -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div class="ambient-mesh-orb orb-primary"></div>
+      <div class="ambient-mesh-orb orb-cyan"></div>
+      <div class="ambient-mesh-orb orb-indigo"></div>
+      <div class="ambient-mesh-orb orb-accent"></div>
+    </div>
+
+    <!-- Background Video (MP4 prioritized for universal iOS/Android support) -->
+    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="w-full h-full object-cover opacity-75 filter contrast-125 brightness-110">
       <source src="assets/video/abstract-nodes.mp4" type="video/mp4">
+      <source src="assets/video/abstract-nodes.webm" type="video/webm">
     </video>
-    <!-- Dynamic Interactive Canvas Constellation Layer -->
-    <canvas id="particleCanvas" class="absolute inset-0 w-full h-full opacity-60"></canvas>
-    <!-- High-Contrast Cinematic Scrim Vignette (Darkened on mobile) -->
+
+    <!-- Guaranteed 60fps Generative Canvas Node Engine (Touch/Mouse/Scroll Kinetic) -->
+    <canvas id="particleCanvas" class="absolute inset-0 w-full h-full opacity-90"></canvas>
+
+    <!-- High-Contrast Cinematic Scrim Vignette -->
     <div class="absolute inset-0 thine-vignette"></div>
   </div>
 
@@ -332,36 +534,85 @@
 
         <!-- ACT I (Screen 1) -->
         <div id="act-1" class="stage-act is-active text-center w-full px-4 sm:px-6">
-          <div class="inline-flex flex-wrap items-center justify-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-[11px] sm:text-xs font-mono font-medium mb-3 sm:mb-6 backdrop-blur-md shadow-lg max-w-full">
+          <!-- Floating Live Status Pill with Pulsating Beacon -->
+          <div class="cinematic-reveal-1 inline-flex flex-wrap items-center justify-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/60 text-blue-300 text-[11px] sm:text-xs font-mono font-medium mb-2.5 sm:mb-4 backdrop-blur-md shadow-lg shadow-blue-500/10 max-w-full">
             <span class="relative flex h-2 w-2 shrink-0">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-80"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
             </span>
-            <span class="text-slate-400">Act I ·</span>
-            <span class="text-white font-semibold truncate sm:overflow-visible">We do the work, you take the credit.</span>
+            <span class="text-white font-bold tracking-wide">Live Pod Conductor Active</span>
+            <span class="text-slate-500">·</span>
+            <span class="text-cyan-300 font-semibold truncate sm:overflow-visible">We do the work, you take the credit.</span>
           </div>
 
-          <h1 class="hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto px-2 leading-tight">
+          <h1 class="cinematic-reveal-2 hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto px-2 leading-tight">
             Your secret remote team scales without burnout.
           </h1>
 
-          <p class="mt-3 sm:mt-6 text-xs sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal px-2">
+          <p class="cinematic-reveal-3 mt-2 sm:mt-3 text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal px-2">
             Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
           </p>
 
-          <div class="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
-            <a href="#pricing-act" class="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
+          <div class="cinematic-reveal-4 mt-3 sm:mt-5 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-none mx-auto">
+            <a href="#pricing-act" class="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
               <span>Start with Credits</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
-            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
-              <span>Watch How It Works</span>
+            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
+              <span>Explore The Pod Factory</span>
               <svg class="w-4 h-4 text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
             </button>
           </div>
 
+          <!-- Live Pod Dispatch Simulation Stream in Act I -->
+          <div class="cinematic-reveal-5 mt-4 sm:mt-5 w-full max-w-2xl mx-auto thine-glass rounded-2xl p-3 sm:p-4 border border-blue-500/30 shadow-2xl text-left font-mono">
+            <div class="flex items-center justify-between pb-2 border-b border-white/10 text-[10px] sm:text-xs">
+              <div class="flex items-center gap-2">
+                <span class="relative flex h-2 w-2 shrink-0">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <span class="font-bold text-white font-mono tracking-tight">Live Pod Dispatch Stream</span>
+              </div>
+              <span class="text-cyan-400 font-mono text-[10px] sm:text-[11px] flex items-center gap-1">
+                <span class="text-slate-400">Router:</span> 1 Dedicated PM Online
+              </span>
+            </div>
+
+            <!-- Active Task Simulation -->
+            <div class="py-2">
+              <div class="flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400 mb-1">
+                <span>Client Task Inbound:</span>
+                <span id="act1-sim-role" class="text-blue-300 font-semibold">Senior Specialist ($5/hr)</span>
+              </div>
+              <div class="bg-obsidian-950/90 rounded-xl px-3 py-2 border border-white/5 text-[11px] sm:text-xs text-slate-200 flex items-center min-h-[36px] overflow-hidden">
+                <span class="text-cyan-400 mr-1.5 font-bold">›</span>
+                <span id="act1-sim-text" class="text-slate-100 truncate"></span>
+                <span class="animate-pulse ml-1 text-cyan-400 font-bold">▍</span>
+              </div>
+            </div>
+
+            <!-- Animated Progress Bar & Elapsed Time -->
+            <div class="pt-2 border-t border-white/10 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] sm:text-[11px]">
+                <div class="flex items-center gap-1.5 text-slate-300 min-w-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
+                  <span id="act1-sim-status" class="truncate">Fulfilling client brief under your brand...</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-emerald-400 font-bold shrink-0">
+                  <span id="act1-sim-time">Delivered in 12h</span>
+                  <span class="text-slate-500">·</span>
+                  <span id="act1-sim-burn" class="text-rose-400 font-mono">-500 cr</span>
+                </div>
+              </div>
+              <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                <div id="act1-sim-bar" class="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 rounded-full transition-all duration-300" style="width: 75%;"></div>
+              </div>
+            </div>
+          </div>
+
           <!-- Bottom Micro Scroll Cue -->
-          <div class="mt-6 sm:mt-12 inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
+          <div class="mt-3 sm:mt-6 inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
             <span>Scroll to Enter The Pod Factory</span>
             <svg class="w-3.5 h-3.5 animate-pulse text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
@@ -479,14 +730,6 @@
             <a href="#services-pipeline" class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-white transition-colors">
               <span>Continue to Interactive Pipeline</span>
               <span>↓</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
             </a>
           </div>
         </div>
@@ -650,7 +893,101 @@
       </div>
     </section>
 
-    <!-- 3B. GRANULAR TASK & STAFFING CALCULATOR -->
+    <!-- 3B. THE OPERATIONAL SHIFT: UPSCAYL-STYLE BEFORE/AFTER COMPARISON SLIDER -->
+    <section id="comparison-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold">The Operational Shift</span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
+            Unmanaged Freelancer Chaos vs. Autonomous JDP Pod
+          </h2>
+          <p class="text-slate-400 mt-4 text-base sm:text-lg">
+            Drag the interactive divider below to compare your old operational headaches against our turnkey white-label fulfillment engine.
+          </p>
+        </div>
+
+        <!-- Upscayl Interactive Comparison Slider -->
+        <div class="comparison-slider-container rounded-3xl border border-white/10 shadow-2xl relative" style="--split-pos: 50%;">
+          <!-- Before Pane (Unmanaged Freelancer Chaos) -->
+          <div class="comparison-pane-before p-6 sm:p-10 min-h-[400px] sm:min-h-[440px] flex flex-col justify-between">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-mono font-bold mb-5">
+                <span>✕</span> The Old Agency Grind (Unmanaged Freelancers)
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">You Act As The Unpaid Full-Time PM</h3>
+              <ul class="space-y-3.5 text-xs sm:text-sm text-slate-300">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
+                  <span>Juggling 4-6 unreliable Upwork & Fiverr freelancers across chaotic timezones.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
+                  <span>Constant ghosting, missed deadlines, and sudden excuse-ridden delays.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
+                  <span>You spend 3 hours fixing grammar, broken formatting, and AI hallucinations yourself.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
+                  <span>$45 - $85/hr US contractor rates destroy your agency net profit margins.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-white/10 text-[11px] font-mono text-slate-500">
+              Result: 60-Hour Workweeks, Burnout & Client Churn
+            </div>
+          </div>
+
+          <!-- After Pane (Autonomous JDP Pod) -->
+          <div class="comparison-pane-after p-6 sm:p-10 min-h-[400px] sm:min-h-[440px] flex flex-col justify-between">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-bold mb-5">
+                <span>✓</span> The JDP System (1 Dedicated PM + Autonomous Pod)
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4">1 Slack Channel. Turnkey White-Label Execution.</h3>
+              <ul class="space-y-3.5 text-xs sm:text-sm text-slate-700">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>1 Dedicated PM handles all staffing, scoping, and rigorous multi-stage QA.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Reliable 12-24h turnaround with US timezone overlap and daily Slack updates.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>100% Client-ready deliverables formatted under your agency logo and guidelines.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Junior Staff from $3/hr, Senior Specialists $5/hr, 76% average net margin.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-200 text-[11px] font-mono text-emerald-700 font-bold">
+              Result: Scalable Recurring Revenue & Zero Burnout
+            </div>
+          </div>
+
+          <!-- Divider Line & Drag Handle -->
+          <div class="comparison-divider-line"></div>
+          <div class="comparison-drag-handle" role="slider" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="5" aria-valuemax="95">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l-4 3 4 3m8-6l4 3-4 3"/></svg>
+          </div>
+        </div>
+
+        <!-- Preset Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <span class="text-xs font-mono text-slate-400">Quick View:</span>
+          <button type="button" data-slider-set="20" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-300 transition">Show JDP (80%)</button>
+          <button type="button" data-slider-set="50" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-blue-600 text-white transition">50 / 50 Split</button>
+          <button type="button" data-slider-set="80" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-300 transition">Show Old (80%)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3C. GRANULAR TASK & STAFFING CALCULATOR -->
     <section id="calculator-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
       <div class="max-w-6xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-14">
@@ -1057,6 +1394,87 @@
           </p>
         </div>
 
+        <!-- PayPal.com Style Live Credit Wallet Simulator -->
+        <div id="creditWalletSim" class="mb-14 rounded-3xl thine-glass p-5 sm:p-8 text-white border border-white/10 shadow-2xl relative overflow-hidden">
+          <div id="walletDeductTag" class="wallet-deduct-tag">-3,200 cr</div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-blue-500 inline-block shadow-lg shadow-blue-500/50"></span>
+                <span class="font-mono text-xs font-bold text-slate-200">Live Credit Wallet Simulator</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Active Pod</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Click demo client tasks below to simulate real-time credit deduction from your active pod balance.</p>
+            </div>
+
+            <!-- Live Balance Display -->
+            <div class="text-left sm:text-right bg-obsidian-900/90 px-4 py-3 rounded-2xl border border-white/10">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Available Pod Balance</div>
+              <div class="flex items-baseline gap-2 mt-0.5">
+                <span id="walletBalanceNumber" class="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight">110,000</span>
+                <span class="text-xs font-bold text-slate-300">credits</span>
+                <span id="walletCurrencyVal" class="text-xs font-mono text-slate-400">($1,100.00)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clickable Task Deductions Grid -->
+          <div class="py-5">
+            <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-3 flex items-center justify-between">
+              <span>Simulate Submitting Client Tasks:</span>
+              <button type="button" id="walletResetBtn" class="text-[10px] font-mono text-blue-400 hover:text-blue-300 underline cursor-pointer">Reset Balance</button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="3200" data-deduct-task="1 SEO Pillar Article (1,500w)">
+                <div class="min-w-0 pr-1">
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">1 SEO Pillar Article</div>
+                  <div class="text-[11px] text-slate-400">1,500w + Surfer 85+</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-3,200 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="600" data-deduct-task="2h Junior Tech VA Support">
+                <div class="min-w-0 pr-1">
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">2h Junior Tech VA</div>
+                  <div class="text-[11px] text-slate-400">Shopify & CRM catalog</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-600 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="2000" data-deduct-task="4 Short-Form TikTok Reels">
+                <div class="min-w-0 pr-1">
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">4 TikTok Reels</div>
+                  <div class="text-[11px] text-slate-400">Subtitles & motion cuts</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-2,000 cr</span>
+              </button>
+
+              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="1000" data-deduct-task="2h Technical SEO Audit">
+                <div class="min-w-0 pr-1">
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">2h Tech SEO Audit</div>
+                  <div class="text-[11px] text-slate-400">Schema & orphan URLs</div>
+                </div>
+                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-1,000 cr</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Recent Simulated Ledger Feed -->
+          <div class="pt-4 border-t border-white/10">
+            <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-2">Simulated Pod Activity Ledger:</div>
+            <div id="walletLedgerList" class="space-y-1.5 font-mono text-xs">
+              <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-slate-300">
+                <div class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Initial Pod Capacity Allocation</span>
+                </div>
+                <span class="text-emerald-400 font-bold">+110,000 cr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Mobile Segmented Tab Switcher (Visible on sm:hidden) -->
         <div class="flex sm:hidden p-1 rounded-full thine-glass border border-white/10 mb-6 max-w-xs mx-auto text-xs font-mono font-bold" role="tablist" aria-label="Pricing Tier Switcher">
           <button type="button" id="tabStarter2" onclick="switchPricingTab2('Starter')" class="pricing-tab-btn flex-1 py-2 px-1.5 rounded-full text-slate-400 transition-all text-center">
@@ -1397,12 +1815,15 @@
       });
     }
 
+    // ==========================================
     // 1. PINNED VIEWPORT SCROLL STORYTELLER (ALL SCREENS & MOBILE)
+    // ==========================================
     const stageContainer = document.getElementById('cinematic-stage-container');
     const act1 = document.getElementById('act-1');
     const act2 = document.getElementById('act-2');
     const act3 = document.getElementById('act-3');
 
+    let scrollTicking = false;
     function updateScrollStory() {
       if (!stageContainer) return;
       const rect = stageContainer.getBoundingClientRect();
@@ -1417,6 +1838,16 @@
         setActActive(2);
       } else {
         setActActive(3);
+      }
+    }
+
+    function onScrollStory() {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          updateScrollStory();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
       }
     }
 
@@ -1478,11 +1909,13 @@
       });
     }
 
-    window.addEventListener('scroll', updateScrollStory, { passive: true });
-    window.addEventListener('resize', updateScrollStory, { passive: true });
+    window.addEventListener('scroll', onScrollStory, { passive: true });
+    window.addEventListener('resize', onScrollStory, { passive: true });
     updateScrollStory();
 
+    // ==========================================
     // 1B. ROBUST VIDEO AUTOPLAY HANDLER
+    // ==========================================
     const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
       bgVideo.muted = true;
@@ -1505,26 +1938,37 @@
       tryPlay();
     }
 
-    // 2. DYNAMIC CANVAS CONSTELLATION ENGINE (TOUCH & MOUSE RESPONSIVE)
+    // ==========================================
+    // 2. GUARANTEED 60FPS GENERATIVE CANVAS NODE ENGINE
+    // ==========================================
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
       let particles = [];
+      let pulses = [];
+      let rings = [];
       let width = (canvas.width = window.innerWidth);
       let height = (canvas.height = window.innerHeight);
       let pointer = { x: -1000, y: -1000, active: false };
 
       function initParticles() {
         particles = [];
-        const count = Math.floor(Math.min(width, 1400) / 22);
+        pulses = [];
+        rings = [];
+        const isMobile = width < 768;
+        const count = isMobile ? Math.floor(width / 14) : Math.floor(Math.min(width, 1600) / 18);
         for (let i = 0; i < count; i++) {
+          const isHub = Math.random() < 0.12;
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            radius: Math.random() * 1.6 + 0.8,
-            alpha: Math.random() * 0.6 + 0.2
+            vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.45),
+            vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.45),
+            radius: isHub ? (Math.random() * 1.5 + 3.2) : (Math.random() * 1.2 + 1.6),
+            isHub: isHub,
+            color: Math.random() < 0.6 ? '#38bdf8' : '#60a5fa',
+            alpha: Math.random() * 0.4 + 0.5,
+            pulsePhase: Math.random() * Math.PI * 2
           });
         }
       }
@@ -1541,44 +1985,125 @@
       window.addEventListener('touchmove', onPointerMove, { passive: true });
       window.addEventListener('touchend', () => { pointer.active = false; }, { passive: true });
       window.addEventListener('scroll', () => {
-        for (let i = 0; i < Math.min(particles.length, 5); i++) {
-          particles[Math.floor(Math.random() * particles.length)].vy += (Math.random() - 0.5) * 0.6;
+        const maxP = Math.min(particles.length, 6);
+        for (let i = 0; i < maxP; i++) {
+          const idx = Math.floor(Math.random() * particles.length);
+          particles[idx].vy += (Math.random() - 0.5) * 0.8;
+          particles[idx].vx += (Math.random() - 0.5) * 0.5;
         }
       }, { passive: true });
 
-      function animateCanvas() {
+      function onPointerClick(e) {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        rings.push({ x: clientX, y: clientY, radius: 5, maxRadius: 90, alpha: 0.8 });
+        particles.slice(0, 8).forEach(p => {
+          const dx = p.x - clientX;
+          const dy = p.y - clientY;
+          if (Math.hypot(dx, dy) < 180) {
+            pulses.push({
+              fromX: clientX, fromY: clientY, toX: p.x, toY: p.y, progress: 0, speed: 0.04
+            });
+          }
+        });
+      }
+      window.addEventListener('click', onPointerClick, { passive: true });
+
+      let lastRingTime = 0;
+
+      function animateCanvas(timestamp) {
         ctx.clearRect(0, 0, width, height);
 
+        if (timestamp - lastRingTime > 3200) {
+          const hubs = particles.filter(p => p.isHub);
+          if (hubs.length > 0) {
+            const h = hubs[Math.floor(Math.random() * hubs.length)];
+            rings.push({ x: h.x, y: h.y, radius: h.radius, maxRadius: 75, alpha: 0.7 });
+          }
+          lastRingTime = timestamp;
+        }
+
+        // 1. Draw Expanding Rings
+        for (let i = rings.length - 1; i >= 0; i--) {
+          const r = rings[i];
+          r.radius += 1.4;
+          r.alpha *= 0.96;
+          if (r.radius >= r.maxRadius || r.alpha <= 0.02) {
+            rings.splice(i, 1);
+            continue;
+          }
+          ctx.strokeStyle = `rgba(56, 189, 248, ${r.alpha})`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Pointer repulsion / attraction
         if (pointer.active) {
           for (const p of particles) {
             const dx = pointer.x - p.x;
             const dy = pointer.y - p.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120 && dist > 0) {
-              const force = (120 - dist) / 120 * 0.08;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 130 && dist > 0) {
+              const force = (130 - dist) / 130 * 0.12;
               p.x -= (dx / dist) * force * 4;
               p.y -= (dy / dist) * force * 4;
             }
           }
         }
 
-        // Draw links
+        const maxDist = width < 768 ? 100 : 125;
+
+        // 2. Draw Constellation Links & Spawn Pulses
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 110) {
-              ctx.strokeStyle = `rgba(59, 130, 246, ${0.18 * (1 - dist / 110)})`;
-              ctx.lineWidth = 0.8;
+            const p1 = particles[i];
+            const p2 = particles[j];
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < maxDist) {
+              const lineAlpha = (1 - dist / maxDist) * 0.38;
+              ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha})`;
+              ctx.lineWidth = dist < 60 ? 1.4 : 0.8;
               ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
               ctx.stroke();
+
+              if (pulses.length < 10 && Math.random() < 0.0018) {
+                pulses.push({
+                  fromX: p1.x, fromY: p1.y, toX: p2.x, toY: p2.y,
+                  progress: 0, speed: Math.random() * 0.02 + 0.015
+                });
+              }
             }
           }
         }
-        // Draw points
+
+        // 3. Draw Traveling Energy Pulses
+        for (let i = pulses.length - 1; i >= 0; i--) {
+          const pulse = pulses[i];
+          pulse.progress += pulse.speed;
+          if (pulse.progress >= 1) {
+            pulses.splice(i, 1);
+            continue;
+          }
+          const curX = pulse.fromX + (pulse.toX - pulse.fromX) * pulse.progress;
+          const curY = pulse.fromY + (pulse.toY - pulse.fromY) * pulse.progress;
+
+          ctx.shadowColor = '#38bdf8';
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(curX, curY, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+
+        // 4. Draw Digital Nodes
         for (const p of particles) {
           p.x += p.vx;
           p.y += p.vy;
@@ -1587,11 +2112,28 @@
           if (p.y < 0) p.y = height;
           if (p.y > height) p.y = 0;
 
-          ctx.fillStyle = `rgba(147, 197, 253, ${p.alpha})`;
+          p.pulsePhase += 0.03;
+          const currentAlpha = p.alpha + Math.sin(p.pulsePhase) * 0.15;
+
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = p.isHub ? 12 : 6;
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0.2, Math.min(1, currentAlpha));
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
           ctx.fill();
+
+          if (p.isHub) {
+            ctx.strokeStyle = `rgba(56, 189, 248, 0.4)`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius + 3, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         }
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+
         requestAnimationFrame(animateCanvas);
       }
 
@@ -1599,13 +2141,99 @@
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         initParticles();
-      });
+      }, { passive: true });
 
       initParticles();
-      animateCanvas();
+      requestAnimationFrame(animateCanvas);
     }
 
-    // 3. LIVE SIMULATION TERMINAL STREAM
+    // ==========================================
+    // 3. ACT I LIVE POD DISPATCH SIMULATION STREAM
+    // ==========================================
+    const act1TextEl = document.getElementById('act1-sim-text');
+    const act1RoleEl = document.getElementById('act1-sim-role');
+    const act1TimeEl = document.getElementById('act1-sim-time');
+    const act1BurnEl = document.getElementById('act1-sim-burn');
+    const act1BarEl = document.getElementById('act1-sim-bar');
+    const act1StatusEl = document.getElementById('act1-sim-status');
+
+    const act1Tasks = [
+      {
+        text: "Resolve 42 orphan URLs & deploy Schema JSON-LD markup",
+        role: "Senior Tech Specialist ($5/hr)",
+        time: "Delivered in 6h",
+        burn: "-500 cr ($5.00)",
+        status: "Running Screaming Frog + Schema Validator..."
+      },
+      {
+        text: "Write 1,500w SEO Pillar on Medical Billing SaaS",
+        role: "Senior SEO Specialist ($5/hr)",
+        time: "Delivered in 12h",
+        burn: "-3,200 cr ($32.00)",
+        status: "SurferSEO score 87/100 · Plagiarism 0% verified"
+      },
+      {
+        text: "Edit 4 Short-Form Reels with motion captions & audio sync",
+        role: "Video Editor ($5/hr)",
+        time: "Delivered in 8h",
+        burn: "-2,000 cr ($20.00)",
+        status: "9:16 vertical render + white-label exported"
+      },
+      {
+        text: "Format & publish 25 Shopify e-commerce catalog items",
+        role: "Junior Tech Staff ($3/hr)",
+        time: "Delivered in 4h",
+        burn: "-600 cr ($6.00)",
+        status: "Inventory tags synced · CMS preview approved"
+      }
+    ];
+
+    let act1Idx = 0;
+    let act1Char = 0;
+    let act1Deleting = false;
+    let act1Progress = 20;
+
+    function tickAct1Sim() {
+      if (!act1TextEl) return;
+      const cur = act1Tasks[act1Idx];
+
+      if (!act1Deleting) {
+        act1Char++;
+        act1TextEl.textContent = cur.text.substring(0, act1Char);
+        act1Progress = Math.min(100, Math.round((act1Char / cur.text.length) * 100));
+        if (act1BarEl) act1BarEl.style.width = `${act1Progress}%`;
+
+        if (act1Char === cur.text.length) {
+          act1Deleting = true;
+          if (act1StatusEl) act1StatusEl.textContent = "✓ Client-Ready Deliverable Approved";
+          setTimeout(tickAct1Sim, 3000);
+          return;
+        }
+      } else {
+        act1Char--;
+        act1TextEl.textContent = cur.text.substring(0, act1Char);
+        act1Progress = Math.max(10, Math.round((act1Char / cur.text.length) * 100));
+        if (act1BarEl) act1BarEl.style.width = `${act1Progress}%`;
+
+        if (act1Char === 0) {
+          act1Deleting = false;
+          act1Idx = (act1Idx + 1) % act1Tasks.length;
+          const next = act1Tasks[act1Idx];
+          if (act1RoleEl) act1RoleEl.textContent = next.role;
+          if (act1TimeEl) act1TimeEl.textContent = next.time;
+          if (act1BurnEl) act1BurnEl.textContent = next.burn;
+          if (act1StatusEl) act1StatusEl.textContent = next.status;
+          setTimeout(tickAct1Sim, 450);
+          return;
+        }
+      }
+      setTimeout(tickAct1Sim, act1Deleting ? 18 : 42);
+    }
+    if (act1TextEl) tickAct1Sim();
+
+    // ==========================================
+    // 3B. SECTION 3A PIPELINE SIMULATOR
+    // ==========================================
     const simTextEl = document.getElementById('sim-text');
     const simRoleEl = document.getElementById('sim-role');
     const simRateEl = document.getElementById('sim-rate');
@@ -1622,6 +2250,7 @@
     let isDeleting = false;
 
     function tickSimulator() {
+      if (!simTextEl) return;
       const current = simTasks[simIdx];
       if (!isDeleting) {
         charIdx++;
@@ -1638,18 +2267,203 @@
           isDeleting = false;
           simIdx = (simIdx + 1) % simTasks.length;
           const next = simTasks[simIdx];
-          simRoleEl.textContent = next.role;
-          simRateEl.textContent = next.rate;
-          simTimeEl.textContent = next.time;
+          if (simRoleEl) simRoleEl.textContent = next.role;
+          if (simRateEl) simRateEl.textContent = next.rate;
+          if (simTimeEl) simTimeEl.textContent = next.time;
           setTimeout(tickSimulator, 500);
           return;
         }
       }
       setTimeout(tickSimulator, isDeleting ? 20 : 45);
     }
-    tickSimulator();
+    if (simTextEl) tickSimulator();
 
-    // 4. GRANULAR STAFFING CALCULATOR
+    // ==========================================
+    // 4. UPSCAYL-STYLE BEFORE/AFTER COMPARISON SLIDER
+    // ==========================================
+    function initComparisonSlider() {
+      const containers = document.querySelectorAll('.comparison-slider-container');
+      containers.forEach(container => {
+        const handle = container.querySelector('.comparison-drag-handle');
+        if (!handle) return;
+
+        let isDragging = false;
+
+        function setPosition(percent) {
+          const clamped = Math.min(95, Math.max(5, percent));
+          container.style.setProperty('--split-pos', `${clamped}%`);
+          handle.setAttribute('aria-valuenow', Math.round(clamped).toString());
+        }
+
+        function updateFromPointer(clientX) {
+          const rect = container.getBoundingClientRect();
+          if (rect.width <= 0) return;
+          const offsetX = clientX - rect.left;
+          const percent = (offsetX / rect.width) * 100;
+          setPosition(percent);
+        }
+
+        handle.addEventListener('pointerdown', (e) => {
+          isDragging = true;
+          handle.setPointerCapture(e.pointerId);
+          container.classList.add('is-dragging');
+          e.preventDefault();
+        });
+
+        handle.addEventListener('pointermove', (e) => {
+          if (!isDragging) return;
+          updateFromPointer(e.clientX);
+        });
+
+        function onPointerEnd(e) {
+          if (isDragging) {
+            isDragging = false;
+            container.classList.remove('is-dragging');
+            try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+          }
+        }
+
+        handle.addEventListener('pointerup', onPointerEnd);
+        handle.addEventListener('pointercancel', onPointerEnd);
+
+        handle.addEventListener('keydown', (e) => {
+          const current = parseFloat(getComputedStyle(container).getPropertyValue('--split-pos')) || 50;
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            setPosition(current - 5);
+            e.preventDefault();
+          } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            setPosition(current + 5);
+            e.preventDefault();
+          }
+        });
+
+        const wrapper = container.closest('section') || container.parentElement;
+        if (wrapper) {
+          const presets = wrapper.querySelectorAll('[data-slider-set]');
+          presets.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const targetPos = parseFloat(btn.getAttribute('data-slider-set'));
+              if (!isNaN(targetPos)) {
+                presets.forEach(b => {
+                  b.classList.remove('bg-blue-600', 'text-white');
+                  b.classList.add('bg-white/5', 'text-slate-300');
+                });
+                btn.classList.add('bg-blue-600', 'text-white');
+                btn.classList.remove('bg-white/5', 'text-slate-300');
+                setPosition(targetPos);
+              }
+            });
+          });
+        }
+      });
+    }
+    initComparisonSlider();
+
+    // ==========================================
+    // 5. PAYPAL-STYLE LIVE CREDIT WALLET SIMULATOR
+    // ==========================================
+    function initCreditWalletSimulator() {
+      const sim = document.getElementById('creditWalletSim');
+      if (!sim) return;
+
+      const balanceNumEl = sim.querySelector('#walletBalanceNumber');
+      const currencyValEl = sim.querySelector('#walletCurrencyVal');
+      const deductTagEl = sim.querySelector('#walletDeductTag');
+      const ledgerListEl = sim.querySelector('#walletLedgerList');
+      const resetBtn = sim.querySelector('#walletResetBtn');
+      const taskButtons = sim.querySelectorAll('.wallet-task-pill');
+
+      const INITIAL_CREDITS = 110000;
+      let currentBalance = INITIAL_CREDITS;
+
+      function formatNumber(num) {
+        return Math.round(num).toLocaleString('en-US');
+      }
+
+      function formatCurrency(credits) {
+        const dollars = credits * 0.01;
+        return `$${dollars.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      }
+
+      function updateDisplay(newBalance) {
+        currentBalance = Math.max(0, newBalance);
+        if (balanceNumEl) {
+          balanceNumEl.textContent = formatNumber(currentBalance);
+        }
+        if (currencyValEl) {
+          currencyValEl.textContent = formatCurrency(currentBalance);
+        }
+      }
+
+      taskButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cost = parseInt(btn.getAttribute('data-deduct-credits') || '0', 10);
+          const taskName = btn.getAttribute('data-deduct-task') || 'Client Task Execution';
+          if (cost <= 0) return;
+
+          if (currentBalance < cost) {
+            if (balanceNumEl && balanceNumEl.parentElement) {
+              balanceNumEl.parentElement.classList.add('animate-pulse');
+              setTimeout(() => balanceNumEl.parentElement.classList.remove('animate-pulse'), 800);
+            }
+            return;
+          }
+
+          const newBal = currentBalance - cost;
+
+          if (deductTagEl) {
+            deductTagEl.textContent = `-${formatNumber(cost)} cr`;
+            deductTagEl.classList.remove('is-animating');
+            void deductTagEl.offsetWidth;
+            deductTagEl.classList.add('is-animating');
+          }
+
+          updateDisplay(newBal);
+
+          if (ledgerListEl) {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const row = document.createElement('div');
+            row.className = 'flex items-center justify-between py-1.5 border-b border-white/5 text-slate-300';
+            row.innerHTML = `
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span class="font-medium text-slate-200">${taskName}</span>
+                <span class="text-[10px] text-slate-500 font-mono">${timeStr}</span>
+              </div>
+              <span class="font-mono font-bold text-rose-400">-${formatNumber(cost)} cr</span>
+            `;
+            ledgerListEl.prepend(row);
+
+            while (ledgerListEl.children.length > 5) {
+              ledgerListEl.removeChild(ledgerListEl.lastChild);
+            }
+          }
+        });
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          updateDisplay(INITIAL_CREDITS);
+          if (ledgerListEl) {
+            ledgerListEl.innerHTML = `
+              <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-slate-300">
+                <div class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Initial Pod Capacity Allocation</span>
+                </div>
+                <span class="text-emerald-400 font-bold">+110,000 cr</span>
+              </div>
+            `;
+          }
+        });
+      }
+    }
+    initCreditWalletSimulator();
+
+    // ==========================================
+    // 6. GRANULAR STAFFING CALCULATOR
+    // ==========================================
     const cJunior = document.getElementById('calcJunior');
     const cSenior = document.getElementById('calcSenior');
     const cVideo = document.getElementById('calcVideo');
@@ -1674,7 +2488,6 @@
       const totalJdp = jCost + sCost + vCost + artCost;
       const totalCredits = (totalJdp * 100).toLocaleString();
 
-      // US Benchmarks: Junior $25/hr, Senior $45/hr, Video $40/hr, Article $120/ea
       const usJunior = jHrs * 25;
       const usSenior = sHrs * 45;
       const usVideo = vHrs * 40;
@@ -1702,7 +2515,9 @@
     });
     updateCalculator();
 
-    // 5. FAQ TOGGLE
+    // ==========================================
+    // 7. FAQ ACCORDION TOGGLE
+    // ==========================================
     function toggleFaq(btn) {
       const parent = btn.closest('.thine-glass-card');
       const wrapper = parent?.querySelector('.faq-grid-wrapper');
