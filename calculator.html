@@ -114,7 +114,7 @@
       </div>
       <div class="hidden sm:flex items-center gap-5 text-slate-400">
         <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 1 Dedicated PM</span>
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Rollover Credits</span>
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Fresh Monthly Capacity</span>
         <a href="/proof.html" class="text-brand-400 hover:text-white underline font-semibold">View Case Studies →</a>
       </div>
     </div>
@@ -435,7 +435,7 @@
               </div>
 
               <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed">
-                💡 <strong>Recommended Plan:</strong> <span id="recPlanName" class="font-bold text-white">Growth Pod ($999/mo)</span> includes 110,000 credits, leaving <span id="recPlanLeft" class="font-bold text-brand-300">40,300 rollover credits</span> for next month.
+                💡 <strong>Recommended Plan:</strong> <span id="recPlanName" class="font-bold text-white">Growth Pod ($999/mo)</span> includes 110,000 credits, leaving <span id="recPlanLeft" class="font-bold text-brand-300">40,300 buffer credits</span> for your current monthly cycle.
               </div>
             </div>
 
@@ -755,15 +755,15 @@
       if (credits <= 50000) {
         recPlan.textContent = 'Starter Pod ($499/mo)';
         const diff = 50000 - credits;
-        recLeft.textContent = `${diff.toLocaleString()} rollover credits`;
+        recLeft.textContent = `${diff.toLocaleString()} buffer credits`;
       } else if (credits <= 110000) {
         recPlan.textContent = 'Growth Pod ($999/mo)';
         const diff = 110000 - credits;
-        recLeft.textContent = `${diff.toLocaleString()} rollover credits`;
+        recLeft.textContent = `${diff.toLocaleString()} buffer credits`;
       } else {
         recPlan.textContent = 'Scale Partner ($1,899/mo)';
         const diff = Math.max(0, 220000 - credits);
-        recLeft.textContent = diff > 0 ? `${diff.toLocaleString()} rollover credits` : 'Top-up credits recommended';
+        recLeft.textContent = diff > 0 ? `${diff.toLocaleString()} buffer credits` : 'Top-up credits recommended';
       }
 
       // Reseller Mode Calc
