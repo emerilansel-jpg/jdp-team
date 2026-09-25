@@ -112,8 +112,8 @@
       transform: translateY(24px) scale(0.98);
       transition: opacity 400ms var(--ease-cinematic), transform 400ms var(--ease-cinematic);
       will-change: opacity, transform;
-      padding-top: max(5rem, calc(env(safe-area-inset-top) + 4.5rem));
-      padding-bottom: max(4rem, calc(env(safe-area-inset-bottom) + 3.5rem));
+      padding-top: max(4.5rem, calc(env(safe-area-inset-top) + 3.5rem));
+      padding-bottom: max(3.5rem, calc(env(safe-area-inset-bottom) + 2.5rem));
       overflow-y: auto;
       max-height: 100dvh;
       -webkit-overflow-scrolling: touch;
@@ -122,6 +122,36 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0) scale(1);
+    }
+    .stage-act.is-passed {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-30px) scale(0.98);
+    }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+    @keyframes float-slow-reverse {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(7px); }
+    }
+    @keyframes float-slow-delay {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    .float-slow {
+      animation: float-slow 5s ease-in-out infinite;
+    }
+    .float-slow-reverse {
+      animation: float-slow-reverse 5.8s ease-in-out infinite;
+    }
+    .float-slow-delay {
+      animation: float-slow-delay 5.2s ease-in-out 1s infinite;
+    }
+    .act-receipt-glow {
+      box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25), 0 0 15px -3px rgba(6, 182, 212, 0.2);
+      transition: box-shadow 400ms var(--ease-cinematic), transform 400ms var(--ease-cinematic);
     }
     /* Touch Range Slider Thumb */
     input[type="range"]::-webkit-slider-thumb {
@@ -257,7 +287,7 @@
 
   <!-- Crisp Dynamic Ambient Video Background (Fixed for both mobile & desktop) -->
   <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
-    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="w-full h-full object-cover opacity-75 filter contrast-125 brightness-110">
+    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="w-full h-full object-cover opacity-85 filter contrast-125 brightness-110">
       <source src="assets/video/abstract-nodes.webm" type="video/webm">
       <source src="assets/video/abstract-nodes.mp4" type="video/mp4">
     </video>
@@ -268,170 +298,32 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- 2A. MOBILE FLOWING VERTICAL SEQUENCE (MD:HIDDEN, ZERO SCROLL-TRAP) -->
-  <!-- ======================================================== -->
-  <section class="md:hidden relative z-10 w-full px-4 pt-24 pb-16 space-y-16 text-center">
-
-    <!-- Mobile Act I -->
-    <div id="mobile-act-1" class="scroll-mt-24">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-[11px] font-mono font-medium mb-4 backdrop-blur-md">
-        <span class="relative flex h-2 w-2 shrink-0">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-        </span>
-        <span class="text-slate-400">Act I ·</span>
-        <span class="text-white font-semibold">We do work, you take credit</span>
-      </div>
-
-      <h1 class="text-2xl font-black text-white tracking-tight leading-[1.15] px-1">
-        Your secret remote team scales without burnout.
-      </h1>
-
-      <p class="mt-3 text-sm text-slate-300 leading-relaxed px-1">
-        Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
-      </p>
-
-      <div class="mt-6 flex flex-col gap-3 w-full max-w-xs mx-auto">
-        <a href="#pricing-act" class="w-full py-3.5 px-6 rounded-full text-xs font-bold font-mono uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-all min-touch flex items-center justify-center gap-2">
-          <span>Start with Credits</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </a>
-        <a href="#mobile-act-2" class="w-full py-3 px-6 rounded-full text-xs font-semibold text-slate-300 border border-white/20 bg-white/5 hover:bg-white/10 text-center backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
-          <span>Explore Pod Factory</span>
-          <svg class="w-3.5 h-3.5 text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Mobile Act II -->
-    <div id="mobile-act-2" class="scroll-mt-24 pt-4 border-t border-white/10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyanGlow-500/30 bg-cyanGlow-500/10 text-cyanGlow-400 text-[11px] font-mono font-medium mb-3 backdrop-blur-md">
-        <span class="w-2 h-2 rounded-full bg-cyanGlow-400 shrink-0"></span>
-        <span class="text-slate-400">Act II ·</span>
-        <span class="text-white font-semibold">Managed Pod Infrastructure</span>
-      </div>
-
-      <h2 class="text-xl font-black text-white tracking-tight px-1 leading-snug">
-        The private factory behind your brand.
-      </h2>
-
-      <p class="mt-2 text-xs text-slate-300 leading-relaxed px-1">
-        You close deals and lead client strategy. We supply the dedicated operational muscle to fulfill every brief with precision.
-      </p>
-
-      <div class="space-y-3 mt-5 text-left">
-        <!-- Node 1 -->
-        <div class="thine-glass-card rounded-2xl p-4 border border-white/10">
-          <div class="flex items-center justify-between mb-2">
-            <span class="w-8 h-8 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-sm text-blue-400 shrink-0">💬</span>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300 px-2 py-0.5 rounded bg-blue-900/40 border border-blue-500/20">Slack / ClickUp</span>
-          </div>
-          <h3 class="text-base font-bold text-white tracking-tight">1 Dedicated PM</h3>
-          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-            Single point of contact in Slack. Scopes hours, assigns specialists, and runs thorough QA. Zero micromanagement on your plate.
-          </p>
-        </div>
-
-        <!-- Node 2 -->
-        <div class="thine-glass-card rounded-2xl p-4 border border-white/10">
-          <div class="flex items-center justify-between mb-2">
-            <span class="w-8 h-8 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-sm text-cyan-400 shrink-0">⚡</span>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-300 px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20">$3 - $5 / hr</span>
-          </div>
-          <h3 class="text-base font-bold text-white tracking-tight">Specialist Pod</h3>
-          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-            Junior Staff <strong class="text-white">$3/hr</strong>, Senior Specialists <strong class="text-white">$5/hr</strong>, Video Editors <strong class="text-white">$5/hr</strong>. Trained as AI Conductors.
-          </p>
-        </div>
-
-        <!-- Node 3 -->
-        <div class="thine-glass-card rounded-2xl p-4 border border-white/10">
-          <div class="flex items-center justify-between mb-2">
-            <span class="w-8 h-8 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-sm text-emerald-400 shrink-0">🎯</span>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/20">Express SLA</span>
-          </div>
-          <h3 class="text-base font-bold text-white tracking-tight">24h Turnaround</h3>
-          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-            Instant scalability. Deliverables come back polished, verified, and client-ready without endless revision cycles.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Act III -->
-    <div id="mobile-act-3" class="scroll-mt-24 pt-4 border-t border-white/10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emeraldGlow-500/30 bg-emeraldGlow-500/10 text-emeraldGlow-400 text-[11px] font-mono font-medium mb-3 backdrop-blur-md">
-        <span class="w-2 h-2 rounded-full bg-emeraldGlow-400 shrink-0"></span>
-        <span class="text-slate-400">Act III ·</span>
-        <span class="text-white font-semibold">100% White-Label</span>
-      </div>
-
-      <h2 class="text-xl font-black text-white tracking-tight px-1 leading-snug">
-        100% Invisible to your clients.
-      </h2>
-
-      <p class="mt-2 text-xs text-slate-300 leading-relaxed px-1">
-        Everything we build is delivered under your logo, your templates, and your brand guidelines.
-      </p>
-
-      <!-- Sleek Unit Economics Receipt Card -->
-      <div class="mt-5 thine-glass rounded-2xl p-4 border border-white/10 shadow-2xl font-mono text-left">
-        <div class="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-widest pb-2.5 border-b border-white/10">
-          <span>Unit Economics Receipt</span>
-          <span class="text-emerald-400 font-bold">100% White-Label</span>
-        </div>
-        <div class="py-3 space-y-2.5 text-xs">
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 font-sans">You Bill Client</span>
-            <span class="text-slate-400 font-bold font-mono">+$3,000</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="text-slate-400 font-sans">JDP Execution Cost</span>
-            <span class="text-cyan-400 font-bold font-mono">-$999</span>
-          </div>
-          <div class="pt-2.5 border-t border-dashed border-white/20 flex items-center justify-between">
-            <span class="text-white font-bold font-sans">Your Net Margin</span>
-            <span class="text-emerald-400 font-bold text-sm font-mono">+$2,001 (66.7%)</span>
-          </div>
-        </div>
-        <div class="pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-sans">
-          <span class="flex items-center gap-1"><span class="text-emerald-400 font-bold">✓</span> Silent NDA on file</span>
-          <span class="flex items-center gap-1"><span class="text-emerald-400 font-bold">✓</span> Direct CMS upload</span>
-        </div>
-      </div>
-
-      <div class="mt-6">
-        <a href="#services-pipeline" class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-white transition-colors">
-          <span>Continue to Pod Pipeline</span>
-          <span>↓</span>
-        </a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- 2B. FULL-BLEED PINNED CINEMATIC STAGE (DESKTOP ONLY: HIDDEN MD:BLOCK) -->
+  <!-- 2. FULL-BLEED PINNED CINEMATIC STAGE (MOBILE & DESKTOP) -->
   <!-- 300vh Container with Pinned 100dvh Sticky Viewport Stage -->
   <!-- ======================================================== -->
-  <div id="cinematic-stage-container" class="hidden md:block relative w-full" style="height: 300vh;">
+  <div id="cinematic-stage-container" class="relative w-full" style="height: 300vh;">
 
     <!-- Sticky 100dvh Viewport -->
     <div id="pinned-viewport" class="sticky top-0 h-[100dvh] min-h-[100dvh] w-full overflow-hidden flex items-center justify-center grid-lines">
 
-      <!-- Stage Step Floating Indicator (Right Side) -->
-      <aside aria-label="Story Acts Progress" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 hidden sm:flex flex-col gap-3">
-        <button type="button" onclick="jumpToAct(1)" id="dot-act-1" class="group flex items-center gap-2 text-right focus:outline-none" aria-label="Act 1: Scale">
-          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity opacity-0 group-hover:opacity-100">01 SCALE</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-blue-500/20 transition-all duration-300"></span>
+      <!-- Stage Step Floating Indicator (Side on desktop, bottom-center on mobile) -->
+      <aside aria-label="Story Acts Progress" class="absolute bottom-5 sm:bottom-auto sm:top-1/2 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-6 lg:right-8 sm:-translate-y-1/2 z-40 flex flex-row sm:flex-col items-center gap-2 sm:gap-3.5 bg-slate-950/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none px-3.5 py-1.5 sm:p-0 rounded-full border border-white/15 sm:border-0 shadow-2xl sm:shadow-none">
+        <button type="button" onclick="jumpToAct(1)" id="dot-act-1" class="group flex items-center gap-2 text-right focus:outline-none min-touch sm:min-touch-0 p-1.5 sm:p-0" aria-label="Act 1: Scale">
+          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity hidden sm:inline opacity-0 group-hover:opacity-100">01 SCALE</span>
+          <span class="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-500 ring-4 ring-blue-500/25 transition-all duration-300"></span>
+          <span class="text-[11px] font-mono font-bold text-white sm:hidden">01</span>
         </button>
-        <button type="button" onclick="jumpToAct(2)" id="dot-act-2" class="group flex items-center gap-2 text-right focus:outline-none" aria-label="Act 2: Factory">
-          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity opacity-0 group-hover:opacity-100">02 POD</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+        <span class="text-slate-600 text-xs sm:hidden">·</span>
+        <button type="button" onclick="jumpToAct(2)" id="dot-act-2" class="group flex items-center gap-2 text-right focus:outline-none min-touch sm:min-touch-0 p-1.5 sm:p-0" aria-label="Act 2: Factory">
+          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity hidden sm:inline opacity-0 group-hover:opacity-100">02 POD</span>
+          <span class="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+          <span class="text-[11px] font-mono font-medium text-slate-500 sm:hidden">02</span>
         </button>
-        <button type="button" onclick="jumpToAct(3)" id="dot-act-3" class="group flex items-center gap-2 text-right focus:outline-none" aria-label="Act 3: Invisible">
-          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity opacity-0 group-hover:opacity-100">03 INVISIBLE</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+        <span class="text-slate-600 text-xs sm:hidden">·</span>
+        <button type="button" onclick="jumpToAct(3)" id="dot-act-3" class="group flex items-center gap-2 text-right focus:outline-none min-touch sm:min-touch-0 p-1.5 sm:p-0" aria-label="Act 3: Invisible">
+          <span class="text-[10px] font-mono tracking-wider text-slate-400 group-hover:text-white transition-opacity hidden sm:inline opacity-0 group-hover:opacity-100">03 INVISIBLE</span>
+          <span class="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+          <span class="text-[11px] font-mono font-medium text-slate-500 sm:hidden">03</span>
         </button>
       </aside>
 
@@ -439,100 +331,100 @@
       <div class="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
 
         <!-- ACT I (Screen 1) -->
-        <div id="act-1" class="stage-act is-active text-center">
-          <div class="inline-flex flex-wrap items-center justify-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-xs font-mono font-medium mb-4 sm:mb-6 backdrop-blur-md shadow-lg max-w-full">
+        <div id="act-1" class="stage-act is-active text-center w-full px-4 sm:px-6">
+          <div class="inline-flex flex-wrap items-center justify-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 text-blue-300 text-[11px] sm:text-xs font-mono font-medium mb-3 sm:mb-6 backdrop-blur-md shadow-lg max-w-full">
             <span class="relative flex h-2 w-2 shrink-0">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
             <span class="text-slate-400">Act I ·</span>
-            <span class="text-white font-semibold">We do the work, you take the credit.</span>
+            <span class="text-white font-semibold truncate sm:overflow-visible">We do the work, you take the credit.</span>
           </div>
 
-          <h1 class="hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto px-2">
+          <h1 class="hero-title-fluid font-black text-white tracking-tight max-w-5xl mx-auto px-2 leading-tight">
             Your secret remote team scales without burnout.
           </h1>
 
-          <p class="mt-4 sm:mt-6 text-sm sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal px-2">
+          <p class="mt-3 sm:mt-6 text-xs sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal px-2">
             Send us your client's SEO, content, and daily digital tasks. Our managed team delivers them fast under your logo—so you scale without hiring staff or burning out.
           </p>
 
-          <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
-            <a href="#pricing-act" class="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-full text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
+          <div class="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+            <a href="#pricing-act" class="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
               <span>Start with Credits</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
-            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-full text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
+            <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
               <span>Watch How It Works</span>
               <svg class="w-4 h-4 text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
             </button>
           </div>
 
           <!-- Bottom Micro Scroll Cue -->
-          <div class="mt-8 sm:mt-14 inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
+          <div class="mt-6 sm:mt-12 inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-slate-400 opacity-80">
             <span>Scroll to Enter The Pod Factory</span>
             <svg class="w-3.5 h-3.5 animate-pulse text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
         </div>
 
         <!-- ACT II (Screen 2) -->
-        <div id="act-2" class="stage-act text-center">
-          <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-cyanGlow-500/30 bg-cyanGlow-500/10 text-cyanGlow-400 text-xs font-mono font-medium mb-3 sm:mb-5 backdrop-blur-md">
+        <div id="act-2" class="stage-act text-center w-full px-4 sm:px-6">
+          <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-cyanGlow-500/30 bg-cyanGlow-500/10 text-cyanGlow-400 text-[11px] sm:text-xs font-mono font-medium mb-2.5 sm:mb-4 backdrop-blur-md">
             <span class="w-2 h-2 rounded-full bg-cyanGlow-400 shrink-0"></span>
             <span class="text-slate-400">Act II ·</span>
             <span class="text-white font-semibold">Managed Pod Infrastructure</span>
           </div>
 
-          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto px-2">
+          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto px-2 leading-tight">
             The private factory behind your brand.
           </h2>
 
-          <p class="mt-2.5 sm:mt-4 text-xs sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
+          <p class="mt-2 sm:mt-3 text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
             You close deals and lead client strategy. We supply the dedicated operational muscle to fulfill every brief with precision.
           </p>
 
           <!-- 3 High-Contrast Glass Floating Nodes -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5 mt-3 sm:mt-8 w-full max-w-4xl mx-auto text-left">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-5 mt-4 sm:mt-7 w-full max-w-4xl mx-auto text-left">
             <!-- Node 1 -->
-            <div class="thine-glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden group flex flex-col justify-between">
+            <div class="thine-glass-card float-slow rounded-2xl p-3.5 sm:p-6 relative overflow-hidden group flex flex-col justify-between">
               <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-all"></div>
               <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-base sm:text-lg text-blue-400 shrink-0">💬</span>
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                  <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-sm sm:text-lg text-blue-400 shrink-0">💬</span>
                   <span class="text-[10px] font-mono uppercase tracking-wider text-blue-300 px-2 py-0.5 rounded bg-blue-900/40 border border-blue-500/20">Slack / ClickUp</span>
                 </div>
-                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">1 Dedicated PM</h3>
-                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                <h3 class="text-sm sm:text-lg font-bold text-white tracking-tight">1 Dedicated PM</h3>
+                <p class="text-[11px] sm:text-sm text-slate-300 mt-1 leading-relaxed">
                   Single point of contact in Slack. Scopes hours, assigns specialists, and runs thorough QA. Zero micromanagement on your plate.
                 </p>
               </div>
             </div>
 
             <!-- Node 2 -->
-            <div class="thine-glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden group flex flex-col justify-between">
+            <div class="thine-glass-card float-slow-reverse rounded-2xl p-3.5 sm:p-6 relative overflow-hidden group flex flex-col justify-between">
               <div class="absolute -right-6 -top-6 w-24 h-24 bg-cyanGlow-500/10 rounded-full blur-xl group-hover:bg-cyanGlow-500/20 transition-all"></div>
               <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-base sm:text-lg text-cyan-400 shrink-0">⚡</span>
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                  <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-sm sm:text-lg text-cyan-400 shrink-0">⚡</span>
                   <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-300 px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20">$3 - $5 / hr</span>
                 </div>
-                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">Specialist Pod</h3>
-                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                <h3 class="text-sm sm:text-lg font-bold text-white tracking-tight">Specialist Pod</h3>
+                <p class="text-[11px] sm:text-sm text-slate-300 mt-1 leading-relaxed">
                   Junior Staff <strong class="text-white">$3/hr</strong>, Senior Specialists <strong class="text-white">$5/hr</strong>, Video Editors <strong class="text-white">$5/hr</strong>. Trained as AI Conductors.
                 </p>
               </div>
             </div>
 
             <!-- Node 3 -->
-            <div class="thine-glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden group flex flex-col justify-between">
+            <div class="thine-glass-card float-slow-delay rounded-2xl p-3.5 sm:p-6 relative overflow-hidden group flex flex-col justify-between">
               <div class="absolute -right-6 -top-6 w-24 h-24 bg-emeraldGlow-500/10 rounded-full blur-xl group-hover:bg-emeraldGlow-500/20 transition-all"></div>
               <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-base sm:text-lg text-emerald-400 shrink-0">🎯</span>
+                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                  <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-sm sm:text-lg text-emerald-400 shrink-0">🎯</span>
                   <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/20">Express SLA</span>
                 </div>
-                <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">24h Turnaround</h3>
-                <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                <h3 class="text-sm sm:text-lg font-bold text-white tracking-tight">24h Turnaround</h3>
+                <p class="text-[11px] sm:text-sm text-slate-300 mt-1 leading-relaxed">
                   Instant scalability. Deliverables come back polished, verified, and client-ready without endless revision cycles.
                 </p>
               </div>
@@ -541,28 +433,28 @@
         </div>
 
         <!-- ACT III (Screen 3) -->
-        <div id="act-3" class="stage-act text-center">
-          <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-emeraldGlow-500/30 bg-emeraldGlow-500/10 text-emeraldGlow-400 text-xs font-mono font-medium mb-3 sm:mb-5 backdrop-blur-md">
+        <div id="act-3" class="stage-act text-center w-full px-4 sm:px-6">
+          <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-emeraldGlow-500/30 bg-emeraldGlow-500/10 text-emeraldGlow-400 text-[11px] sm:text-xs font-mono font-medium mb-2.5 sm:mb-4 backdrop-blur-md">
             <span class="w-2 h-2 rounded-full bg-emeraldGlow-400 shrink-0"></span>
             <span class="text-slate-400">Act III ·</span>
             <span class="text-white font-semibold">100% White-Label</span>
           </div>
 
-          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto px-2">
+          <h2 class="scene-title-fluid font-black text-white tracking-tight max-w-4xl mx-auto px-2 leading-tight">
             100% Invisible to your clients.
           </h2>
 
-          <p class="mt-2.5 sm:mt-4 text-xs sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
+          <p class="mt-2 sm:mt-3 text-xs sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
             Everything we build is delivered under your logo, your templates, and your brand guidelines. You bill the client $3,000. We fulfill for $999. You keep the profit and your sanity.
           </p>
 
           <!-- Sleek Unit Economics Receipt Card -->
-          <div class="mt-6 sm:mt-8 thine-glass rounded-2xl sm:rounded-3xl p-5 sm:p-7 max-w-md w-full mx-auto border border-white/10 shadow-2xl font-mono text-left">
-            <div class="flex items-center justify-between text-[11px] text-slate-400 uppercase tracking-widest pb-3 border-b border-white/10">
+          <div class="act-receipt-glow mt-4 sm:mt-7 thine-glass rounded-2xl sm:rounded-3xl p-4 sm:p-7 max-w-md w-full mx-auto border border-emerald-500/30 shadow-2xl font-mono text-left">
+            <div class="flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400 uppercase tracking-widest pb-2.5 sm:pb-3 border-b border-white/10">
               <span>Unit Economics Receipt</span>
               <span class="text-emerald-400 font-bold">100% White-Label</span>
             </div>
-            <div class="py-4 space-y-3.5 text-sm">
+            <div class="py-3 sm:py-4 space-y-2.5 sm:space-y-3.5 text-xs sm:text-sm">
               <div class="flex items-center justify-between">
                 <span class="text-slate-400 font-sans">You Bill Client</span>
                 <span class="text-slate-400 font-bold font-mono">+$3,000</span>
@@ -571,22 +463,30 @@
                 <span class="text-slate-400 font-sans">JDP Execution Cost</span>
                 <span class="text-cyan-400 font-bold font-mono">-$999</span>
               </div>
-              <div class="pt-3 border-t border-dashed border-white/20 flex items-center justify-between">
+              <div class="pt-2.5 sm:pt-3 border-t border-dashed border-white/20 flex items-center justify-between">
                 <span class="text-white font-bold font-sans">Your Net Margin</span>
-                <span class="text-emerald-400 font-bold text-base font-mono">+$2,001 (66.7%)</span>
+                <span class="text-emerald-400 font-bold text-sm sm:text-base font-mono">+$2,001 (66.7%)</span>
               </div>
             </div>
-            <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400 font-sans">
+            <div class="pt-2.5 sm:pt-3 border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400 font-sans">
               <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Silent NDA on file</span>
               <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Direct CMS upload</span>
             </div>
           </div>
 
           <!-- Bottom Button to Enter Next Act -->
-          <div class="mt-8">
-            <a href="#services-pipeline" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-white transition-colors">
-              <span>Continue to Interactive Console & Calculator</span>
+          <div class="mt-4 sm:mt-7">
+            <a href="#services-pipeline" class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-white transition-colors">
+              <span>Continue to Interactive Pipeline</span>
               <span>↓</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
             </a>
           </div>
         </div>
@@ -1497,27 +1397,20 @@
       });
     }
 
-    // 1. PINNED VIEWPORT SCROLL STORYTELLER
+    // 1. PINNED VIEWPORT SCROLL STORYTELLER (ALL SCREENS & MOBILE)
     const stageContainer = document.getElementById('cinematic-stage-container');
     const act1 = document.getElementById('act-1');
     const act2 = document.getElementById('act-2');
     const act3 = document.getElementById('act-3');
-    const dot1 = document.getElementById('dot-act-1')?.querySelector('span:last-child');
-    const dot2 = document.getElementById('dot-act-2')?.querySelector('span:last-child');
-    const dot3 = document.getElementById('dot-act-3')?.querySelector('span:last-child');
 
     function updateScrollStory() {
-      if (window.innerWidth < 768) return;
       if (!stageContainer) return;
       const rect = stageContainer.getBoundingClientRect();
       const totalScrollable = stageContainer.offsetHeight - window.innerHeight;
+      if (totalScrollable <= 0) return;
       const scrolled = -rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
 
-      // Act thresholds
-      // Act 1: 0.0 to 0.33
-      // Act 2: 0.33 to 0.66
-      // Act 3: 0.66 to 1.0
       if (progress < 0.33) {
         setActActive(1);
       } else if (progress < 0.66) {
@@ -1528,23 +1421,49 @@
     }
 
     function setActActive(actNum) {
-      act1?.classList.toggle('is-active', actNum === 1);
-      act2?.classList.toggle('is-active', actNum === 2);
-      act3?.classList.toggle('is-active', actNum === 3);
+      const acts = [act1, act2, act3];
+      acts.forEach((act, idx) => {
+        if (!act) return;
+        const num = idx + 1;
+        if (num === actNum) {
+          act.classList.add('is-active');
+          act.classList.remove('is-passed');
+        } else if (num < actNum) {
+          act.classList.remove('is-active');
+          act.classList.add('is-passed');
+        } else {
+          act.classList.remove('is-active');
+          act.classList.remove('is-passed');
+        }
+      });
 
-      if (dot1 && dot2 && dot3) {
-        dot1.className = actNum === 1 ? 'w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-blue-500/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
-        dot2.className = actNum === 2 ? 'w-2.5 h-2.5 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
-        dot3.className = actNum === 3 ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/20 transition-all duration-300' : 'w-2.5 h-2.5 rounded-full bg-slate-700 transition-all duration-300';
-      }
+      const dots = [
+        { id: 'dot-act-1', color: 'blue' },
+        { id: 'dot-act-2', color: 'cyan' },
+        { id: 'dot-act-3', color: 'emerald' }
+      ];
+
+      dots.forEach((d, idx) => {
+        const btn = document.getElementById(d.id);
+        if (!btn) return;
+        const isActive = (idx + 1) === actNum;
+        const dotSpan = btn.querySelector('span:nth-child(2)');
+        const numSpan = btn.querySelector('span:nth-child(3)');
+        if (dotSpan) {
+          if (isActive) {
+            const glowClass = d.color === 'blue' ? 'bg-blue-500 ring-4 ring-blue-500/25' : (d.color === 'cyan' ? 'bg-cyan-400 ring-4 ring-cyan-400/25' : 'bg-emerald-400 ring-4 ring-emerald-400/25');
+            dotSpan.className = 'w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full ' + glowClass + ' transition-all duration-300';
+          } else {
+            dotSpan.className = 'w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-700 transition-all duration-300';
+          }
+        }
+        if (numSpan) {
+          numSpan.className = isActive ? 'text-[11px] font-mono font-bold text-white sm:hidden' : 'text-[11px] font-mono font-medium text-slate-500 sm:hidden';
+        }
+      });
     }
 
     function jumpToAct(actNum) {
-      if (window.innerWidth < 768) {
-        const target = document.getElementById(actNum === 1 ? 'mobile-act-1' : (actNum === 2 ? 'mobile-act-2' : 'mobile-act-3'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
       if (!stageContainer) return;
       const totalScrollable = stageContainer.offsetHeight - window.innerHeight;
       let targetY = 0;
@@ -1552,13 +1471,15 @@
       if (actNum === 2) targetY = totalScrollable * 0.45;
       if (actNum === 3) targetY = totalScrollable * 0.85;
 
+      const topPos = stageContainer.getBoundingClientRect().top + window.pageYOffset + targetY;
       window.scrollTo({
-        top: stageContainer.offsetTop + targetY,
+        top: topPos,
         behavior: 'smooth'
       });
     }
 
     window.addEventListener('scroll', updateScrollStory, { passive: true });
+    window.addEventListener('resize', updateScrollStory, { passive: true });
     updateScrollStory();
 
     // 1B. ROBUST VIDEO AUTOPLAY HANDLER
@@ -1569,23 +1490,29 @@
         const p = bgVideo.play();
         if (p !== undefined) {
           p.catch(() => {
-            // Browser blocked autoplay without user gesture; attach listeners
-            window.addEventListener('scroll', () => { bgVideo.play(); }, { once: true, passive: true });
-            window.addEventListener('touchstart', () => { bgVideo.play(); }, { once: true, passive: true });
-            window.addEventListener('click', () => { bgVideo.play(); }, { once: true });
+            const resumePlay = () => {
+              bgVideo.play();
+              window.removeEventListener('scroll', resumePlay);
+              window.removeEventListener('touchstart', resumePlay);
+              window.removeEventListener('click', resumePlay);
+            };
+            window.addEventListener('scroll', resumePlay, { once: true, passive: true });
+            window.addEventListener('touchstart', resumePlay, { once: true, passive: true });
+            window.addEventListener('click', resumePlay, { once: true });
           });
         }
       };
       tryPlay();
     }
 
-    // 2. DYNAMIC CANVAS CONSTELLATION ENGINE
+    // 2. DYNAMIC CANVAS CONSTELLATION ENGINE (TOUCH & MOUSE RESPONSIVE)
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
       let particles = [];
       let width = (canvas.width = window.innerWidth);
       let height = (canvas.height = window.innerHeight);
+      let pointer = { x: -1000, y: -1000, active: false };
 
       function initParticles() {
         particles = [];
@@ -1602,8 +1529,39 @@
         }
       }
 
+      function onPointerMove(e) {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        pointer.x = clientX;
+        pointer.y = clientY;
+        pointer.active = true;
+      }
+
+      window.addEventListener('mousemove', onPointerMove, { passive: true });
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('touchend', () => { pointer.active = false; }, { passive: true });
+      window.addEventListener('scroll', () => {
+        for (let i = 0; i < Math.min(particles.length, 5); i++) {
+          particles[Math.floor(Math.random() * particles.length)].vy += (Math.random() - 0.5) * 0.6;
+        }
+      }, { passive: true });
+
       function animateCanvas() {
         ctx.clearRect(0, 0, width, height);
+
+        if (pointer.active) {
+          for (const p of particles) {
+            const dx = pointer.x - p.x;
+            const dy = pointer.y - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120 && dist > 0) {
+              const force = (120 - dist) / 120 * 0.08;
+              p.x -= (dx / dist) * force * 4;
+              p.y -= (dy / dist) * force * 4;
+            }
+          }
+        }
+
         // Draw links
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
