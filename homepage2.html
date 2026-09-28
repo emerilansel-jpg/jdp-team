@@ -128,69 +128,131 @@
       pointer-events: none;
       transform: translate3d(0, -32px, 0) scale(0.97);
     }
-    /* Ambient Luminous Mesh Breathing Gradient Orbs */
+    /* Ambient Luminous Mesh & Kinetic Aurora Wave System */
     .ambient-mesh-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(75px);
-      opacity: 0.55;
+      filter: blur(65px);
+      opacity: 0.75;
       mix-blend-mode: screen;
       will-change: transform, opacity;
-      animation: ambient-glow 16s ease-in-out infinite alternate;
+      animation: ambient-glow 10s ease-in-out infinite alternate;
       pointer-events: none;
     }
     .orb-primary {
-      width: min(650px, 85vw);
-      height: min(650px, 85vw);
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, rgba(37, 99, 235, 0) 70%);
+      width: min(750px, 90vw);
+      height: min(750px, 90vw);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.70) 0%, rgba(59, 130, 246, 0.35) 45%, rgba(37, 99, 235, 0) 70%);
       top: 5%;
-      left: 10%;
-      animation-duration: 18s;
+      left: 8%;
+      animation-duration: 9s;
     }
     .orb-cyan {
-      width: min(600px, 80vw);
-      height: min(600px, 80vw);
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.42) 0%, rgba(6, 182, 212, 0) 70%);
-      top: 35%;
+      width: min(700px, 85vw);
+      height: min(700px, 85vw);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.70) 0%, rgba(34, 211, 238, 0.35) 45%, rgba(6, 182, 212, 0) 70%);
+      top: 30%;
       right: 5%;
-      animation-duration: 22s;
-      animation-delay: -6s;
+      animation-duration: 11s;
+      animation-delay: -3s;
     }
     .orb-indigo {
-      width: min(550px, 75vw);
-      height: min(550px, 75vw);
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(99, 102, 241, 0) 70%);
-      bottom: 15%;
-      left: 20%;
-      animation-duration: 20s;
-      animation-delay: -12s;
+      width: min(650px, 80vw);
+      height: min(650px, 80vw);
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.65) 0%, rgba(139, 92, 246, 0.30) 45%, rgba(99, 102, 241, 0) 70%);
+      bottom: 10%;
+      left: 15%;
+      animation-duration: 12s;
+      animation-delay: -6s;
     }
     .orb-accent {
-      width: min(420px, 55vw);
-      height: min(420px, 55vw);
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0) 70%);
-      top: 25%;
-      right: 30%;
-      animation-duration: 24s;
-      animation-delay: -3s;
+      width: min(500px, 65vw);
+      height: min(500px, 65vw);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.55) 0%, rgba(5, 150, 105, 0.25) 45%, rgba(16, 185, 129, 0) 70%);
+      top: 20%;
+      right: 25%;
+      animation-duration: 8s;
+      animation-delay: -4s;
+    }
+    /* Flowing Aurora Kinetic Energy Bands */
+    .aurora-wave-band {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(55px);
+      opacity: 0.65;
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+    .aurora-wave-1 {
+      width: 140vw;
+      height: 45vh;
+      top: 15%;
+      left: -20vw;
+      background: linear-gradient(115deg, rgba(37, 99, 235, 0) 0%, rgba(37, 99, 235, 0.6) 30%, rgba(6, 182, 212, 0.7) 60%, rgba(16, 185, 129, 0.5) 80%, rgba(37, 99, 235, 0) 100%);
+      animation: aurora-sweep 12s ease-in-out infinite alternate;
+    }
+    .aurora-wave-2 {
+      width: 130vw;
+      height: 40vh;
+      bottom: 10%;
+      left: -15vw;
+      background: linear-gradient(75deg, rgba(99, 102, 241, 0) 0%, rgba(99, 102, 241, 0.55) 25%, rgba(6, 182, 212, 0.65) 55%, rgba(37, 99, 235, 0.5) 85%, rgba(99, 102, 241, 0) 100%);
+      animation: aurora-sweep-reverse 14s ease-in-out infinite alternate;
+      animation-delay: -5s;
     }
     @keyframes ambient-glow {
       0% {
         transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-        opacity: 0.45;
-      }
-      33% {
-        transform: translate3d(45px, -35px, 0) scale(1.15) rotate(8deg);
         opacity: 0.65;
       }
+      33% {
+        transform: translate3d(60px, -45px, 0) scale(1.2) rotate(10deg);
+        opacity: 0.85;
+      }
       66% {
-        transform: translate3d(-35px, 45px, 0) scale(0.92) rotate(-6deg);
-        opacity: 0.5;
+        transform: translate3d(-50px, 60px, 0) scale(0.9) rotate(-8deg);
+        opacity: 0.70;
       }
       100% {
-        transform: translate3d(25px, 25px, 0) scale(1.08) rotate(4deg);
-        opacity: 0.6;
+        transform: translate3d(40px, 35px, 0) scale(1.15) rotate(6deg);
+        opacity: 0.80;
       }
+    }
+    @keyframes aurora-sweep {
+      0% {
+        transform: translate3d(-5%, -20px, 0) rotate(-6deg) scale(1);
+        opacity: 0.55;
+      }
+      50% {
+        transform: translate3d(5%, 25px, 0) rotate(4deg) scale(1.15);
+        opacity: 0.80;
+      }
+      100% {
+        transform: translate3d(-2%, -10px, 0) rotate(-3deg) scale(1.05);
+        opacity: 0.65;
+      }
+    }
+    @keyframes aurora-sweep-reverse {
+      0% {
+        transform: translate3d(5%, 20px, 0) rotate(5deg) scale(1.05);
+        opacity: 0.50;
+      }
+      50% {
+        transform: translate3d(-6%, -30px, 0) rotate(-5deg) scale(1.2);
+        opacity: 0.75;
+      }
+      100% {
+        transform: translate3d(2%, 10px, 0) rotate(2deg) scale(0.95);
+        opacity: 0.60;
+      }
+    }
+    /* Video Invert & Screen Blend */
+    .cinematic-bg-video {
+      filter: invert(1) hue-rotate(180deg) contrast(1.6) brightness(1.25);
+      mix-blend-mode: screen;
+      opacity: 0.65;
+      transition: opacity 600ms ease;
     }
 
     /* Hero Cinematic Reveal on Load */
@@ -262,13 +324,13 @@
       height: 24px;
       cursor: pointer;
     }
-    /* High Contrast Video Scrim */
+    /* High Contrast Video Scrim Vignette (balances background glow so text is WCAG AAA) */
     .thine-vignette {
-      background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.25) 0%, rgba(7, 9, 14, 0.70) 65%, rgba(7, 9, 14, 0.95) 100%);
+      background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.20) 0%, rgba(7, 9, 14, 0.55) 55%, rgba(7, 9, 14, 0.85) 100%);
     }
     @media (max-width: 767px) {
       .thine-vignette {
-        background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.35) 0%, rgba(7, 9, 14, 0.75) 65%, rgba(7, 9, 14, 0.96) 100%);
+        background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.28) 0%, rgba(7, 9, 14, 0.60) 55%, rgba(7, 9, 14, 0.88) 100%);
       }
     }
     /* Upscayl Comparison Slider Styling */
@@ -478,25 +540,27 @@
 
   <!-- Crisp Dynamic Ambient Video Background (Guaranteed 60fps & Ambient Luminous Mesh) -->
   <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
-    <!-- Ambient Luminous Mesh Breathing Gradient Orbs (CSS Keyframe Driven) -->
+    <!-- 1. Ambient Luminous Mesh Breathing Gradient Orbs & Kinetic Waves (CSS Keyframe Driven) -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
       <div class="ambient-mesh-orb orb-primary"></div>
       <div class="ambient-mesh-orb orb-cyan"></div>
       <div class="ambient-mesh-orb orb-indigo"></div>
       <div class="ambient-mesh-orb orb-accent"></div>
+      <div class="aurora-wave-band aurora-wave-1"></div>
+      <div class="aurora-wave-band aurora-wave-2"></div>
     </div>
 
-    <!-- Background Video (MP4 prioritized for universal iOS/Android support) -->
-    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="w-full h-full object-cover opacity-75 filter contrast-125 brightness-110">
+    <!-- 2. Background Video (MP4 prioritized, inverted & screen-blended for rich dark tech aesthetic) -->
+    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="cinematic-bg-video w-full h-full object-cover">
       <source src="assets/video/abstract-nodes.mp4" type="video/mp4">
       <source src="assets/video/abstract-nodes.webm" type="video/webm">
     </video>
 
-    <!-- Guaranteed 60fps Generative Canvas Node Engine (Touch/Mouse/Scroll Kinetic) -->
-    <canvas id="particleCanvas" class="absolute inset-0 w-full h-full opacity-90"></canvas>
-
-    <!-- High-Contrast Cinematic Scrim Vignette -->
+    <!-- 3. High-Contrast Cinematic Scrim Vignette (balances background glow so text is WCAG AAA) -->
     <div class="absolute inset-0 thine-vignette"></div>
+
+    <!-- 4. Guaranteed 60fps Generative Canvas Node Engine (Touch/Mouse/Scroll Kinetic) - On top of vignette for razor-sharp particle contrast -->
+    <canvas id="particleCanvas" class="absolute inset-0 w-full h-full"></canvas>
   </div>
 
   <!-- ======================================================== -->
@@ -742,7 +806,7 @@
   <!-- ======================================================== -->
   <!-- 3. ACT IV: INTERACTIVE WORKFLOW PIPELINE & CALCULATOR -->
   <!-- ======================================================== -->
-  <main class="relative z-20 bg-obsidian-950 border-t border-white/10 text-white">
+  <main class="relative z-20 bg-obsidian-950/90 backdrop-blur-md border-t border-white/10 text-white">
 
     <!-- 3A. GUMLOOP STYLE 1 PM NODE PIPELINE -->
     <section id="services-pipeline" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
@@ -1914,32 +1978,41 @@
     updateScrollStory();
 
     // ==========================================
-    // 1B. ROBUST VIDEO AUTOPLAY HANDLER
+    // 1B. ROBUST VIDEO AUTOPLAY & ADAPTIVE BLEND HANDLER
     // ==========================================
     const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
       bgVideo.muted = true;
+      const onVideoSuccess = () => {
+        bgVideo.style.display = 'block';
+        bgVideo.style.opacity = '0.65';
+      };
+      const onVideoFail = () => {
+        // Fallback: gracefully hide video so CSS aurora and canvas provide pure 100% motion
+        bgVideo.style.opacity = '0';
+        const resumePlay = () => {
+          bgVideo.play().then(onVideoSuccess).catch(() => {});
+          window.removeEventListener('scroll', resumePlay);
+          window.removeEventListener('touchstart', resumePlay);
+          window.removeEventListener('click', resumePlay);
+        };
+        window.addEventListener('scroll', resumePlay, { once: true, passive: true });
+        window.addEventListener('touchstart', resumePlay, { once: true, passive: true });
+        window.addEventListener('click', resumePlay, { once: true });
+      };
+
       const tryPlay = () => {
         const p = bgVideo.play();
         if (p !== undefined) {
-          p.catch(() => {
-            const resumePlay = () => {
-              bgVideo.play();
-              window.removeEventListener('scroll', resumePlay);
-              window.removeEventListener('touchstart', resumePlay);
-              window.removeEventListener('click', resumePlay);
-            };
-            window.addEventListener('scroll', resumePlay, { once: true, passive: true });
-            window.addEventListener('touchstart', resumePlay, { once: true, passive: true });
-            window.addEventListener('click', resumePlay, { once: true });
-          });
+          p.then(onVideoSuccess).catch(onVideoFail);
         }
       };
+      bgVideo.addEventListener('error', onVideoFail);
       tryPlay();
     }
 
     // ==========================================
-    // 2. GUARANTEED 60FPS GENERATIVE CANVAS NODE ENGINE
+    // 2. GUARANTEED 60FPS HIGH-CONTRAST NEURAL CONSTELLATION ENGINE
     // ==========================================
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
@@ -1947,27 +2020,49 @@
       let particles = [];
       let pulses = [];
       let rings = [];
-      let width = (canvas.width = window.innerWidth);
-      let height = (canvas.height = window.innerHeight);
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let width = window.innerWidth;
+      let height = window.innerHeight;
       let pointer = { x: -1000, y: -1000, active: false };
 
+      function resizeCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.scale(dpr, dpr);
+      }
+
+      const palette = [
+        { color: '#00f0ff', glow: 'rgba(0, 240, 255, 0.85)' },
+        { color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.80)' },
+        { color: '#60a5fa', glow: 'rgba(96, 165, 250, 0.75)' },
+        { color: '#818cf8', glow: 'rgba(129, 140, 248, 0.70)' },
+        { color: '#10b981', glow: 'rgba(16, 185, 129, 0.75)' },
+        { color: '#ffffff', glow: 'rgba(255, 255, 255, 0.90)' }
+      ];
+
       function initParticles() {
+        resizeCanvas();
         particles = [];
         pulses = [];
         rings = [];
         const isMobile = width < 768;
-        const count = isMobile ? Math.floor(width / 14) : Math.floor(Math.min(width, 1600) / 18);
+        const count = isMobile ? Math.floor(width / 15) : Math.floor(Math.min(width, 1600) / 16);
         for (let i = 0; i < count; i++) {
-          const isHub = Math.random() < 0.12;
+          const isHub = Math.random() < 0.16;
+          const pCol = isHub ? palette[5] : palette[Math.floor(Math.random() * (palette.length - 1))];
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.45),
-            vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.45),
-            radius: isHub ? (Math.random() * 1.5 + 3.2) : (Math.random() * 1.2 + 1.6),
+            vx: (Math.random() - 0.5) * (isMobile ? 0.75 : 1.1),
+            vy: (Math.random() - 0.5) * (isMobile ? 0.75 : 1.1),
+            radius: isHub ? (Math.random() * 2.0 + 3.8) : (Math.random() * 1.5 + 2.0),
             isHub: isHub,
-            color: Math.random() < 0.6 ? '#38bdf8' : '#60a5fa',
-            alpha: Math.random() * 0.4 + 0.5,
+            color: pCol.color,
+            glow: pCol.glow,
+            alpha: Math.random() * 0.35 + 0.65,
             pulsePhase: Math.random() * Math.PI * 2
           });
         }
@@ -1985,24 +2080,25 @@
       window.addEventListener('touchmove', onPointerMove, { passive: true });
       window.addEventListener('touchend', () => { pointer.active = false; }, { passive: true });
       window.addEventListener('scroll', () => {
-        const maxP = Math.min(particles.length, 6);
+        const maxP = Math.min(particles.length, 8);
         for (let i = 0; i < maxP; i++) {
           const idx = Math.floor(Math.random() * particles.length);
-          particles[idx].vy += (Math.random() - 0.5) * 0.8;
-          particles[idx].vx += (Math.random() - 0.5) * 0.5;
+          particles[idx].vy += (Math.random() - 0.5) * 1.2;
+          particles[idx].vx += (Math.random() - 0.5) * 0.8;
         }
       }, { passive: true });
 
       function onPointerClick(e) {
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        rings.push({ x: clientX, y: clientY, radius: 5, maxRadius: 90, alpha: 0.8 });
-        particles.slice(0, 8).forEach(p => {
+        rings.push({ x: clientX, y: clientY, radius: 6, maxRadius: 130, alpha: 0.95 });
+        rings.push({ x: clientX, y: clientY, radius: 1, maxRadius: 90, alpha: 0.7 });
+        particles.slice(0, 14).forEach(p => {
           const dx = p.x - clientX;
           const dy = p.y - clientY;
-          if (Math.hypot(dx, dy) < 180) {
+          if (Math.hypot(dx, dy) < 220) {
             pulses.push({
-              fromX: clientX, fromY: clientY, toX: p.x, toY: p.y, progress: 0, speed: 0.04
+              fromX: clientX, fromY: clientY, toX: p.x, toY: p.y, progress: 0, speed: Math.random() * 0.03 + 0.035
             });
           }
         });
@@ -2014,48 +2110,49 @@
       function animateCanvas(timestamp) {
         ctx.clearRect(0, 0, width, height);
 
-        if (timestamp - lastRingTime > 3200) {
+        // 1. Periodic Hub Radar Pulse Rings
+        if (timestamp - lastRingTime > 2000) {
           const hubs = particles.filter(p => p.isHub);
           if (hubs.length > 0) {
             const h = hubs[Math.floor(Math.random() * hubs.length)];
-            rings.push({ x: h.x, y: h.y, radius: h.radius, maxRadius: 75, alpha: 0.7 });
+            rings.push({ x: h.x, y: h.y, radius: h.radius, maxRadius: 95, alpha: 0.85 });
           }
           lastRingTime = timestamp;
         }
 
-        // 1. Draw Expanding Rings
+        // Draw Expanding Rings
         for (let i = rings.length - 1; i >= 0; i--) {
           const r = rings[i];
-          r.radius += 1.4;
-          r.alpha *= 0.96;
+          r.radius += 1.8;
+          r.alpha *= 0.965;
           if (r.radius >= r.maxRadius || r.alpha <= 0.02) {
             rings.splice(i, 1);
             continue;
           }
-          ctx.strokeStyle = `rgba(56, 189, 248, ${r.alpha})`;
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = `rgba(0, 240, 255, ${r.alpha})`;
+          ctx.lineWidth = 1.6;
           ctx.beginPath();
           ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
           ctx.stroke();
         }
 
-        // Pointer repulsion / attraction
+        // Pointer Gravity / Repulsion
         if (pointer.active) {
           for (const p of particles) {
             const dx = pointer.x - p.x;
             const dy = pointer.y - p.y;
             const dist = Math.hypot(dx, dy);
-            if (dist < 130 && dist > 0) {
-              const force = (130 - dist) / 130 * 0.12;
-              p.x -= (dx / dist) * force * 4;
-              p.y -= (dy / dist) * force * 4;
+            if (dist < 150 && dist > 0) {
+              const force = ((150 - dist) / 150) * 0.2;
+              p.x -= (dx / dist) * force * 5;
+              p.y -= (dy / dist) * force * 5;
             }
           }
         }
 
-        const maxDist = width < 768 ? 100 : 125;
+        const maxDist = width < 768 ? 125 : 160;
 
-        // 2. Draw Constellation Links & Spawn Pulses
+        // 2. Draw Constellation Links & Spawn Traveling Pulses
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const p1 = particles[i];
@@ -2065,18 +2162,18 @@
             const dist = Math.hypot(dx, dy);
 
             if (dist < maxDist) {
-              const lineAlpha = (1 - dist / maxDist) * 0.38;
-              ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha})`;
-              ctx.lineWidth = dist < 60 ? 1.4 : 0.8;
+              const lineAlpha = (1 - dist / maxDist) * 0.65;
+              ctx.strokeStyle = `rgba(34, 211, 238, ${lineAlpha})`;
+              ctx.lineWidth = dist < 70 ? 1.6 : 1.0;
               ctx.beginPath();
               ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
               ctx.stroke();
 
-              if (pulses.length < 10 && Math.random() < 0.0018) {
+              if (pulses.length < 24 && Math.random() < 0.012) {
                 pulses.push({
                   fromX: p1.x, fromY: p1.y, toX: p2.x, toY: p2.y,
-                  progress: 0, speed: Math.random() * 0.02 + 0.015
+                  progress: 0, speed: Math.random() * 0.025 + 0.02
                 });
               }
             }
@@ -2094,16 +2191,16 @@
           const curX = pulse.fromX + (pulse.toX - pulse.fromX) * pulse.progress;
           const curY = pulse.fromY + (pulse.toY - pulse.fromY) * pulse.progress;
 
-          ctx.shadowColor = '#38bdf8';
-          ctx.shadowBlur = 10;
+          ctx.shadowColor = '#00f0ff';
+          ctx.shadowBlur = 14;
           ctx.fillStyle = '#ffffff';
           ctx.beginPath();
-          ctx.arc(curX, curY, 2.5, 0, Math.PI * 2);
+          ctx.arc(curX, curY, 3, 0, Math.PI * 2);
           ctx.fill();
           ctx.shadowBlur = 0;
         }
 
-        // 4. Draw Digital Nodes
+        // 4. Draw Digital Neural Nodes
         for (const p of particles) {
           p.x += p.vx;
           p.y += p.vy;
@@ -2112,22 +2209,22 @@
           if (p.y < 0) p.y = height;
           if (p.y > height) p.y = 0;
 
-          p.pulsePhase += 0.03;
-          const currentAlpha = p.alpha + Math.sin(p.pulsePhase) * 0.15;
+          p.pulsePhase += 0.04;
+          const currentAlpha = p.alpha + Math.sin(p.pulsePhase) * 0.2;
 
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = p.isHub ? 12 : 6;
+          ctx.shadowColor = p.glow;
+          ctx.shadowBlur = p.isHub ? 16 : 8;
           ctx.fillStyle = p.color;
-          ctx.globalAlpha = Math.max(0.2, Math.min(1, currentAlpha));
+          ctx.globalAlpha = Math.max(0.3, Math.min(1, currentAlpha));
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
           ctx.fill();
 
           if (p.isHub) {
-            ctx.strokeStyle = `rgba(56, 189, 248, 0.4)`;
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.7)';
+            ctx.lineWidth = 1.4;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius + 3, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.radius + 4, 0, Math.PI * 2);
             ctx.stroke();
           }
         }
@@ -2138,8 +2235,6 @@
       }
 
       window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
         initParticles();
       }, { passive: true });
 
