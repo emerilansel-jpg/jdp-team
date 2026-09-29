@@ -128,196 +128,198 @@
       pointer-events: none;
       transform: translate3d(0, -32px, 0) scale(0.97);
     }
-    /* Ambient Luminous Mesh & Kinetic Aurora Wave System */
-    .ambient-mesh-container {
+    /* ======================================================== */
+    /* VIVID KINETIC GLOWING AURORA ORBS (60FPS GPU COMPOSITED) */
+    /* ======================================================== */
+    .aurora-container {
       position: absolute;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
       contain: paint layout;
     }
-    .ambient-mesh-orb {
+    .aurora-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(60px);
+      filter: blur(38px) saturate(1.6) brightness(1.1);
       mix-blend-mode: screen;
       will-change: transform, opacity;
       pointer-events: none;
       transform: translateZ(0);
       backface-visibility: hidden;
     }
-    /* Orb 1: Cyan #06b6d4, 60% opacity, 800px wide, pulsing & drifting */
-    .orb-cyan {
-      width: min(800px, 95vw);
-      height: min(800px, 95vw);
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.60) 0%, rgba(34, 211, 238, 0.35) 42%, rgba(6, 182, 212, 0) 70%);
-      top: -10%;
-      right: -5%;
-      animation: orb-cyan-drift 15s ease-in-out infinite alternate;
+    /* Orb 1: Vibrant Electric Royal Blue drifting top-left to center */
+    .aurora-orb-1 {
+      width: min(760px, 115vw);
+      height: min(760px, 115vw);
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.80) 0%, rgba(37, 99, 235, 0.46) 45%, transparent 74%);
+      top: -6%;
+      left: -14%;
+      animation: aurora-drift-1 14s ease-in-out infinite alternate;
     }
-    /* Orb 2: Royal Blue #2563eb, 55% opacity, 700px wide, orbiting clockwise */
-    .orb-primary {
-      width: min(700px, 90vw);
-      height: min(700px, 90vw);
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.55) 0%, rgba(59, 130, 246, 0.30) 42%, rgba(37, 99, 235, 0) 70%);
-      top: 12%;
-      left: -8%;
-      animation: orb-blue-orbit 22s linear infinite;
+    /* Orb 2: Radiant Cyan / Turquoise pulsing bottom-right */
+    .aurora-orb-2 {
+      width: min(700px, 110vw);
+      height: min(700px, 110vw);
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.72) 0%, rgba(6, 182, 212, 0.40) 46%, transparent 74%);
+      bottom: -12%;
+      right: -18%;
+      animation: aurora-drift-2 16s ease-in-out infinite alternate;
     }
-    /* Orb 3: Deep Indigo / Violet #6366f1, 50% opacity, 750px wide, counter-orbit */
-    .orb-indigo {
-      width: min(750px, 92vw);
-      height: min(750px, 92vw);
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.50) 0%, rgba(139, 92, 246, 0.28) 45%, rgba(99, 102, 241, 0) 70%);
-      bottom: -15%;
-      left: 15%;
-      animation: orb-indigo-counter 26s linear infinite;
+    /* Orb 3: Deep Cyber Purple / Indigo rotating in center */
+    .aurora-orb-3 {
+      width: min(680px, 105vw);
+      height: min(680px, 105vw);
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.70) 0%, rgba(99, 102, 241, 0.38) 46%, transparent 74%);
+      top: 28%;
+      left: 12%;
+      animation: aurora-drift-3 18s ease-in-out infinite alternate;
     }
-    /* Orb 4: Emerald #10b981, 40% opacity, 500px wide, subtle accent pulse */
-    .orb-accent {
-      width: min(500px, 70vw);
-      height: min(500px, 70vw);
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.40) 0%, rgba(52, 211, 153, 0.20) 40%, rgba(16, 185, 129, 0) 70%);
-      top: 38%;
-      right: 20%;
-      animation: orb-emerald-pulse 11s ease-in-out infinite alternate;
-    }
-
-    /* Flowing Aurora Kinetic Energy Bands */
-    .aurora-wave-band {
-      position: absolute;
-      border-radius: 9999px;
-      filter: blur(55px);
-      mix-blend-mode: screen;
-      will-change: transform, opacity;
-      pointer-events: none;
-      transform: translateZ(0);
-    }
-    .aurora-wave-1 {
-      width: 140vw;
-      height: 48vh;
-      top: 10%;
-      left: -20vw;
-      background: linear-gradient(115deg, rgba(37, 99, 235, 0) 0%, rgba(37, 99, 235, 0.50) 25%, rgba(6, 182, 212, 0.65) 55%, rgba(16, 185, 129, 0.45) 80%, rgba(37, 99, 235, 0) 100%);
-      animation: aurora-sweep 14s ease-in-out infinite alternate;
-    }
-    .aurora-wave-2 {
-      width: 135vw;
-      height: 42vh;
-      bottom: 5%;
-      left: -15vw;
-      background: linear-gradient(75deg, rgba(99, 102, 241, 0) 0%, rgba(99, 102, 241, 0.50) 25%, rgba(6, 182, 212, 0.60) 55%, rgba(37, 99, 235, 0.45) 85%, rgba(99, 102, 241, 0) 100%);
-      animation: aurora-sweep-reverse 16s ease-in-out infinite alternate;
-      animation-delay: -6s;
+    /* Orb 4: Energetic Emerald floating along top */
+    .aurora-orb-4 {
+      width: min(560px, 90vw);
+      height: min(560px, 90vw);
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.62) 0%, rgba(16, 185, 129, 0.32) 46%, transparent 74%);
+      top: 2%;
+      right: 8%;
+      animation: aurora-drift-4 12s ease-in-out infinite alternate;
     }
 
-    /* Hardware-Accelerated 60fps Keyframe Animations */
-    @keyframes orb-cyan-drift {
+    @keyframes aurora-drift-1 {
       0% {
         transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-        opacity: 0.55;
+        opacity: 0.9;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(0deg);
       }
       50% {
-        transform: translate3d(-70px, 80px, 0) scale(1.22) rotate(14deg);
-        opacity: 0.85;
+        transform: translate3d(120px, 90px, 0) scale(1.2) rotate(15deg);
+        opacity: 1;
+        filter: blur(38px) saturate(1.8) brightness(1.2) hue-rotate(24deg);
       }
       100% {
-        transform: translate3d(45px, 120px, 0) scale(0.95) rotate(-10deg);
-        opacity: 0.60;
+        transform: translate3d(-60px, 130px, 0) scale(0.92) rotate(-10deg);
+        opacity: 0.9;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(-18deg);
       }
     }
-    @keyframes orb-blue-orbit {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        opacity: 0.50;
-      }
-      25% {
-        transform: translate3d(80px, 60px, 0) scale(1.18);
-        opacity: 0.75;
-      }
-      50% {
-        transform: translate3d(120px, 0, 0) scale(1.05);
-        opacity: 0.55;
-      }
-      75% {
-        transform: translate3d(60px, -70px, 0) scale(1.15);
-        opacity: 0.70;
-      }
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
-        opacity: 0.50;
-      }
-    }
-    @keyframes orb-indigo-counter {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        opacity: 0.45;
-      }
-      25% {
-        transform: translate3d(-70px, -50px, 0) scale(1.15);
-        opacity: 0.68;
-      }
-      50% {
-        transform: translate3d(-110px, 20px, 0) scale(0.92);
-        opacity: 0.50;
-      }
-      75% {
-        transform: translate3d(-40px, 80px, 0) scale(1.20);
-        opacity: 0.65;
-      }
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
-        opacity: 0.45;
-      }
-    }
-    @keyframes orb-emerald-pulse {
+    @keyframes aurora-drift-2 {
       0% {
         transform: translate3d(0, 0, 0) scale(0.92);
-        opacity: 0.35;
+        opacity: 0.85;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(0deg);
       }
       50% {
-        transform: translate3d(-40px, -35px, 0) scale(1.25);
-        opacity: 0.60;
+        transform: translate3d(-110px, -70px, 0) scale(1.22);
+        opacity: 1;
+        filter: blur(38px) saturate(1.9) brightness(1.2) hue-rotate(-28deg);
       }
       100% {
-        transform: translate3d(30px, 25px, 0) scale(1.0);
-        opacity: 0.40;
+        transform: translate3d(60px, -110px, 0) scale(1.05);
+        opacity: 0.9;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(20deg);
       }
     }
-    @keyframes aurora-sweep {
+    @keyframes aurora-drift-3 {
       0% {
-        transform: translate3d(-6%, -25px, 0) rotate(-6deg) scale(1);
-        opacity: 0.50;
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 0.8;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(0deg);
       }
       50% {
-        transform: translate3d(6%, 30px, 0) rotate(5deg) scale(1.18);
-        opacity: 0.80;
+        transform: translate3d(-80px, 80px, 0) scale(1.15) rotate(20deg);
+        opacity: 1;
+        filter: blur(38px) saturate(1.9) brightness(1.2) hue-rotate(30deg);
       }
       100% {
-        transform: translate3d(-3%, -12px, 0) rotate(-2deg) scale(1.05);
-        opacity: 0.60;
+        transform: translate3d(90px, -50px, 0) scale(0.88) rotate(-15deg);
+        opacity: 0.85;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(-24deg);
       }
     }
-    @keyframes aurora-sweep-reverse {
+    @keyframes aurora-drift-4 {
       0% {
-        transform: translate3d(6%, 25px, 0) rotate(5deg) scale(1.05);
-        opacity: 0.45;
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.8;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(0deg);
       }
       50% {
-        transform: translate3d(-7%, -35px, 0) rotate(-6deg) scale(1.22);
-        opacity: 0.75;
+        transform: translate3d(-60px, 60px, 0) scale(1.22);
+        opacity: 1;
+        filter: blur(38px) saturate(1.9) brightness(1.2) hue-rotate(-26deg);
       }
       100% {
-        transform: translate3d(3%, 15px, 0) rotate(3deg) scale(0.95);
-        opacity: 0.55;
+        transform: translate3d(50px, 70px, 0) scale(0.95);
+        opacity: 0.85;
+        filter: blur(38px) saturate(1.6) brightness(1.1) hue-rotate(22deg);
       }
     }
-    /* Video Invert & Screen Blend */
-    .cinematic-bg-video {
-      filter: invert(1) hue-rotate(180deg) contrast(1.6) brightness(1.25);
+
+    /* Unmistakable color-cycling aurora band sweeping behind the hero.
+       A large rotating conic gradient + a drifting linear sheen make the
+       motion obvious even at a glance, while staying GPU-composited. */
+    .aurora-band {
+      position: absolute;
+      left: -25%;
+      top: -25%;
+      width: 150%;
+      height: 150%;
+      pointer-events: none;
       mix-blend-mode: screen;
-      opacity: 0.65;
-      transition: opacity 600ms ease;
+      will-change: transform, filter;
+      background:
+        radial-gradient(closest-side, rgba(56, 189, 248, 0.34), transparent 70%),
+        conic-gradient(from 0deg,
+          rgba(37, 99, 235, 0.00) 0deg,
+          rgba(59, 130, 246, 0.55) 60deg,
+          rgba(34, 211, 238, 0.55) 130deg,
+          rgba(129, 140, 248, 0.50) 200deg,
+          rgba(52, 211, 153, 0.45) 270deg,
+          rgba(37, 99, 235, 0.00) 360deg);
+      filter: blur(30px) saturate(1.4);
+      opacity: 0.85;
+      animation: aurora-band-spin 22s linear infinite;
+    }
+    @keyframes aurora-band-spin {
+      0%   { transform: rotate(0deg) scale(1);    filter: blur(30px) saturate(1.4) hue-rotate(0deg); }
+      50%  { transform: rotate(180deg) scale(1.12); filter: blur(30px) saturate(1.7) hue-rotate(40deg); }
+      100% { transform: rotate(360deg) scale(1);   filter: blur(30px) saturate(1.4) hue-rotate(0deg); }
+    }
+
+    /* Cybernetic Grid & Scanning Light Beam */
+    .cyber-grid {
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at 50% 50%, black 45%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 45%, transparent 85%);
+      pointer-events: none;
+    }
+    .scan-beam {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.25) 20%, rgba(56, 189, 248, 0.9) 50%, rgba(56, 189, 248, 0.25) 80%, transparent 100%);
+      box-shadow: 0 0 15px #38bdf8, 0 0 30px rgba(56, 189, 248, 0.4);
+      animation: scan-sweep 8s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes scan-sweep {
+      0% {
+        top: -2%;
+        opacity: 0;
+      }
+      8% {
+        opacity: 0.8;
+      }
+      92% {
+        opacity: 0.8;
+      }
+      100% {
+        top: 102%;
+        opacity: 0;
+      }
     }
 
     /* Hero Cinematic Reveal on Load */
@@ -389,14 +391,21 @@
       height: 24px;
       cursor: pointer;
     }
-    /* High Contrast Video Scrim Vignette (balances background glow so text is WCAG AAA) */
-    .thine-vignette {
-      background: radial-gradient(circle at 50% 45%, rgba(6, 8, 13, 0.15) 0%, rgba(6, 8, 13, 0.45) 55%, rgba(6, 8, 13, 0.75) 100%);
+    /* Subtle Outer Vignette that ONLY dims extreme edges, NOT the center */
+    .edge-vignette {
+      background: radial-gradient(ellipse at 50% 50%, transparent 58%, rgba(7, 9, 14, 0.28) 82%, rgba(7, 9, 14, 0.55) 100%);
       pointer-events: none;
     }
-    @media (max-width: 767px) {
-      .thine-vignette {
-        background: radial-gradient(circle at 50% 45%, rgba(6, 8, 13, 0.18) 0%, rgba(6, 8, 13, 0.50) 55%, rgba(6, 8, 13, 0.78) 100%);
+
+    /* Accessibility: honor prefers-reduced-motion by freezing the
+       continuous ambient motion. One-shot load reveals are exempted
+       so content never stays hidden. */
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-orb-1, .aurora-orb-2, .aurora-orb-3, .aurora-orb-4,
+      .aurora-band,
+      .scan-beam,
+      .float-slow, .float-slow-reverse, .float-slow-delay {
+        animation-play-state: paused !important;
       }
     }
     /* Upscayl Comparison Slider Styling */
@@ -604,23 +613,27 @@
     </div>
   </header>
 
-  <!-- Crisp Dynamic Ambient Aurora Background (Guaranteed 60fps & Ambient Luminous Mesh) -->
-  <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
-    <!-- 1. Ambient Luminous Mesh Breathing Gradient Orbs & Kinetic Waves (CSS Keyframe Driven) -->
-    <div class="ambient-mesh-container">
-      <div class="ambient-mesh-orb orb-cyan"></div>
-      <div class="ambient-mesh-orb orb-primary"></div>
-      <div class="ambient-mesh-orb orb-indigo"></div>
-      <div class="ambient-mesh-orb orb-accent"></div>
-      <div class="aurora-wave-band aurora-wave-1"></div>
-      <div class="aurora-wave-band aurora-wave-2"></div>
+  <!-- Vivid Kinetic Glowing Aurora & Constellation Background (60fps GPU Composited) -->
+  <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden bg-[#07090e]" aria-hidden="true">
+    <!-- 1. Ambient Moving Aurora Orbs -->
+    <div class="aurora-container absolute inset-0">
+      <div class="aurora-band"></div>
+      <div class="aurora-orb aurora-orb-1"></div>
+      <div class="aurora-orb aurora-orb-2"></div>
+      <div class="aurora-orb aurora-orb-3"></div>
+      <div class="aurora-orb aurora-orb-4"></div>
     </div>
 
-    <!-- 2. High-Contrast Cinematic Scrim Vignette (balances background glow so text is WCAG AAA) -->
-    <div class="absolute inset-0 thine-vignette"></div>
+    <!-- 2. Cybernetic Grid with Scanning Light Beam -->
+    <div class="cyber-grid absolute inset-0">
+      <div class="scan-beam"></div>
+    </div>
 
-    <!-- 3. Guaranteed 60fps Generative Canvas Node Engine (Touch/Mouse/Scroll Kinetic) - On top of vignette for razor-sharp particle contrast -->
+    <!-- 3. Kinetic Canvas with Glowing Constellation & Traveling Data Packets -->
     <canvas id="particleCanvas" class="absolute inset-0 w-full h-full"></canvas>
+
+    <!-- 4. Subtle Outer Vignette that ONLY dims the extreme edges, NOT the center -->
+    <div class="edge-vignette absolute inset-0"></div>
   </div>
 
   <!-- ======================================================== -->
@@ -2041,6 +2054,9 @@
     // 2. GUARANTEED 60FPS HIGH-VISIBILITY KINETIC DATA STREAM & AURORA ENGINE
     // ==========================================
     const canvas = document.getElementById('particleCanvas');
+    // Respect prefers-reduced-motion: draw one static constellation frame, no loop.
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let reducedMotion = reducedMotionQuery.matches;
     if (canvas) {
       const ctx = canvas.getContext('2d');
       let particles = [];
@@ -2067,11 +2083,11 @@
       }
 
       const archetypes = [
-        { core: '#ffffff', glow: 'rgba(103, 232, 249, 0.90)', halo: 'rgba(6, 182, 212, 0.28)' },
-        { core: '#67e8f9', glow: 'rgba(34, 211, 238, 0.85)', halo: 'rgba(14, 165, 233, 0.25)' },
-        { core: '#93c5fd', glow: 'rgba(59, 130, 246, 0.80)', halo: 'rgba(37, 99, 235, 0.22)' },
-        { core: '#a5b4fc', glow: 'rgba(99, 102, 241, 0.75)', halo: 'rgba(79, 70, 229, 0.20)' },
-        { core: '#34d399', glow: 'rgba(16, 185, 129, 0.80)', halo: 'rgba(5, 150, 105, 0.22)' }
+        { core: '#ffffff', glow: 'rgba(56, 189, 248, 0.95)', halo: 'rgba(56, 189, 248, 0.35)' },
+        { core: '#38bdf8', glow: 'rgba(56, 189, 248, 0.90)', halo: 'rgba(14, 165, 233, 0.30)' },
+        { core: '#60a5fa', glow: 'rgba(96, 165, 250, 0.85)', halo: 'rgba(37, 99, 235, 0.28)' },
+        { core: '#818cf8', glow: 'rgba(129, 140, 248, 0.85)', halo: 'rgba(79, 70, 229, 0.25)' },
+        { core: '#34d399', glow: 'rgba(52, 211, 153, 0.90)', halo: 'rgba(16, 185, 129, 0.28)' }
       ];
 
       function initParticles() {
@@ -2081,10 +2097,10 @@
         rings = [];
         trails = [];
         const isMobile = width < 768;
-        const count = isMobile ? Math.floor(width / 18) + 14 : Math.floor(Math.min(width, 1600) / 18) + 24;
+        const count = isMobile ? Math.floor(width / 20) + 16 : Math.floor(Math.min(width, 1600) / 20) + 26;
 
         for (let i = 0; i < count; i++) {
-          const isHub = Math.random() < 0.18;
+          const isHub = Math.random() < 0.20;
           const arch = isHub ? archetypes[0] : archetypes[Math.floor(Math.random() * (archetypes.length - 1)) + 1];
           const speed = (Math.random() * 0.45 + 0.35) * (isMobile ? 0.85 : 1.0);
           const angle = Math.random() * Math.PI * 2;
@@ -2098,14 +2114,14 @@
             vy: vy,
             baseVx: vx,
             baseVy: vy,
-            radius: isHub ? (Math.random() * 1.5 + 4.2) : (Math.random() * 1.2 + 2.4),
+            radius: isHub ? (Math.random() * 1.5 + 4.0) : (Math.random() * 1.5 + 2.0),
             isHub: isHub,
             coreColor: arch.core,
             glowColor: arch.glow,
             haloColor: arch.halo,
-            alpha: Math.random() * 0.25 + 0.72,
+            alpha: Math.random() * 0.20 + 0.80,
             pulsePhase: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.02 + 0.03
+            pulseSpeed: Math.random() * 0.025 + 0.03
           });
         }
       }
@@ -2127,7 +2143,7 @@
             vy: (Math.random() - 0.5) * 1.6,
             size: Math.random() * 2.2 + 1.2,
             alpha: 0.95,
-            color: Math.random() < 0.5 ? '#67e8f9' : '#ffffff'
+            color: Math.random() < 0.5 ? '#38bdf8' : '#ffffff'
           });
         }
       }
@@ -2145,7 +2161,7 @@
           maxRadius: isMobile ? 120 : 170,
           speed: 4.2,
           alpha: 0.95,
-          color: 'rgba(103, 232, 249, '
+          color: 'rgba(56, 189, 248, '
         });
         rings.push({
           x: clientX,
@@ -2154,7 +2170,7 @@
           maxRadius: isMobile ? 80 : 110,
           speed: 2.8,
           alpha: 0.70,
-          color: 'rgba(56, 189, 248, '
+          color: 'rgba(52, 211, 153, '
         });
 
         // Kinetic impulse push and outward data beams
@@ -2200,19 +2216,20 @@
       function animateCanvas(timestamp) {
         ctx.clearRect(0, 0, width, height);
 
-        // 1. Hub Radar Pulse Rings (every ~2.5 seconds)
-        if (timestamp - lastRingTime > 2400) {
+        // 1. Hub Sonar Radar Pulse Rings (every ~2.2 seconds)
+        if (timestamp - lastRingTime > 2200) {
           const hubs = particles.filter(p => p.isHub);
-          if (hubs.length > 0) {
-            const h = hubs[Math.floor(Math.random() * hubs.length)];
+          const targetNodes = hubs.length > 0 ? hubs : particles;
+          if (targetNodes.length > 0) {
+            const h = targetNodes[Math.floor(Math.random() * targetNodes.length)];
             rings.push({
               x: h.x,
               y: h.y,
               radius: h.radius + 2,
-              maxRadius: width < 768 ? 95 : 135,
-              speed: 1.8,
-              alpha: 0.85,
-              color: 'rgba(34, 211, 238, '
+              maxRadius: width < 768 ? 105 : 155,
+              speed: 2.0,
+              alpha: 0.90,
+              color: Math.random() < 0.35 ? 'rgba(52, 211, 153, ' : 'rgba(56, 189, 248, '
             });
           }
           lastRingTime = timestamp;
@@ -2233,7 +2250,7 @@
           ctx.beginPath();
           ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
           ctx.strokeStyle = r.color + currentAlpha + ')';
-          ctx.lineWidth = 1.4;
+          ctx.lineWidth = 1.5;
           ctx.stroke();
         }
 
@@ -2274,9 +2291,9 @@
         }
 
         const maxDist = width < 768 ? 135 : 175;
-        const maxPackets = width < 768 ? 16 : 28;
+        const maxPackets = width < 768 ? 24 : 42;
 
-        // 4. Constellation Lines & Data Packet Spawning
+        // 4. Constellation Lines & Data Packet Spawning (Crisp 0.35-0.55 opacity)
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const p1 = particles[i];
@@ -2287,17 +2304,17 @@
 
             if (dist < maxDist) {
               const alphaRatio = 1 - dist / maxDist;
-              const lineAlpha = Math.min(0.75, Math.max(0.18, alphaRatio * 0.75));
+              const lineAlpha = (0.35 + alphaRatio * 0.20).toFixed(2);
 
               ctx.beginPath();
               ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
               ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha})`;
-              ctx.lineWidth = dist < 75 ? 1.4 : 1.1;
+              ctx.lineWidth = dist < 75 ? 1.5 : 1.2;
               ctx.stroke();
 
               // Spawn traveling data packets along lines
-              if (packets.length < maxPackets && Math.random() < 0.014) {
+              if (packets.length < maxPackets && Math.random() < 0.028) {
                 const forward = Math.random() < 0.5;
                 packets.push({
                   fromX: forward ? p1.x : p2.x,
@@ -2305,9 +2322,33 @@
                   toX: forward ? p2.x : p1.x,
                   toY: forward ? p2.y : p1.y,
                   progress: 0,
-                  speed: Math.random() * 0.022 + 0.016,
-                  beamLength: Math.min(dist * 0.35, 16)
+                  speed: Math.random() * 0.024 + 0.016,
+                  beamLength: Math.min(dist * 0.38, 18)
                 });
+              }
+            }
+          }
+        }
+
+        // Baseline active data stream packets
+        if (packets.length < (width < 768 ? 8 : 15) && particles.length >= 2) {
+          for (let i = 0; i < particles.length && packets.length < (width < 768 ? 8 : 15); i++) {
+            const p1 = particles[i];
+            for (let j = i + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+              if (dist < maxDist && Math.random() < 0.35) {
+                const forward = Math.random() < 0.5;
+                packets.push({
+                  fromX: forward ? p1.x : p2.x,
+                  fromY: forward ? p1.y : p2.y,
+                  toX: forward ? p2.x : p1.x,
+                  toY: forward ? p2.y : p1.y,
+                  progress: 0,
+                  speed: Math.random() * 0.024 + 0.016,
+                  beamLength: Math.min(dist * 0.38, 18)
+                });
+                break;
               }
             }
           }
@@ -2335,22 +2376,22 @@
           // Glowing laser tail
           const grad = ctx.createLinearGradient(tx, ty, hx, hy);
           grad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-          grad.addColorStop(0.5, 'rgba(103, 232, 249, 0.65)');
-          grad.addColorStop(1, 'rgba(255, 255, 255, 0.95)');
+          grad.addColorStop(0.4, 'rgba(56, 189, 248, 0.75)');
+          grad.addColorStop(1, 'rgba(255, 255, 255, 1)');
 
           ctx.beginPath();
           ctx.moveTo(tx, ty);
           ctx.lineTo(hx, hy);
           ctx.strokeStyle = grad;
-          ctx.lineWidth = 2.2;
+          ctx.lineWidth = 2.4;
           ctx.stroke();
 
           // Radiant photon core
           ctx.beginPath();
-          ctx.arc(hx, hy, 2.5, 0, Math.PI * 2);
+          ctx.arc(hx, hy, 2.8, 0, Math.PI * 2);
           ctx.fillStyle = '#ffffff';
-          ctx.shadowColor = '#67e8f9';
-          ctx.shadowBlur = 10;
+          ctx.shadowColor = '#38bdf8';
+          ctx.shadowBlur = 12;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
@@ -2371,13 +2412,13 @@
 
           // Breathing pulsation
           p.pulsePhase += p.pulseSpeed;
-          const currentAlpha = Math.min(1, Math.max(0.65, p.alpha + Math.sin(p.pulsePhase) * 0.22));
+          const currentAlpha = Math.min(1, Math.max(0.70, p.alpha + Math.sin(p.pulsePhase) * 0.22));
 
           // 1. Soft radial halo
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius * 2.8, 0, Math.PI * 2);
           ctx.fillStyle = p.haloColor;
-          ctx.globalAlpha = currentAlpha * 0.65;
+          ctx.globalAlpha = currentAlpha * 0.70;
           ctx.fill();
 
           // 2. High-glow body
@@ -2386,23 +2427,23 @@
           ctx.fillStyle = p.coreColor;
           ctx.globalAlpha = currentAlpha;
           ctx.shadowColor = p.glowColor;
-          ctx.shadowBlur = p.isHub ? 15 : 8;
+          ctx.shadowBlur = p.isHub ? 16 : 9;
           ctx.fill();
 
           // 3. Stellar white core center
           ctx.beginPath();
           ctx.arc(p.x, p.y, Math.max(1, p.radius * 0.45), 0, Math.PI * 2);
           ctx.fillStyle = '#ffffff';
-          ctx.globalAlpha = Math.min(1, currentAlpha + 0.25);
+          ctx.globalAlpha = Math.min(1, currentAlpha + 0.30);
           ctx.shadowBlur = 0;
           ctx.fill();
 
           // 4. Hub orbital ring
           if (p.isHub) {
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius + 3.8, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(103, 232, 249, ${currentAlpha * 0.85})`;
-            ctx.lineWidth = 1.3;
+            ctx.arc(p.x, p.y, p.radius + 4.0, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${currentAlpha * 0.88})`;
+            ctx.lineWidth = 1.4;
             ctx.stroke();
           }
         }
@@ -2410,7 +2451,9 @@
         ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
 
-        animId = requestAnimationFrame(animateCanvas);
+        if (!reducedMotion) {
+          animId = requestAnimationFrame(animateCanvas);
+        }
       }
 
       // Visibility change handler: pause when tab is backgrounded
@@ -2426,6 +2469,19 @@
       window.addEventListener('resize', () => {
         initParticles();
       }, { passive: true });
+
+      // React to OS-level reduced-motion changes without reload
+      const onReducedMotionChange = (e) => {
+        reducedMotion = e.matches;
+        if (animId) { cancelAnimationFrame(animId); animId = null; }
+        // Redraw one frame either way; loop restarts only when motion allowed
+        animId = requestAnimationFrame(animateCanvas);
+      };
+      if (reducedMotionQuery.addEventListener) {
+        reducedMotionQuery.addEventListener('change', onReducedMotionChange);
+      } else if (reducedMotionQuery.addListener) {
+        reducedMotionQuery.addListener(onReducedMotionChange);
+      }
 
       initParticles();
       animId = requestAnimationFrame(animateCanvas);
