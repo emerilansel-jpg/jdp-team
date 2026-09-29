@@ -96,6 +96,41 @@
     .bg-mesh-glow {
       background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.07) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
     }
+    /* Hero ambient motion blobs (hero-only, GPU transform/opacity only) */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      will-change: transform;
+      z-index: 0;
+    }
+    .hero-blob-a {
+      width: 560px; height: 560px;
+      top: -180px; left: -140px;
+      background: radial-gradient(circle, rgba(29, 78, 216, 0.16), rgba(29, 78, 216, 0) 70%);
+      animation: heroDrift 22s ease-in-out infinite alternate;
+    }
+    .hero-blob-b {
+      width: 480px; height: 480px;
+      top: -120px; right: -160px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.13), rgba(16, 185, 129, 0) 70%);
+      animation: heroDrift 26s ease-in-out infinite alternate-reverse;
+    }
+    .hero-blob-c {
+      width: 420px; height: 420px;
+      bottom: -200px; left: 30%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.10), rgba(59, 130, 246, 0) 70%);
+      animation: heroDrift 30s ease-in-out infinite alternate;
+    }
+    @keyframes heroDrift {
+      0%   { transform: translate3d(0, 0, 0) scale(1); }
+      50%  { transform: translate3d(40px, -30px, 0) scale(1.06); }
+      100% { transform: translate3d(-36px, 28px, 0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-blob { animation: none; }
+    }
     .card-clean {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -232,6 +267,9 @@
 
   <!-- Hero Section -->
   <section id="heroSection" class="relative flex flex-col justify-center pt-16 pb-16 md:pt-24 md:pb-28 overflow-hidden bg-mesh-glow border-b border-slate-200">
+    <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-c" aria-hidden="true"></div>
     <div class="hero-mouse-aura" id="heroMouseAura"></div>
     <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
 
@@ -273,103 +311,38 @@
         <span class="text-slate-300">•</span>
         <span><strong class="text-slate-900">$5/hr</strong> Senior</span>
         <span class="text-slate-300">•</span>
-        <span><strong class="text-slate-900">24–48h</strong> Turnaround</span>
+        <span><strong class="text-slate-900">QA'd</strong> Turnaround</span>
         <span class="text-slate-300">•</span>
-        <span><strong class="text-slate-900">76%</strong> Net Margin</span>
+        <span><strong class="text-slate-900">4.2/5</strong> TrustScore</span>
       </div>
     </div>
   </section>
 
-  <!-- Infinite Smooth Ticker / Marquee for Tools & Platforms -->
-  <section class="py-5 bg-slate-950 border-b border-slate-800 overflow-hidden reveal-on-scroll" aria-label="Supported Platforms and Tools">
-    <div class="max-w-7xl mx-auto px-4 mb-2 text-xs text-slate-400">
-      <span class="font-bold uppercase tracking-wider text-[11px] text-slate-400">Your daily stack, handled:</span>
+  <!-- Verified Trust Bar (all items externally verifiable) -->
+  <section class="py-6 bg-white border-b border-slate-200 overflow-hidden reveal-on-scroll" aria-label="Verified credentials">
+    <div class="max-w-7xl mx-auto px-4 mb-3 text-xs text-slate-500">
+      <span class="font-bold uppercase tracking-wider text-[11px] text-slate-500">Verified credentials:</span>
     </div>
-    <div class="marquee-wrapper">
-      <div class="marquee-track py-2">
-        <!-- Set 1 -->
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Slack
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-purple-400"></span> ClickUp
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-slate-300"></span> Notion
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-400"></span> WordPress
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-orange-400"></span> Ahrefs
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-amber-400"></span> Semrush
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-orange-500"></span> HubSpot
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-500"></span> Google Analytics
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Legiit Certified
-        </div>
-        <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-amber-500/40 text-amber-300 text-xs font-semibold whitespace-nowrap shadow-xs hover:border-amber-400 transition" title="Winner: Best SEO Content Writing Service 2026 — South-South Awards">
-          <span class="w-2 h-2 rounded-full bg-amber-400"></span> South-South Awards 2026 Winner
-        </a>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-sky-400"></span> EIN Presswire
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Stripe
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-600"></span> PayPal
-        </div>
-
-        <!-- Set 2 (Identical for seamless infinite loop) -->
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Slack
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-purple-400"></span> ClickUp
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-slate-300"></span> Notion
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-400"></span> WordPress
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-orange-400"></span> Ahrefs
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-amber-400"></span> Semrush
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-orange-500"></span> HubSpot
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-500"></span> Google Analytics
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Legiit Certified
-        </div>
-        <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-amber-500/40 text-amber-300 text-xs font-semibold whitespace-nowrap shadow-xs hover:border-amber-400 transition" title="Winner: Best SEO Content Writing Service 2026 — South-South Awards">
-          <span class="w-2 h-2 rounded-full bg-amber-400"></span> South-South Awards 2026 Winner
-        </a>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-sky-400"></span> EIN Presswire
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Stripe
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-200 text-xs font-semibold whitespace-nowrap shadow-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-600"></span> PayPal
-        </div>
+    <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+      <a href="https://www.trustpilot.com/review/jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold whitespace-nowrap shadow-xs hover:border-brand-300 hover:text-brand-700 transition" title="JetDigitalPro on Trustpilot">
+        <span class="text-emerald-500">&#9733;&#9733;&#9733;&#9733;</span><span class="text-slate-300">&#9733;</span> TrustScore 4.2 / 5
+      </a>
+      <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-amber-300 text-amber-700 text-xs font-semibold whitespace-nowrap shadow-xs hover:border-amber-400 transition" title="Winner: Best SEO Content Writing Service 2026 - South-South Awards">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span> Winner 2026 &middot; South-South Awards
+      </a>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold whitespace-nowrap shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-orange-500"></span> HubSpot Certified
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold whitespace-nowrap shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-blue-500"></span> Google Certified
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold whitespace-nowrap shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Legiit Certified
       </div>
     </div>
+    <p class="max-w-7xl mx-auto px-4 mt-3 text-[11px] text-slate-400 text-center">
+      Trustpilot &amp; award links open the live external profiles.
+    </p>
   </section>
 
   <!-- Proof Stat Band (real case-study numbers) -->
@@ -385,16 +358,16 @@
 
         <div class="flex flex-wrap justify-center gap-x-10 gap-y-6 text-center">
           <div>
-            <div class="text-2xl sm:text-3xl font-black text-brand-600">+$<span data-counter="2011">2,011</span>/mo</div>
-            <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">SEO Retainer Margin</div>
+            <div class="text-2xl sm:text-3xl font-black text-brand-600"><span data-counter="10">10</span>K+</div>
+            <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Organic Visitors in a Year</div>
           </div>
           <div>
             <div class="text-2xl sm:text-3xl font-black text-emerald-600"><span data-counter="86.95" data-decimals="2">86.95</span>%</div>
             <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Coverage Rate</div>
           </div>
           <div>
-            <div class="text-2xl sm:text-3xl font-black text-slate-900">+$<span data-counter="16200">16,200</span>/yr</div>
-            <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">VA Pod Savings</div>
+            <div class="text-2xl sm:text-3xl font-black text-slate-900">Winner 2026</div>
+            <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Best SEO Content Writing</div>
           </div>
           <div>
             <div class="text-2xl sm:text-3xl font-black text-indigo-600"><span data-counter="62.11" data-decimals="2">62.11</span>%</div>
@@ -674,7 +647,7 @@
               </li>
               <li class="flex items-start gap-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
-                <span>24–48h turnaround, zero micromanagement</span>
+                <span>QA'd delivery, zero micromanagement</span>
               </li>
               <li class="flex items-start gap-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
@@ -688,7 +661,7 @@
           </div>
 
           <div class="pt-5 mt-6 sm:mt-8 border-t border-slate-100 text-xs font-mono text-emerald-800 font-semibold">
-            Outcome: 76% net margins, reliable SLAs, hands-free scaling.
+            Outcome: agency margins protected, reliable SLAs, hands-free scaling.
           </div>
         </div>
 
@@ -776,15 +749,15 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">Fresh Domain (DR 0)</span>
             </div>
             <div class="text-3xl font-black text-indigo-600 tracking-tight">
-              <span data-counter="40.0" data-suffix="%" data-decimals="1">40.0%</span>
+              <span data-counter="38.88" data-suffix="%" data-decimals="2">38.88%</span>
             </div>
-            <div class="text-xs font-semibold text-slate-900 mt-1">Keyword Capture in 45 Days</div>
+            <div class="text-xs font-semibold text-slate-900 mt-1">Keywords Ranked in 5 Weeks</div>
             <div class="flex flex-wrap items-center gap-1.5 mt-2">
-              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ DR 0 to DR 28</span>
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>DR 0 (New Domain)</span>
               <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ 6x pageviews</span>
             </div>
             <p class="text-xs text-slate-600 mt-3 leading-relaxed">
-              From DR 0: 40% of target keywords.
+              From DR 0: nearly 40% of target keywords ranked in 45 days.
             </p>
           </div>
           <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] font-medium text-slate-500">
@@ -804,7 +777,7 @@
             </div>
             <div class="text-xs font-semibold text-slate-900 mt-1">Target Terms in Top 100</div>
             <div class="flex flex-wrap items-center gap-1.5 mt-2">
-              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ +1,420 keywords</span>
+              <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>Top 100: 100 keywords</span>
               <span class="badge-ranksurge"><span class="pulse-dot-green"><span></span><span></span></span>▲ Top 100 sweep</span>
             </div>
             <p class="text-xs text-slate-600 mt-3 leading-relaxed">
@@ -1200,8 +1173,8 @@
             <!-- Verified Metrics Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
               <div class="p-3.5 rounded-xl bg-white border border-slate-200 text-center">
-                <div class="text-lg font-black text-brand-600">Level 4</div>
-                <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Legiit Certified</div>
+                <div class="text-lg font-black text-brand-600">Certified</div>
+                <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Legiit Agency</div>
               </div>
               <div class="p-3.5 rounded-xl bg-white border border-slate-200 text-center">
                 <div class="text-lg font-black text-emerald-600"><span data-counter="4.2" data-decimals="1">4.2</span> / 5.0</div>
@@ -1525,7 +1498,7 @@
             Your secret remote team. 100% white-label fulfillment pod powered by JetDigitalPro.
           </p>
           <div class="text-xs text-slate-400 pt-2">
-            Founder: Nell VH • Legiit Level 4 Certified
+            Founder: Nell VH • Legiit Certified Agency
           </div>
         </div>
 
