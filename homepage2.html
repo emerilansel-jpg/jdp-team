@@ -60,7 +60,7 @@
       padding: 0;
       overflow-x: clip;
       max-width: 100vw;
-      background-color: #07090e;
+      background-color: #0d1530; /* lifted from near-black so aurora glow is visible */
       color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
       text-rendering: optimizeLegibility;
@@ -141,8 +141,8 @@
     .aurora-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(38px) saturate(1.6) brightness(1.1);
-      mix-blend-mode: screen;
+      filter: blur(26px) saturate(1.8) brightness(1.15);
+      mix-blend-mode: normal;
       will-change: transform, opacity;
       pointer-events: none;
       transform: translateZ(0);
@@ -152,7 +152,7 @@
     .aurora-orb-1 {
       width: min(760px, 115vw);
       height: min(760px, 115vw);
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.80) 0%, rgba(37, 99, 235, 0.46) 45%, transparent 74%);
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.95) 0%, rgba(59, 130, 246, 0.82) 30%, rgba(37, 99, 235, 0.45) 52%, transparent 72%);
       top: -6%;
       left: -14%;
       animation: aurora-drift-1 14s ease-in-out infinite alternate;
@@ -161,7 +161,7 @@
     .aurora-orb-2 {
       width: min(700px, 110vw);
       height: min(700px, 110vw);
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.72) 0%, rgba(6, 182, 212, 0.40) 46%, transparent 74%);
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.95) 0%, rgba(34, 211, 238, 0.80) 30%, rgba(6, 182, 212, 0.44) 52%, transparent 72%);
       bottom: -12%;
       right: -18%;
       animation: aurora-drift-2 16s ease-in-out infinite alternate;
@@ -170,7 +170,7 @@
     .aurora-orb-3 {
       width: min(680px, 105vw);
       height: min(680px, 105vw);
-      background: radial-gradient(circle, rgba(129, 140, 248, 0.70) 0%, rgba(99, 102, 241, 0.38) 46%, transparent 74%);
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.92) 0%, rgba(139, 92, 246, 0.78) 30%, rgba(99, 102, 241, 0.42) 52%, transparent 72%);
       top: 28%;
       left: 12%;
       animation: aurora-drift-3 18s ease-in-out infinite alternate;
@@ -179,7 +179,7 @@
     .aurora-orb-4 {
       width: min(560px, 90vw);
       height: min(560px, 90vw);
-      background: radial-gradient(circle, rgba(52, 211, 153, 0.62) 0%, rgba(16, 185, 129, 0.32) 46%, transparent 74%);
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.90) 0%, rgba(16, 185, 129, 0.74) 30%, rgba(5, 150, 105, 0.40) 52%, transparent 72%);
       top: 2%;
       right: 8%;
       animation: aurora-drift-4 12s ease-in-out infinite alternate;
@@ -264,25 +264,25 @@
       width: 150%;
       height: 150%;
       pointer-events: none;
-      mix-blend-mode: screen;
+      mix-blend-mode: normal;
       will-change: transform, filter;
       background:
-        radial-gradient(closest-side, rgba(56, 189, 248, 0.34), transparent 70%),
+        radial-gradient(closest-side, rgba(56, 189, 248, 0.60), rgba(56, 189, 248, 0.22) 45%, transparent 72%),
         conic-gradient(from 0deg,
           rgba(37, 99, 235, 0.00) 0deg,
-          rgba(59, 130, 246, 0.55) 60deg,
-          rgba(34, 211, 238, 0.55) 130deg,
-          rgba(129, 140, 248, 0.50) 200deg,
-          rgba(52, 211, 153, 0.45) 270deg,
+          rgba(59, 130, 246, 0.78) 60deg,
+          rgba(34, 211, 238, 0.80) 130deg,
+          rgba(167, 139, 250, 0.74) 200deg,
+          rgba(52, 211, 153, 0.66) 270deg,
           rgba(37, 99, 235, 0.00) 360deg);
-      filter: blur(30px) saturate(1.4);
-      opacity: 0.85;
+      filter: blur(24px) saturate(1.8);
+      opacity: 1;
       animation: aurora-band-spin 22s linear infinite;
     }
     @keyframes aurora-band-spin {
-      0%   { transform: rotate(0deg) scale(1);    filter: blur(30px) saturate(1.4) hue-rotate(0deg); }
-      50%  { transform: rotate(180deg) scale(1.12); filter: blur(30px) saturate(1.7) hue-rotate(40deg); }
-      100% { transform: rotate(360deg) scale(1);   filter: blur(30px) saturate(1.4) hue-rotate(0deg); }
+      0%   { transform: rotate(0deg) scale(1);    filter: blur(24px) saturate(1.8) hue-rotate(0deg); }
+      50%  { transform: rotate(180deg) scale(1.12); filter: blur(24px) saturate(2.1) hue-rotate(40deg); }
+      100% { transform: rotate(360deg) scale(1);   filter: blur(24px) saturate(1.8) hue-rotate(0deg); }
     }
 
     /* Cybernetic Grid & Scanning Light Beam */
@@ -393,7 +393,7 @@
     }
     /* Subtle Outer Vignette that ONLY dims extreme edges, NOT the center */
     .edge-vignette {
-      background: radial-gradient(ellipse at 50% 50%, transparent 58%, rgba(7, 9, 14, 0.28) 82%, rgba(7, 9, 14, 0.55) 100%);
+      background: radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(10, 17, 40, 0.24) 84%, rgba(8, 13, 32, 0.46) 100%);
       pointer-events: none;
     }
 
@@ -614,7 +614,7 @@
   </header>
 
   <!-- Vivid Kinetic Glowing Aurora & Constellation Background (60fps GPU Composited) -->
-  <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden bg-[#07090e]" aria-hidden="true">
+  <div class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none overflow-hidden" style="background: radial-gradient(ellipse 120% 90% at 50% 0%, #12203f 0%, #0d1530 55%, #0a1128 100%);" aria-hidden="true">
     <!-- 1. Ambient Moving Aurora Orbs -->
     <div class="aurora-container absolute inset-0">
       <div class="aurora-band"></div>
@@ -665,6 +665,9 @@
           <span class="text-[11px] font-mono font-medium text-slate-500 sm:hidden">03</span>
         </button>
       </aside>
+
+      <!-- Hero text scrim: dims the glow center for readability, keeps edges vivid -->
+      <div class="absolute inset-0 z-10 pointer-events-none" style="background: radial-gradient(ellipse 62% 50% at 50% 46%, rgba(8, 12, 24, 0.55) 0%, rgba(8, 12, 24, 0.30) 55%, transparent 80%);" aria-hidden="true"></div>
 
       <!-- Content Stage Layers -->
       <div class="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
