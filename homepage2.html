@@ -408,76 +408,6 @@
         animation-play-state: paused !important;
       }
     }
-    /* Upscayl Comparison Slider Styling */
-    .comparison-slider-container {
-      position: relative;
-      width: 100%;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: pan-y;
-      background-color: #090d16;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
-      --split-pos: 50%;
-    }
-    .comparison-pane-before {
-      position: relative;
-      width: 100%;
-      background: linear-gradient(135deg, #090d16 0%, #111827 100%);
-      color: #f8fafc;
-    }
-    .comparison-pane-after {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-      color: #0f172a;
-      clip-path: inset(0 0 0 var(--split-pos));
-      -webkit-clip-path: inset(0 0 0 var(--split-pos));
-      will-change: clip-path;
-    }
-    .comparison-divider-line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: var(--split-pos);
-      width: 2.5px;
-      background: #3b82f6;
-      transform: translateX(-50%);
-      z-index: 30;
-      pointer-events: none;
-      box-shadow: 0 0 14px 2px rgba(59, 130, 246, 0.8);
-      will-change: left;
-    }
-    .comparison-drag-handle {
-      position: absolute;
-      top: 50%;
-      left: var(--split-pos);
-      transform: translate(-50%, -50%);
-      width: 44px;
-      height: 44px;
-      border-radius: 9999px;
-      background: #ffffff;
-      color: #0f172a;
-      border: 2px solid #2563eb;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: ew-resize;
-      z-index: 35;
-      transition: transform 140ms var(--ease-out);
-      will-change: left, transform;
-    }
-    .comparison-drag-handle:hover {
-      transform: translate(-50%, -50%) scale(1.08);
-    }
-    .comparison-drag-handle:active {
-      transform: translate(-50%, -50%) scale(0.96);
-    }
     /* PayPal Wallet Simulator Tags */
     .wallet-deduct-tag {
       position: absolute;
@@ -1033,96 +963,107 @@
       </div>
     </section>
 
-    <!-- 3B. THE OPERATIONAL SHIFT: UPSCAYL-STYLE BEFORE/AFTER COMPARISON SLIDER -->
+    <!-- 3B. THE OPERATIONAL SHIFT: SIDE-BY-SIDE CONTRAST COMPARISON -->
     <section id="comparison-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
       <div class="max-w-5xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-14">
           <span class="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold">The Operational Shift</span>
           <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
-            Unmanaged Freelancer Chaos vs. Autonomous JDP Pod
+            Unmanaged Freelancers vs. JDP Managed Pod
           </h2>
           <p class="text-slate-400 mt-4 text-base sm:text-lg">
-            Drag the interactive divider below to compare your old operational headaches against our turnkey white-label fulfillment engine.
+            See the difference side-by-side: your old operational headaches against our turnkey white-label pod model.
           </p>
         </div>
 
-        <!-- Upscayl Interactive Comparison Slider -->
-        <div class="comparison-slider-container rounded-3xl border border-white/10 shadow-2xl relative" style="--split-pos: 50%;">
-          <!-- Before Pane (Unmanaged Freelancer Chaos) -->
-          <div class="comparison-pane-before p-6 sm:p-10 min-h-[400px] sm:min-h-[440px] flex flex-col justify-between">
-            <div>
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-mono font-bold mb-5">
-                <span>✕</span> The Old Agency Grind (Unmanaged Freelancers)
-              </div>
-              <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">You Act As The Unpaid Full-Time PM</h3>
-              <ul class="space-y-3.5 text-xs sm:text-sm text-slate-300">
-                <li class="flex items-start gap-2.5">
-                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
-                  <span>Juggling 4-6 unreliable Upwork & Fiverr freelancers across chaotic timezones.</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
-                  <span>Constant ghosting, missed deadlines, and sudden excuse-ridden delays.</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
-                  <span>You spend 3 hours fixing grammar, broken formatting, and AI hallucinations yourself.</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
-                  <span>$45 - $85/hr US contractor rates destroy your agency net profit margins.</span>
-                </li>
-              </ul>
+        <div class="comparison-grid grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+          <!-- OLD WAY CARD: Freelancer Friction -->
+          <div class="old-way-card relative rounded-3xl p-6 sm:p-8 border border-rose-500/20 flex flex-col" style="background: rgba(30, 15, 22, 0.62); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 16px 40px rgba(0,0,0,0.35);">
+            <div class="flex items-center justify-between mb-6 border-b border-rose-500/10 pb-4">
+              <span class="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold">Old Way: Freelancer Friction</span>
+              <span class="text-[10px] font-mono px-2 py-1 rounded bg-rose-500/10 text-rose-300 border border-rose-500/20">HIGH BURNOUT</span>
             </div>
-            <div class="pt-4 border-t border-white/10 text-[11px] font-mono text-slate-500">
-              Result: 60-Hour Workweeks, Burnout & Client Churn
-            </div>
+            <ul class="space-y-5 flex-grow">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 text-[10px] font-bold">✗</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-200">5+ Separate Slack Channels</div>
+                  <div class="text-xs text-slate-500">Fragmented communication, lost context, constant micro-managing.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 text-[10px] font-bold">✗</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-200">$25 - $50 / Hour US Rates</div>
+                  <div class="text-xs text-slate-500">Unpredictable invoicing and surprise rush fees kill your margins.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 text-[10px] font-bold">✗</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-200">Ghosting Before Deadlines</div>
+                  <div class="text-xs text-slate-500">Freelancers disappear, leaving you to finish client work at 2am.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 text-[10px] font-bold">✗</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-200">0% Client-Ready Output</div>
+                  <div class="text-xs text-slate-500">You spend hours doing QA, formatting, and revisions yourself.</div>
+                </div>
+              </li>
+            </ul>
           </div>
 
-          <!-- After Pane (Autonomous JDP Pod) -->
-          <div class="comparison-pane-after p-6 sm:p-10 min-h-[400px] sm:min-h-[440px] flex flex-col justify-between">
-            <div>
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-bold mb-5">
-                <span>✓</span> The JDP System (1 Dedicated PM + Autonomous Pod)
-              </div>
-              <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4">1 Slack Channel. Turnkey White-Label Execution.</h3>
-              <ul class="space-y-3.5 text-xs sm:text-sm text-slate-700">
-                <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>1 Dedicated PM handles all staffing, scoping, and rigorous multi-stage QA.</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Reliable 12-24h turnaround with US timezone overlap and daily Slack updates.</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>100% Client-ready deliverables formatted under your agency logo and guidelines.</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Junior Staff from $3/hr, Senior Specialists $5/hr, 76% average net margin.</span>
-                </li>
-              </ul>
+          <!-- JDP WAY CARD: Managed Pod (RECOMMENDED — first on mobile) -->
+          <div class="jdp-way-card order-first md:order-none relative rounded-3xl p-6 sm:p-8 flex flex-col border border-emerald-400/30 md:scale-[1.04] md:-translate-y-2" style="background: rgba(6, 26, 20, 0.68); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.22), 0 24px 60px -12px rgba(16, 185, 129, 0.28);">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/40">Recommended</span>
+            <div class="flex items-center justify-between mb-6 border-b border-emerald-400/10 pb-4">
+              <span class="text-xs font-mono uppercase tracking-widest text-emeraldGlow-400 font-bold">JDP Way: Managed Pod</span>
+              <span class="text-[10px] font-mono px-2 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">HIGH MARGIN</span>
             </div>
-            <div class="pt-4 border-t border-slate-200 text-[11px] font-mono text-emerald-700 font-bold">
-              Result: Scalable Recurring Revenue & Zero Burnout
-            </div>
-          </div>
-
-          <!-- Divider Line & Drag Handle -->
-          <div class="comparison-divider-line"></div>
-          <div class="comparison-drag-handle" role="slider" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="5" aria-valuemax="95">
-            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l-4 3 4 3m8-6l4 3-4 3"/></svg>
+            <ul class="space-y-5 flex-grow">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-bold">✓</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-100">1 Dedicated PM in Your Slack</div>
+                  <div class="text-xs text-slate-400">Centralized command hub. Zero management required from you.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-bold">✓</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-100">Junior from $3 &amp; Senior $5 / Hour</div>
+                  <div class="text-xs text-slate-400">Fixed rates. Average 76% net margin for your agency.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-bold">✓</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-100">12-24 Hour Turnaround</div>
+                  <div class="text-xs text-slate-400">Guaranteed SLAs with US timezone overlap. Never miss a deadline.</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-bold">✓</span>
+                <div>
+                  <div class="text-sm sm:text-base font-bold text-slate-100">100% Client-Ready White-Label</div>
+                  <div class="text-xs text-slate-400">Deliverables formatted perfectly under your agency logo. Zero QA needed.</div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- Preset Buttons -->
-        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <span class="text-xs font-mono text-slate-400">Quick View:</span>
-          <button type="button" data-slider-set="20" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-300 transition">Show JDP (80%)</button>
-          <button type="button" data-slider-set="50" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-blue-600 text-white transition">50 / 50 Split</button>
-          <button type="button" data-slider-set="80" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-300 transition">Show Old (80%)</button>
+        <!-- Bottom line strip + CTA -->
+        <div class="comparison-result mt-10 rounded-2xl border border-emerald-400/20 px-6 py-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left" style="background: rgba(6, 26, 20, 0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
+          <div class="text-sm sm:text-base font-mono font-bold text-emeraldGlow-400">
+            Result: Scalable Recurring Revenue &amp; Zero Burnout
+          </div>
+          <a href="#pricing-act" class="inline-flex items-center justify-center gap-2 min-h-[44px] px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-bold transition-colors shadow-lg shadow-emerald-500/30 whitespace-nowrap">
+            Start with Credits
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5-5 5M6 12h12"></path></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -2620,87 +2561,6 @@
       setTimeout(tickSimulator, isDeleting ? 20 : 45);
     }
     if (simTextEl) tickSimulator();
-
-    // ==========================================
-    // 4. UPSCAYL-STYLE BEFORE/AFTER COMPARISON SLIDER
-    // ==========================================
-    function initComparisonSlider() {
-      const containers = document.querySelectorAll('.comparison-slider-container');
-      containers.forEach(container => {
-        const handle = container.querySelector('.comparison-drag-handle');
-        if (!handle) return;
-
-        let isDragging = false;
-
-        function setPosition(percent) {
-          const clamped = Math.min(95, Math.max(5, percent));
-          container.style.setProperty('--split-pos', `${clamped}%`);
-          handle.setAttribute('aria-valuenow', Math.round(clamped).toString());
-        }
-
-        function updateFromPointer(clientX) {
-          const rect = container.getBoundingClientRect();
-          if (rect.width <= 0) return;
-          const offsetX = clientX - rect.left;
-          const percent = (offsetX / rect.width) * 100;
-          setPosition(percent);
-        }
-
-        handle.addEventListener('pointerdown', (e) => {
-          isDragging = true;
-          handle.setPointerCapture(e.pointerId);
-          container.classList.add('is-dragging');
-          e.preventDefault();
-        });
-
-        handle.addEventListener('pointermove', (e) => {
-          if (!isDragging) return;
-          updateFromPointer(e.clientX);
-        });
-
-        function onPointerEnd(e) {
-          if (isDragging) {
-            isDragging = false;
-            container.classList.remove('is-dragging');
-            try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
-          }
-        }
-
-        handle.addEventListener('pointerup', onPointerEnd);
-        handle.addEventListener('pointercancel', onPointerEnd);
-
-        handle.addEventListener('keydown', (e) => {
-          const current = parseFloat(getComputedStyle(container).getPropertyValue('--split-pos')) || 50;
-          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-            setPosition(current - 5);
-            e.preventDefault();
-          } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-            setPosition(current + 5);
-            e.preventDefault();
-          }
-        });
-
-        const wrapper = container.closest('section') || container.parentElement;
-        if (wrapper) {
-          const presets = wrapper.querySelectorAll('[data-slider-set]');
-          presets.forEach(btn => {
-            btn.addEventListener('click', () => {
-              const targetPos = parseFloat(btn.getAttribute('data-slider-set'));
-              if (!isNaN(targetPos)) {
-                presets.forEach(b => {
-                  b.classList.remove('bg-blue-600', 'text-white');
-                  b.classList.add('bg-white/5', 'text-slate-300');
-                });
-                btn.classList.add('bg-blue-600', 'text-white');
-                btn.classList.remove('bg-white/5', 'text-slate-300');
-                setPosition(targetPos);
-              }
-            });
-          });
-        }
-      });
-    }
-    initComparisonSlider();
 
     // ==========================================
     // 5. PAYPAL-STYLE LIVE CREDIT WALLET SIMULATOR
