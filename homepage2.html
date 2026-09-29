@@ -129,122 +129,187 @@
       transform: translate3d(0, -32px, 0) scale(0.97);
     }
     /* Ambient Luminous Mesh & Kinetic Aurora Wave System */
+    .ambient-mesh-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      contain: paint layout;
+    }
     .ambient-mesh-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(65px);
-      opacity: 0.75;
+      filter: blur(60px);
       mix-blend-mode: screen;
       will-change: transform, opacity;
-      animation: ambient-glow 10s ease-in-out infinite alternate;
       pointer-events: none;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
-    .orb-primary {
-      width: min(750px, 90vw);
-      height: min(750px, 90vw);
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.70) 0%, rgba(59, 130, 246, 0.35) 45%, rgba(37, 99, 235, 0) 70%);
-      top: 5%;
-      left: 8%;
-      animation-duration: 9s;
-    }
+    /* Orb 1: Cyan #06b6d4, 60% opacity, 800px wide, pulsing & drifting */
     .orb-cyan {
-      width: min(700px, 85vw);
-      height: min(700px, 85vw);
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.70) 0%, rgba(34, 211, 238, 0.35) 45%, rgba(6, 182, 212, 0) 70%);
-      top: 30%;
-      right: 5%;
-      animation-duration: 11s;
-      animation-delay: -3s;
+      width: min(800px, 95vw);
+      height: min(800px, 95vw);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.60) 0%, rgba(34, 211, 238, 0.35) 42%, rgba(6, 182, 212, 0) 70%);
+      top: -10%;
+      right: -5%;
+      animation: orb-cyan-drift 15s ease-in-out infinite alternate;
     }
+    /* Orb 2: Royal Blue #2563eb, 55% opacity, 700px wide, orbiting clockwise */
+    .orb-primary {
+      width: min(700px, 90vw);
+      height: min(700px, 90vw);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.55) 0%, rgba(59, 130, 246, 0.30) 42%, rgba(37, 99, 235, 0) 70%);
+      top: 12%;
+      left: -8%;
+      animation: orb-blue-orbit 22s linear infinite;
+    }
+    /* Orb 3: Deep Indigo / Violet #6366f1, 50% opacity, 750px wide, counter-orbit */
     .orb-indigo {
-      width: min(650px, 80vw);
-      height: min(650px, 80vw);
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.65) 0%, rgba(139, 92, 246, 0.30) 45%, rgba(99, 102, 241, 0) 70%);
-      bottom: 10%;
+      width: min(750px, 92vw);
+      height: min(750px, 92vw);
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.50) 0%, rgba(139, 92, 246, 0.28) 45%, rgba(99, 102, 241, 0) 70%);
+      bottom: -15%;
       left: 15%;
-      animation-duration: 12s;
-      animation-delay: -6s;
+      animation: orb-indigo-counter 26s linear infinite;
     }
+    /* Orb 4: Emerald #10b981, 40% opacity, 500px wide, subtle accent pulse */
     .orb-accent {
-      width: min(500px, 65vw);
-      height: min(500px, 65vw);
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.55) 0%, rgba(5, 150, 105, 0.25) 45%, rgba(16, 185, 129, 0) 70%);
-      top: 20%;
-      right: 25%;
-      animation-duration: 8s;
-      animation-delay: -4s;
+      width: min(500px, 70vw);
+      height: min(500px, 70vw);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.40) 0%, rgba(52, 211, 153, 0.20) 40%, rgba(16, 185, 129, 0) 70%);
+      top: 38%;
+      right: 20%;
+      animation: orb-emerald-pulse 11s ease-in-out infinite alternate;
     }
+
     /* Flowing Aurora Kinetic Energy Bands */
     .aurora-wave-band {
       position: absolute;
       border-radius: 9999px;
       filter: blur(55px);
-      opacity: 0.65;
       mix-blend-mode: screen;
       will-change: transform, opacity;
       pointer-events: none;
+      transform: translateZ(0);
     }
     .aurora-wave-1 {
       width: 140vw;
-      height: 45vh;
-      top: 15%;
+      height: 48vh;
+      top: 10%;
       left: -20vw;
-      background: linear-gradient(115deg, rgba(37, 99, 235, 0) 0%, rgba(37, 99, 235, 0.6) 30%, rgba(6, 182, 212, 0.7) 60%, rgba(16, 185, 129, 0.5) 80%, rgba(37, 99, 235, 0) 100%);
-      animation: aurora-sweep 12s ease-in-out infinite alternate;
+      background: linear-gradient(115deg, rgba(37, 99, 235, 0) 0%, rgba(37, 99, 235, 0.50) 25%, rgba(6, 182, 212, 0.65) 55%, rgba(16, 185, 129, 0.45) 80%, rgba(37, 99, 235, 0) 100%);
+      animation: aurora-sweep 14s ease-in-out infinite alternate;
     }
     .aurora-wave-2 {
-      width: 130vw;
-      height: 40vh;
-      bottom: 10%;
+      width: 135vw;
+      height: 42vh;
+      bottom: 5%;
       left: -15vw;
-      background: linear-gradient(75deg, rgba(99, 102, 241, 0) 0%, rgba(99, 102, 241, 0.55) 25%, rgba(6, 182, 212, 0.65) 55%, rgba(37, 99, 235, 0.5) 85%, rgba(99, 102, 241, 0) 100%);
-      animation: aurora-sweep-reverse 14s ease-in-out infinite alternate;
-      animation-delay: -5s;
+      background: linear-gradient(75deg, rgba(99, 102, 241, 0) 0%, rgba(99, 102, 241, 0.50) 25%, rgba(6, 182, 212, 0.60) 55%, rgba(37, 99, 235, 0.45) 85%, rgba(99, 102, 241, 0) 100%);
+      animation: aurora-sweep-reverse 16s ease-in-out infinite alternate;
+      animation-delay: -6s;
     }
-    @keyframes ambient-glow {
+
+    /* Hardware-Accelerated 60fps Keyframe Animations */
+    @keyframes orb-cyan-drift {
       0% {
         transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-        opacity: 0.65;
+        opacity: 0.55;
       }
-      33% {
-        transform: translate3d(60px, -45px, 0) scale(1.2) rotate(10deg);
+      50% {
+        transform: translate3d(-70px, 80px, 0) scale(1.22) rotate(14deg);
         opacity: 0.85;
       }
-      66% {
-        transform: translate3d(-50px, 60px, 0) scale(0.9) rotate(-8deg);
+      100% {
+        transform: translate3d(45px, 120px, 0) scale(0.95) rotate(-10deg);
+        opacity: 0.60;
+      }
+    }
+    @keyframes orb-blue-orbit {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.50;
+      }
+      25% {
+        transform: translate3d(80px, 60px, 0) scale(1.18);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translate3d(120px, 0, 0) scale(1.05);
+        opacity: 0.55;
+      }
+      75% {
+        transform: translate3d(60px, -70px, 0) scale(1.15);
         opacity: 0.70;
       }
       100% {
-        transform: translate3d(40px, 35px, 0) scale(1.15) rotate(6deg);
-        opacity: 0.80;
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.50;
+      }
+    }
+    @keyframes orb-indigo-counter {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.45;
+      }
+      25% {
+        transform: translate3d(-70px, -50px, 0) scale(1.15);
+        opacity: 0.68;
+      }
+      50% {
+        transform: translate3d(-110px, 20px, 0) scale(0.92);
+        opacity: 0.50;
+      }
+      75% {
+        transform: translate3d(-40px, 80px, 0) scale(1.20);
+        opacity: 0.65;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.45;
+      }
+    }
+    @keyframes orb-emerald-pulse {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.92);
+        opacity: 0.35;
+      }
+      50% {
+        transform: translate3d(-40px, -35px, 0) scale(1.25);
+        opacity: 0.60;
+      }
+      100% {
+        transform: translate3d(30px, 25px, 0) scale(1.0);
+        opacity: 0.40;
       }
     }
     @keyframes aurora-sweep {
       0% {
-        transform: translate3d(-5%, -20px, 0) rotate(-6deg) scale(1);
-        opacity: 0.55;
+        transform: translate3d(-6%, -25px, 0) rotate(-6deg) scale(1);
+        opacity: 0.50;
       }
       50% {
-        transform: translate3d(5%, 25px, 0) rotate(4deg) scale(1.15);
+        transform: translate3d(6%, 30px, 0) rotate(5deg) scale(1.18);
         opacity: 0.80;
       }
       100% {
-        transform: translate3d(-2%, -10px, 0) rotate(-3deg) scale(1.05);
-        opacity: 0.65;
+        transform: translate3d(-3%, -12px, 0) rotate(-2deg) scale(1.05);
+        opacity: 0.60;
       }
     }
     @keyframes aurora-sweep-reverse {
       0% {
-        transform: translate3d(5%, 20px, 0) rotate(5deg) scale(1.05);
-        opacity: 0.50;
+        transform: translate3d(6%, 25px, 0) rotate(5deg) scale(1.05);
+        opacity: 0.45;
       }
       50% {
-        transform: translate3d(-6%, -30px, 0) rotate(-5deg) scale(1.2);
+        transform: translate3d(-7%, -35px, 0) rotate(-6deg) scale(1.22);
         opacity: 0.75;
       }
       100% {
-        transform: translate3d(2%, 10px, 0) rotate(2deg) scale(0.95);
-        opacity: 0.60;
+        transform: translate3d(3%, 15px, 0) rotate(3deg) scale(0.95);
+        opacity: 0.55;
       }
     }
     /* Video Invert & Screen Blend */
@@ -326,11 +391,12 @@
     }
     /* High Contrast Video Scrim Vignette (balances background glow so text is WCAG AAA) */
     .thine-vignette {
-      background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.20) 0%, rgba(7, 9, 14, 0.55) 55%, rgba(7, 9, 14, 0.85) 100%);
+      background: radial-gradient(circle at 50% 45%, rgba(6, 8, 13, 0.15) 0%, rgba(6, 8, 13, 0.45) 55%, rgba(6, 8, 13, 0.75) 100%);
+      pointer-events: none;
     }
     @media (max-width: 767px) {
       .thine-vignette {
-        background: radial-gradient(circle at 50% 45%, rgba(7, 9, 14, 0.28) 0%, rgba(7, 9, 14, 0.60) 55%, rgba(7, 9, 14, 0.88) 100%);
+        background: radial-gradient(circle at 50% 45%, rgba(6, 8, 13, 0.18) 0%, rgba(6, 8, 13, 0.50) 55%, rgba(6, 8, 13, 0.78) 100%);
       }
     }
     /* Upscayl Comparison Slider Styling */
@@ -538,28 +604,22 @@
     </div>
   </header>
 
-  <!-- Crisp Dynamic Ambient Video Background (Guaranteed 60fps & Ambient Luminous Mesh) -->
-  <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
+  <!-- Crisp Dynamic Ambient Aurora Background (Guaranteed 60fps & Ambient Luminous Mesh) -->
+  <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
     <!-- 1. Ambient Luminous Mesh Breathing Gradient Orbs & Kinetic Waves (CSS Keyframe Driven) -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      <div class="ambient-mesh-orb orb-primary"></div>
+    <div class="ambient-mesh-container">
       <div class="ambient-mesh-orb orb-cyan"></div>
+      <div class="ambient-mesh-orb orb-primary"></div>
       <div class="ambient-mesh-orb orb-indigo"></div>
       <div class="ambient-mesh-orb orb-accent"></div>
       <div class="aurora-wave-band aurora-wave-1"></div>
       <div class="aurora-wave-band aurora-wave-2"></div>
     </div>
 
-    <!-- 2. Background Video (MP4 prioritized, inverted & screen-blended for rich dark tech aesthetic) -->
-    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" class="cinematic-bg-video w-full h-full object-cover">
-      <source src="assets/video/abstract-nodes.mp4" type="video/mp4">
-      <source src="assets/video/abstract-nodes.webm" type="video/webm">
-    </video>
-
-    <!-- 3. High-Contrast Cinematic Scrim Vignette (balances background glow so text is WCAG AAA) -->
+    <!-- 2. High-Contrast Cinematic Scrim Vignette (balances background glow so text is WCAG AAA) -->
     <div class="absolute inset-0 thine-vignette"></div>
 
-    <!-- 4. Guaranteed 60fps Generative Canvas Node Engine (Touch/Mouse/Scroll Kinetic) - On top of vignette for razor-sharp particle contrast -->
+    <!-- 3. Guaranteed 60fps Generative Canvas Node Engine (Touch/Mouse/Scroll Kinetic) - On top of vignette for razor-sharp particle contrast -->
     <canvas id="particleCanvas" class="absolute inset-0 w-full h-full"></canvas>
   </div>
 
@@ -1978,52 +2038,21 @@
     updateScrollStory();
 
     // ==========================================
-    // 1B. ROBUST VIDEO AUTOPLAY & ADAPTIVE BLEND HANDLER
-    // ==========================================
-    const bgVideo = document.getElementById('bgVideo');
-    if (bgVideo) {
-      bgVideo.muted = true;
-      const onVideoSuccess = () => {
-        bgVideo.style.display = 'block';
-        bgVideo.style.opacity = '0.65';
-      };
-      const onVideoFail = () => {
-        // Fallback: gracefully hide video so CSS aurora and canvas provide pure 100% motion
-        bgVideo.style.opacity = '0';
-        const resumePlay = () => {
-          bgVideo.play().then(onVideoSuccess).catch(() => {});
-          window.removeEventListener('scroll', resumePlay);
-          window.removeEventListener('touchstart', resumePlay);
-          window.removeEventListener('click', resumePlay);
-        };
-        window.addEventListener('scroll', resumePlay, { once: true, passive: true });
-        window.addEventListener('touchstart', resumePlay, { once: true, passive: true });
-        window.addEventListener('click', resumePlay, { once: true });
-      };
-
-      const tryPlay = () => {
-        const p = bgVideo.play();
-        if (p !== undefined) {
-          p.then(onVideoSuccess).catch(onVideoFail);
-        }
-      };
-      bgVideo.addEventListener('error', onVideoFail);
-      tryPlay();
-    }
-
-    // ==========================================
-    // 2. GUARANTEED 60FPS HIGH-CONTRAST NEURAL CONSTELLATION ENGINE
+    // 2. GUARANTEED 60FPS HIGH-VISIBILITY KINETIC DATA STREAM & AURORA ENGINE
     // ==========================================
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
       let particles = [];
-      let pulses = [];
+      let packets = [];
       let rings = [];
+      let trails = [];
       let dpr = Math.min(window.devicePixelRatio || 1, 2);
       let width = window.innerWidth;
       let height = window.innerHeight;
-      let pointer = { x: -1000, y: -1000, active: false };
+      let pointer = { x: -1000, y: -1000, active: false, lastMove: 0 };
+      let lastRingTime = 0;
+      let animId = null;
 
       function resizeCanvas() {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -2031,39 +2060,52 @@
         height = window.innerHeight;
         canvas.width = Math.floor(width * dpr);
         canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
       }
 
-      const palette = [
-        { color: '#00f0ff', glow: 'rgba(0, 240, 255, 0.85)' },
-        { color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.80)' },
-        { color: '#60a5fa', glow: 'rgba(96, 165, 250, 0.75)' },
-        { color: '#818cf8', glow: 'rgba(129, 140, 248, 0.70)' },
-        { color: '#10b981', glow: 'rgba(16, 185, 129, 0.75)' },
-        { color: '#ffffff', glow: 'rgba(255, 255, 255, 0.90)' }
+      const archetypes = [
+        { core: '#ffffff', glow: 'rgba(103, 232, 249, 0.90)', halo: 'rgba(6, 182, 212, 0.28)' },
+        { core: '#67e8f9', glow: 'rgba(34, 211, 238, 0.85)', halo: 'rgba(14, 165, 233, 0.25)' },
+        { core: '#93c5fd', glow: 'rgba(59, 130, 246, 0.80)', halo: 'rgba(37, 99, 235, 0.22)' },
+        { core: '#a5b4fc', glow: 'rgba(99, 102, 241, 0.75)', halo: 'rgba(79, 70, 229, 0.20)' },
+        { core: '#34d399', glow: 'rgba(16, 185, 129, 0.80)', halo: 'rgba(5, 150, 105, 0.22)' }
       ];
 
       function initParticles() {
         resizeCanvas();
         particles = [];
-        pulses = [];
+        packets = [];
         rings = [];
+        trails = [];
         const isMobile = width < 768;
-        const count = isMobile ? Math.floor(width / 15) : Math.floor(Math.min(width, 1600) / 16);
+        const count = isMobile ? Math.floor(width / 18) + 14 : Math.floor(Math.min(width, 1600) / 18) + 24;
+
         for (let i = 0; i < count; i++) {
-          const isHub = Math.random() < 0.16;
-          const pCol = isHub ? palette[5] : palette[Math.floor(Math.random() * (palette.length - 1))];
+          const isHub = Math.random() < 0.18;
+          const arch = isHub ? archetypes[0] : archetypes[Math.floor(Math.random() * (archetypes.length - 1)) + 1];
+          const speed = (Math.random() * 0.45 + 0.35) * (isMobile ? 0.85 : 1.0);
+          const angle = Math.random() * Math.PI * 2;
+          const vx = Math.cos(angle) * speed;
+          const vy = Math.sin(angle) * speed;
+
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * (isMobile ? 0.75 : 1.1),
-            vy: (Math.random() - 0.5) * (isMobile ? 0.75 : 1.1),
-            radius: isHub ? (Math.random() * 2.0 + 3.8) : (Math.random() * 1.5 + 2.0),
+            vx: vx,
+            vy: vy,
+            baseVx: vx,
+            baseVy: vy,
+            radius: isHub ? (Math.random() * 1.5 + 4.2) : (Math.random() * 1.2 + 2.4),
             isHub: isHub,
-            color: pCol.color,
-            glow: pCol.glow,
-            alpha: Math.random() * 0.35 + 0.65,
-            pulsePhase: Math.random() * Math.PI * 2
+            coreColor: arch.core,
+            glowColor: arch.glow,
+            haloColor: arch.halo,
+            alpha: Math.random() * 0.25 + 0.72,
+            pulsePhase: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.02 + 0.03
           });
         }
       }
@@ -2074,85 +2116,167 @@
         pointer.x = clientX;
         pointer.y = clientY;
         pointer.active = true;
+        pointer.lastMove = performance.now();
+
+        // Trailing radiant star particles
+        if (trails.length < 24) {
+          trails.push({
+            x: clientX + (Math.random() - 0.5) * 10,
+            y: clientY + (Math.random() - 0.5) * 10,
+            vx: (Math.random() - 0.5) * 1.6,
+            vy: (Math.random() - 0.5) * 1.6,
+            size: Math.random() * 2.2 + 1.2,
+            alpha: 0.95,
+            color: Math.random() < 0.5 ? '#67e8f9' : '#ffffff'
+          });
+        }
+      }
+
+      function onPointerClick(e) {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const isMobile = width < 768;
+
+        // Expanding shockwave rings
+        rings.push({
+          x: clientX,
+          y: clientY,
+          radius: 4,
+          maxRadius: isMobile ? 120 : 170,
+          speed: 4.2,
+          alpha: 0.95,
+          color: 'rgba(103, 232, 249, '
+        });
+        rings.push({
+          x: clientX,
+          y: clientY,
+          radius: 1,
+          maxRadius: isMobile ? 80 : 110,
+          speed: 2.8,
+          alpha: 0.70,
+          color: 'rgba(56, 189, 248, '
+        });
+
+        // Kinetic impulse push and outward data beams
+        particles.forEach(p => {
+          const dx = p.x - clientX;
+          const dy = p.y - clientY;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 220 && dist > 0) {
+            const force = ((220 - dist) / 220) * 3.8;
+            p.vx += (dx / dist) * force;
+            p.vy += (dy / dist) * force;
+
+            if (packets.length < 32 && Math.random() < 0.45) {
+              packets.push({
+                fromX: clientX,
+                fromY: clientY,
+                toX: p.x,
+                toY: p.y,
+                progress: 0,
+                speed: Math.random() * 0.03 + 0.03,
+                beamLength: 16
+              });
+            }
+          }
+        });
       }
 
       window.addEventListener('mousemove', onPointerMove, { passive: true });
       window.addEventListener('touchmove', onPointerMove, { passive: true });
       window.addEventListener('touchend', () => { pointer.active = false; }, { passive: true });
+      window.addEventListener('click', onPointerClick, { passive: true });
+      window.addEventListener('touchstart', onPointerClick, { passive: true });
+
       window.addEventListener('scroll', () => {
-        const maxP = Math.min(particles.length, 8);
+        const maxP = Math.min(particles.length, 6);
         for (let i = 0; i < maxP; i++) {
           const idx = Math.floor(Math.random() * particles.length);
-          particles[idx].vy += (Math.random() - 0.5) * 1.2;
-          particles[idx].vx += (Math.random() - 0.5) * 0.8;
+          particles[idx].vy += (Math.random() - 0.5) * 1.0;
+          particles[idx].vx += (Math.random() - 0.5) * 0.6;
         }
       }, { passive: true });
-
-      function onPointerClick(e) {
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        rings.push({ x: clientX, y: clientY, radius: 6, maxRadius: 130, alpha: 0.95 });
-        rings.push({ x: clientX, y: clientY, radius: 1, maxRadius: 90, alpha: 0.7 });
-        particles.slice(0, 14).forEach(p => {
-          const dx = p.x - clientX;
-          const dy = p.y - clientY;
-          if (Math.hypot(dx, dy) < 220) {
-            pulses.push({
-              fromX: clientX, fromY: clientY, toX: p.x, toY: p.y, progress: 0, speed: Math.random() * 0.03 + 0.035
-            });
-          }
-        });
-      }
-      window.addEventListener('click', onPointerClick, { passive: true });
-
-      let lastRingTime = 0;
 
       function animateCanvas(timestamp) {
         ctx.clearRect(0, 0, width, height);
 
-        // 1. Periodic Hub Radar Pulse Rings
-        if (timestamp - lastRingTime > 2000) {
+        // 1. Hub Radar Pulse Rings (every ~2.5 seconds)
+        if (timestamp - lastRingTime > 2400) {
           const hubs = particles.filter(p => p.isHub);
           if (hubs.length > 0) {
             const h = hubs[Math.floor(Math.random() * hubs.length)];
-            rings.push({ x: h.x, y: h.y, radius: h.radius, maxRadius: 95, alpha: 0.85 });
+            rings.push({
+              x: h.x,
+              y: h.y,
+              radius: h.radius + 2,
+              maxRadius: width < 768 ? 95 : 135,
+              speed: 1.8,
+              alpha: 0.85,
+              color: 'rgba(34, 211, 238, '
+            });
           }
           lastRingTime = timestamp;
         }
 
-        // Draw Expanding Rings
+        // Draw Expanding Radar & Shockwave Rings
         for (let i = rings.length - 1; i >= 0; i--) {
           const r = rings[i];
-          r.radius += 1.8;
-          r.alpha *= 0.965;
-          if (r.radius >= r.maxRadius || r.alpha <= 0.02) {
+          r.radius += r.speed;
+          const progress = r.radius / r.maxRadius;
+          const currentAlpha = (1 - progress) * r.alpha;
+
+          if (progress >= 1 || currentAlpha <= 0.02) {
             rings.splice(i, 1);
             continue;
           }
-          ctx.strokeStyle = `rgba(0, 240, 255, ${r.alpha})`;
-          ctx.lineWidth = 1.6;
+
           ctx.beginPath();
           ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = r.color + currentAlpha + ')';
+          ctx.lineWidth = 1.4;
           ctx.stroke();
         }
 
-        // Pointer Gravity / Repulsion
-        if (pointer.active) {
+        // 2. Trailing Radiant Star Particles (Pointer Trails)
+        for (let i = trails.length - 1; i >= 0; i--) {
+          const t = trails[i];
+          t.x += t.vx;
+          t.y += t.vy;
+          t.alpha *= 0.92;
+          t.size *= 0.96;
+
+          if (t.alpha <= 0.03 || t.size <= 0.3) {
+            trails.splice(i, 1);
+            continue;
+          }
+
+          ctx.beginPath();
+          ctx.arc(t.x, t.y, t.size, 0, Math.PI * 2);
+          ctx.fillStyle = t.color;
+          ctx.globalAlpha = t.alpha;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // 3. Pointer Spring Physics on Nearby Nodes
+        if (pointer.active && (timestamp - pointer.lastMove < 400)) {
+          const reach = width < 768 ? 140 : 180;
           for (const p of particles) {
             const dx = pointer.x - p.x;
             const dy = pointer.y - p.y;
             const dist = Math.hypot(dx, dy);
-            if (dist < 150 && dist > 0) {
-              const force = ((150 - dist) / 150) * 0.2;
-              p.x -= (dx / dist) * force * 5;
-              p.y -= (dy / dist) * force * 5;
+            if (dist < reach && dist > 0) {
+              const force = ((reach - dist) / reach) * 0.4;
+              p.vx -= (dx / dist) * force;
+              p.vy -= (dy / dist) * force;
             }
           }
         }
 
-        const maxDist = width < 768 ? 125 : 160;
+        const maxDist = width < 768 ? 135 : 175;
+        const maxPackets = width < 768 ? 16 : 28;
 
-        // 2. Draw Constellation Links & Spawn Traveling Pulses
+        // 4. Constellation Lines & Data Packet Spawning
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const p1 = particles[i];
@@ -2162,84 +2286,149 @@
             const dist = Math.hypot(dx, dy);
 
             if (dist < maxDist) {
-              const lineAlpha = (1 - dist / maxDist) * 0.65;
-              ctx.strokeStyle = `rgba(34, 211, 238, ${lineAlpha})`;
-              ctx.lineWidth = dist < 70 ? 1.6 : 1.0;
+              const alphaRatio = 1 - dist / maxDist;
+              const lineAlpha = Math.min(0.75, Math.max(0.18, alphaRatio * 0.75));
+
               ctx.beginPath();
               ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha})`;
+              ctx.lineWidth = dist < 75 ? 1.4 : 1.1;
               ctx.stroke();
 
-              if (pulses.length < 24 && Math.random() < 0.012) {
-                pulses.push({
-                  fromX: p1.x, fromY: p1.y, toX: p2.x, toY: p2.y,
-                  progress: 0, speed: Math.random() * 0.025 + 0.02
+              // Spawn traveling data packets along lines
+              if (packets.length < maxPackets && Math.random() < 0.014) {
+                const forward = Math.random() < 0.5;
+                packets.push({
+                  fromX: forward ? p1.x : p2.x,
+                  fromY: forward ? p1.y : p2.y,
+                  toX: forward ? p2.x : p1.x,
+                  toY: forward ? p2.y : p1.y,
+                  progress: 0,
+                  speed: Math.random() * 0.022 + 0.016,
+                  beamLength: Math.min(dist * 0.35, 16)
                 });
               }
             }
           }
         }
 
-        // 3. Draw Traveling Energy Pulses
-        for (let i = pulses.length - 1; i >= 0; i--) {
-          const pulse = pulses[i];
-          pulse.progress += pulse.speed;
-          if (pulse.progress >= 1) {
-            pulses.splice(i, 1);
+        // 5. Draw Traveling Data Packets / Fiber Light Beams
+        for (let i = packets.length - 1; i >= 0; i--) {
+          const pkt = packets[i];
+          pkt.progress += pkt.speed;
+
+          if (pkt.progress >= 1) {
+            packets.splice(i, 1);
             continue;
           }
-          const curX = pulse.fromX + (pulse.toX - pulse.fromX) * pulse.progress;
-          const curY = pulse.fromY + (pulse.toY - pulse.fromY) * pulse.progress;
 
-          ctx.shadowColor = '#00f0ff';
-          ctx.shadowBlur = 14;
-          ctx.fillStyle = '#ffffff';
+          const hx = pkt.fromX + (pkt.toX - pkt.fromX) * pkt.progress;
+          const hy = pkt.fromY + (pkt.toY - pkt.fromY) * pkt.progress;
+
+          // Tail beam position
+          const totalDist = Math.hypot(pkt.toX - pkt.fromX, pkt.toY - pkt.fromY) || 1;
+          const tailStep = Math.max(0, pkt.progress - (pkt.beamLength / totalDist));
+          const tx = pkt.fromX + (pkt.toX - pkt.fromX) * tailStep;
+          const ty = pkt.fromY + (pkt.toY - pkt.fromY) * tailStep;
+
+          // Glowing laser tail
+          const grad = ctx.createLinearGradient(tx, ty, hx, hy);
+          grad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+          grad.addColorStop(0.5, 'rgba(103, 232, 249, 0.65)');
+          grad.addColorStop(1, 'rgba(255, 255, 255, 0.95)');
+
           ctx.beginPath();
-          ctx.arc(curX, curY, 3, 0, Math.PI * 2);
+          ctx.moveTo(tx, ty);
+          ctx.lineTo(hx, hy);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 2.2;
+          ctx.stroke();
+
+          // Radiant photon core
+          ctx.beginPath();
+          ctx.arc(hx, hy, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = '#67e8f9';
+          ctx.shadowBlur = 10;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
 
-        // 4. Draw Digital Neural Nodes
+        // 6. Draw High-Contrast Glowing Nodes
         for (const p of particles) {
+          // Kinetic damping towards natural drift
+          p.vx = p.vx * 0.965 + p.baseVx * 0.035;
+          p.vy = p.vy * 0.965 + p.baseVy * 0.035;
           p.x += p.vx;
           p.y += p.vy;
-          if (p.x < 0) p.x = width;
-          if (p.x > width) p.x = 0;
-          if (p.y < 0) p.y = height;
-          if (p.y > height) p.y = 0;
 
-          p.pulsePhase += 0.04;
-          const currentAlpha = p.alpha + Math.sin(p.pulsePhase) * 0.2;
+          // Screen boundaries wrap
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
 
-          ctx.shadowColor = p.glow;
-          ctx.shadowBlur = p.isHub ? 16 : 8;
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = Math.max(0.3, Math.min(1, currentAlpha));
+          // Breathing pulsation
+          p.pulsePhase += p.pulseSpeed;
+          const currentAlpha = Math.min(1, Math.max(0.65, p.alpha + Math.sin(p.pulsePhase) * 0.22));
+
+          // 1. Soft radial halo
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, p.radius * 2.8, 0, Math.PI * 2);
+          ctx.fillStyle = p.haloColor;
+          ctx.globalAlpha = currentAlpha * 0.65;
           ctx.fill();
 
+          // 2. High-glow body
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.coreColor;
+          ctx.globalAlpha = currentAlpha;
+          ctx.shadowColor = p.glowColor;
+          ctx.shadowBlur = p.isHub ? 15 : 8;
+          ctx.fill();
+
+          // 3. Stellar white core center
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, Math.max(1, p.radius * 0.45), 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.globalAlpha = Math.min(1, currentAlpha + 0.25);
+          ctx.shadowBlur = 0;
+          ctx.fill();
+
+          // 4. Hub orbital ring
           if (p.isHub) {
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.7)';
-            ctx.lineWidth = 1.4;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius + 4, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.radius + 3.8, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(103, 232, 249, ${currentAlpha * 0.85})`;
+            ctx.lineWidth = 1.3;
             ctx.stroke();
           }
         }
+
         ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
 
-        requestAnimationFrame(animateCanvas);
+        animId = requestAnimationFrame(animateCanvas);
       }
+
+      // Visibility change handler: pause when tab is backgrounded
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (animId) cancelAnimationFrame(animId);
+        } else {
+          lastRingTime = performance.now();
+          animId = requestAnimationFrame(animateCanvas);
+        }
+      });
 
       window.addEventListener('resize', () => {
         initParticles();
       }, { passive: true });
 
       initParticles();
-      requestAnimationFrame(animateCanvas);
+      animId = requestAnimationFrame(animateCanvas);
     }
 
     // ==========================================
