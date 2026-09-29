@@ -96,40 +96,65 @@
     .bg-mesh-glow {
       background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.07) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
     }
-    /* Hero ambient motion blobs (hero-only, GPU transform/opacity only) */
+    /* Vivid kinetic aurora orbs — light-theme adaptation of homepage2 engine.
+       Saturated blue/indigo/violet/cyan, hero-only, GPU transform/opacity only. */
     .hero-blob {
       position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
+      border-radius: 9999px;
+      filter: blur(64px);
       pointer-events: none;
-      will-change: transform;
+      will-change: transform, opacity;
       z-index: 0;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
-    .hero-blob-a {
-      width: 560px; height: 560px;
-      top: -180px; left: -140px;
-      background: radial-gradient(circle, rgba(29, 78, 216, 0.16), rgba(29, 78, 216, 0) 70%);
-      animation: heroDrift 22s ease-in-out infinite alternate;
+    .hero-blob-a { /* electric royal blue, top-left */
+      width: min(640px, 100vw); height: min(640px, 100vw);
+      top: -14%; left: -12%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.55) 0%, rgba(37, 99, 235, 0.38) 42%, transparent 70%);
+      animation: heroDriftA 13s ease-in-out infinite alternate;
     }
-    .hero-blob-b {
-      width: 480px; height: 480px;
-      top: -120px; right: -160px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.13), rgba(16, 185, 129, 0) 70%);
-      animation: heroDrift 26s ease-in-out infinite alternate-reverse;
+    .hero-blob-b { /* radiant cyan, bottom-right */
+      width: min(560px, 95vw); height: min(560px, 95vw);
+      bottom: -18%; right: -14%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.50) 0%, rgba(6, 182, 212, 0.34) 42%, transparent 70%);
+      animation: heroDriftB 16s ease-in-out infinite alternate;
     }
-    .hero-blob-c {
-      width: 420px; height: 420px;
-      bottom: -200px; left: 30%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.10), rgba(59, 130, 246, 0) 70%);
-      animation: heroDrift 30s ease-in-out infinite alternate;
+    .hero-blob-c { /* violet/indigo, center-left */
+      width: min(520px, 90vw); height: min(520px, 90vw);
+      top: 26%; left: 8%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.46) 0%, rgba(99, 102, 241, 0.32) 42%, transparent 70%);
+      animation: heroDriftC 19s ease-in-out infinite alternate;
     }
-    @keyframes heroDrift {
-      0%   { transform: translate3d(0, 0, 0) scale(1); }
-      50%  { transform: translate3d(40px, -30px, 0) scale(1.06); }
-      100% { transform: translate3d(-36px, 28px, 0) scale(1); }
+    .hero-blob-d { /* sky blue, top-right */
+      width: min(430px, 80vw); height: min(430px, 80vw);
+      top: -8%; right: 10%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.48) 0%, rgba(14, 165, 233, 0.32) 42%, transparent 70%);
+      animation: heroDriftD 11s ease-in-out infinite alternate;
     }
+    @keyframes heroDriftA {
+      0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+      50%  { transform: translate3d(120px, 80px, 0) scale(1.18); opacity: 1; }
+      100% { transform: translate3d(-60px, 110px, 0) scale(0.94); opacity: 0.88; }
+    }
+    @keyframes heroDriftB {
+      0%   { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0.88; }
+      50%  { transform: translate3d(-110px, -70px, 0) scale(1.16); opacity: 1; }
+      100% { transform: translate3d(70px, -100px, 0) scale(1.05); opacity: 0.9; }
+    }
+    @keyframes heroDriftC {
+      0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.85; }
+      50%  { transform: translate3d(-80px, 70px, 0) scale(1.15); opacity: 1; }
+      100% { transform: translate3d(90px, -50px, 0) scale(0.9); opacity: 0.88; }
+    }
+    @keyframes heroDriftD {
+      0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.88; }
+      50%  { transform: translate3d(-70px, 60px, 0) scale(1.2); opacity: 1; }
+      100% { transform: translate3d(55px, 75px, 0) scale(0.95); opacity: 0.86; }
+    }
+    #heroParticleCanvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
     @media (prefers-reduced-motion: reduce) {
-      .hero-blob { animation: none; }
+      .hero-blob { animation: none; opacity: 0.7; }
     }
     .card-clean {
       background: #ffffff;
@@ -270,6 +295,8 @@
     <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
     <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
     <div class="hero-blob hero-blob-c" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-d" aria-hidden="true"></div>
+    <canvas id="heroParticleCanvas" aria-hidden="true"></canvas>
     <div class="hero-mouse-aura" id="heroMouseAura"></div>
     <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
 
@@ -655,7 +682,7 @@
               </li>
               <li class="flex items-start gap-3">
                 <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
-                <span>Monthly credits — pause or cancel anytime</span>
+                <span>Top up anytime — credits never expire</span>
               </li>
             </ul>
           </div>
@@ -1031,7 +1058,7 @@
             </div>
             <div id="walletLedgerList" class="space-y-1 max-h-36 overflow-y-auto">
               <div class="py-2 text-xs text-slate-500 italic text-center">
-                Wallet ready: 110,000 credits. Click any task to simulate execution.
+                Example: you topped up the Growth Pack — 110,000 credits land in your wallet (never expire). Click any task to simulate spending.
               </div>
             </div>
           </div>
@@ -1214,10 +1241,10 @@
       <div class="text-center max-w-3xl mx-auto mb-14">
         <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Transparent Pricing</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-          Flexible Credit Packs With Guaranteed Capacity
+          Credits never expire.
         </h2>
         <p class="text-slate-600 mt-3 text-base">
-          <strong>1 Credit = $0.01.</strong> Fresh capacity every 30 days.
+          <strong>1 Credit = $0.01.</strong> Top up once. Spend on any service. Add monthly crew time if you need it.
         </p>
       </div>
 
@@ -1247,13 +1274,13 @@
             <p class="text-xs text-slate-500 mb-6">For solo founders offloading routine admin.</p>
             <div class="flex items-baseline gap-1 mb-6">
               <span class="text-4xl font-black text-slate-950">$499</span>
-              <span class="text-slate-500 text-sm">/month</span>
+              <span class="text-slate-500 text-sm">one-time</span>
             </div>
 
             <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
-                <span><strong><span data-counter="50000">50,000</span> credits</strong> per month</span>
+                <span><strong><span data-counter="50000">50,000</span> credits</strong> in your wallet</span>
               </div>
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
@@ -1269,7 +1296,7 @@
               </div>
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
-                <span>Fresh capacity every 30 days</span>
+                <span>Credits never expire — spend anytime</span>
               </div>
             </div>
           </div>
@@ -1295,13 +1322,13 @@
             <p class="text-xs text-slate-500 mb-6">Fulfillment engine for agencies with 3–10 clients.</p>
             <div class="flex items-baseline gap-1 mb-6">
               <span class="text-4xl font-black text-slate-950">$999</span>
-              <span class="text-slate-500 text-sm">/month</span>
+              <span class="text-slate-500 text-sm">one-time</span>
             </div>
 
             <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-800">
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
-                <span><strong><span data-counter="110000">110,000</span> credits</strong> (10k bonus included)</span>
+                <span><strong><span data-counter="110000">110,000</span> credits</strong> (+10k bonus included)</span>
               </div>
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
@@ -1321,7 +1348,7 @@
               </div>
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
-                <span>Guaranteed monthly bandwidth</span>
+                <span>Credits never expire — spend anytime</span>
               </div>
             </div>
           </div>
@@ -1343,13 +1370,13 @@
             <p class="text-xs text-slate-500 mb-6">Backend pod for high-volume agencies.</p>
             <div class="flex items-baseline gap-1 mb-6">
               <span class="text-4xl font-black text-slate-950">$1,899</span>
-              <span class="text-slate-500 text-sm">/month</span>
+              <span class="text-slate-500 text-sm">one-time</span>
             </div>
 
             <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
-                <span><strong><span data-counter="220000">220,000</span> credits</strong> (20k bonus included)</span>
+                <span><strong><span data-counter="220000">220,000</span> credits</strong> (+20k bonus included)</span>
               </div>
               <div class="flex items-center gap-2.5">
                 <span class="text-brand-600 font-bold">✓</span>
@@ -1377,6 +1404,35 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- Optional monthly crew time -->
+      <div class="mt-12 max-w-4xl mx-auto rounded-2xl border border-brand-200 bg-brand-50 p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+          <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-600 text-white whitespace-nowrap self-start">Optional</span>
+          <div>
+            <h3 class="text-lg font-extrabold text-slate-950">Monthly crew time — reserve hours from your wallet</h3>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+              Pick a role + a monthly credit amount — e.g. Junior VA, 10,000 credits/month ≈ 33 hours. That amount is deducted from your wallet on the same date each month (prepaid). Change or stop anytime, effective at the next deduction (give us 4 days' notice). Only unused subscription hours expire at period end — the time was reserved. Low balance? We auto top-up from your card on file (you can turn this off; the plan then pauses).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How credits work -->
+      <div class="mt-8 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+        <div class="card-clean rounded-2xl border-slate-200 p-5">
+          <div class="text-brand-600 font-black text-sm mb-1">1. Top up</div>
+          <p class="text-xs text-slate-600">Buy a credit pack. Balance rolls over forever.</p>
+        </div>
+        <div class="card-clean rounded-2xl border-slate-200 p-5">
+          <div class="text-brand-600 font-black text-sm mb-1">2. Spend</div>
+          <p class="text-xs text-slate-600">On tasks or à-la-carte services — same wallet.</p>
+        </div>
+        <div class="card-clean rounded-2xl border-slate-200 p-5">
+          <div class="text-brand-600 font-black text-sm mb-1">3. Optional crew time</div>
+          <p class="text-xs text-slate-600">Monthly crew hours are prepaid from your wallet.</p>
+        </div>
       </div>
 
       <!-- Link to full services and pricing -->
@@ -1409,7 +1465,72 @@
           </button>
           <div class="faq-grid-wrapper">
             <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-              1 Credit = $0.01. Junior hour: 300 cr ($3). Senior hour: 500 cr ($5). Refresh every 30 days; instant top-ups.
+              1 Credit = $0.01. Junior hour: 300 cr ($3), Senior hour: 500 cr ($5). Buy a one-time pack, spend on any service — credits never expire.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 1b: credits expire -->
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">Do credits expire?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              No. Your wallet balance rolls over forever — top up once and spend whenever you need.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 1c: unused subscription hours -->
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">What happens to unused subscription hours?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              They expire at the end of that monthly period — the time was reserved from the shared team. You can change or stop your subscription anytime (effective at the next monthly deduction, 4 days' notice).
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 1d: other services -->
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">Can I use credits for other services?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              Yes. One wallet pays for everything: crew hours, video editing, SEO content, and any à-la-carte service on the rate card.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 1e: low balance -->
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">What if my balance runs low?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              We auto top-up from your card on file so your subscription deduction never fails. You can turn this off anytime — the plan simply pauses until you top up.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 1f: refunds -->
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">Can I get a refund on credits?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              Credits are non-refundable and can't be exchanged for cash. They also never expire, so there's no pressure to spend fast.
             </div>
           </div>
         </div>

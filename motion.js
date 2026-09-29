@@ -658,7 +658,7 @@
         if (ledgerListEl) {
           ledgerListEl.innerHTML = `
             <div class="py-2 text-xs text-slate-500 italic text-center">
-              Credit pack renewed: 110,000 credits available ($1,100.00 USD).
+              Balance restored: 110,000 credits ($1,100.00 USD) — they never expire.
             </div>
           `;
         }
@@ -996,6 +996,101 @@
   }
 
   // ==========================================
+  // 16b. Hero Particle Constellation Canvas (light theme)
+  // Pauses off-screen / hidden tab; honors prefers-reduced-motion.
+  // ==========================================
+  function initHeroParticles() {
+    const canvas = document.getElementById('heroParticleCanvas');
+    const hero = document.getElementById('heroSection');
+    if (!canvas || !hero || prefersReduced) return;
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0, rafId = null, running = false;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const LINK_DIST = 120;
+    const points = [];
+
+    function resize() {
+      const rect = hero.getBoundingClientRect();
+      width = Math.max(1, Math.floor(rect.width));
+      height = Math.max(1, Math.floor(rect.height));
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function seed() {
+      points.length = 0;
+      const count = Math.max(18, Math.min(42, Math.floor((width * height) / 26000)));
+      for (let i = 0; i < count; i++) {
+        points.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          r: 1.2 + Math.random() * 1.8
+        });
+      }
+    }
+
+    function frame() {
+      if (!running) return;
+      ctx.clearRect(0, 0, width, height);
+      // links
+      for (let i = 0; i < points.length; i++) {
+        const a = points[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > width) a.vx *= -1;
+        if (a.y < 0 || a.y > height) a.vy *= -1;
+        for (let j = i + 1; j < points.length; j++) {
+          const b = points[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < LINK_DIST) {
+            const alpha = (1 - d / LINK_DIST) * 0.20;
+            ctx.strokeStyle = 'rgba(29, 78, 216, ' + alpha.toFixed(3) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      // dots
+      for (const pt of points) {
+        ctx.fillStyle = 'rgba(37, 99, 235, 0.35)';
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function start() { if (!running) { running = true; rafId = requestAnimationFrame(frame); } }
+    function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
+
+    resize(); seed();
+    window.addEventListener('resize', () => { resize(); seed(); if (running) { stop(); start(); } }, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((en) => (en.isIntersecting && !document.hidden) ? start() : stop());
+      }, { threshold: 0.05 }).observe(hero);
+    } else {
+      start();
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else {
+        const r = hero.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) start();
+      }
+    });
+  }
+
+  // ==========================================
   // 17. Hero Mouse Parallax & Background Radial Aura
   // ==========================================
   function initHeroParallax() {
@@ -1084,6 +1179,7 @@
     initHeroTypewriter();
     initHeroConsole();
     initHeroParallax();
+    initHeroParticles();
   }
 
   if (document.readyState === 'loading') {
