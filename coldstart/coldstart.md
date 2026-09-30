@@ -103,3 +103,14 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - **Conversion:** $10/$25 = loss-leader trial; 1 credit = $0.01 everywhere.
 - **Fee guardrail:** PayPal micro-fee ~$0.44 on $10 (~4.4%) — acceptable as CAC.
 - **Status:** PENDING implementation (blocked on CRO subagent finishing layout). Next: restructure pricing UI + PayPal Subscription integration + auto-subscribe logic.
+
+## 2026-09-30 — PRICING: PayPal auto-charge constraint (owner-corrected)
+
+- **Owner correction:** PayPal auto-charge HANYA bisa jika produk itu dari awal adalah SUBSCRIPTION (recurring plan). Tidak bisa "charge selisih/top-up otomatis saat saldo kurang" untuk one-time wallet.
+- **Konsekuensi:** opsi B (wallet-cover/auto-charge selisih) TIDAK bisa murni via PayPal. Yang benar = opsi A (flat subscription) — pod dijual sebagai recurring plan PayPal dengan amount tetap.
+- **Desain final (diputuskan):** 2 jalur terpisah, jangan dicampur —
+  (1) ONE-TIME top-up micro ($10/$25/$99/$249/$999/$1,899) = a-la-carte, kredit never expire, PayPal Checkout one-time.
+  (2) SUBSCRIPTION pod (recurring PayPal plan, amount tetap/bln, misal Junior 100 jam = $300/bln) = PayPal auto-charge flat tiap bulan sampe cancel (4-day notice, jam tak terpakai hangus).
+- **Aturan kejujuran:** subscribe 100 jam = $300/bln flat; $10 top-up TIDAK boleh dipakai untuk "nyicil" subscription (menyesatkan). Micro top-up hanya untuk a-la-carte coba-coba.
+- **Open question for owner:** apakah sisa kredit one-time boleh dipakai sebagai CREDIT/diskon terhadap invoice subscription bulan berikutnya (manual/ledger), atau dua wallet benar-benar terpisah?
+- **Status:** keputusan struktur terkunci; implementasi menunggu jawaban open question + CRO subagent selesai.
