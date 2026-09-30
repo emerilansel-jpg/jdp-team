@@ -93,3 +93,13 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - **Prinsip:** a-la-carte = micro top-up; komitmen bulanan = recurring discount. Cash predictor + MRR.
 - **Status:** PENDING owner decision. Implementation blocked until owner picks option + confirms PayPal subscription tooling.
 - **Owner must confirm:** apakah PayPal "subscriptions"/auto-reload sudah diset di dashboard (Checkout = one-time ≠ auto-recurring).
+
+## 2026-09-30 — PRICING DECISION (owner-confirmed)
+
+- **Micro top-up:** owner wants as low as possible — trial pack **$10 or $25** (1,000 / 2,500 cr).
+- **Auto-charge model:** owner unsure — PM recommends SPEND-BASED (subscribe-per-service), because micro-wallet + low entry makes auto-reload unnecessary; commit is to OUTPUT (pod hours) not a dollar amount. Fee-friendly.
+- **PayPal:** not yet set up; owner confirms "just integrate PayPal Subscription" (recurring) — acceptable.
+- **Pricing ladder (decided):** Trial $10/1,000cr | Dip $25/2,500cr | Believer $99/10,000cr | Builder $249/25,000cr | Growth $999/110,000cr | Scale $1,899/220,000cr. Credits NEVER expire. Bonus only at $249+.
+- **Conversion:** $10/$25 = loss-leader trial; 1 credit = $0.01 everywhere.
+- **Fee guardrail:** PayPal micro-fee ~$0.44 on $10 (~4.4%) — acceptable as CAC.
+- **Status:** PENDING implementation (blocked on CRO subagent finishing layout). Next: restructure pricing UI + PayPal Subscription integration + auto-subscribe logic.
