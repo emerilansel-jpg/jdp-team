@@ -36,3 +36,22 @@
   - `index.html`
   - `homepage2.html`
   - `coldstart/coldstart.md`
+
+## 2026-09-30 — CRO Optimization Pass (score→10) + Bug Fixes (PM-Mode)
+
+- **Status:** IN PROGRESS (subagent running)
+- **Type:** CRO AUDIT + COPY COMPRESSION (~30%) + BUG FIX
+- **Scope:** `index.html` ONLY (Homepage 1, light theme). homepage2.html NOT touched.
+- **Base:** HEAD `0609595` (after fact-audit df8c2b7 + credit-wallet pricing 0609595).
+- **Goals:**
+  1. Score current page 1-10 (10-criteria CRO rubric), then optimize toward 10.
+  2. Cut visible copy to ~30% (~570-680 words of ~1,890 original) via progressive disclosure (`<details>`/accordions), NOT deletion of proof.
+- **2 bugs found (from screenshots) — being fixed this pass:**
+  (a) Stuck scroll-fade: credentials strip + proof stats render faded (IntersectionObserver not firing for in-viewport elements). Fix = reveal on load + fallback.
+  (b) Mobile hero overflow: headline + stats row clipped at ≤480px. Fix = responsive sizing/overflow-wrap/flex-wrap, 0px overflow at 320/375/390/414.
+- **Immutable constraints:** facts match docs/fact-audit.md (no unsupported claims); pricing stays per docs/pricing-model.md (credits never expire, one-time packs, monthly crew time, 4-day notice, non-refundable); KEEP hero aurora motion, Verified Credentials bar, all JS widgets, nav anchors, comparison section.
+- **Files touched:** `index.html` (+ coldstart/coldstart.md)
+- **Decisions:** progressive disclosure over deletion; fix fade+overflow bugs as part of score optimization.
+- **Issues:** 2 prior agent runs failed/lost-thread (upstream AI error; restarted cleanly).
+- **Next:** subagent ships → verify in production → report before/after scores + exact word count.
+- **Deploy:** pending (wrangler pages deploy, project jdp-team)

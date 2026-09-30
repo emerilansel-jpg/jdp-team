@@ -17,7 +17,7 @@ must match this spec.
 |-------------|---------|-----------|--------------|
 | Starter Pod | $499    | 50,000    | —            |
 | Growth Pod  | $999    | 110,000   | +10k bonus   |
-| Scale Pod   | $1,999  | 220,000   | +20k bonus   |
+| Scale Partner | $1,899  | 220,000   | +20k bonus   |
 
 ## Service rates (paid from the same wallet)
 
