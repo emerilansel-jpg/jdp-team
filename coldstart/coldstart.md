@@ -114,3 +114,14 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - **Aturan kejujuran:** subscribe 100 jam = $300/bln flat; $10 top-up TIDAK boleh dipakai untuk "nyicil" subscription (menyesatkan). Micro top-up hanya untuk a-la-carte coba-coba.
 - **Open question for owner:** apakah sisa kredit one-time boleh dipakai sebagai CREDIT/diskon terhadap invoice subscription bulan berikutnya (manual/ledger), atau dua wallet benar-benar terpisah?
 - **Status:** keputusan struktur terkunci; implementasi menunggu jawaban open question + CRO subagent selesai.
+
+## 2026-09-30 — CRO 3-fix RESULT (PM-verified live)
+
+- **Deploy:** `2db0616` → wrangler pages deploy (49 files). PM-verified live.
+- **Fix 2 (CTA hierarchy):** VERIFIED — hero "Start with Credits" = primary blue, "Book intro call →" = text-link. Clear hierarchy.
+- **Fix 1 (sim consolidation):** Verified — only 1 interactive (calculator) visible; Live Task Sim + Wallet Sim behind accordions.
+- **Fix 3 (pricing slim):** 3 packs + details behind "Monthly crew time & how credits work" accordion.
+- **Word count (live, excl details):** 653.
+- **No regression:** overflow 0px (320-414), fade OK, 0 console errors, calculator + accordions work.
+- **New CRO score: 8.2 → ~9.0/10.** Remaining gap to 10 = pricing section will be restructured anyway for new 2-lane model (micro top-up + subscription).
+- **Next:** implement decided 2-lane pricing (one-time micro $10/$25/$99/$249/$999/$1,899 + PayPal Subscription flat pod). Open Q: one-time credit offset vs subscription? (owner to decide: separate recommended).
