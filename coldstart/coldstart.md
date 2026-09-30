@@ -125,3 +125,19 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - **No regression:** overflow 0px (320-414), fade OK, 0 console errors, calculator + accordions work.
 - **New CRO score: 8.2 → ~9.0/10.** Remaining gap to 10 = pricing section will be restructured anyway for new 2-lane model (micro top-up + subscription).
 - **Next:** implement decided 2-lane pricing (one-time micro $10/$25/$99/$249/$999/$1,899 + PayPal Subscription flat pod). Open Q: one-time credit offset vs subscription? (owner to decide: separate recommended).
+
+## 2026-09-30 — PRICING: handling jalur campur (owner scenarios)
+
+**Architecture:** 1 wallet kredit + 2 tipe jam. Wallet-topup kredit = NEVER expire (a-la-carte). Subscription = recurring plan (PayPal auto-charge flat) yang tiap bulan mengkredit "subscription-hours" (jam yg hangus bila tak terpakai).
+
+**Scenario 1 (one-time → subscription):** client top-up micro, cocok, lalu subscribe pod. Sisa kredit one-time TETAP miliknya (never expire) — dipakai utk jam EKSTRA di luar jatah pod. Subscription charge flat penuh (PayPal tak bisa partial). Kredit one-time TIDAK memotong charge subscription. Contoh: sisa 5,000 cr + subscribe 100 jam/bln ($300) → tiap bulan ditagih $300 + dapat 100 jam; 5,000 cr masih ada utk tambahan.
+
+**Scenario 2 (subscription → a-la-carte):** client cancel pod, sisa subscription-hours bulan itu dipakai s/d habis cycle, lalu HANGUS. Sesudah itu dia top-up one-time utk a-la-carte. Dua wallet tidak berpindah.
+
+**Scenario 3 (hybrid):** service A a-la-carte + service B subscription berjalan bersamaan. Satu ledger; UI tunjukkan "subscription-hours (expire)" vs "wallet credits (never expire)" terpisah. A-la-carte pakai wallet, pod pakai subscription-hours.
+
+**DECISION (resolves open Q):** kredit one-time TIDAK dipotong ke tagihan subscription. Alasan: PayPal tidak bisa charge partial, dan pemisahan = jujur + ledger sederhana.
+
+**Edge cases to handle:** kredit pod tak terpakai hangus (bukan refund/rollover); upgrade/downgrade pod (PayPal plan change); cancel (4-day notice, jatah dipakai s/d akhir cycle); jam ekstra di atas jatah = tarik dari wallet one-time.
+
+**Status:** struktur terkunci penuh. Ready to build (UI + ledger + PayPal Subscription integration).
