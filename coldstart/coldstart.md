@@ -68,3 +68,19 @@
 - **Console:** 0 errors. Widgets (testimonial carousel, pricing tabs, calculator) OK.
 - **Files touched:** index.html, docs/pricing-model.md, coldstart/coldstart.md
 - **Next:** none open on Homepage 1. Optional future: favicon 404, Tailwind-CDN build migration, dashboard-copy sync (not verified, outside scope).
+
+## 2026-09-30 — PM CRO SCORE (current live, evidence-based)
+
+Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
+- Above-fold clarity 9 — headline+sub+2 CTA+never-expire+trust bar di 1 layar.
+- CTA dominance 8 — "Start with Credits" menonjol & berulang; -2 CTA sekunder "Book Intro Call" bersaing di hero & footer.
+- Scannability/density 8 — 680 kata, rapi; -2 pricing masih padat (packs+crew+ledger+how-it-works bertumpuk).
+- Social-proof placement 9 — trust bar atas, Founder/cert tengah, testimoni sebelum pricing.
+- Friction/distractions 7 — 3 blok simulasi/demo berbeda (Live Task Sim, ROI Calculator, Wallet Ledger) jadi noise.
+- Visual hierarchy 9 — ritme eyebrow→headline→body konsisten.
+- Mobile UX 9 — overflow 0px semua viewport, hero tidak terpotong.
+- Pricing clarity 8 — never-expire+one-time jelas; -2 hanya 1 CTA pack menonjol, 2 lainnya redup.
+- Trust/credibility 9 — verified claims + verbatim testimoni.
+- Performance feel 8 — hero lancar; -1 render-blocking.
+
+**AVERAGE 8.2/10.** Path ke 10 (3 hal): (1) satukan/turunkan 3 blok simulasi jadi 1; (2) CTA utama > sekunder (ghost/book-later); (3) pricing ke 3 pack saja, detail crew/ledger ke accordion.
