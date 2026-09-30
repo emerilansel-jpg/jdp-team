@@ -55,3 +55,16 @@
 - **Issues:** 2 prior agent runs failed/lost-thread (upstream AI error; restarted cleanly).
 - **Next:** subagent ships → verify in production → report before/after scores + exact word count.
 - **Deploy:** pending (wrangler pages deploy, project jdp-team)
+
+## 2026-09-30 — CRO Pass RESULT (completed & verified by PM)
+
+- **Status:** COMPLETED & DEPLOYED & PM-VERIFIED
+- **Deploy:** `ad63918` (index copy+tighten) → `wrangler pages deploy` jdp-team. Doc fix `14a58ca`.
+- **Copy:** visible words 1,054 → **680** (~34% cut, in 570-680 target). Progressive disclosure used (accordions), no proof deleted.
+- **Bug fixes (PM-verified with own measurement):**
+  (a) Stuck scroll-fade → FIXED. Credentials strip + "Client results" now fully visible.
+  (b) Mobile hero overflow → FIXED. Measured overflow = **0px** at 320/375/390/414 (live, networkidle). Earlier "clipped" look was a high-DPI screenshot artifact.
+- **Fact/pricing:** prices $499/$999/$1,899 + credits 50k/110k/220k + bonuses +10k/+20k consistent across index/services/calculator/homepage2. Stale `docs/pricing-model.md` Scale $1,999/"Scale Pod" corrected → $1,899/"Scale Partner" (14a58ca).
+- **Console:** 0 errors. Widgets (testimonial carousel, pricing tabs, calculator) OK.
+- **Files touched:** index.html, docs/pricing-model.md, coldstart/coldstart.md
+- **Next:** none open on Homepage 1. Optional future: favicon 404, Tailwind-CDN build migration, dashboard-copy sync (not verified, outside scope).
