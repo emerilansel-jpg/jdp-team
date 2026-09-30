@@ -84,3 +84,12 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - Performance feel 8 — hero lancar; -1 render-blocking.
 
 **AVERAGE 8.2/10.** Path ke 10 (3 hal): (1) satukan/turunkan 3 blok simulasi jadi 1; (2) CTA utama > sekunder (ghost/book-later); (3) pricing ke 3 pack saja, detail crew/ledger ke accordion.
+
+## 2026-09-30 — PRICING BRAINSTORM (owner-led, pending decision)
+
+- **Owner feedback:** $499 min top-up = barrier terlalu tinggi; terasa seperti konvensional retainer, bukan credit-based.
+- **Owner wants:** (a) micro top-up (small commitment, entry rendah); (b) PayPal auto-subscription saat kredit dipakai utk subscribe service (auto-charge tiap bulan sampe cancel).
+- **My proposal (2-layer):** LAYER 1 Wallet (never expire) — Pay-as-you-go micro pack $99, Starter $249, Growth $999, Scale $1,899 (bonus makin besar). LAYER 2 Auto-Reload/Subscription (opt-in, recurring) — small auto-charge ($99/$249) + spend-based auto-subscribe per service (Junior/Senior/SEO Staff pod) dengan auto-beli jam via wallet saat balance < threshold; PayPal auto-charge sampe cancel, 4-day notice, jam tak terpakai yg hangus.
+- **Prinsip:** a-la-carte = micro top-up; komitmen bulanan = recurring discount. Cash predictor + MRR.
+- **Status:** PENDING owner decision. Implementation blocked until owner picks option + confirms PayPal subscription tooling.
+- **Owner must confirm:** apakah PayPal "subscriptions"/auto-reload sudah diset di dashboard (Checkout = one-time ≠ auto-recurring).
