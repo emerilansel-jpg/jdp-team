@@ -200,3 +200,27 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
   (2) MANUAL PAUSE/CANCEL saja — sama dgn (1) tapi UI tonjolkan tombol "Pause/Cancel anytime" supaya client yg mau berhenti mudah. (Bukan auto.)
 - **Rekomendasi PM:** opsi 1+2 digabung = terima penumpukan, buat cancel/pause super-mudah & jelas. Anti-menumpuk sejati memang mustahil utk "1 kredit tak hangus + auto-charge" tanpa expiry/cap rumit.
 - **Status:** PENDING owner confirm opsi (1)/(2) atau arah lain.
+
+## 2026-09-30 — MAJOR PIVOT: DROP credit system → direct-service storefront (owner decision)
+
+**Owner final direction:** HAPUS sistem kredit sepenuhnya. Client belanja LANGSUNG seperti online store (Amazon/Fiverr hybrid) — harga dalam DOLAR, bukan kredit. Satu page = storefront: mau a-la-carte ATAU subscription, tinggal add/checkout.
+
+**Model:** DIRECT-SERVICE STOREFRONT
+- Setiap layanan = PRODUK dengan harga $ jelas. 2 tipe produk:
+  - ONE-TIME (a-la-carte): beli sekali, misal "20 jam Junior = $60", "SEO Audit = $150". PayPal one-time.
+  - SUBSCRIPTION (recurring): misal "Junior Pod 40 jam/bln = $120/bln". PayPal Subscription auto-charge sampe cancel (manual, 4-day notice).
+- TIDAK ada "kredit", TIDAK ada konversi, TIDAK ada expiry — beli apa yang tertera, dapat itu.
+- Entry barrier rendah = produk one-time MURAH (misal $25 starter task, $50 10-jam) sebagai loss-leader.
+- White-label + PM-managed tetap jadi differentiator.
+
+**DAMPAK BESAR pada copy/site (HARUS direvisi):**
+- HAPUS semua "credits/credits never expire/top-up/wallet" dari SEMUA halaman.
+- HERO badge "Credits never expire" → ganti (misal "No retainer. Pay per task or subscribe.").
+- HERO CTA "Start with Credits" → "Browse Services" / "Start a Task".
+- NAV "Start with Credits" → "Services"/"Get Started".
+- PRICING section → jadi CATALOG/STORE (produk one-time + subscription).
+- "How credits work"/"Monthly crew time"/wallet-ledger simulator → ganti "How it works" (order → PM scopes → deliver under your brand).
+- Calculator tetap relevan (hitung kebutuhan jam → rekomendasi produk/pod).
+- fact-audit.md & pricing-model.md perlu rewrite utk model baru.
+
+**Status:** DIRECTION LOCKED. Belum diimplementasikan. Butuh: (a) katalog produk+harga final, (b) rewrite copy semua halaman, (c) rebuild pricing/store UI, (d) PayPal one-time + subscription integration. BESAR — pecah jadi fase.
