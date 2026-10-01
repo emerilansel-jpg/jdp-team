@@ -141,3 +141,13 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 **Edge cases to handle:** kredit pod tak terpakai hangus (bukan refund/rollover); upgrade/downgrade pod (PayPal plan change); cancel (4-day notice, jatah dipakai s/d akhir cycle); jam ekstra di atas jatah = tarik dari wallet one-time.
 
 **Status:** struktur terkunci penuh. Ready to build (UI + ledger + PayPal Subscription integration).
+
+## 2026-09-30 — PRICING: multi-pod staggered starts (owner scenario)
+
+**Rule:** setiap pod = recurring plan INDEPENDEN dengan anchor date sendiri (tanggal subscribe = tanggal charge tiap siklus 30 hari). TIDAK prorate, TIDAK diseragamkan ke tanggal 1 (prorate = fee banyak + invoice rumit). PayPal Subscription memang menagih per-anchor-date.
+
+**Example:** Pod A subscribe 1 Jun → charge $300, jam A berlaku 1-30 Jun. Pod B subscribe 15 Jun → charge $300, jam B berlaku 15 Jun-14 Jul. Pod C subscribe 30 Jun → charge $300, jam C 30 Jun-29 Jul. Tiap pod auto-charge di anchor-nya masing2 tiap 30 hari sampe cancel per-pod. Jam tiap pod hangus di akhir siklus pod itu sendiri (bukan akhir bulan kalender).
+
+**UI:** tampilkan tiap pod sbg kartu: nama, siklus ("renews 15 Jul"), jam terpakai/sisa, tombol cancel per-pod. Wallet one-time tetap terpisah utk jam ekstra di semua pod.
+
+**Status:** model final. Ready to build.
