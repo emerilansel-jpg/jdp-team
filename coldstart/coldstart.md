@@ -168,3 +168,18 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 **KEY DIFFERENCE:** X = subscription = cara beli kredit (fleksibel, kredit universal). Y = subscription = beli jatah jam service tertentu (hangus).
 
 **DECISION NEEDED from owner:** X (pure 1-credit, auto-credit tiap bulan, kredit tak hangus) ATAU Y (credits + pods terpisah, jam hangus)? Ini menentukan build.
+
+## 2026-09-30 — PRICING FINAL: Design X + anti-accumulation (owner picked X)
+
+**Owner:** mau Design X (pure 1-credit) TAPI tanpa kelemahan kredit-menumpuk.
+
+**SOLUTION: 1 wallet, 2 tier kredit (satu saldo angka, dua sub-label):**
+- ONE-TIME credits = NEVER expire (top-up $10/$25/$99/$249/$999/$1,899).
+- SUBSCRIPTION credits = auto-credit flat tiap siklus (PayPal charge) → berlaku 60 HARI (lebih lama dari 30 = adil/generous), lalu hangus. Bisa dipakai ke service MANA SAJA (tetap 1 kredit universal, X murni).
+- Spend waterfall: SUB tier (yang paling cepat hangus) dipakai DULU, ONE-TIME tier belakangan. Client lihat satu saldo + breakdown.
+
+**Kenapa 60 hari (bukan hangus tiap 30):** tetap 1 kredit universal (janji X), tapi ada rollover 1 bulan + urgency → kredit tak menumpuk tanpa batas. Pesan jujur: "Kredit top-up tak pernah hangus. Kredit langganan berlaku 60 hari." Tanpa batas 60-hari = kembali ke liability.
+
+**Alternatif cadangan (kalau owner tolak expiry apapun):** soft-cap (saldo di atas 2x jatah bulanan tak bertambah; charge berhenti) atau auto-pause saat saldo > threshold. Lebih kompleks, hanya jika diminta.
+
+**Rekomendasi PM: 60-hari sub-credit expiry.** PENDING owner confirm.
