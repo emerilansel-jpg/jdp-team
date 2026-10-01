@@ -151,3 +151,20 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 **UI:** tampilkan tiap pod sbg kartu: nama, siklus ("renews 15 Jul"), jam terpakai/sisa, tombol cancel per-pod. Wallet one-time tetap terpisah utk jam ekstra di semua pod.
 
 **Status:** model final. Ready to build.
+
+## 2026-09-30 — PRICING: 1-credit vs multi-pod separation (owner challenge)
+
+**Owner Q:** kalau tiap pod terpisah, berarti BUKAN 1 credit system dong?
+
+**Design X — TRUE single-credit (recommended jika mau "1 credits"):**
+- 1 wallet, 1 saldo kredit. A-la-carte tarik dari situ.
+- Subscription = recurring AUTO-CREDIT plan: tiap siklus PayPal charge flat → sistem kredit sejumlah cr ke wallet (recurring credits, tidak hangus). Client bebas pakai ke service mana saja (Junior/Senior/SEO). 100% credit-based, unified, staggered tidak masalah.
+- Kelemahan: kredit tidak hangus → client bisa akumulasi → revenue liability; tidak ada urgency pakai.
+
+**Design Y — Credits + per-service pods (yang sudah dibahas):**
+- Wallet never-expire (a-la-carte) TERPISAH dari subscription-hours per pod (hangus per siklus). 2 tipe jam dalam 1 ledger.
+- Lebih sehat utk cash (jam hangus), tapi BUKAN murni 1 kredit.
+
+**KEY DIFFERENCE:** X = subscription = cara beli kredit (fleksibel, kredit universal). Y = subscription = beli jatah jam service tertentu (hangus).
+
+**DECISION NEEDED from owner:** X (pure 1-credit, auto-credit tiap bulan, kredit tak hangus) ATAU Y (credits + pods terpisah, jam hangus)? Ini menentukan build.
