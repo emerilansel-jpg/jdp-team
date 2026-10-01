@@ -191,3 +191,12 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - **Candidate (pure single-credit, no expiry):** SOFT-CAP auto-pause — subscription auto-credit berhenti bila saldo >= N x jatah bulanan (misal 2x); PayPal charge juga pause; auto-resume saat saldo < threshold. 1 kredit, tak hangus, tapi stok tak menumpuk.
 - **Caveat (flagged to owner):** pause = "ditagih tapi tak dapat" risk; perlu UI jelas "auto-refill paused, saldo cukup". + acceptance: sebagian client memang akan menumpuk s/d cap (itu harga kesederhanaan).
 - **Status:** PENDING owner decision — confirm soft-cap auto-pause (rekomendasi PM utk pure-1-credit), atau terima penumpukan tanpa batas (no mechanism), atau ide lain dari owner.
+
+## 2026-09-30 — PRICING: auto-pause rejected (PayPal reality)
+
+- **Owner:** auto-pause/resume tidak realistis via PayPal; hanya bisa kalau CLIENT sendiri yang pause. REJECTED.
+- **Remaining realistic options (PURE 1 credit, never-expire):**
+  (1) NO MECHANISM — subscription = auto-beli kredit tiap bulan (PayPal charge flat), kredit universal & tak hangus, client bebas akumulasi. Pause/cancel = manual oleh client. Sederhana, murni 1 kredit. RISIKO: liability kredit menumpuk (owner terima).
+  (2) MANUAL PAUSE/CANCEL saja — sama dgn (1) tapi UI tonjolkan tombol "Pause/Cancel anytime" supaya client yg mau berhenti mudah. (Bukan auto.)
+- **Rekomendasi PM:** opsi 1+2 digabung = terima penumpukan, buat cancel/pause super-mudah & jelas. Anti-menumpuk sejati memang mustahil utk "1 kredit tak hangus + auto-charge" tanpa expiry/cap rumit.
+- **Status:** PENDING owner confirm opsi (1)/(2) atau arah lain.
