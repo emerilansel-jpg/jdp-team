@@ -224,3 +224,18 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 - fact-audit.md & pricing-model.md perlu rewrite utk model baru.
 
 **Status:** DIRECTION LOCKED. Belum diimplementasikan. Butuh: (a) katalog produk+harga final, (b) rewrite copy semua halaman, (c) rebuild pricing/store UI, (d) PayPal one-time + subscription integration. BESAR — pecah jadi fase.
+
+## 2026-09-30 — STOREFRONT pricing formula (owner) — PENDING clarification
+
+**Model:** produk SAMA, 2 cara beli. A-la-carte (one-time) = +35% dari harga subscription. Subscription 4 level (junior/senior), makin besar jam makin murah.
+- Base rate (asli): Junior $3/hr, Senior $5/hr.
+- 160 hr/bln = base rate ($3 / $5).
+- 120 hr/bln = base +15%.
+- 80 hr/bln = +15% dari level 120.
+- 40 hr/bln = +15% dari level 80.
+- A-la-carte = (harga/hr subscription) x 1.35? ATAU x1.35 dari base? -> CONFIRM.
+
+**PM calculated (junior, dari base $3):** 160=$3.00 | 120=$3.45 | 80=$3.97 | 40=$4.56/hr. A-la-carte(1.35x base)=$4.05/hr. Senior: 160=$5.00 | 120=$5.75 | 80=$6.61 | 40=$7.61/hr | a-la-carte(1.35x base)=$6.75/hr.
+**CONFLICT to confirm:** a-la-carte(junior, 1.35x base)=$4.05 < sub-40hr=$4.56. Artinya sub-40hr LEBIH MAHAL/jam dari a-la-carte. Apakah intended (a-la-carte tetap termurah/jam utk jumlah kecil, subscription = untuk komitmen) atau a-la-carte hrs 1.35x dari SUBSCRIPTION rate terkait?
+
+**Monthly totals (junior):** 40hr=$182 | 80hr=$318 | 120hr=$414 | 160hr=$480. (senior: 40=$304 | 80=$529 | 120=$690 | 160=$800.)
