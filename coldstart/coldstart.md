@@ -183,3 +183,11 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 **Alternatif cadangan (kalau owner tolak expiry apapun):** soft-cap (saldo di atas 2x jatah bulanan tak bertambah; charge berhenti) atau auto-pause saat saldo > threshold. Lebih kompleks, hanya jika diminta.
 
 **Rekomendasi PM: 60-hari sub-credit expiry.** PENDING owner confirm.
+
+## 2026-09-30 — PRICING: owner rejects 2-tier expiry
+
+- **Owner feedback:** 60-day sub-credit expiry = "gak enak, jadi 2 sistem credit". REJECTED.
+- **Implication:** mau PURE 1 credit, never-expire, universal (Design X sejati). Anti-accumulation HARUS lewat SUPPLY LIMIT, bukan expiry.
+- **Candidate (pure single-credit, no expiry):** SOFT-CAP auto-pause — subscription auto-credit berhenti bila saldo >= N x jatah bulanan (misal 2x); PayPal charge juga pause; auto-resume saat saldo < threshold. 1 kredit, tak hangus, tapi stok tak menumpuk.
+- **Caveat (flagged to owner):** pause = "ditagih tapi tak dapat" risk; perlu UI jelas "auto-refill paused, saldo cukup". + acceptance: sebagian client memang akan menumpuk s/d cap (itu harga kesederhanaan).
+- **Status:** PENDING owner decision — confirm soft-cap auto-pause (rekomendasi PM utk pure-1-credit), atau terima penumpukan tanpa batas (no mechanism), atau ide lain dari owner.
