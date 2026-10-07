@@ -322,7 +322,16 @@
 }
 
 .faq-inner {
+  min-height: 0;
   overflow: hidden;
+  transition: opacity 250ms var(--ease-out);
+}
+
+.faq-grid-wrapper:not(.open) .faq-inner {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-top-width: 0 !important;
+  visibility: hidden;
 }
 
 .faq-icon-rot {

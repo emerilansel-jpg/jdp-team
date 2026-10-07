@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — JDP Team</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { theme: { extend: { colors: { brand: {600:'#4f46e5',700:'#4338ca'}, slate:{950:'#020617'} } } } }</script>
+</head>
+<body class="min-h-screen bg-slate-950 text-white">
+  <header class="border-b border-white/10 bg-slate-900/60 backdrop-blur sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-lg font-black tracking-tight">JDP<span class="text-brand-600">.team</span></div>
+        <span class="text-xs text-slate-400 border border-white/10 rounded-full px-2 py-0.5">Admin</span>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <a href="/dashboard/manager.html" class="text-slate-400 hover:text-white">Manager view →</a>
+        <span class="text-slate-300" id="userName">…</span>
+        <button onclick="dash.logout()" class="text-slate-400 hover:text-white">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <!-- Stats -->
+    <section>
+      <h1 class="text-lg font-bold mb-4">Overview</h1>
+      <div id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+    </section>
+
+    <!-- Users -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-bold">Users</h2>
+        <button onclick="document.getElementById('newUser').classList.toggle('hidden')" class="text-sm bg-brand-600 hover:bg-brand-700 rounded-lg px-3 py-1.5 font-semibold">+ New staff user</button>
+      </div>
+      <div id="newUser" class="hidden bg-white/5 border border-white/10 rounded-xl p-4 mb-4">
+        <form onsubmit="createUser(event)" class="flex flex-wrap gap-2 items-end">
+          <input id="nuEmail" type="email" required placeholder="email@jdp.team" class="flex-1 min-w-48 rounded-lg bg-slate-950 border border-white/10 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none">
+          <input id="nuName" placeholder="Display name" class="w-40 rounded-lg bg-slate-950 border border-white/10 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none">
+          <select id="nuRole" class="rounded-lg bg-slate-950 border border-white/10 px-3 py-2 text-sm">
+            <option value="crew">Crew</option><option value="manager">Manager</option><option value="admin">Admin</option>
+          </select>
+          <input id="nuPass" type="password" required minlength="10" placeholder="Temp password (10+ chars)" class="w-56 rounded-lg bg-slate-950 border border-white/10 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none">
+          <button class="bg-brand-600 hover:bg-brand-700 rounded-lg px-4 py-2 text-sm font-bold">Create</button>
+        </form>
+      </div>
+      <div id="userList" class="space-y-2"></div>
+    </section>
+
+    <!-- Catalog -->
+    <section>
+      <h2 class="text-lg font-bold mb-3">Service catalog</h2>
+      <div id="catalog" class="space-y-2"></div>
+    </section>
+  </main>
+
+<script src="/dashboard/dash.js"></script>
+<script>
+async function boot() {
+  if (!(await dash.init('admin'))) return;
+  await Promise.all([loadStats(), loadUsers(), loadCatalog()]);
+}
+async function loadStats() {
+  const [oRes, uRes] = await Promise.all([fetch('/api/orders'), fetch('/api/users')]);
+  const orders = (await oRes.json()).orders || [];
+  const users = (await uRes.json()).users || [];
+  const active = orders.filter(o => !['completed','cancelled'].includes(o.status));
+  const revenue = orders.filter(o => o.status !== 'cancelled').reduce((s, o) => s + o.total_cents, 0);
+  const mrr = orders.filter(o => o.billing_cycle === 'monthly' && o.status !== 'cancelled').reduce((s, o) => s + o.total_cents, 0);
+  const clients = users.filter(u => u.role === 'client').length;
+  document.getElementById('stats').innerHTML = [
+    ['Active orders', active.length], ['Clients', clients],
+    ['Total order value', dash.money(revenue)], ['Monthly recurring', dash.money(mrr)]
+  ].map(([k, v]) => `
+    <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+      <div class="text-2xl font-black">${v}</div>
+      <div class="text-xs text-slate-400 mt-1">${k}</div>
+    </div>`).join('');
+}
+async function loadUsers() {
+  const res = await fetch('/api/users');
+  const users = (await res.json()).users || [];
+  const roleBadge = { client: 'text-sky-300 border-sky-500/30 bg-sky-500/15', manager: 'text-violet-300 border-violet-500/30 bg-violet-500/15', crew: 'text-amber-300 border-amber-500/30 bg-amber-500/15', admin: 'text-emerald-300 border-emerald-500/30 bg-emerald-500/15' };
+  document.getElementById('userList').innerHTML = users.map(u => `
+    <div class="flex items-center justify-between bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-sm">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="font-semibold truncate">${dash.esc(u.display_name || '')}</span>
+        <span class="text-slate-400 truncate">${dash.esc(u.email)}</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs text-slate-500">${u.last_login_at ? 'Last login ' + dash.fmtDate(u.last_login_at) : 'Never logged in'}</span>
+        <span class="px-2 py-0.5 rounded-full border text-[11px] font-bold uppercase ${roleBadge[u.role] || ''}">${u.role}</span>
+      </div>
+    </div>`).join('');
+}
+async function createUser(e) {
+  e.preventDefault();
+  const res = await fetch('/api/users', {
+    method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      email: document.getElementById('nuEmail').value,
+      display_name: document.getElementById('nuName').value,
+      role: document.getElementById('nuRole').value,
+      password: document.getElementById('nuPass').value
+    })
+  });
+  const d = await res.json().catch(() => ({}));
+  if (!res.ok) { alert(d.error || 'Failed'); return; }
+  document.getElementById('nuEmail').value = document.getElementById('nuPass').value = document.getElementById('nuName').value = '';
+  alert('Staff user created.');
+  await loadUsers();
+}
+async function loadCatalog() {
+  const res = await fetch('/api/services');
+  const services = (await res.json()).services || [];
+  document.getElementById('catalog').innerHTML = services.map(s => `
+    <div class="flex items-center justify-between bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-sm ${s.active ? '' : 'opacity-50'}">
+      <div class="min-w-0">
+        <span class="font-semibold">${dash.esc(s.name)}</span>
+        <span class="text-slate-500 text-xs ml-2">${s.category} · ${s.unit}</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <input type="number" value="${(s.price_cents/100).toFixed(2)}" step="0.01" min="0"
+               class="w-24 bg-slate-950 border border-white/10 rounded px-2 py-1 text-xs text-right"
+               onchange="setPrice('${s.id}', this.value)">
+        <label class="flex items-center gap-1.5 text-xs text-slate-400">
+          <input type="checkbox" ${s.active ? 'checked' : ''} class="accent-indigo-500" onchange="toggleSvc('${s.id}', this.checked)"> Active
+        </label>
+      </div>
+    </div>`).join('');
+}
+async function patchSvc(body) {
+  await fetch('/api/services', { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  await loadCatalog();
+}
+function toggleSvc(id, active) { patchSvc({ id, active }); }
+function setPrice(id, dollars) { patchSvc({ id, price_cents: Math.round(Number(dollars) * 100) }); }
+boot();
+</script>
+</body>
+</html>

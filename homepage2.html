@@ -408,27 +408,6 @@
         animation-play-state: paused !important;
       }
     }
-    /* PayPal Wallet Simulator Tags */
-    .wallet-deduct-tag {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-family: ui-monospace, SFMono-Regular, monospace;
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #fb7185;
-      pointer-events: none;
-      opacity: 0;
-      transform: translate3d(0, 0, 0);
-    }
-    .wallet-deduct-tag.is-animating {
-      animation: walletDeductFloat 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    @keyframes walletDeductFloat {
-      0% { opacity: 1; transform: translate3d(0, 0, 0) scale(0.9); }
-      30% { opacity: 1; transform: translate3d(0, -10px, 0) scale(1.05); }
-      100% { opacity: 0; transform: translate3d(0, -32px, 0) scale(1.15); }
-    }
     /* Subtle Glowing Grid Lines */
     .grid-lines {
       background-size: 60px 60px;
@@ -530,11 +509,11 @@
       <a href="#comparison-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">03 · Operational Shift</a>
       <a href="#calculator-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">04 · ROI Calculator</a>
       <a href="#proof-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">05 · Proof & Case Studies</a>
-      <a href="#pricing-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">06 · Wholesale Pricing & Wallet</a>
+      <a href="#pricing-act" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">06 · Wholesale Pricing</a>
       <a href="/contact.html" class="mobile-nav-link flex items-center min-touch px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition">07 · Contact Concierge</a>
       <div class="pt-3 mt-1 border-t border-white/10 flex flex-col gap-2">
         <a href="#pricing-act" class="w-full py-3 min-touch rounded-xl text-xs font-bold font-mono uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center flex items-center justify-center shadow-lg">
-          Start with Credits
+          Get a Quote
         </a>
         <a href="/contact.html" class="w-full py-3 min-touch rounded-xl text-xs font-semibold text-slate-300 hover:text-white border border-white/10 hover:bg-white/5 text-center flex items-center justify-center">
           Book Intro Call
@@ -625,7 +604,7 @@
 
           <div class="cinematic-reveal-4 mt-3 sm:mt-5 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-none mx-auto">
             <a href="#pricing-act" class="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-full text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-2xl shadow-blue-500/40 transition-all transform hover:-translate-y-0.5 min-touch flex items-center justify-center gap-2">
-              <span>Start with Credits</span>
+              <span>See Ways to Buy</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
             <button type="button" onclick="jumpToAct(2)" class="w-full sm:w-auto px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold border border-white/20 bg-white/5 hover:bg-white/10 text-white backdrop-blur-md transition min-touch flex items-center justify-center gap-2">
@@ -1061,7 +1040,7 @@
             Result: Scalable Recurring Revenue &amp; Zero Burnout
           </div>
           <a href="#pricing-act" class="inline-flex items-center justify-center gap-2 min-h-[44px] px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-bold transition-colors shadow-lg shadow-emerald-500/30 whitespace-nowrap">
-            Start with Credits
+            Start with a Scope Call
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5-5 5M6 12h12"></path></svg>
           </a>
         </div>
@@ -1077,7 +1056,7 @@
             Granular Task & Staffing Calculator
           </h2>
           <p class="text-slate-400 mt-4 text-base sm:text-lg">
-            Slide hours to calculate credits and compare against typical US in-house benchmark costs.
+            Slide hours to calculate your monthly cost and compare against typical US in-house benchmark costs.
           </p>
         </div>
 
@@ -1130,10 +1109,6 @@
             <!-- Dynamic Outputs (5 cols) -->
             <div class="lg:col-span-5 bg-obsidian-900 rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between">
               <div class="space-y-4">
-                <div class="flex justify-between items-center text-sm">
-                  <span class="text-slate-400">Credits Needed:</span>
-                  <span id="outCredits" class="font-mono font-bold text-blue-400 text-lg">31,300 pts</span>
-                </div>
                 <div class="flex justify-between items-center text-sm">
                   <span class="text-slate-400">Your JDP Pod Cost:</span>
                   <span id="outJdpCost" class="font-mono font-bold text-white text-xl">$313/mo</span>
@@ -1466,283 +1441,201 @@
     <section id="pricing-act" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10">
       <div class="max-w-6xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">One Wallet For Everything</span>
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">Simple, Dollar-Based Pricing</span>
           <h2 class="text-3xl sm:text-5xl font-black text-white mt-2 tracking-tight">
-            Credits <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">never expire.</span>
+            One team. <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">Two ways to buy.</span>
           </h2>
           <p class="text-slate-400 mt-4 text-base sm:text-lg">
-            1 Credit = $0.01 USD. Top up once. Spend on any service. Add monthly crew time if you need it.
+            Published dollar rates. No hidden fees. Choose ongoing monthly support or one-off project delivery — every engagement includes a dedicated PM.
           </p>
         </div>
 
-        <!-- PayPal.com Style Live Credit Wallet Simulator -->
-        <div id="creditWalletSim" class="mb-14 rounded-3xl thine-glass p-5 sm:p-8 text-white border border-white/10 shadow-2xl relative overflow-hidden">
-          <div id="walletDeductTag" class="wallet-deduct-tag">-3,200 cr</div>
+        <!-- Path A: Monthly Support -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white whitespace-nowrap">Path A</span>
+            <h3 class="text-xl sm:text-2xl font-black text-white">Monthly Support</h3>
+            <span class="text-xs text-slate-400 font-mono hidden sm:inline">Ongoing scope, billed monthly</span>
+          </div>
 
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-blue-500 inline-block shadow-lg shadow-blue-500/50"></span>
-                <span class="font-mono text-xs font-bold text-slate-200">Live Credit Wallet Simulator</span>
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Active Pod</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            <!-- Junior -->
+            <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <h4 class="text-lg font-bold text-white">Junior Remote Staff</h4>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">$3.00/hr</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-6">Admin, research, data entry, CMS catalog formatting, inbox & schedule support.</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-4xl font-black text-white">$3.00</span>
+                  <span class="text-xs font-mono text-slate-400">/ hour</span>
+                </div>
+                <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Dedicated PM in a private Slack channel</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>48h standard delivery turnaround</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Pause or cancel anytime — no contracts</span></div>
+                </div>
               </div>
-              <p class="text-xs text-slate-400 mt-1">Click demo client tasks below to simulate real-time credit deduction from your active pod balance.</p>
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a href="/contact.html?path=monthly&role=junior" data-product="monthly-junior" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                  Scope Junior Support
+                </a>
+              </div>
             </div>
 
-            <!-- Live Balance Display -->
-            <div class="text-left sm:text-right bg-obsidian-900/90 px-4 py-3 rounded-2xl border border-white/10">
-              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Available Pod Balance</div>
-              <div class="flex items-baseline gap-2 mt-0.5">
-                <span id="walletBalanceNumber" class="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight">110,000</span>
-                <span class="text-xs font-bold text-slate-300">credits</span>
-                <span id="walletCurrencyVal" class="text-xs font-mono text-slate-400">($1,100.00)</span>
+            <!-- Senior (Featured) -->
+            <div class="thine-glass rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-blue-500 shadow-2xl relative bg-blue-950/20">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white shadow-lg whitespace-nowrap">
+                Most Popular
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <h4 class="text-lg font-bold text-white">Senior Specialist</h4>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">$5.00/hr</span>
+                </div>
+                <p class="text-xs text-slate-300 mb-6">Technical SEO, CMS management, campaign ops, reporting — for agencies with active retainers.</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-4xl font-black text-white">$5.00</span>
+                  <span class="text-xs font-mono text-slate-300">/ hour</span>
+                </div>
+                <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-200">
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Dedicated PM in a private Slack channel</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Fast 24–48h turnaround</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Full SEO content & technical audit support</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Pause or cancel anytime — no contracts</span></div>
+                </div>
+              </div>
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a href="/contact.html?path=monthly&role=senior" data-product="monthly-senior" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-transform active:scale-95 min-touch flex items-center justify-center">
+                  Scope Senior Support
+                </a>
+              </div>
+            </div>
+
+            <!-- Video -->
+            <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <h4 class="text-lg font-bold text-white">Video Editor</h4>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">$5.00/hr</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-6">Reels, Shorts, long-form cuts — motion captions, audio sync, white-label exports.</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-4xl font-black text-white">$5.00</span>
+                  <span class="text-xs font-mono text-slate-400">/ hour</span>
+                </div>
+                <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Dedicated PM in a private Slack channel</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>9:16, 1:1 and 16:9 white-label renders</span></div>
+                  <div class="flex items-center gap-2"><span class="text-blue-400 font-bold">✓</span><span>Pause or cancel anytime — no contracts</span></div>
+                </div>
+              </div>
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a href="/contact.html?path=monthly&role=video" data-product="monthly-video" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                  Scope Video Support
+                </a>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Clickable Task Deductions Grid -->
-          <div class="py-5">
-            <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-3 flex items-center justify-between">
-              <span>Simulate Submitting Client Tasks:</span>
-              <button type="button" id="walletResetBtn" class="text-[10px] font-mono text-blue-400 hover:text-blue-300 underline cursor-pointer">Reset Balance</button>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="3200" data-deduct-task="1 SEO Pillar Article (1,500w)">
-                <div class="min-w-0 pr-1">
-                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">1 SEO Pillar Article</div>
-                  <div class="text-[11px] text-slate-400">1,500w + Surfer 85+</div>
-                </div>
-                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-3,200 cr</span>
-              </button>
-
-              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="600" data-deduct-task="2h Junior Tech VA Support">
-                <div class="min-w-0 pr-1">
-                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">2h Junior Tech VA</div>
-                  <div class="text-[11px] text-slate-400">Shopify & CRM catalog</div>
-                </div>
-                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-600 cr</span>
-              </button>
-
-              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="2000" data-deduct-task="4 Short-Form TikTok Reels">
-                <div class="min-w-0 pr-1">
-                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">4 TikTok Reels</div>
-                  <div class="text-[11px] text-slate-400">Subtitles & motion cuts</div>
-                </div>
-                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-2,000 cr</span>
-              </button>
-
-              <button type="button" class="wallet-task-pill p-3.5 rounded-xl bg-obsidian-900 border border-white/10 text-left flex flex-wrap items-center justify-between gap-2 group cursor-pointer min-h-[48px]" data-deduct-credits="1000" data-deduct-task="2h Technical SEO Audit">
-                <div class="min-w-0 pr-1">
-                  <div class="text-xs font-bold text-slate-200 group-hover:text-blue-300 transition-colors">2h Tech SEO Audit</div>
-                  <div class="text-[11px] text-slate-400">Schema & orphan URLs</div>
-                </div>
-                <span class="font-mono text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 shrink-0">-1,000 cr</span>
-              </button>
-            </div>
+        <!-- Path B: Project Board -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-cyan-500 text-slate-950 whitespace-nowrap">Path B</span>
+            <h3 class="text-xl sm:text-2xl font-black text-white">Project Board</h3>
+            <span class="text-xs text-slate-400 font-mono hidden sm:inline">Fixed-price, one-off deliverables</span>
           </div>
 
-          <!-- Recent Simulated Ledger Feed -->
-          <div class="pt-4 border-t border-white/10">
-            <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-2">Simulated Pod Activity Ledger:</div>
-            <div class="text-[10px] text-slate-500 italic mb-2">Example: you topped up the Growth Pack — 110,000 credits land in your wallet (never expire).</div>
-            <div id="walletLedgerList" class="space-y-1.5 font-mono text-xs">
-              <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-slate-300">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  <span>One-time top-up · Growth Pack</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            <!-- SEO Content -->
+            <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <h4 class="text-lg font-bold text-white">SEO Content</h4>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">Per article</span>
                 </div>
-                <span class="text-emerald-400 font-bold">+110,000 cr</span>
+                <p class="text-xs text-slate-400 mb-6">Researched 1,200-word articles — keyword brief, draft, QA and on-page formatting included.</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-4xl font-black text-white">$32.00</span>
+                  <span class="text-xs font-mono text-slate-400">/ article</span>
+                </div>
+                <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                  <div class="flex items-center gap-2"><span class="text-cyan-400 font-bold">✓</span><span>Human-edited, plagiarism-checked</span></div>
+                  <div class="flex items-center gap-2"><span class="text-cyan-400 font-bold">✓</span><span>Delivered white-label under your brand</span></div>
+                </div>
+              </div>
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a href="/contact.html?path=project&service=seo-content" data-product="project-seo-content" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                  Order SEO Content
+                </a>
+              </div>
+            </div>
+
+            <!-- Press Release -->
+            <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <h4 class="text-lg font-bold text-white">Press Release</h4>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">Per release</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-6">PressWires.net syndication — writing, distribution and live-placement report.</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-4xl font-black text-white">$240.00</span>
+                  <span class="text-xs font-mono text-slate-400">/ release</span>
+                </div>
+                <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                  <div class="flex items-center gap-2"><span class="text-cyan-400 font-bold">✓</span><span>Syndicated placement report included</span></div>
+                  <div class="flex items-center gap-2"><span class="text-cyan-400 font-bold">✓</span><span>White-label — your agency gets the credit</span></div>
+                </div>
+              </div>
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a href="/contact.html?path=project&service=press-release" data-product="project-press-release" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                  Order a Press Release
+                </a>
+              </div>
+            </div>
+
+            <!-- Technical SEO -->
+            <div class="thine-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-white/10">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <h4 class="text-lg font-bold text-white">Technical SEO</h4>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">$7.00/hr</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-6">Audits, schema markup, orphan-URL fixes and crawl optimization — billed hourly.</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-4xl font-black text-white">$7.00</span>
+                  <span class="text-xs font-mono text-slate-400">/ hour</span>
+                </div>
+                <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
+                  <div class="flex items-center gap-2"><span class="text-cyan-400 font-bold">✓</span><span>Screaming Frog + Schema Validator reports</span></div>
+                  <div class="flex items-center gap-2"><span class="text-cyan-400 font-bold">✓</span><span>Fixes deployed under your guest credentials</span></div>
+                </div>
+              </div>
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <a href="/contact.html?path=project&service=technical-seo" data-product="project-technical-seo" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
+                  Scope Technical SEO
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Mobile Segmented Tab Switcher (Visible on sm:hidden) -->
-        <div class="flex sm:hidden p-1 rounded-full thine-glass border border-white/10 mb-6 max-w-xs mx-auto text-xs font-mono font-bold" role="tablist" aria-label="Pricing Tier Switcher">
-          <button type="button" id="tabStarter2" onclick="switchPricingTab2('Starter')" class="pricing-tab-btn flex-1 py-2 px-1.5 rounded-full text-slate-400 transition-all text-center">
-            Starter ($499)
-          </button>
-          <button type="button" id="tabGrowth2" onclick="switchPricingTab2('Growth')" class="pricing-tab-btn flex-1 py-2 px-1.5 rounded-full bg-blue-600 text-white shadow-xs transition-all text-center">
-            Growth ($999)
-          </button>
-          <button type="button" id="tabScale2" onclick="switchPricingTab2('Scale')" class="pricing-tab-btn flex-1 py-2 px-1.5 rounded-full text-slate-400 transition-all text-center">
-            Scale ($1,899)
-          </button>
+        <!-- Custom blended scope -->
+        <div class="rounded-3xl thine-glass border-2 border-emerald-500/40 bg-emerald-500/5 p-8 sm:p-10 text-center">
+          <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Not sure which path fits?</h3>
+          <p class="text-sm text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
+            Most agencies blend both: a monthly support pod for recurring client work, plus the Project Board for one-off deliverables. Book a 15-minute scope call and we'll map the right mix — no obligation, no contracts.
+          </p>
+          <a href="https://calendly.com/jdp_team/15min" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[48px] rounded-full font-bold text-sm uppercase font-mono tracking-wider bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg transition-transform active:scale-95 min-touch">
+            <span>Book a 15-Min Scope Call</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5-5 5M6 12h12"></path></svg>
+          </a>
+          <p class="text-[11px] text-slate-400 mt-4 font-mono">Open the <a href="/calculator.html" class="text-blue-400 hover:text-blue-300 underline">ROI calculator</a> first if you'd like numbers ready.</p>
         </div>
 
-        <!-- 3 Tiers Grid (Single active card on Mobile with switcher, 3-Col on Desktop) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-
-          <!-- Starter Pod -->
-          <div id="pricingCardStarter2" class="thine-glass-card rounded-3xl p-6 sm:p-8 hidden sm:flex flex-col justify-between border-white/10">
-            <div>
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-white">Starter Pod</h3>
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-slate-300">Light Needs</span>
-              </div>
-              <p class="text-xs text-slate-400 mb-6">Ideal for boutique founders offloading routine digital administration.</p>
-              <div class="flex items-baseline gap-1 mb-6">
-                <span class="text-4xl font-black text-white">$499</span>
-                <span class="text-xs font-mono text-slate-400">one-time</span>
-              </div>
-
-              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span><strong>50,000 credits</strong> in your wallet</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>1 Dedicated Project Manager</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>Junior ($3/hr) & Senior ($5/hr) Access</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>48h standard delivery turnaround</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>Guaranteed dedicated monthly bandwidth</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <a href="/contact.html?plan=Starter" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
-                Start Starter Pod
-              </a>
-            </div>
-          </div>
-
-          <!-- Growth Pod (Featured) -->
-          <div id="pricingCardGrowth2" class="thine-glass rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-blue-500 shadow-2xl relative bg-blue-950/20">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white shadow-lg whitespace-nowrap">
-              Most Popular Pod
-            </div>
-
-            <div>
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-white">Growth Pod</h3>
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">+10k Bonus</span>
-              </div>
-              <p class="text-xs text-slate-300 mb-6">Complete fulfillment engine for agencies servicing 3 to 10 client retainers.</p>
-              <div class="flex items-baseline gap-1 mb-6">
-                <span class="text-4xl font-black text-white">$999</span>
-                <span class="text-xs font-mono text-slate-400">one-time</span>
-              </div>
-
-              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-200">
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span><strong>110,000 credits</strong> (+10k bonus included)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>1 Dedicated PM via private Slack channel</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>Junior ($3/hr), Senior ($5/hr), Video ($5/hr)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>Fast 24-48h turnaround</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>Full SEO content & technical audit support</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-bold">✓</span>
-                  <span>Credits never expire — spend anytime</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <a href="/contact.html?plan=Growth" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-blue-600 hover:bg-blue-500 text-white text-center shadow-lg transition-transform active:scale-95 min-touch flex items-center justify-center">
-                Start Growth Pod
-              </a>
-            </div>
-          </div>
-
-          <!-- Scale Partner -->
-          <div id="pricingCardScale2" class="thine-glass-card rounded-3xl p-6 sm:p-8 hidden sm:flex flex-col justify-between border-white/10">
-            <div>
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-white">Scale Partner</h3>
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">+20k Bonus</span>
-              </div>
-              <p class="text-xs text-slate-400 mb-6">Dedicated backend pod for high-volume agencies and demanding client accounts.</p>
-              <div class="flex items-baseline gap-1 mb-6">
-                <span class="text-4xl font-black text-white">$1,899</span>
-                <span class="text-xs font-mono text-slate-400">one-time</span>
-              </div>
-
-              <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-slate-300">
-                <div class="flex items-center gap-2">
-                  <span class="text-purple-400 font-bold">✓</span>
-                  <span><strong>220,000 credits</strong> (+20k bonus included)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-purple-400 font-bold">✓</span>
-                  <span>Senior Dedicated PM + Priority Queue</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-purple-400 font-bold">✓</span>
-                  <span>Priority same-day & 24h turnaround</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-purple-400 font-bold">✓</span>
-                  <span>Custom client portal integration</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-purple-400 font-bold">✓</span>
-                  <span>Press release syndication enabled</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <a href="/contact.html?plan=Scale" class="w-full py-4 min-h-[48px] rounded-full font-bold text-xs uppercase font-mono tracking-wider bg-white/10 hover:bg-white/20 text-white text-center transition min-touch flex items-center justify-center">
-                Start Scale Partner
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Optional monthly crew time -->
-        <div class="mt-12 max-w-4xl mx-auto rounded-2xl thine-glass border border-blue-500/20 bg-blue-500/5 p-6 sm:p-8">
-          <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-            <span class="px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-blue-600 text-white whitespace-nowrap self-start">Optional</span>
-            <div>
-              <h3 class="text-lg font-black text-white">Monthly crew time — reserve hours from your wallet</h3>
-              <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-                Pick a role + a monthly credit amount — e.g. Junior VA, 10,000 credits/month ≈ 33 hours. Deducted from your wallet on the same date each month (prepaid). Change or stop anytime, effective at the next deduction (4 days' notice). Only unused subscription hours expire at period end — the time was reserved. Low balance? Auto top-up from your card on file (turn it off and the plan simply pauses).
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- How credits work -->
-        <div class="mt-8 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-          <div class="thine-glass-card rounded-2xl border-white/10 p-5">
-            <div class="text-blue-400 font-black text-sm font-mono mb-1">1. Top up</div>
-            <p class="text-[11px] text-slate-400">Buy a credit pack. Balance rolls over forever.</p>
-          </div>
-          <div class="thine-glass-card rounded-2xl border-white/10 p-5">
-            <div class="text-blue-400 font-black text-sm font-mono mb-1">2. Spend</div>
-            <p class="text-[11px] text-slate-400">On tasks or à-la-carte services — same wallet.</p>
-          </div>
-          <div class="thine-glass-card rounded-2xl border-white/10 p-5">
-            <div class="text-blue-400 font-black text-sm font-mono mb-1">3. Optional crew time</div>
-            <p class="text-[11px] text-slate-400">Monthly crew hours are prepaid from your wallet.</p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -1760,73 +1653,77 @@
           <!-- FAQ 1 -->
           <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
             <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-              <span class="font-bold text-sm text-white">How do credits work and what is the dollar rate?</span>
+              <span class="font-bold text-sm text-white">How does pricing work?</span>
               <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
             </button>
             <div class="faq-grid-wrapper">
               <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
-                1 Credit equals exactly $0.01 USD. 1 hour of Junior Staff is 300 credits ($3.00), 1 hour of Senior Specialist is 500 credits ($5.00), 1 SEO Article is 3,200 credits ($32.00). Buy a one-time pack, spend on any service — credits never expire.
+                Simple dollar pricing, published on this page. Monthly Support is billed hourly: $3.00/hr for Junior Remote Staff, $5.00/hr for Senior Specialists, and $5.00/hr for Video Editors. Project Board services are fixed-price: $32.00 per 1,200-word SEO article and $240.00 per PressWires.net press release, with Technical SEO at $7.00/hr. No hidden fees.
               </div>
             </div>
           </div>
 
-          <!-- FAQ 1b..1f -->
+          <!-- FAQ 1b -->
           <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
             <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-              <span class="font-bold text-sm text-white">Do credits expire?</span>
+              <span class="font-bold text-sm text-white">What's the difference between Monthly Support and the Project Board?</span>
               <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
             </button>
             <div class="faq-grid-wrapper">
               <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
-                No. Your wallet balance rolls over forever — top up once and spend whenever you need.
+                Monthly Support is ongoing help billed monthly at an hourly rate — ideal for recurring client work like admin, CMS management or content ops. The Project Board is fixed-price, one-off deliverables (articles, press releases, technical fixes) — order as needed, no ongoing commitment. Most agencies blend both.
               </div>
             </div>
           </div>
 
+          <!-- FAQ 1c -->
           <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
             <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-              <span class="font-bold text-sm text-white">What happens to unused subscription hours?</span>
+              <span class="font-bold text-sm text-white">Is a dedicated Project Manager included in both paths?</span>
               <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
             </button>
             <div class="faq-grid-wrapper">
               <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
-                They expire at the end of that monthly period — the time was reserved from the shared team. You can change or stop your subscription anytime (effective at the next monthly deduction, 4 days' notice).
+                Yes. Every engagement — monthly or one-off — includes a dedicated PM in a private Slack channel. Your PM scopes the work, assigns the right specialists, runs QA, and returns finished white-label files. There's no extra management fee.
               </div>
             </div>
           </div>
 
+          <!-- FAQ 1d -->
           <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
             <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-              <span class="font-bold text-sm text-white">Can I use credits for other services?</span>
+              <span class="font-bold text-sm text-white">What is a scope call, and what happens after?</span>
               <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
             </button>
             <div class="faq-grid-wrapper">
               <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
-                Yes. One wallet pays for everything: crew hours, video editing, SEO content, and any à-la-carte service on the rate card.
+                A free 15-minute call where we map your workload to the right mix of monthly support and project work. Within 48 hours you receive a written scope with pricing, roles and estimated start date. No obligation — say yes, adjust it, or walk away.
               </div>
             </div>
           </div>
 
+          <!-- FAQ 1e -->
           <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
             <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-              <span class="font-bold text-sm text-white">What if my balance runs low?</span>
+              <span class="font-bold text-sm text-white">How do I pay and how am I billed?</span>
               <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
             </button>
             <div class="faq-grid-wrapper">
               <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
-                We auto top-up from your card on file so your subscription deduction never fails. Turn it off anytime — the plan simply pauses until you top up.
+                Monthly Support is invoiced monthly based on tracked hours with transparent time logs. Project Board items are invoiced per deliverable on order. We accept standard card and invoice payment — you'll see every hour and every deliverable itemized.
               </div>
             </div>
           </div>
 
+          <!-- FAQ 1f -->
           <div class="thine-glass-card rounded-2xl border-white/10 overflow-hidden">
             <button type="button" onclick="toggleFaq(this)" class="w-full p-5 text-left flex justify-between items-center gap-4 focus:outline-none min-touch">
-              <span class="font-bold text-sm text-white">Can I get a refund on credits?</span>
+              <span class="font-bold text-sm text-white">What if I need to cancel mid-month?</span>
               <span class="faq-icon-rot text-slate-400 text-lg font-mono">+</span>
             </button>
             <div class="faq-grid-wrapper">
               <div class="faq-inner px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
-                Credits are non-refundable and can't be exchanged for cash. They also never expire, so there's no pressure to spend fast.
+                You can pause or cancel Monthly Support anytime. You're only billed for hours already tracked — no termination fees, no lock-in. Project Board orders are billed per deliverable, so there's nothing ongoing to cancel.
               </div>
             </div>
           </div>
@@ -1951,38 +1848,6 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeMobileMenu2();
-        }
-      });
-    }
-
-    // 0B. MOBILE PRICING TAB SWITCHER
-    function switchPricingTab2(plan) {
-      const cards = {
-        Starter: document.getElementById('pricingCardStarter2'),
-        Growth: document.getElementById('pricingCardGrowth2'),
-        Scale: document.getElementById('pricingCardScale2')
-      };
-      const tabs = {
-        Starter: document.getElementById('tabStarter2'),
-        Growth: document.getElementById('tabGrowth2'),
-        Scale: document.getElementById('tabScale2')
-      };
-      Object.keys(cards).forEach(key => {
-        if (cards[key]) {
-          if (key === plan) {
-            cards[key].classList.remove('hidden');
-            cards[key].classList.add('flex');
-          } else {
-            cards[key].classList.add('hidden');
-            cards[key].classList.remove('flex');
-          }
-        }
-        if (tabs[key]) {
-          if (key === plan) {
-            tabs[key].className = 'pricing-tab-btn flex-1 py-2 px-1.5 rounded-full bg-blue-600 text-white shadow-xs transition-all text-center';
-          } else {
-            tabs[key].className = 'pricing-tab-btn flex-1 py-2 px-1.5 rounded-full text-slate-400 transition-all text-center';
-          }
         }
       });
     }
@@ -2533,34 +2398,34 @@
     const act1StatusEl = document.getElementById('act1-sim-status');
 
     const act1Tasks = [
-      {
-        text: "Resolve 42 orphan URLs & deploy Schema JSON-LD markup",
-        role: "Senior Tech Specialist ($5/hr)",
-        time: "Delivered in 6h",
-        burn: "-500 cr ($5.00)",
-        status: "Running Screaming Frog + Schema Validator..."
-      },
-      {
-        text: "Write 1,500w SEO Pillar on Medical Billing SaaS",
-        role: "Senior SEO Specialist ($5/hr)",
-        time: "Delivered in 12h",
-        burn: "-3,200 cr ($32.00)",
-        status: "SurferSEO score 87/100 · Plagiarism 0% verified"
-      },
-      {
-        text: "Edit 4 Short-Form Reels with motion captions & audio sync",
-        role: "Video Editor ($5/hr)",
-        time: "Delivered in 8h",
-        burn: "-2,000 cr ($20.00)",
-        status: "9:16 vertical render + white-label exported"
-      },
-      {
-        text: "Format & publish 25 Shopify e-commerce catalog items",
-        role: "Junior Tech Staff ($3/hr)",
-        time: "Delivered in 4h",
-        burn: "-600 cr ($6.00)",
-        status: "Inventory tags synced · CMS preview approved"
-      }
+              {
+                text: "Resolve 42 orphan URLs & deploy Schema JSON-LD markup",
+                role: "Senior Tech Specialist ($5/hr)",
+                time: "Delivered in 6h",
+                burn: "$30.00 at $5.00/hr",
+                status: "Running Screaming Frog + Schema Validator..."
+              },
+              {
+                text: "Write 1,500w SEO Pillar on Medical Billing SaaS",
+                role: "Senior SEO Specialist ($5/hr)",
+                time: "Delivered in 12h",
+                burn: "$60.00 at $5.00/hr",
+                status: "SurferSEO score 87/100 · Plagiarism 0% verified"
+              },
+              {
+                text: "Edit 4 Short-Form Reels with motion captions & audio sync",
+                role: "Video Editor ($5/hr)",
+                time: "Delivered in 8h",
+                burn: "$40.00 at $5.00/hr",
+                status: "9:16 vertical render + white-label exported"
+              },
+              {
+                text: "Format & publish 25 Shopify e-commerce catalog items",
+                role: "Junior Tech Staff ($3/hr)",
+                time: "Delivered in 4h",
+                burn: "$12.00 at $3.00/hr",
+                status: "Inventory tags synced · CMS preview approved"
+              }
     ];
 
     let act1Idx = 0;
@@ -2654,108 +2519,6 @@
     if (simTextEl) tickSimulator();
 
     // ==========================================
-    // 5. PAYPAL-STYLE LIVE CREDIT WALLET SIMULATOR
-    // ==========================================
-    function initCreditWalletSimulator() {
-      const sim = document.getElementById('creditWalletSim');
-      if (!sim) return;
-
-      const balanceNumEl = sim.querySelector('#walletBalanceNumber');
-      const currencyValEl = sim.querySelector('#walletCurrencyVal');
-      const deductTagEl = sim.querySelector('#walletDeductTag');
-      const ledgerListEl = sim.querySelector('#walletLedgerList');
-      const resetBtn = sim.querySelector('#walletResetBtn');
-      const taskButtons = sim.querySelectorAll('.wallet-task-pill');
-
-      const INITIAL_CREDITS = 110000;
-      let currentBalance = INITIAL_CREDITS;
-
-      function formatNumber(num) {
-        return Math.round(num).toLocaleString('en-US');
-      }
-
-      function formatCurrency(credits) {
-        const dollars = credits * 0.01;
-        return `$${dollars.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-      }
-
-      function updateDisplay(newBalance) {
-        currentBalance = Math.max(0, newBalance);
-        if (balanceNumEl) {
-          balanceNumEl.textContent = formatNumber(currentBalance);
-        }
-        if (currencyValEl) {
-          currencyValEl.textContent = formatCurrency(currentBalance);
-        }
-      }
-
-      taskButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const cost = parseInt(btn.getAttribute('data-deduct-credits') || '0', 10);
-          const taskName = btn.getAttribute('data-deduct-task') || 'Client Task Execution';
-          if (cost <= 0) return;
-
-          if (currentBalance < cost) {
-            if (balanceNumEl && balanceNumEl.parentElement) {
-              balanceNumEl.parentElement.classList.add('animate-pulse');
-              setTimeout(() => balanceNumEl.parentElement.classList.remove('animate-pulse'), 800);
-            }
-            return;
-          }
-
-          const newBal = currentBalance - cost;
-
-          if (deductTagEl) {
-            deductTagEl.textContent = `-${formatNumber(cost)} cr`;
-            deductTagEl.classList.remove('is-animating');
-            void deductTagEl.offsetWidth;
-            deductTagEl.classList.add('is-animating');
-          }
-
-          updateDisplay(newBal);
-
-          if (ledgerListEl) {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            const row = document.createElement('div');
-            row.className = 'flex items-center justify-between py-1.5 border-b border-white/5 text-slate-300';
-            row.innerHTML = `
-              <div class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                <span class="font-medium text-slate-200">${taskName}</span>
-                <span class="text-[10px] text-slate-500 font-mono">${timeStr}</span>
-              </div>
-              <span class="font-mono font-bold text-rose-400">-${formatNumber(cost)} cr</span>
-            `;
-            ledgerListEl.prepend(row);
-
-            while (ledgerListEl.children.length > 5) {
-              ledgerListEl.removeChild(ledgerListEl.lastChild);
-            }
-          }
-        });
-      });
-
-      if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-          updateDisplay(INITIAL_CREDITS);
-          if (ledgerListEl) {
-            ledgerListEl.innerHTML = `
-              <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-slate-300">
-                <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  <span>One-time top-up · Growth Pack</span>
-                </div>
-                <span class="text-emerald-400 font-bold">+110,000 cr</span>
-              </div>
-            `;
-          }
-        });
-      }
-    }
-    initCreditWalletSimulator();
-
-    // ==========================================
     // 6. GRANULAR STAFFING CALCULATOR
     // ==========================================
     const cJunior = document.getElementById('calcJunior');
@@ -2780,7 +2543,6 @@
       document.getElementById('calcArticlesLabel').textContent = `${artCount} articles ($${artCost})`;
 
       const totalJdp = jCost + sCost + vCost + artCost;
-      const totalCredits = (totalJdp * 100).toLocaleString();
 
       const usJunior = jHrs * 25;
       const usSenior = sHrs * 45;
@@ -2791,7 +2553,6 @@
       const savings = Math.max(0, totalUs - totalJdp);
       const pct = totalUs > 0 ? ((savings / totalUs) * 100).toFixed(1) : '0';
 
-      document.getElementById('outCredits').textContent = `${totalCredits} pts`;
       document.getElementById('outJdpCost').textContent = `$${totalJdp}/mo`;
       document.getElementById('outUsCost').textContent = `$${totalUs}/mo`;
       document.getElementById('outSavings').textContent = `+$${savings}/mo`;

@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jdp-team",
+  "compatibility_date": "2026-10-01",
+  "pages_build_output_dir": ".",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "jdp-team-db",
+      "database_id": "64e09b3b-98ba-48ff-8bee-4df3b164625a"
+    }
+  ]
+}

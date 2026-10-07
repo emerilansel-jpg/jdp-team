@@ -1,6 +1,6 @@
 # Fact Audit — jdp.team (index.html + homepage2.html) vs jetdigitalpro.com
 
-Audit date: 2026-09-29. Source inventory with verbatim quotes: `docs/fact-inventory.md`.
+Audit date: 2026-09-29. Updated 2026-09-30 for the storefront pivot (credits dropped; see pricing note). Source inventory with verbatim quotes: `docs/fact-inventory.md`.
 
 **Source reachability:** jetdigitalpro.com + /about-us/ + /our-portfolio/ fetched OK (200). Trustpilot profile is bot-walled (AWS WAF challenge) — TrustScore 4.2/5 could NOT be confirmed off-site; it is claimed on jetdigitalpro.com with an outbound link. Legiit profile HTML is JS-rendered — no rating extractable. All classifications below treat "on jetdigitalpro.com (self-published, with outbound link)" as the available source.
 
@@ -36,7 +36,7 @@ Audit date: 2026-09-29. Source inventory with verbatim quotes: `docs/fact-invent
 | 14 | Testimonial — Omar (L1151-1159) | Quote, role "Business Owner" | VERIFIED | Verbatim match with source T#8. |
 | 15 | Hidden "See more" testimonials (L1178-1217): Jose Jimenez, Jake L, AnnieLu | Quotes + names/roles | VERIFIED | All verbatim matches (T#5, T#4, T#3). "Verified Agency Review"/"Verified Founder Review" labels are presentation, fine. |
 | 16 | Footer credentials (L1222-1228): Legiit badge, "4.2 Trustpilot", Google, HubSpot | 4.2 + Google + HubSpot VERIFIED (badge links exist in source homepage HTML); "Level 4 Legiit" text (L1224) UNSUPPORTED | Source links Skillshop (Google) + HubSpot Academy profiles. "Level 4" appears nowhere. → Change "Level 4" → "Certified". |
-| 17 | FAQ | Credit rules, PM model, NDA/white-label, pause/cancel | NDA + white-label VERIFIED (R1/R2); credit rules = PRICING — left untouched per hard rule | See pricing note below. |
+| 17 | FAQ | Storefront purchase rules, PM model, NDA/white-label, pause/cancel | NDA + white-label VERIFIED (R1/R2); purchase/subscription rules = PRICING — canonical source is `docs/pricing-model.md` | See pricing note below. |
 
 ## homepage2.html — claim-by-claim (fact fixes ONLY)
 
@@ -53,15 +53,15 @@ Audit date: 2026-09-29. Source inventory with verbatim quotes: `docs/fact-invent
 | H9 | Founder card (L1295) | "scaled digital operations across hundreds of client campaigns" | UNSUPPORTED (soft) | Source bio: successful gardening blog, Udemy SEO Copywriting course, eCommerce ventures, co-leading TheSiteSale.com. → Soften to "Having run eCommerce ventures and co-led projects like TheSiteSale.com, Nell created JDP.team to solve the single greatest friction point in agency growth: unmanaged contractors and unpredictable delivery quality." |
 | H10 | Founder mini-stats (L1301-1314): "Level 4 Legiit Certified", "4.2/5.0 Trustpilot", "Google Certified", "HubSpot Certified" | 4.2/Google/HubSpot VERIFIED; "Level 4" UNSUPPORTED | → "Level 4" → "Certified". |
 | H11 | Testimonials: Hodgdon, Baranik, Jimenez, Jake L, AnnieLu, Omar | All quotes + attributions | VERIFIED | All verbatim matches with source. |
-| H12 | Pricing section (L1466+) | Credit packs, refresh rules | PRICING — untouched per hard rule | See below. |
+| H12 | Pricing section (L1466+) | Storefront tiers + a-la-carte rates | PRICING — canonical source is `docs/pricing-model.md` (credits system dropped 2026-09-30) | See below. |
 
 ---
 
 ## Pricing discrepancies — REPORT ONLY (NOT fixed, per hard rule)
 
-1. **index.html + homepage2.html pricing model (credits, 100 cr = $1, 30-day refresh, credit-pack tiers, $3/hr junior / $5/hr senior) does not appear on the public jetdigitalpro.com pages fetched.** The source site sells SEO content packages via free-sample CTA; no public credit/expiry/rollover rules were found. The credit model is presumably the owner's own JDP.team offer — flagging only that it cannot be cross-verified against jetdigitalpro.com.
+1. **MODEL CHANGE (2026-09-30): the credit system was DROPPED.** JDP.team is now a direct-service storefront — clients buy services in dollars, one-time (a-la-carte) or monthly subscription (4 tiers). The canonical pricing is `docs/pricing-model.md` (owner-approved). Old credit-pack rules (100 cr = $1, 30-day refresh, "credits never expire") must NOT appear anywhere on the site. New model is the owner's own JDP.team offer; it cannot be cross-verified against jetdigitalpro.com (which sells SEO content packages via free-sample CTA) — flagging only.
 2. **homepage2.html L1043 "12-24 Hour Turnaround" sits adjacent to pricing copy** — flagged as unsupported (fixed as H4, since it's a delivery claim, not a pricing rule).
-3. index.html hero meta description mentions "junior staff from $3/hr" — pricing-adjacent; left untouched per hard rule.
+3. index.html hero meta description mentions "junior staff from $3/hr" — pricing-adjacent; remains TRUE under the new storefront model ($3.00/hr = junior 160-hr/mo subscription tier rate).
 
 ## Verified trust items available for the Task 2 strip
 

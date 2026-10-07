@@ -4,3 +4,11 @@ node_modules/
 .wrangler/
 .DS_Store
 Thumbs.db
+.verify/
+.audit/
+.browser-sessions/
+.playwright-mcp/
+browser-screenshots/
+.check_tmp/
+index-final.png
+services-full.png

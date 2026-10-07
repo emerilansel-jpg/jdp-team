@@ -82,6 +82,19 @@ Format: Title » Quote » Name, Role | Company. All from https://jetdigitalpro.c
 - Chris M. Walker (CEO at Legiit): "Relevance is the north star of link building."
 - James De Lacy (Founder, Sweet Science of Fighting): "You must develop the knowledge, application, and expertise first before going all out on social media."
 
-## Pricing (REPORT-ONLY — do not fix)
+## Pricing (JDP.team storefront model — canonical: `docs/pricing-model.md`)
 
-The homepage text extraction did not surface a public pricing table with per-credit rules; services are quoted via packages/free-sample CTA. If index.html/homepage2.html state specific credit prices, expiry or rollover rules, those cannot be verified against the fetched source pages and must be left untouched (per the hard rule) and reported.
+**MODEL CHANGE (2026-09-30):** the credit system was DROPPED. JDP.team now sells services DIRECTLY in dollars — one-time (a-la-carte) or monthly subscription (40/80/120/160 hr tiers; more hours = cheaper per hour). Canonical rates:
+
+| Level | Junior $/hr | Junior $/mo | Senior $/hr | Senior $/mo |
+|---|---|---|---|---|
+| A-la-carte (one-time) | $6.16 | per-task | $10.27 | per-task |
+| 40 hr/mo | $4.56 | $182 | $7.61 | $304 |
+| 80 hr/mo | $3.97 | $318 | $6.61 | $529 |
+| 120 hr/mo | $3.45 | $414 | $5.75 | $690 |
+| 160 hr/mo | $3.00 | $480 | $5.00 | $800 |
+
+Other service rates: Video Editor $5.00/hr, SEO Specialist $7.00/hr, SEO Content $32.00/article.
+Subscription rules: PayPal recurring, flat monthly, cancel with 4-day notice, unused subscription hours expire at cycle end, non-refundable. A-la-carte: one-time payment, no commitment.
+
+This model is the owner's own JDP.team offer and cannot be verified against the fetched jetdigitalpro.com pages (which quote via packages/free-sample CTA and show no public pricing table). Old credit-era copy ("1 Credit = $0.01", credit packs, "credits never expire", wallets, top-ups) is RETIRED and must not appear on any page.

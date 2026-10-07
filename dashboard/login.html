@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — JDP Team</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { theme: { extend: { colors: { brand: {50:'#eef2ff',100:'#e0e7ff',600:'#4f46e5',700:'#4338ca'}, slate:{950:'#020617'} } } } }</script>
+</head>
+<body class="min-h-screen bg-slate-950 text-white flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <div class="text-center mb-8">
+      <div class="text-2xl font-black tracking-tight">JDP<span class="text-brand-600">.team</span></div>
+      <p class="text-slate-400 text-sm mt-1">Client &amp; staff portal</p>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur">
+      <!-- Tabs -->
+      <div class="grid grid-cols-2 gap-1 p-1 bg-white/5 rounded-lg mb-6 text-sm font-semibold">
+        <button id="tabMagic" class="py-2 rounded-md bg-brand-600 text-white" onclick="switchTab('magic')">I'm a client</button>
+        <button id="tabStaff" class="py-2 rounded-md text-slate-300 hover:text-white" onclick="switchTab('staff')">Staff login</button>
+      </div>
+
+      <!-- Magic link (client) -->
+      <form id="formMagic" onsubmit="sendMagic(event)" class="space-y-4">
+        <p class="text-sm text-slate-400">We'll email you a secure sign-in link — no password needed.</p>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">Work email</label>
+          <input id="magicEmail" type="email" required autocomplete="email"
+                 class="w-full rounded-lg bg-slate-900 border border-white/10 px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-brand-600 focus:outline-none"
+                 placeholder="you@agency.com">
+        </div>
+        <button id="magicBtn" class="w-full py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 font-bold transition-colors">Email me a sign-in link</button>
+      </form>
+
+      <!-- Password (staff) -->
+      <form id="formStaff" onsubmit="staffLogin(event)" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">Email</label>
+          <input id="staffEmail" type="email" autocomplete="username"
+                 class="w-full rounded-lg bg-slate-900 border border-white/10 px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-brand-600 focus:outline-none"
+                 placeholder="you@jdp.team">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">Password</label>
+          <input id="staffPassword" type="password" autocomplete="current-password"
+                 class="w-full rounded-lg bg-slate-900 border border-white/10 px-3.5 py-2.5 text-white placeholder-slate-500 focus:border-brand-600 focus:outline-none"
+                 placeholder="••••••••">
+        </div>
+        <button id="staffBtn" class="w-full py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 font-bold transition-colors">Sign in</button>
+      </form>
+
+      <div id="notice" class="hidden mt-4 text-sm rounded-lg px-3.5 py-2.5"></div>
+    </div>
+
+    <p class="text-center text-xs text-slate-500 mt-6">
+      <a href="/" class="hover:text-slate-300">← Back to jdp.team</a>
+    </p>
+  </div>
+
+<script>
+const notice = document.getElementById('notice');
+function show(kind, msg) {
+  notice.className = 'mt-4 text-sm rounded-lg px-3.5 py-2.5 ' +
+    (kind === 'ok' ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                   : 'bg-red-500/15 text-red-300 border border-red-500/30');
+  notice.textContent = msg;
+}
+function switchTab(which) {
+  const magic = which === 'magic';
+  document.getElementById('formMagic').classList.toggle('hidden', !magic);
+  document.getElementById('formStaff').classList.toggle('hidden', magic);
+  document.getElementById('tabMagic').className = 'py-2 rounded-md ' + (magic ? 'bg-brand-600 text-white' : 'text-slate-300 hover:text-white');
+  document.getElementById('tabStaff').className = 'py-2 rounded-md ' + (!magic ? 'bg-brand-600 text-white' : 'text-slate-300 hover:text-white');
+}
+// Surface ?error= from failed verify redirects
+const params = new URLSearchParams(location.search);
+if (params.get('error')) show('err', params.get('error'));
+
+async function sendMagic(e) {
+  e.preventDefault();
+  const btn = document.getElementById('magicBtn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const res = await fetch('/api/auth/magic-link', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: document.getElementById('magicEmail').value })
+    });
+    const data = await res.json();
+    if (!res.ok) { show('err', data.error || 'Something went wrong'); return; }
+    show('ok', 'Check your inbox — your sign-in link is on its way. It expires in 15 minutes.');
+    if (data.dev_link) {
+      // Dev convenience until email provider is wired: show the link.
+      notice.innerHTML += '<br><a class="underline break-all" href="' + data.dev_link + '">Dev link: ' + data.dev_link + '</a>';
+    }
+  } catch { show('err', 'Network error — try again.'); }
+  finally { btn.disabled = false; btn.textContent = 'Email me a sign-in link'; }
+}
+
+async function staffLogin(e) {
+  e.preventDefault();
+  const btn = document.getElementById('staffBtn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: document.getElementById('staffEmail').value,
+        password: document.getElementById('staffPassword').value
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) { show('err', data.error || 'Invalid credentials'); return; }
+    const next = params.get('next');
+    location.href = next && next.startsWith('/dashboard/') ? next : data.redirect;
+  } catch { show('err', 'Network error — try again.'); }
+  finally { btn.disabled = false; btn.textContent = 'Sign in'; }
+}
+</script>
+</body>
+</html>

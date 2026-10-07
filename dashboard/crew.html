@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crew Dashboard — JDP Team</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { theme: { extend: { colors: { brand: {600:'#4f46e5',700:'#4338ca'}, slate:{950:'#020617'} } } } }</script>
+</head>
+<body class="min-h-screen bg-slate-950 text-white">
+  <header class="border-b border-white/10 bg-slate-900/60 backdrop-blur sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-lg font-black tracking-tight">JDP<span class="text-brand-600">.team</span></div>
+        <span class="text-xs text-slate-400 border border-white/10 rounded-full px-2 py-0.5">Crew</span>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <span class="text-slate-300" id="userName">…</span>
+        <button onclick="dash.logout()" class="text-slate-400 hover:text-white">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <h1 class="text-lg font-bold">My queue</h1>
+        <button onclick="loadAll()" class="text-sm text-slate-400 hover:text-white">↻ Refresh</button>
+      </div>
+      <div id="queue" class="space-y-3"></div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-bold mb-3">Recent time logs</h2>
+      <div id="logs" class="space-y-2"></div>
+    </section>
+  </main>
+
+  <!-- Time log modal -->
+  <div id="logModal" class="hidden fixed inset-0 bg-black/70 z-20 flex items-center justify-center p-4" onclick="if(event.target===this)this.classList.add('hidden')">
+    <form onsubmit="logTime(event)" class="bg-slate-900 border border-white/10 rounded-2xl p-6 w-full max-w-md space-y-4">
+      <h2 class="font-bold text-lg">Log time</h2>
+      <div id="logItemName" class="text-sm text-slate-400"></div>
+      <input type="hidden" id="logItemId">
+      <div>
+        <label class="block text-xs font-bold text-slate-300 mb-1.5">Minutes</label>
+        <input id="logMinutes" type="number" min="1" max="1440" required class="w-full rounded-lg bg-slate-950 border border-white/10 px-3.5 py-2.5 text-sm focus:border-brand-600 focus:outline-none" placeholder="e.g. 90">
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-slate-300 mb-1.5">Note (optional)</label>
+        <input id="logNote" maxlength="500" class="w-full rounded-lg bg-slate-950 border border-white/10 px-3.5 py-2.5 text-sm focus:border-brand-600 focus:outline-none" placeholder="What did you work on?">
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" onclick="document.getElementById('logModal').classList.add('hidden')" class="px-4 py-2 text-sm text-slate-400 hover:text-white">Cancel</button>
+        <button class="bg-brand-600 hover:bg-brand-700 rounded-lg px-4 py-2 text-sm font-bold">Save</button>
+      </div>
+    </form>
+  </div>
+
+<script src="/dashboard/dash.js"></script>
+<script>
+const NEXT_STATUS = { assigned: 'working', working: 'review', review: 'done' };
+let myItems = [];
+let orders = [];
+
+async function boot() {
+  if (!(await dash.init('crew'))) return;
+  await loadAll();
+}
+async function loadAll() {
+  const [oRes, lRes] = await Promise.all([fetch('/api/orders'), fetch('/api/time-logs')]);
+  orders = (await oRes.json()).orders || [];
+  myItems = [];
+  for (const o of orders) {
+    for (const i of (o.items || [])) {
+      if (i.assigned_crew_id === dash.me.id) myItems.push({ ...i, order_id: o.id, order_brief: o.brief, order_status: o.status });
+    }
+  }
+  renderQueue();
+  const logs = (await lRes.json()).time_logs || [];
+  renderLogs(logs);
+}
+function renderQueue() {
+  const active = myItems.filter(i => i.status !== 'done');
+  const el = document.getElementById('queue');
+  if (!active.length) {
+    el.innerHTML = '<div class="text-slate-500 text-sm border border-dashed border-white/10 rounded-xl p-8 text-center">Nothing assigned to you right now.</div>';
+    return;
+  }
+  el.innerHTML = active.map(i => `
+    <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-wrap items-center gap-3 justify-between">
+      <div class="min-w-0">
+        <div class="font-semibold text-sm">${dash.esc(i.service_name)} × ${i.qty} ${i.unit}${i.qty>1?'s':''}</div>
+        <div class="text-xs text-slate-400 mt-0.5 truncate">${dash.esc((i.order_brief||'').split('\n')[0].slice(0,80))}</div>
+        <div class="text-[11px] text-slate-500 mt-0.5">${i.due_at ? 'Due ' + dash.fmtDate(i.due_at) : 'No due date'}</div>
+      </div>
+      <div class="flex items-center gap-2">
+        ${dash.statusBadge(i.status)}
+        <button onclick="openLog('${i.id}', '${dash.esc(i.service_name)}')" class="text-xs border border-white/15 hover:border-white/40 rounded-lg px-2.5 py-1.5">Log time</button>
+        ${NEXT_STATUS[i.status] ? `<button onclick="advance('${i.order_id}','${i.id}','${NEXT_STATUS[i.status]}')" class="text-xs bg-brand-600 hover:bg-brand-700 rounded-lg px-2.5 py-1.5 font-semibold">Mark ${NEXT_STATUS[i.status]}</button>` : ''}
+      </div>
+    </div>`).join('');
+}
+function renderLogs(logs) {
+  const el = document.getElementById('logs');
+  if (!logs.length) { el.innerHTML = '<div class="text-slate-500 text-sm">No time logged yet.</div>'; return; }
+  const total = logs.reduce((s, l) => s + l.minutes, 0);
+  el.innerHTML = `<div class="text-xs text-slate-400 mb-2">Total logged: <span class="font-bold text-white">${Math.floor(total/60)}h ${total%60}m</span></div>` +
+    logs.slice(0, 20).map(l => `
+      <div class="flex items-center justify-between bg-white/5 border border-white/10 rounded-lg px-3.5 py-2.5 text-sm">
+        <span>${dash.esc(l.note || 'Work session')}</span>
+        <span class="text-slate-400 text-xs">${l.minutes} min · ${dash.fmtDate(l.logged_at)}</span>
+      </div>`).join('');
+}
+function openLog(itemId, name) {
+  document.getElementById('logItemId').value = itemId;
+  document.getElementById('logItemName').textContent = name;
+  document.getElementById('logModal').classList.remove('hidden');
+}
+async function advance(orderId, itemId, status) {
+  // Crew advances item status via the orders PATCH (manager-level route checks role — crew needs its own path)
+  const res = await fetch('/api/orders', {
+    method: 'PATCH', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ order_id: orderId, item_id: itemId, item_status: status })
+  });
+  if (!res.ok) {
+    const d = await res.json().catch(() => ({}));
+    alert(d.error || 'Could not update status');
+  }
+  await loadAll();
+}
+async function logTime(e) {
+  e.preventDefault();
+  const res = await fetch('/api/time-logs', {
+    method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      item_id: document.getElementById('logItemId').value,
+      minutes: Number(document.getElementById('logMinutes').value),
+      note: document.getElementById('logNote').value
+    })
+  });
+  const d = await res.json().catch(() => ({}));
+  if (!res.ok) { alert(d.error || 'Failed'); return; }
+  document.getElementById('logModal').classList.add('hidden');
+  document.getElementById('logMinutes').value = '';
+  document.getElementById('logNote').value = '';
+  await loadAll();
+}
+boot();
+</script>
+</body>
+</html>

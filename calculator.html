@@ -110,11 +110,11 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase tracking-wider">Live</span>
-        <span>Real-time staffing calculator based on <strong>1 Credit = $0.01 USD</strong> benchmarked vs US payroll.</span>
+        <span>Real-time staffing calculator with direct dollar pricing, benchmarked vs US payroll.</span>
       </div>
       <div class="hidden sm:flex items-center gap-5 text-slate-400">
         <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 1 Dedicated PM</span>
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Credits Never Expire</span>
+        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Cancel Anytime (4-Day Notice)</span>
         <a href="/proof.html" class="text-brand-400 hover:text-white underline font-semibold">View Case Studies →</a>
       </div>
     </div>
@@ -149,11 +149,11 @@
 
       <!-- Desktop CTAs -->
       <div class="hidden sm:flex items-center gap-3">
-        <a href="/contact.html" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
-          Book Intro Call
+        <a href="/services.html" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
+          Browse Services
         </a>
         <a href="/services.html#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
-          Start with Credits
+          Get Started
         </a>
       </div>
 
@@ -171,11 +171,11 @@
       <a href="/proof.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
       <a href="/contact.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Contact & FAQ</a>
       <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <a href="/contact.html" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
-          Book Intro Call
+        <a href="/services.html" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
+          Browse Services
         </a>
         <a href="/services.html#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
-          Start with Credits
+          Get Started
         </a>
       </div>
     </div>
@@ -390,12 +390,7 @@
             <!-- Standard In-House Savings View -->
             <div id="savingsView" class="space-y-5">
               <div class="flex justify-between items-center text-sm">
-                <span class="text-slate-400">Credits Required</span>
-                <span id="outCredits" class="font-bold text-brand-300 text-lg val-flash">69,700 pts</span>
-              </div>
-
-              <div class="flex justify-between items-center text-sm">
-                <span class="text-slate-400">Your JDP Team Cost</span>
+                <span class="text-slate-400">Estimated Monthly Cost with JDP</span>
                 <span id="outJdpCost" class="font-black text-white text-2xl val-flash">$697.00</span>
               </div>
 
@@ -435,7 +430,7 @@
               </div>
 
               <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed">
-                💡 <strong>Recommended Plan:</strong> <span id="recPlanName" class="font-bold text-white">Growth Pod ($999/mo)</span> includes 110,000 credits, leaving <span id="recPlanLeft" class="font-bold text-brand-300">40,300 buffer credits</span> for your current monthly cycle.
+                💡 <strong>Recommended Plan:</strong> <span id="recPlanName" class="font-bold text-white">Junior Pod 160 hr/mo — $480/mo (≈$3.00/hr)</span> <span id="recPlanNote">or buy a-la-carte at $6.16/hr (junior) / $10.27/hr (senior) for one-off tasks.</span>
               </div>
             </div>
 
@@ -480,7 +475,7 @@
             <!-- CTA Buttons -->
             <div class="mt-8 pt-6 border-t border-slate-800 space-y-3">
               <a id="btnGetSetup" href="/services.html#pricing" class="w-full py-4 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-500 text-white btn-motion text-center block shadow-lg shadow-brand-600/30">
-                Get This Setup with Credits →
+                Get This Setup →
               </a>
               <a href="/contact.html" class="w-full py-3 rounded-xl font-semibold text-xs border border-slate-700 hover:border-slate-600 bg-slate-900 hover:bg-slate-800 text-slate-300 btn-motion text-center block">
                 Book 15-Min Intro Call to Review Setup
@@ -488,7 +483,7 @@
             </div>
 
             <div class="mt-4 text-center">
-              <span class="text-[11px] text-slate-500">100% White-Label • Roll-Over Balance • Pause Anytime</span>
+              <span class="text-[11px] text-slate-500">100% White-Label • Pause or Cancel Anytime • Billed Monthly via PayPal</span>
             </div>
 
           </div>
@@ -508,7 +503,7 @@
           How Our Benchmark Calculation Works
         </h2>
         <p class="text-sm text-slate-600 mt-2 max-w-xl mx-auto">
-          We compare real JDP credit rates against median US contractor and in-house salaries.
+          We compare published JDP dollar rates against median US contractor and in-house salaries.
         </p>
       </div>
 
@@ -517,8 +512,7 @@
           <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider text-[11px]">
             <tr>
               <th class="p-4 sm:p-5">Service / Role</th>
-              <th class="p-4 sm:p-5">JDP Credit Rate</th>
-              <th class="p-4 sm:p-5">JDP Dollar Equiv.</th>
+              <th class="p-4 sm:p-5">JDP Rate</th>
               <th class="p-4 sm:p-5">US In-House Benchmark</th>
               <th class="p-4 sm:p-5 text-right">Agency Advantage</th>
             </tr>
@@ -526,36 +520,31 @@
           <tbody class="divide-y divide-slate-100 text-slate-800">
             <tr>
               <td class="p-4 sm:p-5 font-semibold">Junior Remote Staff (Admin/Research)</td>
-              <td class="p-4 sm:p-5 font-mono text-brand-600">300 pts/hr</td>
-              <td class="p-4 sm:p-5 font-bold text-slate-950">$3.00 / hr</td>
+              <td class="p-4 sm:p-5 font-mono font-bold text-slate-950">$3.00 / hr</td>
               <td class="p-4 sm:p-5 text-slate-500">$25.00 / hr</td>
               <td class="p-4 sm:p-5 text-right font-bold text-accent-700">88.0% Lower</td>
             </tr>
             <tr>
               <td class="p-4 sm:p-5 font-semibold">Senior Specialist (Technical SEO / CMS)</td>
-              <td class="p-4 sm:p-5 font-mono text-indigo-600">500 pts/hr</td>
-              <td class="p-4 sm:p-5 font-bold text-slate-950">$5.00 / hr</td>
+              <td class="p-4 sm:p-5 font-mono font-bold text-slate-950">$5.00 / hr</td>
               <td class="p-4 sm:p-5 text-slate-500">$40.00 / hr</td>
               <td class="p-4 sm:p-5 text-right font-bold text-accent-700">87.5% Lower</td>
             </tr>
             <tr>
               <td class="p-4 sm:p-5 font-semibold">Video Editor (Reels / Shorts / Long Cuts)</td>
-              <td class="p-4 sm:p-5 font-mono text-emerald-600">500 pts/hr</td>
-              <td class="p-4 sm:p-5 font-bold text-slate-950">$5.00 / hr</td>
+              <td class="p-4 sm:p-5 font-mono font-bold text-slate-950">$5.00 / hr</td>
               <td class="p-4 sm:p-5 text-slate-500">$45.00 / hr</td>
               <td class="p-4 sm:p-5 text-right font-bold text-accent-700">88.9% Lower</td>
             </tr>
             <tr>
               <td class="p-4 sm:p-5 font-semibold">SEO Article (1,200 Words Researched)</td>
-              <td class="p-4 sm:p-5 font-mono text-amber-600">3,200 pts/art</td>
-              <td class="p-4 sm:p-5 font-bold text-slate-950">$32.00 / art</td>
+              <td class="p-4 sm:p-5 font-mono font-bold text-slate-950">$32.00 / art</td>
               <td class="p-4 sm:p-5 text-slate-500">$120.00 / art</td>
               <td class="p-4 sm:p-5 text-right font-bold text-accent-700">73.3% Lower</td>
             </tr>
             <tr>
               <td class="p-4 sm:p-5 font-semibold">Press Release Syndication (PressWires.net)</td>
-              <td class="p-4 sm:p-5 font-mono text-rose-600">24,000 pts/PR</td>
-              <td class="p-4 sm:p-5 font-bold text-slate-950">$240.00 / PR</td>
+              <td class="p-4 sm:p-5 font-mono font-bold text-slate-950">$240.00 / PR</td>
               <td class="p-4 sm:p-5 text-slate-500">$500.00 / PR</td>
               <td class="p-4 sm:p-5 text-right font-bold text-accent-700">52.0% Lower</td>
             </tr>
@@ -598,11 +587,11 @@
         <div>
           <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Specialist Rates</div>
           <ul class="space-y-2 text-xs text-slate-500">
-            <li>Junior Staff: <strong class="text-slate-700">$3.00/hr</strong> (300 credits)</li>
-            <li>Senior Specialist: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
-            <li>Video Editor: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
-            <li>SEO Specialist: <strong class="text-slate-700">$7.00/hr</strong> (700 credits)</li>
-            <li>SEO Content: <strong class="text-slate-700">$32.00/art</strong> (3,200 credits)</li>
+            <li>Junior Staff: <strong class="text-slate-700">$3.00/hr</strong></li>
+            <li>Senior Specialist: <strong class="text-slate-700">$5.00/hr</strong></li>
+            <li>Video Editor: <strong class="text-slate-700">$5.00/hr</strong></li>
+            <li>SEO Specialist: <strong class="text-slate-700">$7.00/hr</strong></li>
+            <li>SEO Content: <strong class="text-slate-700">$32.00/article</strong></li>
           </ul>
         </div>
 
@@ -710,15 +699,13 @@
       document.getElementById('labelArticle').textContent = `${artCount} articles ($${artCount * 32})`;
       document.getElementById('labelPR').textContent = `${prCount} releases ($${prCount * 240})`;
 
-      // Cost & Credits
+      // Cost (published dollar rates)
       const jdpCost = (jHrs * 3) + (sHrs * 5) + (vHrs * 5) + (artCount * 32) + (prCount * 240);
-      const credits = jdpCost * 100;
       const usCost = (jHrs * 25) + (sHrs * 40) + (vHrs * 45) + (artCount * 120) + (prCount * 500);
       const savings = Math.max(0, usCost - jdpCost);
       const percent = usCost > 0 ? ((savings / usCost) * 100).toFixed(1) : 0;
 
       // Update Savings View
-      document.getElementById('outCredits').textContent = `${credits.toLocaleString()} pts`;
       document.getElementById('outJdpCost').textContent = `$${jdpCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
       document.getElementById('outUsCost').textContent = `$${usCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
       document.getElementById('outSavings').textContent = `+$${savings.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
@@ -749,21 +736,20 @@
         window.calcConfettiFired = false;
       }
 
-      // Recommend Plan
+      // Recommend Buying Route (from monthly spend)
       const recPlan = document.getElementById('recPlanName');
       const recLeft = document.getElementById('recPlanLeft');
-      if (credits <= 50000) {
-        recPlan.textContent = 'Starter Pod ($499/mo)';
-        const diff = 50000 - credits;
-        recLeft.textContent = `${diff.toLocaleString()} buffer credits`;
-      } else if (credits <= 110000) {
-        recPlan.textContent = 'Growth Pod ($999/mo)';
-        const diff = 110000 - credits;
-        recLeft.textContent = `${diff.toLocaleString()} buffer credits`;
+      if (jdpCost <= 1500) {
+        recPlan.textContent = 'Monthly Support';
+        const diff = 1500 - jdpCost;
+        recLeft.textContent = diff > 0 ? `${diff.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })} headroom on a Monthly Support scope` : 'Fits within a Monthly Support scope';
+      } else if (jdpCost <= 4000) {
+        recPlan.textContent = 'Project Board';
+        const diff = 4000 - jdpCost;
+        recLeft.textContent = `${diff.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })} headroom on a Project Board scope`;
       } else {
-        recPlan.textContent = 'Scale Partner ($1,899/mo)';
-        const diff = Math.max(0, 220000 - credits);
-        recLeft.textContent = diff > 0 ? `${diff.toLocaleString()} buffer credits` : 'Top-up credits recommended';
+        recPlan.textContent = 'Custom Blended Scope';
+        recLeft.textContent = 'Above typical pod scope — request a custom quote';
       }
 
       // Reseller Mode Calc

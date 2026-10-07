@@ -239,3 +239,33 @@ Scored by PM from full-page screenshot + live checks. Rubric 0-10 per criterion:
 **CONFLICT to confirm:** a-la-carte(junior, 1.35x base)=$4.05 < sub-40hr=$4.56. Artinya sub-40hr LEBIH MAHAL/jam dari a-la-carte. Apakah intended (a-la-carte tetap termurah/jam utk jumlah kecil, subscription = untuk komitmen) atau a-la-carte hrs 1.35x dari SUBSCRIPTION rate terkait?
 
 **Monthly totals (junior):** 40hr=$182 | 80hr=$318 | 120hr=$414 | 160hr=$480. (senior: 40=$304 | 80=$529 | 120=$690 | 160=$800.)
+
+## 2026-10-06 — Sections Alignment (Founders Say, FAQ, Case Studies) & Cloudflare Pages Live Deploy
+
+- **Status:** COMPLETED & DEPLOYED & PM-VERIFIED
+- **Type:** UI RECOVERY + AUTHENTIC CONTENT RESTORATION + PRODUCTION DEPLOY
+- **Scope:** `index.html`, `motion.css`, `.gitignore`, live Cloudflare Pages (`jdp-team` at `https://jdp.team`)
+- **Key Objectives & Implemented Fixes:**
+  1. **Client Results (Case Studies):**
+     - Restored missing 4th card (Telecom Operator, 59.10% Terms in Top 100, +1,420 keywords) in `lg:grid-cols-4` desktop layout.
+     - Preserved exact verified metrics, DR badges, tag pills, and timelines across all 4 case cards.
+  2. **Founders Say (Testimonials):**
+     - Restored 4-column balanced desktop grid (`lg:grid-cols-4`).
+     - Replaced truncated/placeholder text with 100% authentic verbatim reviews & client headshot photos from jetdigitalpro.com:
+       - Michael Hodgdon (EliteSEOConsulting.com): Turnkey system, top tier content review.
+       - Peter Baranik (Founder | Colorwee.com): 40% lower CPA vs $5K/mo premium agencies.
+       - Jose Jimenez (Owner | JoliDigital.com): Autopilot blog growth & direct WP publishing.
+       - Jake L (ScaleRankings.com): VA service, accommodating, overseas VA praise.
+  3. **FAQ Section:**
+     - Removed wrapping `<details id="faqToggle">` barrier ("Browse all questions").
+     - Exposed all 6 primary onboarding & pricing questions directly in clean vertical stack.
+     - Fixed accordion closed state in CSS (`grid-template-rows: 0fr`, padding/border 0, height 0px) to eliminate collapsed gap clipping.
+  4. **Deployment & Live Verification:**
+     - Deployed directly to Cloudflare Pages production (`jdp-team`).
+     - Live production verified via Playwright headless tests at `https://jdp.team/` across desktop (1440px) and mobile (375px).
+- **Files touched:**
+  - `index.html`
+  - `motion.css`
+  - `.gitignore`
+  - `coldstart/coldstart.md`
+- **Deploy URL:** `https://jdp.team` (Cloudflare Pages `jdp-team`)

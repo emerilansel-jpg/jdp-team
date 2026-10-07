@@ -1,867 +1,910 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth no-js">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.replace('no-js','js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services & Credit Rate Card - JDP.team</title>
-  <meta name="description" content="Complete transparent credit pricing catalog. 1 Credit = $0.01 USD. Junior staff at $3/hr, senior specialists at $5/hr, SEO articles, and press release distribution.">
+  <title>Service Catalog & Storefront — JDP.team</title>
+  <meta name="description" content="Fiverr-style white-label service catalog: technical SEO audits, content, backlinks & PR, local SEO and AI-agent-ready human task fulfillment — fixed scope, transparent 'From $X' pricing, SLA-guaranteed turnaround.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/motion.css?v=20260924">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-search-console.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
           colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              300: '#93c5fd',
-              400: '#60a5fa',
-              500: '#2563eb',
-              600: '#1d4ed8',
-              700: '#1e40af',
-              800: '#1e3a8a',
-              900: '#172554'
-            },
-            accent: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857'
-            },
-            surface: {
-              pure: '#ffffff',
-              subtle: '#f8fafc',
-              muted: '#f1f5f9',
-              border: '#e2e8f0',
-              borderHover: '#cbd5e1'
-            }
-          }
+            brand: {50:'#eff6ff',100:'#dbeafe',600:'#0055ff',700:'#0044cc',900:'#0b1e3d'},
+            accent: {500:'#f59e0b',600:'#d97706'},
+            surface: {subtle:'#f8fafc'}
+          },
+          fontFamily: { sans: ['Plus Jakarta Sans','sans-serif'] },
+          animation: { 'fade-in': 'fadeIn .5s ease-out forwards' },
+          keyframes: { fadeIn: { '0%': {opacity: '0', transform: 'translateY(10px)'}, '100%': {opacity: '1', transform: 'translateY(0)'} } }
         }
       }
     }
   </script>
+  <link rel="stylesheet" href="https://unpkg.com/@fontsource/plus-jakarta-sans@latest/index.css">
   <style>
-    :root {
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --dur-short: 200ms;
-      --dur-long: 400ms;
-    }
-    body {
-      background-color: #ffffff;
-      color: #0f172a;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-    }
-    .bg-dot-grid {
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-    .bg-mesh-glow {
-      background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.07) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
-    }
-    .card-clean {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
-    }
-    .card-clean:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
-      transform: translateY(-2px);
-    }
-    .btn-motion {
-      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
-    }
-    .btn-motion:hover {
-      transform: translateY(-2px);
-    }
-    .btn-motion:active {
-      transform: translateY(1px);
-    }
+    .text-gradient { background: linear-gradient(135deg, #0055ff 0%, #0b1e3d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card-clean { background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(15,23,42,.06); }
+    .faq-grid-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.16,1,.3,1); }
+    .faq-grid-wrapper.open { grid-template-rows: 1fr; }
+    .faq-inner { overflow: hidden; }
+    .faq-icon-rot { transition: transform .3s; }
+    .faq-icon-rot.rotate-45 { transform: rotate(45deg); }
   </style>
+  <link rel="stylesheet" href="/motion.css?v=20260924">
 </head>
-<body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
-  <!-- Reading Progress Bar -->
-  <div id="progress-bar"></div>
+<body class="bg-surface-subtle text-slate-800 font-sans antialiased">
 
-  <!-- Top Announcement Bar -->
-  <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase tracking-wider">Live</span>
-        <span>Transparent credit pricing: <strong>1 Credit = $0.01 USD (1 Cent)</strong>. No hidden markups.</span>
+  <!-- Logo Preloader -->
+  <div id="page-preloader" aria-hidden="true" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#f8fafc;transition:opacity .4s ease;">
+    <div class="preloader-logo text-3xl font-black text-slate-900 tracking-tight" style="animation:preloader-pulse 1.2s ease-in-out infinite;">jdp<span class="text-brand-600">.team</span></div>
+  </div>
+  <style>
+    @keyframes preloader-pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.06); opacity: .75; } }
+    #page-preloader.preloader-done { opacity: 0; pointer-events: none; }
+  </style>
+  <script>
+    (function () {
+      var hide = function () {
+        var el = document.getElementById('page-preloader');
+        if (el && !el.classList.contains('preloader-done')) {
+          el.classList.add('preloader-done');
+          setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 500);
+        }
+      };
+      window.addEventListener('load', function () { setTimeout(hide, 300); });
+      setTimeout(hide, 2600);
+    })();
+  </script>
+
+  <!-- Glass Pill Navigation (consistent with index.html) -->
+  <nav class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+    <div class="glass-pill w-full max-w-3xl flex items-center justify-between px-4 sm:px-6 py-2.5">
+      <a href="/index.html" class="text-xl font-bold text-slate-900 tracking-tight">jdp<span class="text-brand-600">.team</span></a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="/services.html" class="text-brand-600 border-b-2 border-brand-600 pb-0.5">Services</a>
+        <a href="/calculator.html" class="hover:text-slate-950 transition">Calculator</a>
+        <a href="/proof.html" class="hover:text-slate-950 transition">Proof</a>
+        <a href="/contact.html" class="hover:text-slate-950 transition">Contact</a>
       </div>
-      <div class="hidden sm:flex items-center gap-5 text-slate-400">
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> 1 Dedicated PM</span>
-        <span class="flex items-center gap-1"><span class="text-accent-400">✓</span> Credits Never Expire</span>
-        <a href="/calculator.html" class="text-brand-400 hover:text-white underline font-semibold">Test ROI Calculator →</a>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Header / Navigation -->
-  <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
-          <span class="text-brand-400">J</span>
-        </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-slate-950 text-lg tracking-tight">JDP.team</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
-          </div>
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
-        </div>
-      </a>
-
-      <!-- Desktop Nav with Clay.com Fluid Sliding Pill -->
-      <nav id="desktop-nav" class="nav-pill-wrapper hidden md:inline-flex items-center">
-        <div id="nav-pill-indicator"></div>
-        <a href="/" class="nav-pill-link">Home</a>
-        <a href="/services.html" class="nav-pill-link is-active">Services & Pricing</a>
-        <a href="/calculator.html" class="nav-pill-link">ROI Calculator</a>
-        <a href="/proof.html" class="nav-pill-link">Proof & Reviews</a>
-        <a href="/contact.html" class="nav-pill-link">Contact & FAQ</a>
-      </nav>
-
-      <!-- Desktop CTAs -->
-      <div class="hidden sm:flex items-center gap-3">
-        <a href="/contact.html" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
-          Book Intro Call
-        </a>
-        <a href="#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
-          Start with Credits
-        </a>
-      </div>
-
-      <!-- Mobile Hamburger Button -->
-      <button id="mobileMenuBtn" aria-label="Toggle Navigation" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 border border-slate-200">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-    </div>
-
-    <!-- Mobile Drawer Menu -->
-    <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 text-sm font-medium">
-      <a href="/" class="block py-1.5 text-slate-700 hover:text-brand-600">Home</a>
-      <a href="/services.html" class="block py-1.5 font-bold text-brand-600">Services & Pricing</a>
-      <a href="/calculator.html" class="block py-1.5 text-slate-700 hover:text-brand-600">ROI Calculator</a>
-      <a href="/proof.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
-      <a href="/contact.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Contact & FAQ</a>
-      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <a href="/contact.html" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
-          Book Intro Call
-        </a>
-        <a href="#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
-          Start with Credits
-        </a>
+      <div class="flex items-center gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex bg-slate-950 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-[1.03] active:scale-[0.97]">Get Started</a>
+        <button id="mobile-menu-btn" class="md:hidden text-slate-600 p-1" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
       </div>
     </div>
-  </header>
+  </nav>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden fixed top-20 left-4 right-4 z-40 rounded-2xl bg-white border border-slate-200 shadow-xl p-5">
+    <div class="flex flex-col gap-3 text-sm font-semibold text-slate-700">
+      <a href="/services.html" class="text-brand-600">Services</a>
+      <a href="/calculator.html" class="hover:text-slate-950 transition">Calculator</a>
+      <a href="/proof.html" class="hover:text-slate-950 transition">Proof</a>
+      <a href="/contact.html" class="hover:text-slate-950 transition">Contact</a>
+      <a href="/contact.html" class="mt-2 bg-slate-950 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold text-center transition">Get Started</a>
+    </div>
+  </div>
 
-  <!-- Hero Section -->
-  <section class="relative pt-16 pb-14 md:pt-20 md:pb-20 overflow-hidden bg-mesh-glow border-b border-slate-200">
-    <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
-
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white/95 text-slate-800 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-brand-600"></span>
-        <span>Transparent Credit Conversion:</span>
-        <span class="text-brand-700 font-bold">1 Credit = $0.01 USD</span>
-      </div>
-
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 leading-tight">
-        Services & Flat Credit Rate Card
+  <!-- Hero -->
+  <section class="relative pt-32 sm:pt-40 pb-12 sm:pb-16 bg-slate-950 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.07] pointer-events-none" style="background-image: radial-gradient(#93c5fd 1px, transparent 1px); background-size: 28px 28px;"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-4 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-brand-300">
+        🏷️ 100% White-Label &nbsp;·&nbsp; 🤖 API &amp; Agent Ready
+      </span>
+      <h1 class="mt-6 text-3xl sm:text-5xl font-black tracking-tight leading-[1.1]">
+        Service Catalog &amp; Storefront
       </h1>
-
-      <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-        Everything priced in simple credits. Credits never expire — top up once, spend anytime.
+      <p class="mt-4 text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        Fixed-scope services, transparent "From $X" pricing, SLA-guaranteed turnaround.
+        Order like a product — we fulfill under your brand. We do the work, <strong class="text-white">you take the credit</strong>.
       </p>
 
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <a href="#hourly-staff" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-white hover:bg-slate-800 transition">
-          Remote Staff Rates
-        </a>
-        <a href="#seo-writing" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-800 border border-slate-300 hover:border-slate-400 transition">
-          SEO Writing Packs
-        </a>
-        <a href="#press-releases" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-800 border border-slate-300 hover:border-slate-400 transition">
-          Press Releases
-        </a>
-        <a href="#pricing" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 text-white hover:bg-brand-700 transition">
-          Monthly Plans
-        </a>
+      <!-- Live search -->
+      <div class="mt-8 max-w-xl mx-auto">
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+          <input id="service-search" type="search" autocomplete="off" placeholder="Search SEO audits, link building, WP publishing, agent tasks..."
+            class="w-full rounded-xl bg-white text-slate-900 placeholder-slate-400 pl-11 pr-4 py-3.5 text-sm font-medium border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent shadow-lg">
+        </div>
+      </div>
+
+      <!-- Category chips -->
+      <div id="category-chips" class="mt-5 flex flex-wrap justify-center gap-2">
+        <button type="button" data-cat="all" class="chip-btn px-4 py-2 rounded-full text-xs font-bold border transition-all bg-brand-600 border-brand-600 text-white">All Services</button>
+        <button type="button" data-cat="technical" class="chip-btn px-4 py-2 rounded-full text-xs font-bold border transition-all bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white">Technical SEO</button>
+        <button type="button" data-cat="content" class="chip-btn px-4 py-2 rounded-full text-xs font-bold border transition-all bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white">Content &amp; On-Page</button>
+        <button type="button" data-cat="backlinks" class="chip-btn px-4 py-2 rounded-full text-xs font-bold border transition-all bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white">Backlinks &amp; PR</button>
+        <button type="button" data-cat="local" class="chip-btn px-4 py-2 rounded-full text-xs font-bold border transition-all bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white">Local SEO</button>
+        <button type="button" data-cat="agent" class="chip-btn px-4 py-2 rounded-full text-xs font-bold border transition-all bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white">AI Agent Tasks</button>
       </div>
     </div>
   </section>
 
-  <!-- Section 1: Hourly Remote Staff Rates -->
-  <section id="hourly-staff" class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
+  <!-- Catalog Grid -->
+  <section id="catalog" class="py-12 sm:py-16 bg-surface-subtle">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+
+      <div class="flex items-center justify-between mb-6">
+        <p id="results-count" class="text-xs sm:text-sm font-bold text-slate-500" aria-live="polite">Showing 14 of 14 services</p>
+        <button id="clear-filters" type="button" class="hidden text-xs font-bold text-brand-600 hover:text-brand-700 underline underline-offset-2">Clear search &amp; filters</button>
+      </div>
+
+      <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
+        <!-- 1. Technical -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="technical" data-agent="false" data-title="Deep Technical SEO Audit" data-tags="audit crawl core web vitals indexation schema technical seo site health">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">Technical SEO</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">5-7 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Deep Technical SEO Audit</h3>
+          <p class="text-xs text-slate-500 mb-3">Full crawl &amp; prioritized fix roadmap your developers can action immediately.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>200+ checkpoint crawl report</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Core Web Vitals &amp; indexation review</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Prioritized fix roadmap + Loom walkthrough</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $199</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Technical-SEO-Audit" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">A human-led deep dive into your site's technical health: crawlability, indexation, site architecture, Core Web Vitals, schema markup, canonicalization, pagination, hreflang, and log-level issues. Built for agencies that need a client-ready, developer-actionable document.</p>
+            <p data-field="deliverables">200+ checkpoint crawl report|Core Web Vitals &amp; indexation review|Prioritized fix roadmap (P0/P1/P2)|Loom walkthrough video|Client-ready white-label PDF</p>
+            <p data-field="requirements">Website URL|Google Search Console access (read-only)|Any known dev constraints or platform (WP, Shopify, custom)</p>
+          </div>
+        </article>
+
+        <!-- 2. Technical -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="technical" data-agent="true" data-title="Core Web Vitals Speed Fix" data-tags="speed optimization core web vitals pagespeed lcp cls performance technical">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">Technical SEO</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">3-5 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Core Web Vitals Speed Fix</h3>
+          <p class="text-xs text-slate-500 mb-3">Hands-on optimization to push your scores into the green — verified before/after.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>LCP / CLS / INP hands-on fixes</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Image, script &amp; font optimization</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Before/after PageSpeed proof report</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $249</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=CWV-Speed-Fix" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">We don't hand you a report — we fix it. Our specialists optimize render-blocking resources, images, fonts, caching headers and third-party scripts to move LCP, CLS and INP into Google's green thresholds.</p>
+            <p data-field="deliverables">Hands-on fixes for LCP / CLS / INP|Image compression &amp; next-gen formats|Critical CSS &amp; script deferral|Caching &amp; CDN configuration|Before/after PageSpeed proof report</p>
+            <p data-field="requirements">CMS/hosting access (WP admin, Shopify, or SSH/SFTP)|Staging environment preferred|List of must-not-touch plugins or scripts</p>
+          </div>
+        </article>
+
+        <!-- 3. Technical -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="technical" data-agent="true" data-title="Schema Markup Implementation" data-tags="schema structured data rich snippets json-ld faq product technical seo">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">Technical SEO</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">72h</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Schema Markup Implementation</h3>
+          <p class="text-xs text-slate-500 mb-3">Structured data deployed and validated across up to 10 key pages.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>JSON-LD for up to 10 pages</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Product, FAQ, Article, LocalBusiness &amp; more</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Rich Results Test validation proof</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $99</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Schema-Implementation" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Manual JSON-LD schema implementation for the page types that win rich results: Product, FAQ, Article, LocalBusiness, Organization, Breadcrumb and more — validated in Google's Rich Results Test before handover.</p>
+            <p data-field="deliverables">JSON-LD markup for up to 10 pages|Correct @type per page template|Rich Results Test validation screenshots|Deployment to your CMS or hand-off file|Validation proof report</p>
+            <p data-field="requirements">List of target pages &amp; page types|CMS access or dev contact for deployment|Business details (NAP, logo, socials)</p>
+          </div>
+        </article>
+
+        <!-- 4. Content -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="content" data-agent="false" data-title="SEO Blog Article (1,500 words)" data-tags="blog article content writing copywriting seo content article writing human writer">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">Content &amp; On-Page</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">48h</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">SEO Blog Article (1,500 words)</h3>
+          <p class="text-xs text-slate-500 mb-3">Human-written, SERP-researched article ready to publish — or we publish it for you.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>1,500-word human-written article</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Keyword &amp; SERP research included</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Meta title, description &amp; internal links</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $32</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=SEO-Blog-Article" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Written by vetted human writers (no raw AI dumps), each article is researched against the live SERP for your target keyword, structured to rank, and delivered with on-page metadata. Optional CMS publishing add-on available.</p>
+            <p data-field="deliverables">1,500-word article in Google Doc|Keyword &amp; SERP research notes|Meta title + meta description|Suggested internal links|1 revision round included</p>
+            <p data-field="requirements">Target keyword or topic|Brand tone of voice notes|Any mandatory references or competitors to outrank</p>
+          </div>
+        </article>
+
+        <!-- 5. Content -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="content" data-agent="true" data-title="On-Page SEO Optimization (5 Pages)" data-tags="on-page optimization meta title description headings content optimization seo">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">Content &amp; On-Page</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">72h</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">On-Page SEO Optimization (5 Pages)</h3>
+          <p class="text-xs text-slate-500 mb-3">Titles, metas, headings, internal links &amp; content tune-ups on your money pages.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>5 pages fully optimized in-CMS</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Meta titles, descriptions &amp; headings</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Internal linking + change log</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $89</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=On-Page-SEO-5-Pages" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">We go inside your CMS and optimize five target pages end-to-end: search-intent-matched titles, click-worthy meta descriptions, H1-H3 structure, keyword placement, image alt text and internal links. Every change logged.</p>
+            <p data-field="deliverables">5 pages optimized directly in CMS|Rewritten titles &amp; meta descriptions|Heading structure fixes|Internal link additions|Change log spreadsheet</p>
+            <p data-field="requirements">CMS access|Target pages + their target keywords|Brand guidelines (if any)</p>
+          </div>
+        </article>
+
+        <!-- 6. Content -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="content" data-agent="true" data-title="WordPress Content Publishing (10 Posts)" data-tags="wordpress publishing wp upload formatting cms scheduling content upload">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">Content &amp; On-Page</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">24h</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">WordPress Content Publishing (10 Posts)</h3>
+          <p class="text-xs text-slate-500 mb-3">Formatted, optimized, scheduled — your content pipeline on autopilot.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>10 posts published or scheduled</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Formatting, images, alt text &amp; categories</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>SEO plugin fields completed</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $69</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=WP-Publishing-10" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Send us drafts or final docs — our operators handle the tedious part: clean Gutenberg/HTML formatting, featured images, alt text, categories/tags, Rank Math or Yoast fields, internal links and scheduling. Ideal hand-off step for AI content pipelines.</p>
+            <p data-field="deliverables">10 posts published or scheduled|Clean formatting &amp; heading structure|Featured image + alt text set|SEO plugin fields (Yoast/Rank Math)|Live URL list on completion</p>
+            <p data-field="requirements">WP admin access (Editor role is enough)|Content docs or drafts|Publishing schedule preference</p>
+          </div>
+        </article>
+
+        <!-- 7. Backlinks -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="backlinks" data-agent="true" data-title="Press Release Writing + Distribution" data-tags="press release pr distribution syndication media outlets google news brand mentions">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">Backlinks &amp; PR</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">7 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Press Release Writing + Distribution</h3>
+          <p class="text-xs text-slate-500 mb-3">Written, syndicated to 200+ outlets, and reported under your brand.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Professional press release writing</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>200+ media outlet syndication</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Google News inclusion + placement report</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $149</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Press-Release-Distribution" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">A complete PR sprint: our writers craft a newsworthy release, then we distribute it to 200+ media outlets and news aggregators including Google News. You receive a full placement report — white-labeled, ready to forward to your client.</p>
+            <p data-field="deliverables">500-word press release written|Syndication to 200+ outlets|Google News inclusion|As-seen-on badge assets|Full placement report (white-label)</p>
+            <p data-field="requirements">Announcement details &amp; quotes|Company boilerplate|Target URL + anchor preference</p>
+          </div>
+        </article>
+
+        <!-- 8. Backlinks -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="backlinks" data-agent="false" data-title="Niche Guest Post Placement (DR 30+)" data-tags="guest post backlinks niche edit outreach link building dr authority links">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">Backlinks &amp; PR</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">14 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Niche Guest Post Placement (DR 30+)</h3>
+          <p class="text-xs text-slate-500 mb-3">Real sites with real traffic — manual outreach, no PBNs, ever.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>DR 30+ real-traffic sites</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Content + manual outreach included</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Live link + placement report</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $120</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Niche-Guest-Post" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Our outreach team manually pitches and secures a guest post on a niche-relevant site with DR 30+ and verified organic traffic. We write the article, negotiate the placement, and report the live URL. No PBNs, no link farms — replacements guaranteed if a link drops within 6 months.</p>
+            <p data-field="deliverables">1 live guest post on DR 30+ site|700+ word niche article included|Anchor &amp; target URL of your choice|Site metrics screenshot (DR + traffic)|6-month link-drop replacement guarantee</p>
+            <p data-field="requirements">Target URL &amp; preferred anchors|Niche / industry|Anchors to avoid (if any)</p>
+          </div>
+        </article>
+
+        <!-- 9. Backlinks -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="backlinks" data-agent="false" data-title="Authority Link Insertions (Niche Edits)" data-tags="niche edits link insertion curated links backlinks existing content authority">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">Backlinks &amp; PR</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">7 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Authority Link Insertions (Niche Edits)</h3>
+          <p class="text-xs text-slate-500 mb-3">Your link placed inside existing, indexed, traffic-earning content.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Link placed in existing indexed articles</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Niche-relevant, traffic-verified pages</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Live URL report with metrics</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $90</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Niche-Edit-Insertion" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Faster than guest posts: we negotiate a contextual link insertion into an already-indexed, already-ranking article on a niche-relevant site. Great for boosting existing pages that sit on page 2.</p>
+            <p data-field="deliverables">1 contextual link insertion|Existing indexed &amp; ranking page|Niche + traffic verification|Live URL + metrics report|6-month link-drop replacement</p>
+            <p data-field="requirements">Target URL &amp; anchor|Niche / industry|Competitor examples (optional)</p>
+          </div>
+        </article>
+
+        <!-- 10. Local -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="local" data-agent="true" data-title="Google Business Profile Optimization" data-tags="gbp google business profile gmb local seo map pack optimization">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-50 text-orange-700 border border-orange-200">Local SEO</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">5 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Google Business Profile Optimization</h3>
+          <p class="text-xs text-slate-500 mb-3">Complete GBP overhaul plus 25 citations to dominate the local map pack.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Complete GBP profile optimization</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Categories, services, Q&amp;A &amp; photos</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>25 local citations built</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $129</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=GBP-Optimization" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">A complete local visibility package: we optimize every field of the Google Business Profile (categories, services, description, Q&amp;A, photos, posts) and build 25 consistent local citations to reinforce NAP signals.</p>
+            <p data-field="deliverables">Full GBP optimization (all fields)|Categories &amp; services configured|10 Q&amp;A seeded + 5 GBP posts|25 local citations with NAP consistency|Citation report with login details</p>
+            <p data-field="requirements">GBP manager access|Business details (NAP, hours, photos)|Service area or address confirmation</p>
+          </div>
+        </article>
+
+        <!-- 11. Local -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="local" data-agent="true" data-title="Local Citations Pack (50 Listings)" data-tags="citations local seo directory listings nap consistency local directories">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-orange-50 text-orange-700 border border-orange-200">Local SEO</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">7 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">Local Citations Pack (50 Listings)</h3>
+          <p class="text-xs text-slate-500 mb-3">50 hand-built, NAP-consistent directory listings with full report.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>50 hand-built directory listings</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>NAP consistency guaranteed</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Full report with login credentials</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">From $79</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Local-Citations-50" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Manual submissions to 50 high-quality general + niche + geo directories. No automated blasts — every listing is built by hand with consistent NAP data and delivered with a report including live URLs and login credentials.</p>
+            <p data-field="deliverables">50 manual directory submissions|General + niche + geo mix|NAP consistency check|Live URL + credentials report|Duplicate listing cleanup flags</p>
+            <p data-field="requirements">Business NAP details|Logo &amp; 3-5 photos|Short business description</p>
+          </div>
+        </article>
+
+        <!-- 12. Agent -->
+        <article class="service-card group rounded-2xl border-2 border-indigo-300 bg-indigo-50/40 p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-indigo-400"
+          data-category="agent" data-agent="true" data-title="Agent-Triggered Task Pack (10 Tasks)" data-tags="ai agent tasks api webhook n8n make automation human in the loop zapier workflow dispatch">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-indigo-100 text-indigo-700 border border-indigo-200">AI Agent Tasks</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">24h</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-indigo-700 transition mb-1.5">Agent-Triggered Task Pack (10 Tasks)</h3>
+          <p class="text-xs text-slate-500 mb-3">Your AI dispatches, our humans execute. API &amp; webhook native.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>10 human-executed task credits</li>
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>REST API + n8n/Make webhook dispatch</li>
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>Dashboard tracking &amp; proof-of-work</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-indigo-100">
+            <span class="text-sm font-black text-slate-950">From $99</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-indigo-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Agent-Task-Pack" class="text-[11px] font-bold bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">The inverted AI-to-human bridge: when your AI Agent or workflow hits a wall, it calls us. Dispatch tasks via REST API, n8n, Make, Zapier webhook — or manually from the dashboard. A vetted human operator completes each task with screenshots and timestamps returned to your system. Zero hallucinations, full SLA.</p>
+            <p data-field="deliverables">10 task credits (each up to 30 min of human work)|API key + webhook endpoint setup|n8n / Make / Zapier integration guide|Live dashboard with SLA timers|Proof-of-work payload (screenshots, timestamps, notes)</p>
+            <p data-field="requirements">Typical task examples &amp; SOPs|Any required tool access (guest seats)|Webhook endpoint to receive results (optional)</p>
+          </div>
+        </article>
+
+        <!-- 13. Agent -->
+        <article class="service-card group rounded-2xl border-2 border-indigo-300 bg-indigo-50/40 p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-indigo-400"
+          data-category="agent" data-agent="true" data-title="Human Verification &amp; QA (50 Checks)" data-tags="human verification qa quality assurance testing review checks uat content review">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-indigo-100 text-indigo-700 border border-indigo-200">AI Agent Tasks</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">48h</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-indigo-700 transition mb-1.5">Human Verification &amp; QA (50 Checks)</h3>
+          <p class="text-xs text-slate-500 mb-3">Human eyes on AI output, links, forms, and flows — pass/fail with evidence.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>50 human verification checks</li>
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>Links, forms, UX flows &amp; AI output review</li>
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>Pass/fail report with screenshots</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-indigo-100">
+            <span class="text-sm font-black text-slate-950">From $119</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-indigo-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Human-Verification-QA-50" class="text-[11px] font-bold bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">Anything AI generates, a human should verify. Our operators manually check links, forms, user flows, published content and AI outputs against your checklist — and return a pass/fail report with screenshot evidence for every check.</p>
+            <p data-field="deliverables">50 individual verification checks|Checklist execution by trained humans|Screenshot evidence per check|Pass/fail + severity report|Webhook result delivery (optional)</p>
+            <p data-field="requirements">Checklist or test cases|URLs / assets to verify|Staging access where needed</p>
+          </div>
+        </article>
+
+        <!-- 14. Agent -->
+        <article class="service-card group rounded-2xl border-2 border-indigo-300 bg-indigo-50/40 p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-indigo-400"
+          data-category="agent" data-agent="true" data-title="Manual Data Entry &amp; Enrichment (200 Rows)" data-tags="data entry enrichment crm cleanup research manual data spreadsheet lead research">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-indigo-100 text-indigo-700 border border-indigo-200">AI Agent Tasks</span>
+            <span class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">3-5 days</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-indigo-700 transition mb-1.5">Manual Data Entry &amp; Enrichment (200 Rows)</h3>
+          <p class="text-xs text-slate-500 mb-3">The work scrapers can't do — humans research, verify &amp; fill your CRM.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>200 rows researched &amp; enriched</li>
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>Human-verified accuracy (double-checked)</li>
+            <li class="flex gap-1.5"><span class="text-indigo-600 font-bold">✓</span>Delivered in your sheet or CRM</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">🏷️ 100% White-Label</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">🤖 API &amp; Agent Ready</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-indigo-100">
+            <span class="text-sm font-black text-slate-950">From $149</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-indigo-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=Data-Entry-Enrichment-200" class="text-[11px] font-bold bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">When automation can't reliably fill the gaps — judgement calls, gated sites, captcha-protected sources — human operators research and enrich up to 200 rows in your spreadsheet or CRM. Every row is double-checked by a second operator.</p>
+            <p data-field="deliverables">200 rows researched &amp; enriched|Second-operator accuracy review|Direct entry into your sheet/CRM|Source notes per row|Completion report</p>
+            <p data-field="requirements">Sheet or CRM access|Column definitions &amp; examples|Data sources or research instructions</p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <div class="text-5xl mb-4">🔍</div>
+        <h3 class="text-lg font-extrabold text-slate-950 mb-1">No services match your search</h3>
+        <p class="text-sm text-slate-500 mb-5">Try a broader keyword, or clear the filters to browse everything.</p>
+        <button type="button" id="empty-clear" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-bold transition">Clear search &amp; filters</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AI Bridge strip -->
+  <section class="py-14 sm:py-16 bg-slate-950 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <span class="text-xs uppercase tracking-widest font-bold text-brand-300">🤖 → 👤 The Inverted Bridge</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-2 mb-3">Automate the order. Humanize the delivery.</h2>
+      <p class="text-sm text-slate-400 max-w-2xl mx-auto mb-6 leading-relaxed">
+        Every service here can be triggered by your AI Agent or workflow via API, n8n, Make, or webhook — and every deliverable is executed by vetted humans with SLA tracking and proof-of-work. When AI hits a wall, our humans step in.
+      </p>
+      <a href="/contact.html?service=AI-Agent-Bridge" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm transition shadow-lg shadow-brand-900/40">Get API access for your agent →</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Got Questions?</span>
+        <h2 class="text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">Storefront FAQ</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">How do I order a service?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              Click "Order Service" on any card — it opens the contact form with the service pre-selected. Our PM confirms scope, turnaround and price within hours, then fulfillment starts. No account or subscription required for one-time orders.
+            </div>
+          </div>
+        </div>
+
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">Is everything really 100% white-label?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              Yes. Every deliverable, report and dashboard is brand-free or carries your agency's branding. We never contact your clients, never appear in metadata, and never disclose fulfillment. We do the work — you take the credit.
+            </div>
+          </div>
+        </div>
+
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">What does "API &amp; Agent Ready" mean?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              Services with the 🤖 badge can be dispatched programmatically — by your AI Agent, n8n workflow, Make scenario, Zapier, or a plain REST API call. Tasks are executed by vetted human operators with SLA timers, dashboard tracking and proof-of-work payloads returned to your system. Zero hallucinations, fully measurable.
+            </div>
+          </div>
+        </div>
+
+        <div class="card-clean rounded-2xl bg-white border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">What happens if you miss the SLA?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
+          </button>
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              SLA timers start when scope is confirmed and requirements are received. If we ever miss a turnaround, the order is discounted 20% automatically — no tickets, no arguing. Live status is always visible on your dashboard.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20 bg-slate-950 text-white text-center">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">Need a custom scope or monthly retainer?</h2>
+      <p class="text-sm sm:text-base text-slate-400 mb-8">Mix and match catalog services into a monthly plan, or brief us on something entirely custom.</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/contact.html" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm sm:text-base transition shadow-lg shadow-brand-900/40">Talk to a PM →</a>
+        <a href="/calculator.html" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm sm:text-base transition">Estimate with Calculator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (consistent with index.html) -->
+  <footer class="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-800 reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div class="md:col-span-2">
+          <a href="/index.html" class="text-2xl font-black text-white tracking-tight">jdp<span class="text-brand-600">.team</span></a>
+          <p class="mt-4 text-sm text-slate-400 max-w-md leading-relaxed">
+            Your secret remote team. We do the work, you take the credit — 100% white-label fulfillment for agencies &amp; founders, and the human layer for your AI Agents.
+          </p>
+          <div class="mt-6">
+            <p class="text-xs uppercase tracking-widest font-bold text-slate-500 mb-2">Stay Updated</p>
+            <form action="https://formsubmit.co/support@jdp.team" method="POST" class="flex max-w-sm gap-2" onsubmit="var btn=this.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Subscribing...';}">
+              <input type="hidden" name="_subject" value="JDP Team Blog Subscribe">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://jdp.team/blog.html">
+              <input type="email" name="email" placeholder="Your email" required class="flex-1 px-4 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent">
+              <button type="submit" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-sm font-bold transition">Subscribe</button>
+            </form>
+          </div>
+        </div>
         <div>
-          <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Hourly Specialist Execution</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
-            Dedicated Remote Staffing by the Hour
-          </h2>
-          <p class="text-sm text-slate-600 mt-2 max-w-xl">
-            Coordinated directly through your 1 Dedicated Project Manager. Exact minute tracking with zero inflated minimums.
-          </p>
-        </div>
-        <div class="p-3.5 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-600">
-          <span>Billing Unit:</span> <strong class="text-slate-900">Per 15-Minute Increment</strong>
-        </div>
-      </div>
-
-      <!-- 4 Staffing Cards Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- Staff 1: Junior Remote Staff -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-lg">
-                📋
-              </span>
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">300 pts/hr</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-950 mb-1">Junior Remote Staff</h3>
-            <div class="text-3xl font-black text-brand-600 mb-3">$3.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
-            <p class="text-xs text-slate-600 leading-relaxed mb-6">
-              Repetitive operations, manual formatting, and administrative support that keep agency founders bogged down.
-            </p>
-
-            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Data entry & spreadsheet cleanup</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> WordPress & Shopify blog uploads</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Web research & lead list scrubbing</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Social media post scheduling</div>
-            </div>
-          </div>
-
-          <div class="pt-6 mt-6 border-t border-slate-100">
-            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
-              Calculate Staff Hours →
-            </a>
-          </div>
-        </div>
-
-        <!-- Staff 2: Senior Specialist -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <span class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
-                ⚙️
-              </span>
-              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">500 pts/hr</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-950 mb-1">Senior Specialist</h3>
-            <div class="text-3xl font-black text-indigo-600 mb-3">$5.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
-            <p class="text-xs text-slate-600 leading-relaxed mb-6">
-              Higher-skill execution for technical SEO fixes, editorial copy polishing, and website layout adjustments.
-            </p>
-
-            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Technical SEO site audit fixes</div>
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Copy editing & grammar polishing</div>
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> HTML/CSS & CMS design fixes</div>
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Schema markup & tag implementation</div>
-            </div>
-          </div>
-
-          <div class="pt-6 mt-6 border-t border-slate-100">
-            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
-              Calculate Staff Hours →
-            </a>
-          </div>
-        </div>
-
-        <!-- Staff 3: Video Editor -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg">
-                🎬
-              </span>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">500 pts/hr</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-950 mb-1">Video Editor</h3>
-            <div class="text-3xl font-black text-emerald-600 mb-3">$5.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
-            <p class="text-xs text-slate-600 leading-relaxed mb-6">
-              Turn raw client video into captivating social clips, animated subtitles, and polished YouTube cuts.
-            </p>
-
-            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Reels, TikToks & YouTube Shorts</div>
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Auto-captions & animated typography</div>
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> B-roll insertion & sound effects</div>
-              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Podcast video clipping & intros</div>
-            </div>
-          </div>
-
-          <div class="pt-6 mt-6 border-t border-slate-100">
-            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
-              Calculate Video Hours →
-            </a>
-          </div>
-        </div>
-
-        <!-- Staff 4: SEO Staff (JetDigitalPro) -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <span class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-lg">
-                📈
-              </span>
-              <span class="text-xs font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">700 pts/hr</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-950 mb-1">Dedicated SEO Staff</h3>
-            <div class="text-3xl font-black text-amber-600 mb-3">$7.00 <span class="text-xs text-slate-500 font-normal">/ hour</span></div>
-            <p class="text-xs text-slate-600 leading-relaxed mb-6">
-              Powered by JetDigitalPro. Dedicated SEO practitioners running manual outreach, internal links, and keyword blueprints.
-            </p>
-
-            <div class="space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-700">
-              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> In-depth keyword clustering</div>
-              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Internal linking & silo optimization</div>
-              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Competitor gap analysis</div>
-              <div class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> White-label monthly SEO reporting</div>
-            </div>
-          </div>
-
-          <div class="pt-6 mt-6 border-t border-slate-100">
-            <a href="/calculator.html" class="block w-full py-2.5 rounded-lg text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
-              Calculate SEO Hours →
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 2: SEO Content Writing Packs -->
-  <section id="seo-writing" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Turnkey Content Fulfillment</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
-            SEO Content Writing (By JetDigitalPro)
-          </h2>
-          <p class="text-sm text-slate-600 mt-2 max-w-xl">
-            Fully researched, search-optimized articles (1,200 words each). Formatted with clear headings, royalty-free images, meta data, and internal linking anchors.
-          </p>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="text-xs text-slate-500 font-medium">Standard Word Count:</span>
-          <span class="px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-900">1,200 Words / Article</span>
-        </div>
-      </div>
-
-      <!-- Content Writing Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- 1 Article -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-bold text-slate-500 uppercase">Single Piece</span>
-              <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">3,200 pts</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-950 mb-1">1 SEO Article</h3>
-            <div class="text-3xl font-black text-slate-900 mb-1">$32.00</div>
-            <div class="text-xs text-slate-500 mb-6">$32.00 per article</div>
-
-            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 1,200 words deep-researched</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Keyword & intent optimization</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Meta title & meta description</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 48h turnaround</div>
-            </div>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <span class="text-[11px] font-semibold text-slate-500 block text-center">Great for testing our quality</span>
-          </div>
-        </div>
-
-        <!-- 4 Articles Pack -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-bold text-brand-600 uppercase">Weekly Cadence</span>
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">12,700 pts</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-950 mb-1">4 Articles Pack</h3>
-            <div class="text-3xl font-black text-brand-600 mb-1">$127.00</div>
-            <div class="text-xs text-slate-500 mb-6">$31.75 per article</div>
-
-            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 4 × 1,200 words (4,800 words)</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Topical cluster planning</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Direct CMS upload available</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 3-4 days turnaround</div>
-            </div>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <span class="text-[11px] font-semibold text-slate-500 block text-center">Perfect 1-month blog schedule</span>
-          </div>
-        </div>
-
-        <!-- 12 Articles Pack (Popular) -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white border-2 border-brand-500 shadow-md relative">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-600 text-white">
-            Agency Favorite
-          </div>
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-bold text-brand-600 uppercase">Growth Cluster</span>
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">31,700 pts</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-950 mb-1">12 Articles Pack</h3>
-            <div class="text-3xl font-black text-brand-600 mb-1">$317.00</div>
-            <div class="text-xs text-slate-500 mb-6">$26.41 per article</div>
-
-            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 12 × 1,200 words (14,400 words)</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Full authority topical map</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Internal linking silo mapping</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Staggered delivery schedule</div>
-            </div>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <span class="text-[11px] font-semibold text-brand-600 block text-center">Save $67 vs single pieces</span>
-          </div>
-        </div>
-
-        <!-- 30 Articles Pack -->
-        <div class="card-clean rounded-2xl p-7 flex flex-col justify-between bg-white">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-bold text-indigo-600 uppercase">Bulk Dominance</span>
-              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">58,700 pts</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-950 mb-1">30 Articles Pack</h3>
-            <div class="text-3xl font-black text-indigo-600 mb-1">$587.00</div>
-            <div class="text-xs text-slate-500 mb-6">$19.56 per article</div>
-
-            <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> 30 × 1,200 words (36,000 words)</div>
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Multi-client campaign allocation</div>
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Turnkey WordPress upload</div>
-              <div class="flex items-center gap-2"><span class="text-indigo-600 font-bold">✓</span> Dedicated content lead</div>
-            </div>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <span class="text-[11px] font-semibold text-indigo-700 block text-center">Highest margin ($19.56/art)</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: Press Releases Distribution -->
-  <section id="press-releases" class="py-16 md:py-24 bg-white border-b border-slate-200 reveal-on-scroll">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest font-bold text-brand-600">High-Authority PR Syndication</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1 tracking-tight">
-            Press Releases (Powered by PressWires.net)
-          </h2>
-          <p class="text-sm text-slate-600 mt-2 max-w-xl">
-            Major news network syndication for agency clients. Guaranteed publishing to EIN Presswire, ABNewswire, and Newswirejet networks.
-          </p>
-        </div>
-        <div class="p-3.5 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-600">
-          <span>Syndication Reach:</span> <strong class="text-slate-900">250+ Major News & Financial Sites</strong>
-        </div>
-      </div>
-
-      <!-- PR Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-
-        <!-- 1 Press Release -->
-        <div class="card-clean rounded-2xl p-8 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Single Distribution</span>
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded border border-brand-200">24,000 pts</span>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-950 mb-1">1 Press Release Distribution</h3>
-            <div class="text-4xl font-black text-slate-900 mb-1">$240.00</div>
-            <p class="text-xs text-slate-500 mb-6">Complete writing + multi-network distribution</p>
-
-            <div class="space-y-3 text-xs sm:text-sm text-slate-700 border-t border-slate-100 pt-5">
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Professional 500-word PR writing included</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Syndicated to EIN Presswire network</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> ABNewswire & Newswirejet distribution</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Google News & financial news pickups</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Full white-label PDF syndication report</div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-100">
-            <a href="/contact.html?service=PR-Single" class="block w-full py-3 rounded-xl text-xs font-bold text-center bg-slate-900 hover:bg-slate-800 text-white btn-motion shadow-sm">
-              Request Press Release Distribution →
-            </a>
-          </div>
-        </div>
-
-        <!-- 2 Press Releases Pack -->
-        <div class="card-clean rounded-2xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-md">
-          <div>
-            <div class="flex justify-between items-center mb-4">
-              <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Dual Distribution Pack</span>
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded border border-brand-200">42,000 pts</span>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-950 mb-1">2 Press Releases Pack</h3>
-            <div class="text-4xl font-black text-brand-600 mb-1">$420.00</div>
-            <p class="text-xs text-slate-500 mb-6">$210.00 per release (Save $60)</p>
-
-            <div class="space-y-3 text-xs sm:text-sm text-slate-700 border-t border-slate-100 pt-5">
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 2 × 500-word professionally written PRs</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Tier 1 syndication across EIN Presswire</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Full ABNewswire and Newswirejet reach</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Brand authority anchor links in top wire feeds</div>
-              <div class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 2 Detailed PDF placement reports</div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-100">
-            <a href="/contact.html?service=PR-Pack" class="block w-full py-3 rounded-xl text-xs font-bold text-center bg-brand-600 hover:bg-brand-700 text-white btn-motion shadow-md">
-              Order 2 PR Distribution Pack →
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4: Monthly Subscription Plans & Credit Rules -->
-  <section id="pricing" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 reveal-on-scroll">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-xs uppercase tracking-widest font-bold text-brand-600">Fulfillment Pods</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 mt-2 tracking-tight">
-          Credit Packs & Monthly Crew Time
-        </h2>
-        <p class="text-slate-600 mt-3 text-base sm:text-lg">
-          One-time credit packs — <strong>credits never expire.</strong> Optional monthly crew time is prepaid from your wallet; only unused subscription hours expire at period end.
-        </p>
-      </div>
-
-      <!-- 3 Tier Cards Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
-
-        <!-- Tier 1: Starter Pod -->
-        <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-slate-200 bg-white">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="text-xl font-bold text-slate-950">Starter Pod</h3>
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">Light Needs</span>
-            </div>
-            <p class="text-xs text-slate-500 mb-6">Ideal for solo founders and boutique agencies offloading routine admin.</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-black text-slate-950">$499</span>
-              <span class="text-slate-500 text-sm">one-time</span>
-            </div>
-
-            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span><strong><span data-counter="50000">50,000</span> credits</strong> in your wallet</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>1 Dedicated Project Manager</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Access to Junior ($3/hr) & Senior ($5/hr)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>48h standard turnaround</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Credits never expire — spend anytime</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-100">
-            <a href="/contact.html?plan=Starter" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion text-center shadow-sm">
-              Subscribe to Starter Pod
-            </a>
-          </div>
-        </div>
-
-        <!-- Tier 2: Growth Pod (Featured) -->
-        <div class="card-clean tilt-card-3d rounded-3xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-xl relative bg-white" data-tilt-max="5">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-600 text-white shadow-sm">
-            Most Popular Pod
-          </div>
-
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="text-xl font-bold text-slate-950">Growth Pod</h3>
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">+10k Bonus</span>
-            </div>
-            <p class="text-xs text-slate-500 mb-6">Full fulfillment engine for digital agencies managing 3 to 10 active clients.</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-black text-slate-950">$999</span>
-              <span class="text-slate-500 text-sm">one-time</span>
-            </div>
-
-            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-800">
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span><strong><span data-counter="110000">110,000</span> credits</strong> (+10k bonus included)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>1 Dedicated PM via private Slack channel</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Junior ($3/hr), Senior ($5/hr), Video ($5/hr)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Fast 24-48h turnaround</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Full SEO writing & technical audit access</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Guaranteed dedicated monthly bandwidth</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-100">
-            <a href="/contact.html?plan=Growth" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-700 text-white shadow-md btn-motion text-center">
-              Subscribe to Growth Pod
-            </a>
-          </div>
-        </div>
-
-        <!-- Tier 3: Scale Partner -->
-        <div class="card-clean rounded-3xl p-8 flex flex-col justify-between border-slate-200 bg-white">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="text-xl font-bold text-slate-950">Scale Partner</h3>
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">+20k Bonus</span>
-            </div>
-            <p class="text-xs text-slate-500 mb-6">Dedicated backend pod for high-volume agencies and multiple client accounts.</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-black text-slate-950">$1,899</span>
-              <span class="text-slate-500 text-sm">one-time</span>
-            </div>
-
-            <div class="space-y-3.5 border-t border-slate-100 pt-6 text-sm text-slate-700">
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span><strong><span data-counter="220000">220,000</span> credits</strong> (+20k bonus included)</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Senior Dedicated PM + Priority Queue</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Priority same-day & 24h turnaround</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Custom client portal integration</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="text-brand-600 font-bold">✓</span>
-                <span>Press releases & bulk content packs enabled</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-slate-100">
-            <a href="/contact.html?plan=Scale" class="block w-full py-3.5 rounded-xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white btn-motion text-center shadow-sm">
-              Subscribe to Scale Partner
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Pay-As-You-Go Top-Up Packs -->
-      <div class="rounded-3xl p-8 bg-white border border-slate-200 shadow-sm">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <div>
-            <h3 class="text-lg font-bold text-slate-950">Pay-As-You-Go (PAYG) Top-Up Packs</h3>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1">
-              Need extra hours without changing your subscription tier? Top up credits anytime.
-            </p>
-          </div>
-          <span class="text-xs font-bold text-brand-700 bg-brand-50 border border-brand-200 px-3 py-1 rounded-lg">Instant Balance Credit</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div class="p-5 rounded-2xl bg-surface-subtle border border-slate-200 flex justify-between items-center">
-            <div>
-              <div class="font-black text-slate-950 text-xl">$100</div>
-              <div class="text-xs text-slate-500 mt-0.5"><span data-counter="10000">10,000</span> Credits</div>
-            </div>
-            <a href="/contact.html?topup=100" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition btn-motion">Buy Pack</a>
-          </div>
-
-          <div class="p-5 rounded-2xl bg-surface-subtle border border-slate-200 flex justify-between items-center">
-            <div>
-              <div class="font-black text-slate-950 text-xl">$250</div>
-              <div class="text-xs text-slate-500 mt-0.5"><span data-counter="25000">25,000</span> Credits</div>
-            </div>
-            <a href="/contact.html?topup=250" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition btn-motion">Buy Pack</a>
-          </div>
-
-          <div class="p-5 rounded-2xl bg-brand-50 border border-brand-200 flex justify-between items-center">
-            <div>
-              <div class="font-black text-brand-900 text-xl">$500</div>
-              <div class="text-xs text-brand-700 font-semibold mt-0.5"><span data-counter="55000">55,000</span> Credits (+5k Bonus)</div>
-            </div>
-            <a href="/contact.html?topup=500" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition btn-motion">Buy Pack</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Turnaround Times, SLAs, and Credit Rules -->
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl bg-white border border-slate-200">
-          <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-lg mb-3">
-            ⏱️
-          </div>
-          <h4 class="font-bold text-sm text-slate-950 mb-1">Standard Turnaround Times</h4>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Routine tasks (data entry, uploads, video clips) delivered in 24 to 48 hours. Priority tasks on Growth & Scale plans receive same-day attention.
-          </p>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-white border border-slate-200">
-          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-3">
-            🔄
-          </div>
-          <h4 class="font-bold text-sm text-slate-950 mb-1">Credit Allocation Policy</h4>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Wallet credits never expire — top up once, spend anytime. Monthly crew time (optional) is prepaid from your wallet on the same date each month; only unused subscription hours expire at that period's end because the time was reserved. Change or stop anytime with 4 days' notice. Credits are non-refundable and can't be exchanged for cash.
-          </p>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-white border border-slate-200">
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg mb-3">
-            🛡️
-          </div>
-          <h4 class="font-bold text-sm text-slate-950 mb-1">Satisfaction Guarantee SLA</h4>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Every deliverable includes unlimited minor revisions until it meets your brief. If an output falls short, credits are refunded immediately by your PM.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Consistent Footer -->
-  <footer class="border-t border-slate-200 bg-surface-subtle py-14 text-slate-600 text-xs sm:text-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        <div class="space-y-3">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-slate-950 text-white flex items-center justify-center font-black text-sm">
-              J
-            </div>
-            <span class="font-extrabold text-slate-950 text-base">JDP.team</span>
-          </div>
-          <p class="text-xs text-slate-500 leading-relaxed">
-            Your secret remote team. 100% white-label fulfillment pod powered by JetDigitalPro.
-          </p>
-          <div class="text-xs text-slate-400 pt-2">
-            Founder: Nell VH • Legiit Level 4 Certified
-          </div>
-        </div>
-
-        <div>
-          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
-          <ul class="space-y-2 text-xs">
-            <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
-            <li><a href="/services.html" class="hover:text-brand-600 transition">Services & Pricing</a></li>
-            <li><a href="/calculator.html" class="hover:text-brand-600 transition">ROI Calculator</a></li>
-            <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof & Case Studies</a></li>
-            <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact & FAQ</a></li>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Sitemap</h3>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="/services.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/calculator.html" class="hover:text-white transition">Calculator</a></li>
+            <li><a href="/proof.html" class="hover:text-white transition">Proof</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition">Contact</a></li>
           </ul>
         </div>
-
         <div>
-          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Specialist Rates</div>
-          <ul class="space-y-2 text-xs text-slate-500">
-            <li>Junior Staff: <strong class="text-slate-700">$3.00/hr</strong> (300 credits)</li>
-            <li>Senior Specialist: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
-            <li>Video Editor: <strong class="text-slate-700">$5.00/hr</strong> (500 credits)</li>
-            <li>SEO Specialist: <strong class="text-slate-700">$7.00/hr</strong> (700 credits)</li>
-            <li>SEO Content: <strong class="text-slate-700">$32.00/art</strong> (3,200 credits)</li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Contact Channels</div>
-          <ul class="space-y-2 text-xs">
-            <li>Email: <a href="mailto:team@jdp.team" class="text-brand-600 hover:underline">team@jdp.team</a></li>
-            <li>Inquiries: <a href="mailto:info@jetdigitalpro.com" class="text-brand-600 hover:underline">info@jetdigitalpro.com</a></li>
-            <li>Trustpilot: <span class="font-semibold text-slate-900">4.2 / 5.0 Rating</span></li>
-            <li>Agency: <a href="https://jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600">JetDigitalPro.com ↗</a></li>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Follow Us</h3>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="https://x.com/jdoteam" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">X (Twitter)</a></li>
+            <li><a href="https://www.linkedin.com/company/jdp-team/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">LinkedIn</a></li>
           </ul>
         </div>
       </div>
-
-      <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-        <div>
-          &copy; 2026 JDP.team. A JetDigitalPro brand. All rights reserved.
-        </div>
-        <div class="flex items-center gap-4">
-          <span>Strict NDA Guaranteed</span>
-          <span>•</span>
-          <span>100% White-Label Delivery</span>
+      <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <p>© 2026 JDP.team. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="mailto:support@jdp.team" class="hover:text-slate-300 transition">support@jdp.team</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Scope Modal -->
+  <div id="scope-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="scope-modal-title">
+    <div id="scope-backdrop" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto p-6 sm:p-8">
+      <button id="scope-close" type="button" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold transition flex items-center justify-center" aria-label="Close">✕</button>
+      <span id="scope-category" class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200 mb-3">Category</span>
+      <h3 id="scope-modal-title" class="text-xl font-extrabold text-slate-950 mb-2 pr-8">Service Title</h3>
+      <div class="flex items-center gap-3 mb-4">
+        <span id="scope-sla" class="text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">SLA</span>
+        <span id="scope-price" class="text-sm font-black text-slate-950">From $X</span>
+      </div>
+      <p id="scope-desc" class="text-sm text-slate-600 leading-relaxed mb-5"></p>
+      <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">What's included</h4>
+      <ul id="scope-deliverables" class="text-xs text-slate-600 space-y-1.5 mb-5"></ul>
+      <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">What we need from you</h4>
+      <ul id="scope-requirements" class="text-xs text-slate-600 space-y-1.5 mb-6"></ul>
+      <a id="scope-order" href="/contact.html" class="block w-full text-center bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition shadow-md">Order This Service →</a>
+    </div>
+  </div>
+
   <script>
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    /* ---------- FAQ Accordion (shared with index.html) ---------- */
+    function toggleFaq(btn) {
+      var wrapper = btn.nextElementSibling;
+      var icon = btn.querySelector('.faq-icon-rot');
+      var isOpen = wrapper.classList.contains('open');
+      document.querySelectorAll('.faq-grid-wrapper.open').forEach(function (w) {
+        w.classList.remove('open');
+        var i = w.previousElementSibling.querySelector('.faq-icon-rot');
+        if (i) i.classList.remove('rotate-45');
+      });
+      if (!isOpen) {
+        wrapper.classList.add('open');
+        if (icon) icon.classList.add('rotate-45');
+      }
+    }
+
+    /* ---------- Catalog: search + category filter + modal ---------- */
+    (function () {
+      var searchInput = document.getElementById('service-search');
+      var chips = Array.prototype.slice.call(document.querySelectorAll('.chip-btn'));
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.service-card'));
+      var countEl = document.getElementById('results-count');
+      var emptyEl = document.getElementById('empty-state');
+      var clearBtn = document.getElementById('clear-filters');
+      var emptyClear = document.getElementById('empty-clear');
+      var activeCat = 'all';
+
+      var ACTIVE = ['bg-brand-600', 'border-brand-600', 'text-white'];
+      var INACTIVE = ['bg-slate-900', 'border-slate-700', 'text-slate-300'];
+
+      function cardText(card) {
+        return (card.dataset.title + ' ' + card.dataset.tags + ' ' + card.textContent).toLowerCase();
+      }
+
+      function applyFilters() {
+        var q = (searchInput.value || '').trim().toLowerCase();
+        var shown = 0;
+        cards.forEach(function (card) {
+          var catOk = activeCat === 'all' || card.dataset.category === activeCat;
+          var qOk = !q || cardText(card).indexOf(q) !== -1;
+          var show = catOk && qOk;
+          card.style.display = show ? '' : 'none';
+          if (show) shown++;
+        });
+        countEl.textContent = 'Showing ' + shown + ' of ' + cards.length + ' services';
+        emptyEl.classList.toggle('hidden', shown !== 0);
+        var filtering = q !== '' || activeCat !== 'all';
+        clearBtn.classList.toggle('hidden', !filtering);
+      }
+
+      function setActiveChip(btn) {
+        chips.forEach(function (c) {
+          c.classList.remove.apply(c.classList, ACTIVE);
+          c.classList.add.apply(c.classList, INACTIVE);
+        });
+        btn.classList.remove.apply(btn.classList, INACTIVE);
+        btn.classList.add.apply(btn.classList, ACTIVE);
+      }
+
+      function resetAll() {
+        searchInput.value = '';
+        activeCat = 'all';
+        setActiveChip(chips[0]);
+        applyFilters();
+      }
+
+      chips.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCat = btn.dataset.cat;
+          setActiveChip(btn);
+          applyFilters();
+        });
+      });
+
+      searchInput.addEventListener('input', applyFilters);
+      clearBtn.addEventListener('click', resetAll);
+      emptyClear.addEventListener('click', resetAll);
+
+      /* ----- Modal ----- */
+      var modal = document.getElementById('scope-modal');
+      var backdrop = document.getElementById('scope-backdrop');
+      var closeBtn = document.getElementById('scope-close');
+      var lastFocus = null;
+
+      function fillList(ul, raw) {
+        ul.innerHTML = '';
+        raw.split('|').forEach(function (item) {
+          var li = document.createElement('li');
+          li.className = 'flex gap-1.5';
+          var tick = document.createElement('span');
+          tick.className = 'text-brand-600 font-bold';
+          tick.textContent = '✓';
+          var txt = document.createElement('span');
+          txt.textContent = item;
+          li.appendChild(tick);
+          li.appendChild(txt);
+          ul.appendChild(li);
+        });
+      }
+
+      function openModal(card) {
+        lastFocus = document.activeElement;
+        var data = card.querySelector('.scope-data');
+        document.getElementById('scope-modal-title').textContent = card.dataset.title;
+        document.getElementById('scope-category').textContent = card.querySelector('span').textContent;
+        document.getElementById('scope-sla').textContent = card.querySelector('.ml-auto').textContent + ' turnaround';
+        document.getElementById('scope-price').textContent = card.querySelector('.text-sm.font-black').textContent;
+        document.getElementById('scope-desc').textContent = data.querySelector('[data-field="desc"]').textContent;
+        fillList(document.getElementById('scope-deliverables'), data.querySelector('[data-field="deliverables"]').textContent);
+        fillList(document.getElementById('scope-requirements'), data.querySelector('[data-field="requirements"]').textContent);
+        document.getElementById('scope-order').href = card.querySelector('a[href^="/contact.html"]').href;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+
+      document.querySelectorAll('.view-scope').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openModal(btn.closest('.service-card'));
+        });
+      });
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+      });
+
+      applyFilters();
+    })();
+  </script>
+
+  <!-- Mobile menu toggle + motion boot (identical to index.html) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function () {
+          var s = document.createElement('script');
+          s.src = '/motion.js?v=20260924';
+          s.defer = true;
+          document.body.appendChild(s);
+        }, { timeout: 2000 });
+      }
+    });
+    var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.addEventListener('click', function () {
         mobileMenu.classList.toggle('hidden');
       });
     }
   </script>
-  <!-- Hallmark & Taste Motion System Script -->
-  <script src="/motion.js?v=20260924" defer></script>
 </body>
 </html>
