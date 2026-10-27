@@ -312,9 +312,9 @@
                 <div class="flex justify-between items-center text-sm font-semibold mb-2">
                   <div class="flex items-center gap-2">
                     <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-800 flex items-center justify-center font-bold text-xs">A</span>
-                    <span class="text-slate-800">SEO Articles 1,200w ($32.00/ea)</span>
+                    <span class="text-slate-800">SEO Articles 1,200w ($15.00/ea)</span>
                   </div>
-                  <span id="labelArticle" class="font-bold text-amber-700 val-flash">6 articles ($192)</span>
+                  <span id="labelArticle" class="font-bold text-amber-700 val-flash">6 articles ($90)</span>
                 </div>
                 <div class="flex items-center gap-3">
                   <input id="sliderArticle" type="range" min="0" max="30" step="1" value="6" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-600">
@@ -696,11 +696,11 @@
       document.getElementById('labelJunior').textContent = `${jHrs} hrs/mo ($${jHrs * 3})`;
       document.getElementById('labelSenior').textContent = `${sHrs} hrs/mo ($${sHrs * 5})`;
       document.getElementById('labelVideo').textContent = `${vHrs} hrs/mo ($${vHrs * 5})`;
-      document.getElementById('labelArticle').textContent = `${artCount} articles ($${artCount * 32})`;
+      document.getElementById('labelArticle').textContent = `${artCount} articles ($${artCount * 15})`;
       document.getElementById('labelPR').textContent = `${prCount} releases ($${prCount * 240})`;
 
       // Cost (published dollar rates)
-      const jdpCost = (jHrs * 3) + (sHrs * 5) + (vHrs * 5) + (artCount * 32) + (prCount * 240);
+      const jdpCost = (jHrs * 3) + (sHrs * 5) + (vHrs * 5) + (artCount * 15) + (prCount * 240);
       const usCost = (jHrs * 25) + (sHrs * 40) + (vHrs * 45) + (artCount * 120) + (prCount * 500);
       const savings = Math.max(0, usCost - jdpCost);
       const percent = usCost > 0 ? ((savings / usCost) * 100).toFixed(1) : 0;

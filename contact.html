@@ -571,9 +571,11 @@
       }, 400);
     }
 
-    // Auto-select plan from query string if present
+    // Auto-select plan or pre-fill service from query string (CRO Zero-Friction)
     const urlParams = new URLSearchParams(window.location.search);
     const planParam = urlParams.get('plan');
+    const serviceParam = urlParams.get('service');
+
     if (planParam) {
       const select = document.getElementById('formPlan');
       if (select) {
@@ -583,6 +585,22 @@
             break;
           }
         }
+      }
+    }
+
+    if (serviceParam) {
+      const cleanService = decodeURIComponent(serviceParam).replace(/[-_]/g, " ");
+      const tasksInput = document.getElementById('formTasks');
+      if (tasksInput && !tasksInput.value) {
+        tasksInput.value = "Requesting white-label wholesale scope for: " + cleanService + ". Please provide onboarding details and turnaround time.";
+      }
+      // Show service badge alert above form if present
+      const formHeader = document.querySelector('#contact-form') || document.querySelector('form');
+      if (formHeader) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = "mb-6 p-4 rounded-xl bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold flex items-center justify-between";
+        alertDiv.innerHTML = "<span>🛒 Selected Service: <strong class='text-brand-700 font-bold'>" + cleanService + "</strong></span><span class='text-[10px] uppercase font-black px-2 py-0.5 rounded bg-brand-600 text-white'>White-Label Scope</span>";
+        formHeader.parentNode.insertBefore(alertDiv, formHeader);
       }
     }
   </script>
