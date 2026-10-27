@@ -1061,7 +1061,8 @@
         var q = (searchInput.value || '').trim().toLowerCase();
         var shown = 0;
         cards.forEach(function (card) {
-          var catOk = activeCat === 'all' || card.dataset.category === activeCat;
+          var cardCats = (card.dataset.category || '').split(' ');
+          var catOk = activeCat === 'all' || cardCats.indexOf(activeCat) !== -1;
           var qOk = !q || cardText(card).indexOf(q) !== -1;
           var show = catOk && qOk;
           card.style.display = show ? '' : 'none';
