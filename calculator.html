@@ -124,16 +124,24 @@
   <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
-          <span class="text-brand-400">J</span>
+      <a href="/" class="flex items-center gap-3 group py-1 min-touch select-none" aria-label="JDP.team Home">
+        <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-slate-950 text-white shadow-md shadow-slate-950/20 group-hover:scale-105 transition-all overflow-hidden border border-slate-800">
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-600/40 via-transparent to-cyan-400/30 opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <svg class="w-5 h-5 relative z-10 text-white" viewBox="0 0 24 24" fill="none">
+            <path d="M5 6H19V8H5V6Z" fill="white" />
+            <path d="M11 8H13V15C13 16.6569 11.6569 18 10 18H7V16H10C10.5523 16 11 15.5523 11 15V8Z" fill="#38bdf8" />
+            <circle cx="17" cy="16.5" r="2.2" fill="#2563eb" />
+          </svg>
         </div>
         <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-slate-950 text-lg tracking-tight">JDP.team</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
+          <div class="flex items-baseline gap-1">
+            <span class="text-xl sm:text-[1.45rem] font-black tracking-[-0.055em] text-slate-950 font-sans leading-none">
+              jdp<span class="text-brand-600 font-black">.team</span>
+            </span>
           </div>
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
+          <span class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-400 group-hover:text-brand-600 transition-colors mt-0.5 leading-none">
+            Wholesale Engine
+          </span>
         </div>
       </a>
 
@@ -141,7 +149,7 @@
       <nav id="desktop-nav" class="nav-pill-wrapper hidden md:inline-flex items-center">
         <div id="nav-pill-indicator"></div>
         <a href="/" class="nav-pill-link">Home</a>
-        <a href="/services.html" class="nav-pill-link">Services & Pricing</a>
+        <a href="/services" class="nav-pill-link">Services & Pricing</a>
         <a href="/calculator.html" class="nav-pill-link is-active">ROI Calculator</a>
         <a href="/proof.html" class="nav-pill-link">Proof & Reviews</a>
         <a href="/contact.html" class="nav-pill-link">Contact & FAQ</a>
@@ -149,10 +157,10 @@
 
       <!-- Desktop CTAs -->
       <div class="hidden sm:flex items-center gap-3">
-        <a href="/services.html" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
+        <a href="/services" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
           Browse Services
         </a>
-        <a href="/services.html#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
+        <a href="/services#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
           Get Started
         </a>
       </div>
@@ -166,15 +174,15 @@
     <!-- Mobile Drawer Menu -->
     <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 text-sm font-medium">
       <a href="/" class="block py-1.5 text-slate-700 hover:text-brand-600">Home</a>
-      <a href="/services.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Services & Pricing</a>
+      <a href="/services" class="block py-1.5 text-slate-700 hover:text-brand-600">Services & Pricing</a>
       <a href="/calculator.html" class="block py-1.5 font-bold text-brand-600">ROI Calculator</a>
       <a href="/proof.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
       <a href="/contact.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Contact & FAQ</a>
       <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <a href="/services.html" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
+        <a href="/services" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
           Browse Services
         </a>
-        <a href="/services.html#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
+        <a href="/services#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
           Get Started
         </a>
       </div>
@@ -474,7 +482,7 @@
 
             <!-- CTA Buttons -->
             <div class="mt-8 pt-6 border-t border-slate-800 space-y-3">
-              <a id="btnGetSetup" href="/services.html#pricing" class="w-full py-4 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-500 text-white btn-motion text-center block shadow-lg shadow-brand-600/30">
+              <a id="btnGetSetup" href="/services#pricing" class="w-full py-4 rounded-xl font-bold text-sm bg-brand-600 hover:bg-brand-500 text-white btn-motion text-center block shadow-lg shadow-brand-600/30">
                 Get This Setup →
               </a>
               <a href="/contact.html" class="w-full py-3 rounded-xl font-semibold text-xs border border-slate-700 hover:border-slate-600 bg-slate-900 hover:bg-slate-800 text-slate-300 btn-motion text-center block">
@@ -577,7 +585,7 @@
           <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
           <ul class="space-y-2 text-xs">
             <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
-            <li><a href="/services.html" class="hover:text-brand-600 transition">Services & Pricing</a></li>
+            <li><a href="/services" class="hover:text-brand-600 transition">Services & Pricing</a></li>
             <li><a href="/calculator.html" class="hover:text-brand-600 transition">ROI Calculator</a></li>
             <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof & Case Studies</a></li>
             <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact & FAQ</a></li>

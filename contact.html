@@ -133,16 +133,24 @@
   <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 group-hover:scale-105 transition-transform">
-          <span class="text-brand-400">J</span>
+      <a href="/" class="flex items-center gap-3 group py-1 min-touch select-none" aria-label="JDP.team Home">
+        <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-slate-950 text-white shadow-md shadow-slate-950/20 group-hover:scale-105 transition-all overflow-hidden border border-slate-800">
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-600/40 via-transparent to-cyan-400/30 opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <svg class="w-5 h-5 relative z-10 text-white" viewBox="0 0 24 24" fill="none">
+            <path d="M5 6H19V8H5V6Z" fill="white" />
+            <path d="M11 8H13V15C13 16.6569 11.6569 18 10 18H7V16H10C10.5523 16 11 15.5523 11 15V8Z" fill="#38bdf8" />
+            <circle cx="17" cy="16.5" r="2.2" fill="#2563eb" />
+          </svg>
         </div>
         <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-slate-950 text-lg tracking-tight">JDP.team</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">White-Label</span>
+          <div class="flex items-baseline gap-1">
+            <span class="text-xl sm:text-[1.45rem] font-black tracking-[-0.055em] text-slate-950 font-sans leading-none">
+              jdp<span class="text-brand-600 font-black">.team</span>
+            </span>
           </div>
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold -mt-0.5">By JetDigitalPro</span>
+          <span class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-400 group-hover:text-brand-600 transition-colors mt-0.5 leading-none">
+            Wholesale Engine
+          </span>
         </div>
       </a>
 
@@ -150,7 +158,7 @@
       <nav id="desktop-nav" class="nav-pill-wrapper hidden md:inline-flex items-center">
         <div id="nav-pill-indicator"></div>
         <a href="/" class="nav-pill-link">Home</a>
-        <a href="/services.html" class="nav-pill-link">Services & Pricing</a>
+        <a href="/services" class="nav-pill-link">Services & Pricing</a>
         <a href="/calculator.html" class="nav-pill-link">ROI Calculator</a>
         <a href="/proof.html" class="nav-pill-link">Proof & Reviews</a>
         <a href="/contact.html" class="nav-pill-link is-active">Contact & FAQ</a>
@@ -161,7 +169,7 @@
         <a href="#booking-form" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300 btn-motion">
           Book Intro Call
         </a>
-        <a href="/services.html#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
+        <a href="/services#pricing" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm btn-motion">
           Get Started
         </a>
       </div>
@@ -175,7 +183,7 @@
     <!-- Mobile Drawer Menu -->
     <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 text-sm font-medium">
       <a href="/" class="block py-1.5 text-slate-700 hover:text-brand-600">Home</a>
-      <a href="/services.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Services & Pricing</a>
+      <a href="/services" class="block py-1.5 text-slate-700 hover:text-brand-600">Services & Pricing</a>
       <a href="/calculator.html" class="block py-1.5 text-slate-700 hover:text-brand-600">ROI Calculator</a>
       <a href="/proof.html" class="block py-1.5 text-slate-700 hover:text-brand-600">Proof & Reviews</a>
       <a href="/contact.html" class="block py-1.5 font-bold text-brand-600">Contact & FAQ</a>
@@ -183,7 +191,7 @@
         <a href="#booking-form" class="w-full py-2.5 rounded-lg text-xs font-bold text-slate-800 border border-slate-300 text-center">
           Book Intro Call
         </a>
-        <a href="/services.html#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
+        <a href="/services#pricing" class="w-full py-2.5 rounded-lg text-xs font-bold bg-brand-600 text-white text-center">
           Get Started
         </a>
       </div>
@@ -211,23 +219,40 @@
     </div>
   </section>
 
-    <!-- Verified Trust Credentials Bar (CRO Trust Continuity) -->
-  <section class="py-4 bg-slate-900 border-b border-slate-800" aria-label="Verified credentials">
-    <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs">
-      <a href="https://www.trustpilot.com/review/jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white hover:border-emerald-500 transition">
-        <span class="text-emerald-400 font-bold">&#9733;&#9733;&#9733;&#9733;</span><span class="text-slate-500">&#9733;</span> <span class="font-bold text-white">TrustScore 4.2 / 5</span>
-      </a>
-      <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 border border-amber-500/40 text-amber-300 hover:border-amber-400 transition">
-        <span class="w-2 h-2 rounded-full bg-amber-400"></span> Winner 2026 &middot; South-South Awards
-      </a>
-      <div class="flex items-center gap-1.5 text-slate-400 px-2 py-1">
-        <span class="w-2 h-2 rounded-full bg-orange-400"></span> HubSpot Certified
-      </div>
-      <div class="flex items-center gap-1.5 text-slate-400 px-2 py-1">
-        <span class="w-2 h-2 rounded-full bg-blue-400"></span> Google Certified
-      </div>
-      <div class="flex items-center gap-1.5 text-emerald-400 font-bold px-2 py-1">
-        <span>🛡️ 100% White-Label NDA Guaranteed</span>
+<!-- Verified Authority Badges Bar (Real Official Visual Logos from JetDigitalPro) -->
+  <section class="py-6 bg-slate-900 border-b border-slate-800 text-white overflow-hidden" aria-label="Verified agency credentials">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs">
+        <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-3.5 py-1.5 rounded-xl bg-slate-800/90 border border-amber-500/30 hover:border-amber-400 transition" title="Winner: Best SEO Content Writing Service 2026">
+          <img src="/assets/img/badges/south-south-award.svg" alt="South-South Business Awards 2026" class="w-7 h-7 object-contain shrink-0 drop-shadow">
+          <div class="text-left">
+            <div class="text-[10px] font-black text-amber-300 leading-tight">Winner 2026</div>
+            <div class="text-[9px] text-slate-400">South-South Awards</div>
+          </div>
+        </a>
+
+        <a href="https://www.trustpilot.com/review/jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-800/90 border border-emerald-500/30 hover:border-emerald-400 transition" title="JetDigitalPro on Trustpilot">
+          <div class="w-6 h-6 rounded-md bg-[#00b67a] text-white flex items-center justify-center font-black text-xs shadow-xs">★</div>
+          <div class="text-left">
+            <div class="text-[10px] font-black text-white leading-tight">TrustScore 4.2 / 5</div>
+            <div class="text-[9px] text-emerald-400">Verified Reviews</div>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+          <img src="/assets/img/badges/google-certified.png" alt="Google Certified" class="h-5 w-auto object-contain">
+          <span class="text-[10px] font-bold text-slate-300">Google Certified</span>
+        </div>
+
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+          <img src="/assets/img/badges/hubspot-certified.png" alt="HubSpot Certified" class="h-5 w-auto object-contain">
+          <span class="text-[10px] font-bold text-slate-300">HubSpot Partner</span>
+        </div>
+
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+          <img src="/assets/img/badges/legiit-certified.png" alt="Legiit Certified Agency" class="h-5 w-auto object-contain">
+          <span class="text-[10px] font-bold text-slate-300">Legiit Top-Rated</span>
+        </div>
       </div>
     </div>
   </section>
@@ -337,7 +362,7 @@
                 ⚡ <strong>Need urgent pod dispatch today?</strong> Email our lead strategist directly with subject <span class="font-mono font-bold text-amber-800">[URGENT DISPATCH]</span> to <a href="mailto:team@jdp.team?subject=%5BURGENT%20DISPATCH%5D%20White-Label%20Fulfillment" class="text-brand-700 underline font-bold">team@jdp.team</a> for 15-minute priority onboarding.
               </div>
               <div class="mt-6">
-                <a href="/services.html" class="inline-block px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition">
+                <a href="/services" class="inline-block px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition">
                   Browse Services & Pricing in the Meantime →
                 </a>
               </div>
@@ -520,7 +545,7 @@
           <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
           <ul class="space-y-2 text-xs">
             <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
-            <li><a href="/services.html" class="hover:text-brand-600 transition">Services & Pricing</a></li>
+            <li><a href="/services" class="hover:text-brand-600 transition">Services & Pricing</a></li>
             <li><a href="/calculator.html" class="hover:text-brand-600 transition">ROI Calculator</a></li>
             <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof & Case Studies</a></li>
             <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact & FAQ</a></li>

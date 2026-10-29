@@ -82,7 +82,7 @@
         <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-950 text-white shadow-xs">White-Label</span>
       </a>
       <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-        <a href="/services.html" class="text-brand-600 border-b-2 border-brand-600 pb-0.5">Services</a>
+        <a href="/services" class="text-brand-600 border-b-2 border-brand-600 pb-0.5">Services</a>
         <a href="/calculator.html" class="hover:text-slate-950 transition">Calculator</a>
         <a href="/proof.html" class="hover:text-slate-950 transition">Proof</a>
         <a href="/contact.html" class="hover:text-slate-950 transition">Contact</a>
@@ -98,7 +98,7 @@
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden fixed top-20 left-4 right-4 z-40 rounded-2xl bg-white border border-slate-200 shadow-xl p-5">
     <div class="flex flex-col gap-3 text-sm font-semibold text-slate-700">
-      <a href="/services.html" class="text-brand-600">Services</a>
+      <a href="/services" class="text-brand-600">Services</a>
       <a href="/calculator.html" class="hover:text-slate-950 transition">Calculator</a>
       <a href="/proof.html" class="hover:text-slate-950 transition">Proof</a>
       <a href="/contact.html" class="hover:text-slate-950 transition">Contact</a>
@@ -144,25 +144,53 @@
   </section>
 
     <!-- Verified Trust Credentials Bar (CRO Trust Continuity) -->
-  <section class="py-4 bg-slate-900 border-b border-slate-800" aria-label="Verified credentials">
-    <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs">
-      <a href="https://www.trustpilot.com/review/jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white hover:border-emerald-500 transition">
-        <span class="text-emerald-400 font-bold">&#9733;&#9733;&#9733;&#9733;</span><span class="text-slate-500">&#9733;</span> <span class="font-bold text-white">TrustScore 4.2 / 5</span>
-      </a>
-      <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 border border-amber-500/40 text-amber-300 hover:border-amber-400 transition">
-        <span class="w-2 h-2 rounded-full bg-amber-400"></span> Winner 2026 &middot; South-South Awards
-      </a>
-      <div class="flex items-center gap-1.5 text-slate-400 px-2 py-1">
-        <span class="w-2 h-2 rounded-full bg-orange-400"></span> HubSpot Certified
-      </div>
-      <div class="flex items-center gap-1.5 text-slate-400 px-2 py-1">
-        <span class="w-2 h-2 rounded-full bg-blue-400"></span> Google Certified
-      </div>
-      <div class="flex items-center gap-1.5 text-slate-400 px-2 py-1">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Legiit Certified
-      </div>
-      <div class="flex items-center gap-1.5 text-emerald-400 font-bold px-2 py-1">
-        <span>🛡️ 100% White-Label NDA</span>
+  <!-- Verified Authority Badges Bar (Real Official Visual Logos from JetDigitalPro) -->
+  <section class="py-8 bg-slate-900 border-b border-slate-800 text-white overflow-hidden reveal-on-scroll" aria-label="Verified agency credentials">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-center md:text-left">
+          <div class="text-[10px] font-black uppercase tracking-[0.2em] text-brand-400 mb-1">Parent Agency Backing</div>
+          <div class="text-sm font-extrabold text-white">Backed by JetDigitalPro Verified Credentials</div>
+        </div>
+        
+        <!-- Authentic Logos / Medallions Grid -->
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          <!-- South-South Award Medallion SVG -->
+          <a href="https://southsouthawards.com/2026/us/nationwide/best-seo-content-writing-service/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-800/90 border border-amber-500/30 hover:border-amber-400 transition hover:scale-105 shadow-sm group" title="Winner: Best SEO Content Writing Service 2026">
+            <img src="/assets/img/badges/south-south-award.svg" alt="South-South Business Awards 2026" class="w-8 h-8 object-contain shrink-0 drop-shadow">
+            <div class="text-left">
+              <div class="text-[11px] font-black text-amber-300 leading-tight">Winner 2026</div>
+              <div class="text-[9px] text-slate-400">South-South Awards</div>
+            </div>
+          </a>
+
+          <!-- Trustpilot Official Rating Badge -->
+          <a href="https://www.trustpilot.com/review/jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-800/90 border border-emerald-500/30 hover:border-emerald-400 transition hover:scale-105 shadow-sm" title="JetDigitalPro on Trustpilot">
+            <div class="w-7 h-7 rounded-lg bg-[#00b67a] text-white flex items-center justify-center font-black text-base shadow-xs">★</div>
+            <div class="text-left">
+              <div class="text-[11px] font-black text-white leading-tight">TrustScore 4.2 / 5</div>
+              <div class="text-[9px] text-emerald-400 font-semibold">Verified Agency Reviews</div>
+            </div>
+          </a>
+
+          <!-- Google Certified Partner Badge -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+            <img src="/assets/img/badges/google-certified.png" alt="Google Certified" class="h-6 w-auto object-contain">
+            <span class="text-[10px] font-bold text-slate-300">Google Certified</span>
+          </div>
+
+          <!-- HubSpot Certified Badge -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+            <img src="/assets/img/badges/hubspot-certified.png" alt="HubSpot Certified" class="h-6 w-auto object-contain">
+            <span class="text-[10px] font-bold text-slate-300">HubSpot Partner</span>
+          </div>
+
+          <!-- Legiit Level 4 Certified Agency Badge -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+            <img src="/assets/img/badges/legiit-certified.png" alt="Legiit Certified Agency" class="h-6 w-auto object-contain">
+            <span class="text-[10px] font-bold text-slate-300">Legiit Top-Rated</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -172,11 +200,41 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="flex items-center justify-between mb-6">
-        <p id="results-count" class="text-xs sm:text-sm font-bold text-slate-500" aria-live="polite">Showing 23 of 23 services</p>
+        <p id="results-count" class="text-xs sm:text-sm font-bold text-slate-500" aria-live="polite">Showing 24 of 24 services</p>
         <button id="clear-filters" type="button" class="hidden text-xs font-bold text-brand-600 hover:text-brand-700 underline underline-offset-2">Clear search &amp; filters</button>
       </div>
 
       <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <!-- YouTube Listicle & Video Mentions (GEO) -->
+        <article class="service-card group rounded-2xl border border-slate-200 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand-300"
+          data-category="content agent" data-agent="true" data-title="YouTube Listicle & Video Mentions (GEO)" data-tags="youtube video listicle mentions geo aeo brand citation visibility">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">Video &amp; AI GEO</span>
+            <span class="ml-auto text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">Guaranteed</span>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-950 group-hover:text-brand-700 transition mb-1.5">YouTube Listicle &amp; Video Mentions (GEO)</h3>
+          <p class="text-xs text-slate-500 mb-3">Guaranteed placement in ranking niche YouTube listicles. Cited in AI Overviews &amp; Perplexity.</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-4 flex-1">
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Placement in ranking niche listicle videos</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>High-intent video brand mention + link in description</li>
+            <li class="flex gap-1.5"><span class="text-brand-600 font-bold">✓</span>Video SEO optimization for AI search engines</li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">Unbranded Report</span>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+            <span class="text-sm font-black text-slate-950">As low as $127/mo</span>
+            <div class="flex gap-2">
+              <button type="button" class="view-scope text-[11px] font-bold text-slate-500 hover:text-brand-600 transition py-1.5">View Scope</button>
+              <a href="/contact.html?service=YouTube-Listicle-Mentions" class="text-[11px] font-bold bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg transition">Order Service</a>
+            </div>
+          </div>
+          <div class="scope-data hidden">
+            <p data-field="desc">We secure and place guaranteed brand mentions inside niche-relevant, ranking YouTube listicle videos that Google AI Overviews and Perplexity frequently index for commercial-intent queries.</p>
+            <p data-field="deliverables">Guaranteed placement in 1 ranking video per month|Brand mention timestamp + description link|Live YouTube video URL report|AI indexation status audit</p>
+            <p data-field="requirements">Target URL + product/brand overview|Target keyword angle|Call to action preference for video description</p>
+          </div>
+        </article>
         <!-- Core 1: Indonesian VA as AI Conductor (Notion Core) -->
         <article class="service-card group rounded-2xl border-2 border-brand-500 bg-white p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-brand-600 relative"
           data-category="va agent" data-agent="true" data-title="Indonesian VA (AI Conductor)" data-tags="va virtual assistant ai conductor manus openclaws cowork prompt automation indonesian talent">
@@ -1003,7 +1061,7 @@
         <div>
           <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Sitemap</h3>
           <ul class="space-y-2.5 text-sm">
-            <li><a href="/services.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="/services" class="hover:text-white transition">Services</a></li>
             <li><a href="/calculator.html" class="hover:text-white transition">Calculator</a></li>
             <li><a href="/proof.html" class="hover:text-white transition">Proof</a></li>
             <li><a href="/contact.html" class="hover:text-white transition">Contact</a></li>
