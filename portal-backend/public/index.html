@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JDP Team — Operations & Client Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
+            },
+            accent: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+    /* Hide scrollbar for clean horizontal snap */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Drawer animation */
+    .drawer-backdrop {
+      transition: opacity 0.3s ease-in-out;
+    }
+    .drawer-panel {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-brand-600 selection:text-white">
+
+  <!-- 1. Top Trust & SLA Notification Bar -->
+  <aside aria-label="Trust & SLA" class="bg-gradient-to-r from-slate-900 via-slate-800 to-brand-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-slate-700/60 shadow-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+      <div class="flex items-center gap-2 font-medium">
+        <span class="inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30 text-[10px]">
+          <svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          Winner 2026
+        </span>
+        <span class="hidden sm:inline text-slate-200">South-South Digital Excellence Award &bull;</span>
+        <span class="text-slate-300">⭐ Trustpilot <strong class="text-white">4.2 / 5.0</strong> Verified Supplier</span>
+      </div>
+      <div class="flex items-center gap-3 text-slate-300 font-medium ml-auto sm:ml-0">
+        <span class="inline-flex items-center gap-1.5 text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          100% Wholesale SLA Guarantee
+        </span>
+        <span class="hidden md:inline text-slate-400">&bull; 24h Emergency Response</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. Main Navigation Bar with Wholesale Storefront Trigger -->
+  <header class="border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Logo + Role -->
+      <div class="flex items-center gap-3">
+        <a href="https://jdp.team" class="text-xl font-extrabold tracking-tight text-slate-900 hover:opacity-90 transition">
+          JDP<span class="text-brand-600">.team</span>
+        </a>
+        <span id="roleBadge" class="text-[11px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-full border border-slate-200 text-slate-700 bg-slate-100 shadow-2xs">
+          Portal
+        </span>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Sandbox Simulator Link -->
+        <a id="btnSimulateCheckout" href="/checkout" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs sm:text-xs font-black shadow-xs transition-all hover:scale-[1.02]">
+          <span class="w-2 h-2 rounded-full bg-slate-950 animate-ping"></span>
+          <span>⚡ Simulator Checkout</span>
+        </a>
+
+        <!-- Wholesale "+ Order Service" Storefront Drawer Trigger -->
+        <button id="btnOpenStorefront" onclick="portal.openStorefrontDrawer()" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm shadow-brand-500/20 transition-all hover:shadow-md hover:scale-[1.01] active:scale-[0.99]">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+          <span>Order Service</span>
+          <span class="hidden md:inline text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-extrabold uppercase">Wholesale</span>
+        </button>
+
+        <!-- User profile info -->
+        <div class="hidden sm:flex flex-col text-right pl-2 border-l border-slate-200">
+          <span id="userName" class="font-semibold text-slate-900 text-xs sm:text-sm leading-tight">Loading...</span>
+          <span id="userEmail" class="text-[11px] text-slate-500 max-w-[160px] truncate">...</span>
+        </div>
+
+        <!-- Sign out -->
+        <button onclick="portal.logout()" class="text-xs font-semibold px-3 py-1.5 rounded-xl border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition shadow-2xs">
+          Sign out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2.5 Staff Operations KPI & Pipeline Bar (Visible for Staff / Admin) -->
+  <section id="staffOpsSummaryBar" class="hidden border-b border-slate-200 bg-white/90 backdrop-blur-xs px-4 sm:px-6 lg:px-8 py-3 shadow-2xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs font-extrabold uppercase tracking-wider text-slate-900">Operations Command Hub</span>
+        <span class="hidden sm:inline text-[11px] text-slate-400">&bull; Live Fulfillment Overview</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <button onclick="portal.filterOrders('intake_submitted')" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 hover:bg-amber-100/80 transition text-left cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
+          <div>
+            <div class="text-[10px] uppercase font-bold text-amber-800 leading-none">Needs Action</div>
+            <div id="kpiIntakeSubmitted" class="text-xs font-black text-amber-950 mt-0.5">0 Orders</div>
+          </div>
+        </button>
+        <button onclick="portal.filterOrders('in_progress')" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200 hover:bg-blue-100/80 transition text-left cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>
+          <div>
+            <div class="text-[10px] uppercase font-bold text-blue-800 leading-none">Active Pods</div>
+            <div id="kpiInProgress" class="text-xs font-black text-blue-950 mt-0.5">0 Sprints</div>
+          </div>
+        </button>
+        <button onclick="portal.filterOrders('approval_progress')" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-50 border border-purple-200 hover:bg-purple-100/80 transition text-left cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></span>
+          <div>
+            <div class="text-[10px] uppercase font-bold text-purple-800 leading-none">In Review</div>
+            <div id="kpiInReview" class="text-xs font-black text-purple-950 mt-0.5">0 Approvals</div>
+          </div>
+        </button>
+        <button onclick="portal.filterOrders('all')" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 hover:bg-slate-200/70 transition text-left cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+          <div>
+            <div class="text-[10px] uppercase font-bold text-slate-600 leading-none">Pipeline Sales</div>
+            <div id="kpiTotalRevenue" class="text-xs font-black text-slate-900 mt-0.5">$0</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Mobile Segmented View Switcher (Visible only on mobile / small screens) -->
+  <div class="lg:hidden max-w-7xl w-full mx-auto px-4 pt-4">
+    <div class="bg-slate-200/90 p-1 rounded-xl flex text-xs font-bold shadow-inner">
+      <button id="btnMobileViewOrders" onclick="portal.switchMobileView('orders')" class="flex-1 py-2 rounded-lg transition-all text-center bg-white text-slate-900 shadow-xs">
+        📋 Orders List (<span id="mobileOrderCount">0</span>)
+      </button>
+      <button id="btnMobileViewDetails" onclick="portal.switchMobileView('details')" class="flex-1 py-2 rounded-lg transition-all text-center text-slate-600 hover:text-slate-900">
+        📦 Details & Tracker
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 grid lg:grid-cols-12 gap-6">
+
+    <!-- Left Column: Orders List & Staff Controls (4 cols on lg) -->
+    <aside id="columnOrdersList" class="lg:col-span-4 flex flex-col gap-4">
+
+      <!-- Orders Header & New Order button for Staff -->
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            Your Orders
+            <span id="ordersCountBadge" class="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded-full border border-slate-200">0</span>
+          </h2>
+          <p class="text-xs text-slate-500">Active services & requests</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btnNewOrder" onclick="portal.openNewOrderModal()" class="hidden text-xs font-bold bg-slate-900 hover:bg-slate-800 px-3 py-1.5 rounded-xl text-white shadow-xs transition">
+            + New Order
+          </button>
+        </div>
+      </div>
+
+      <!-- Staff Status Filter Tabs -->
+      <div id="staffFilterBar" class="hidden flex flex-wrap gap-1.5 text-xs">
+        <button onclick="portal.filterOrders('all')" class="filter-btn active px-2.5 py-1 rounded-lg bg-slate-900 text-white font-semibold shadow-xs" data-filter="all">All</button>
+        <button onclick="portal.filterOrders('attention')" class="filter-btn px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 font-bold hover:bg-amber-100" data-filter="attention">⚡ Needs Action</button>
+        <button onclick="portal.filterOrders('paid')" class="filter-btn px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100" data-filter="paid">Paid</button>
+        <button onclick="portal.filterOrders('intake_submitted')" class="filter-btn px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100" data-filter="intake_submitted">Intake</button>
+        <button onclick="portal.filterOrders('in_progress')" class="filter-btn px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100" data-filter="in_progress">Working</button>
+        <button onclick="portal.filterOrders('approval_progress')" class="filter-btn px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100" data-filter="approval_progress">In Review</button>
+        <button onclick="portal.filterOrders('completed')" class="filter-btn px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100" data-filter="completed">Done</button>
+      </div>
+
+      <!-- Orders List Container -->
+      <div id="ordersContainer" class="space-y-2.5 overflow-y-auto max-h-[calc(100vh-220px)] pr-1">
+        <div class="p-8 text-center text-slate-400 border border-dashed border-slate-200 rounded-2xl text-xs bg-white">
+          Loading orders...
+        </div>
+      </div>
+
+      <!-- Wholesale Quick Storefront Promo Banner -->
+      <div class="p-4 rounded-2xl bg-gradient-to-br from-brand-50 to-indigo-50 border border-brand-100/80 shadow-2xs">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div class="flex-1">
+            <h4 class="text-xs font-bold text-slate-900">Need Extra Specialists?</h4>
+            <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">Dedicated wholesale pods start at just <strong class="text-brand-700">$3/hr</strong> with verified PM oversight.</p>
+            <button onclick="portal.openStorefrontDrawer()" class="mt-2 text-xs font-bold text-brand-600 hover:text-brand-700 underline inline-flex items-center gap-1">
+              View Wholesale Rate Card &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Right Column: Detail View, Visual Tracker & Tabs (8 cols on lg) -->
+    <section id="columnOrderDetails" class="hidden lg:flex lg:col-span-8 flex-col gap-5">
+
+      <!-- Empty State -->
+      <div id="emptyOrderState" class="h-full min-h-[460px] flex flex-col items-center justify-center p-12 text-center border border-dashed border-slate-200 rounded-2xl bg-white shadow-xs">
+        <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 shadow-xs">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-slate-900 mb-1">Select an order</h3>
+        <p class="text-xs text-slate-500 max-w-sm">Choose an order from the list to view its real-time 6-stage tracker, intake requirements, deliverables, and masked message relay.</p>
+      </div>
+
+      <!-- Active Order Content View -->
+      <div id="activeOrderView" class="hidden flex flex-col gap-5">
+
+        <!-- Top Order Card: Info + Status + Fast Action Concierge Bar -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2 mb-1.5">
+                <span id="orderIdTag" class="text-xs font-mono font-bold text-brand-600 uppercase tracking-wider bg-brand-50 px-2 py-0.5 rounded-md border border-brand-200">ORD_...</span>
+                <span id="orderCycleTag" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">ONE TIME</span>
+              </div>
+              <h1 id="orderTitle" class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Service Package</h1>
+              <div id="orderMeta" class="text-xs text-slate-500 mt-2 flex flex-wrap gap-x-4 gap-y-1.5">
+                <span>Client: <strong id="orderClientName" class="text-slate-800">...</strong></span>
+                <span>Total: <strong id="orderAmount" class="text-slate-800">$0</strong></span>
+                <span>Created: <span id="orderDate">...</span></span>
+              </div>
+            </div>
+
+            <!-- Staff Status Control / Client Status Badge -->
+            <div id="statusControlContainer" class="flex items-center gap-2 shrink-0">
+              <span id="orderStatusBadge" class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                PAID
+              </span>
+            </div>
+          </div>
+
+          <!-- Staff 1-Click Operations Hub (Dynamically updated for Staff) -->
+          <div id="staffOpsActionBanner" class="hidden"></div>
+
+          <!-- 4. Fast Action Concierge Bar -->
+          <div class="p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/90 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 text-slate-600 font-medium">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="font-bold text-slate-800">Dedicated Support:</span>
+              <span class="hidden sm:inline">Operations desk & lead PM standing by</span>
+            </div>
+
+            <div class="flex items-center flex-wrap gap-2">
+              <!-- WhatsApp Concierge Link -->
+              <a id="btnWhatsAppConcierge" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-2xs transition">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.769.78 2.791.78 3.182 0 5.768-2.587 5.768-5.766.001-3.18-2.585-5.766-5.768-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.688 0-3.273-.42-4.667-1.157L2 22l1.246-5.184C2.463 15.394 2 13.754 2 11.938 2 6.42 6.482 1.938 12 1.938c5.518 0 10 4.482 10 10z"/></svg>
+                <span>WhatsApp PM</span>
+              </a>
+
+              <!-- Book 15m PM Sync Modal Trigger -->
+              <button onclick="portal.openSyncModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 font-semibold text-xs shadow-2xs transition">
+                <svg class="w-3.5 h-3.5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span>Book 15m Sync</span>
+              </button>
+
+              <!-- Copy Masked Relay Email Button with Tooltip -->
+              <button id="btnCopyRelayEmail" onclick="portal.copyRelayEmail()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 font-semibold text-xs shadow-2xs transition">
+                <svg id="iconCopyRelay" class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span id="textCopyRelay">Copy Relay Email</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. 6-Stage Visual Progress Tracker with Scroll-Snap for Mobile -->
+          <div class="pt-4 pb-2">
+            <!-- Mobile Horizontal Scroll Container with snap -->
+            <div class="overflow-x-auto no-scrollbar snap-x snap-mandatory pb-3 sm:pb-0">
+              <div class="relative min-w-[580px] sm:min-w-0 px-2 sm:px-0">
+                <!-- Background Bar -->
+                <div class="absolute top-4 left-6 right-6 h-1 bg-slate-200 z-0"></div>
+                <!-- Active Progress Fill -->
+                <div id="trackerProgressBar" class="absolute top-4 left-6 h-1 bg-brand-600 z-0 transition-all duration-500" style="width: 0%;"></div>
+
+                <!-- 6 Steps -->
+                <div class="relative z-10 flex justify-between">
+
+                  <!-- 1. Paid -->
+                  <div class="step-node snap-center flex flex-col items-center w-24" data-step="paid">
+                    <div class="step-circle w-8 h-8 rounded-full bg-white border-2 border-slate-300 text-slate-500 flex items-center justify-center text-xs font-bold transition shadow-xs">1</div>
+                    <span class="step-label text-[11px] font-semibold text-slate-500 mt-2 text-center">Paid</span>
+                    <span class="text-[9px] text-slate-400 mt-0.5">Kickoff</span>
+                  </div>
+
+                  <!-- 2. Intake Submitted -->
+                  <div class="step-node snap-center flex flex-col items-center w-24" data-step="intake_submitted">
+                    <div class="step-circle w-8 h-8 rounded-full bg-white border-2 border-slate-300 text-slate-500 flex items-center justify-center text-xs font-bold transition shadow-xs">2</div>
+                    <span class="step-label text-[11px] font-semibold text-slate-500 mt-2 text-center">Intake</span>
+                    <span class="text-[9px] text-slate-400 mt-0.5">Brief In</span>
+                  </div>
+
+                  <!-- 3. In Progress -->
+                  <div class="step-node snap-center flex flex-col items-center w-24" data-step="in_progress">
+                    <div class="step-circle w-8 h-8 rounded-full bg-white border-2 border-slate-300 text-slate-500 flex items-center justify-center text-xs font-bold transition shadow-xs">3</div>
+                    <span class="step-label text-[11px] font-semibold text-slate-500 mt-2 text-center">Working</span>
+                    <span class="text-[9px] text-slate-400 mt-0.5">Pod Active</span>
+                  </div>
+
+                  <!-- 4. Approval Progress -->
+                  <div class="step-node snap-center flex flex-col items-center w-24" data-step="approval_progress">
+                    <div class="step-circle w-8 h-8 rounded-full bg-white border-2 border-slate-300 text-slate-500 flex items-center justify-center text-xs font-bold transition shadow-xs">4</div>
+                    <span class="step-label text-[11px] font-semibold text-slate-500 mt-2 text-center">Approval</span>
+                    <span class="text-[9px] text-slate-400 mt-0.5">Review</span>
+                  </div>
+
+                  <!-- 5. Delivered -->
+                  <div class="step-node snap-center flex flex-col items-center w-24" data-step="delivered">
+                    <div class="step-circle w-8 h-8 rounded-full bg-white border-2 border-slate-300 text-slate-500 flex items-center justify-center text-xs font-bold transition shadow-xs">5</div>
+                    <span class="step-label text-[11px] font-semibold text-slate-500 mt-2 text-center">Delivered</span>
+                    <span class="text-[9px] text-slate-400 mt-0.5">Packaged</span>
+                  </div>
+
+                  <!-- 6. Completed -->
+                  <div class="step-node snap-center flex flex-col items-center w-24" data-step="completed">
+                    <div class="step-circle w-8 h-8 rounded-full bg-white border-2 border-slate-300 text-slate-500 flex items-center justify-center text-xs font-bold transition shadow-xs">6</div>
+                    <span class="step-label text-[11px] font-semibold text-slate-500 mt-2 text-center">Completed</span>
+                    <span class="text-[9px] text-slate-400 mt-0.5">Verified</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-400 text-center sm:hidden mt-1">&larr; Swipe to view full 6-stage lifecycle &rarr;</p>
+          </div>
+
+          <!-- 6. Dynamic "What Happens Next?" Guidance Banner with SLA Timer -->
+          <div id="guidanceBanner" class="rounded-xl border p-4 transition-all duration-300">
+            <!-- Injected dynamically via JS based on current status -->
+          </div>
+        </div>
+
+        <!-- 7. Monthly Subscription Management Card (Visible only when billing_cycle === 'monthly') -->
+        <div id="monthlySubscriptionCard" class="hidden rounded-2xl bg-gradient-to-br from-indigo-900 via-slate-900 to-brand-950 text-white p-5 sm:p-6 shadow-md border border-indigo-700/40 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-indigo-800/60">
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 text-[10px] font-bold uppercase tracking-wider mb-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Active Retainer
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white">Monthly Dedicated Pod Retainer</h3>
+              <p class="text-xs text-indigo-200/80">Guaranteed specialist capacity with prioritized queue routing and dedicated PM oversight.</p>
+            </div>
+            <div class="text-right sm:border-l sm:border-indigo-800/60 sm:pl-4">
+              <span class="text-xs text-indigo-300 block">Monthly Rate</span>
+              <span id="subRateDisplay" class="text-xl font-extrabold text-white">$480 / mo</span>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <span class="text-indigo-300 block text-[11px]">Allocated Capacity</span>
+              <strong class="text-sm font-bold text-white">160 Hours / Month</strong>
+              <span class="text-[10px] text-indigo-200/70 block mt-0.5">Rollover within billing cycle</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <span class="text-indigo-300 block text-[11px]">Fulfillment Model</span>
+              <strong class="text-sm font-bold text-white">Dedicated Specialist Pod</strong>
+              <span class="text-[10px] text-indigo-200/70 block mt-0.5">PM + QA + Lead Specialist</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <span class="text-indigo-300 block text-[11px]">Notice & Flexibility</span>
+              <strong class="text-sm font-bold text-white">4-Day Cancel Notice</strong>
+              <span class="text-[10px] text-indigo-200/70 block mt-0.5">Pause or adjust tiers anytime</span>
+            </div>
+          </div>
+
+          <!-- 1-Click Pod Overtime & Add-On Bumps -->
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <div class="text-xs text-indigo-200">
+              Need extra hours this sprint? Add overtime at your locked wholesale rate.
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="portal.addPodOvertime()" class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs shadow-sm transition">
+                + Add 20h Overtime ($60)
+              </button>
+              <button onclick="portal.openStorefrontDrawer()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 transition">
+                Browse Add-Ons
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Navigation Tabs -->
+        <div class="flex border-b border-slate-200 gap-2 overflow-x-auto no-scrollbar">
+          <button onclick="portal.setDetailTab('thread')" id="tabBtnThread" class="detail-tab px-4 py-2.5 text-sm font-bold border-b-2 border-brand-600 text-brand-600 whitespace-nowrap">
+            Messages & Relay (<span id="tabMsgCount">0</span>)
+          </button>
+          <button onclick="portal.setDetailTab('intake')" id="tabBtnIntake" class="detail-tab px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
+            Project Intake Form
+          </button>
+          <button onclick="portal.setDetailTab('deliverables')" id="tabBtnDeliverables" class="detail-tab px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
+            Deliverables (<span id="tabDelivCount">0</span>)
+          </button>
+          <button onclick="portal.setDetailTab('items')" id="tabBtnItems" class="detail-tab px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
+            Scope & Items
+          </button>
+        </div>
+
+        <!-- Tab 1: Messages & Anonymized Email Relay -->
+        <div id="tabContentThread" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col">
+
+          <!-- Masked Relay Banner -->
+          <div class="mb-4 p-3.5 rounded-xl bg-blue-50/70 border border-blue-200 text-xs text-blue-900 flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-blue-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <div class="flex-1 leading-relaxed">
+              <span class="font-bold">2-Way Email Masking Active:</span>
+              You can reply here OR directly from your email to
+              <code id="relayEmailAddress" class="bg-white px-1.5 py-0.5 rounded text-blue-950 font-mono font-bold border border-blue-200">order-...@reply.jdp.team</code>.
+              Your real agency email is securely shielded.
+            </div>
+          </div>
+
+          <!-- Message List -->
+          <div id="messagesList" class="space-y-3 max-h-[380px] overflow-y-auto pr-1 mb-4">
+            <div class="text-center text-slate-400 text-xs py-8">No messages yet.</div>
+          </div>
+
+          <!-- Composer Form -->
+          <form id="msgForm" onsubmit="portal.sendMessage(event)" class="pt-3 border-t border-slate-100 space-y-2">
+            <!-- Staff toggle for internal notes -->
+            <div id="staffMsgOptions" class="hidden flex items-center justify-between text-xs pb-1">
+              <div class="flex items-center gap-3">
+                <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 font-medium">
+                  <input type="radio" name="msgKind" value="client" checked class="accent-brand-600">
+                  <span>Public (Forwards to Client via Masked Email)</span>
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer text-amber-700 font-medium">
+                  <input type="radio" name="msgKind" value="internal" class="accent-amber-600">
+                  <span>Internal Note (Staff only)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex gap-2">
+              <textarea id="msgBody" rows="2" placeholder="Write a message or reply... (synchronized with email relay)" required
+                class="flex-1 rounded-xl bg-white border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 resize-none shadow-xs"></textarea>
+              <button type="submit" id="btnSendMsg" class="self-end px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-sm font-bold text-white shadow-xs transition">
+                Send
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Tab 2: Project Intake Form with Quick-Fill Presets & Drive Notice -->
+        <div id="tabContentIntake" class="hidden bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Project Intake Information</h3>
+              <p class="text-xs text-slate-500">Provide the requirements, target assets, and instructions for your specialist pod.</p>
+            </div>
+            <div id="draftSaveIndicator" class="text-[11px] text-slate-400 flex items-center gap-1.5 font-medium">
+              <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Auto-saved to browser</span>
+            </div>
+          </div>
+
+          <!-- Quick-Fill Presets -->
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+            <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider block">⚡ Quick-Fill Brief Presets:</span>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="portal.applyIntakePreset('seo_audit')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:text-brand-600 hover:border-brand-300 transition shadow-2xs">
+                🔍 Technical SEO & Audit Preset
+              </button>
+              <button type="button" onclick="portal.applyIntakePreset('content_writing')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:text-brand-600 hover:border-brand-300 transition shadow-2xs">
+                ✍️ Content Cluster Writing Preset
+              </button>
+              <button type="button" onclick="portal.applyIntakePreset('va_pod')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:text-brand-600 hover:border-brand-300 transition shadow-2xs">
+                🤖 Remote Operations & VA Pod Preset
+              </button>
+            </div>
+          </div>
+
+          <!-- Google Drive Permission Alert Callout -->
+          <div class="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200 text-amber-900 text-xs flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <div class="leading-relaxed">
+              <strong class="font-bold">Google Drive Permission Warning:</strong>
+              Please confirm your shared Drive links are set to <code class="bg-white/80 px-1 py-0.5 rounded font-bold text-amber-950">"Anyone with the link can view/edit"</code>.
+              Restricted permissions will pause kickoff until access is granted.
+            </div>
+          </div>
+
+          <form id="intakeForm" onsubmit="portal.submitIntake(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Target URLs / Domains</label>
+              <input type="text" id="intakeUrls" placeholder="https://clientdomain.com, https://competitor.com"
+                class="w-full rounded-xl bg-white border border-slate-300 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 shadow-xs">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Target Keywords / Focus Anchors</label>
+              <input type="text" id="intakeKeywords" placeholder="e.g. b2b saas billing, remote executive assistant"
+                class="w-full rounded-xl bg-white border border-slate-300 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 shadow-xs">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Google Drive / Assets / Brand Guidelines Link</label>
+              <input type="url" id="intakeDrive" placeholder="https://drive.google.com/drive/folders/..."
+                class="w-full rounded-xl bg-white border border-slate-300 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 shadow-xs">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Access Notes / Tool Logins</label>
+              <textarea id="intakeAccess" rows="3" placeholder="Shared 1Password link, WordPress credentials, or GSC email delegation..."
+                class="w-full rounded-xl bg-white border border-slate-300 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 shadow-xs"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Extra Brief / Project Details</label>
+              <textarea id="intakeExtra" rows="3" placeholder="Any specific instructions, deadlines, tone of voice, or special requests..."
+                class="w-full rounded-xl bg-white border border-slate-300 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 shadow-xs"></textarea>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <span id="intakeStatusNotice" class="text-xs font-medium text-slate-500"></span>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="portal.clearIntakeDraft()" class="px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+                  Reset Draft
+                </button>
+                <button type="submit" id="btnSaveIntake" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-sm font-bold text-white shadow-sm transition">
+                  Submit Project Intake
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Tab 3: Deliverables & Approval Section with Review Actions -->
+        <div id="tabContentDeliverables" class="hidden bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Project Deliverables & Approval</h3>
+              <p class="text-xs text-slate-500">Review deliverables, download work files, confirm completion, or request revisions.</p>
+            </div>
+            <!-- Staff Add Deliverable Button -->
+            <button id="btnStaffAddDeliv" onclick="portal.openDeliverableModal()" class="hidden px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white shadow-xs">
+              + Add Deliverable
+            </button>
+          </div>
+
+          <div id="deliverablesContainer" class="space-y-4">
+            <div class="text-center text-slate-400 text-xs py-8 border border-dashed border-slate-200 rounded-xl bg-slate-50/50">
+              No deliverables submitted yet. Once your pod finishes work, deliverables will appear here for your review and approval.
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Scope & Items -->
+        <div id="tabContentItems" class="hidden bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Order Scope & Staff Assignment</h3>
+              <p class="text-xs text-slate-500">Items included in this package.</p>
+            </div>
+            <button id="btnStaffAddItem" onclick="portal.openItemModal()" class="hidden px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white shadow-xs">
+              + Add Line Item
+            </button>
+          </div>
+
+          <div id="itemsContainer" class="space-y-3">
+            <div class="text-center text-slate-400 text-xs py-6">No items listed.</div>
+          </div>
+        </div>
+
+        <!-- 12. Contextual Order Bump Card at the bottom of active orders -->
+        <div id="contextualOrderBumpCard" class="p-5 rounded-2xl bg-gradient-to-r from-amber-50/80 via-white to-amber-50/80 border border-amber-200 shadow-sm space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div>
+                <span class="inline-block px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-amber-200/60 text-amber-900 mb-0.5">High-Velocity Order Bump</span>
+                <h4 class="text-sm font-bold text-slate-900">Accelerate Delivery & Authority on this Sprint</h4>
+                <p class="text-xs text-slate-600 mt-0.5">Add 1-click wholesale power-ups directly to your active order sprint queue.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-3 pt-1">
+            <!-- Bump 1: 24h Express Turnaround -->
+            <div class="p-3.5 rounded-xl bg-white border border-amber-200/70 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">⚡ 24h Priority Turnaround</span>
+                  <span class="text-xs font-extrabold text-amber-700">+$49</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1">Jump to head of execution queue with continuous dual-shift pod coverage.</p>
+              </div>
+              <button onclick="portal.claimOrderBump('24h_priority', 49, '24h Priority Express Turnaround')" class="mt-3 w-full py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition shadow-xs">
+                + Add Priority ($49)
+              </button>
+            </div>
+
+            <!-- Bump 2: 5 High-DA Anchor Citations -->
+            <div class="p-3.5 rounded-xl bg-white border border-amber-200/70 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-slate-900">🔗 5 High-DA Anchor Citations</span>
+                  <span class="text-xs font-extrabold text-brand-700">+$85</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1">Niche-relevant business citations to supercharge indexing of target pages.</p>
+              </div>
+              <button onclick="portal.claimOrderBump('citations_pack', 85, '5 High-DA Anchor Citations')" class="mt-3 w-full py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition shadow-xs">
+                + Add Citations ($85)
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <!-- 10. Post-Approval Milestone Celebration Upsell Modal -->
+  <div id="modalMilestone" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-5 transform transition-all">
+      <div class="text-center space-y-2">
+        <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-2xl shadow-inner">
+          🎉
+        </div>
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+          Milestone Approved!
+        </span>
+        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Deliverable Confirmed</h3>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+          Your project files have been verified and archived. Keep your growth momentum moving with this exclusive completion reward:
+        </p>
+      </div>
+
+      <!-- Exclusive Offer Box -->
+      <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-brand-50 to-indigo-50 border border-brand-200 text-left space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-brand-600 text-white tracking-wider">
+            20% OFF COMPLETION REWARD
+          </span>
+          <span class="text-xs text-slate-400 line-through">$200</span>
+        </div>
+        <div class="flex items-baseline justify-between">
+          <h4 class="font-extrabold text-base text-slate-900">10 High-Authority Backlinks (DA 40–70+)</h4>
+          <span class="text-2xl font-black text-brand-700">$160</span>
+        </div>
+        <ul class="text-xs text-slate-600 space-y-1.5">
+          <li class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Do-Follow contextual links in aged, niche-relevant publications</span>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Anchor text diversification according to your target URLs</span>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Full live crawl and indexing tracking report within 7 days</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-2 pt-2">
+        <button onclick="portal.claimMilestoneUpsell()" class="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-extrabold text-sm shadow-md shadow-brand-500/20 transition">
+          Claim 20% Off Bundle ($160)
+        </button>
+        <button onclick="portal.closeModal('modalMilestone')" class="w-full sm:w-auto py-3 px-4 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold text-xs transition">
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. Slide-Over Wholesale Services Storefront Drawer -->
+  <div id="drawerStorefront" class="hidden fixed inset-0 z-50 overflow-hidden" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div onclick="portal.closeStorefrontDrawer()" class="drawer-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"></div>
+
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="drawer-panel w-screen max-w-md sm:max-w-lg bg-white shadow-2xl flex flex-col border-l border-slate-200">
+
+        <!-- Drawer Header -->
+        <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">Wholesale Catalog</span>
+              <span class="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full font-bold">Guaranteed SLA</span>
+            </div>
+            <h3 class="text-lg font-extrabold tracking-tight mt-0.5">JDP Services Storefront</h3>
+          </div>
+          <button onclick="portal.closeStorefrontDrawer()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-lg transition">
+            &times;
+          </button>
+        </div>
+
+        <!-- Drawer Content Rate Cards -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-4">
+          <p class="text-xs text-slate-500">Genuine JDP wholesale rates. Add directly to your active sprint or order as standalone services.</p>
+
+          <!-- Card 1: Junior Specialist Pod -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-brand-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-bold uppercase text-brand-600 tracking-wider">Dedicated Capacity</span>
+                <h4 class="text-sm font-bold text-slate-900">Junior Specialist Pod</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Data research, CRM hygiene, social schedule & task ops.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-extrabold text-slate-900">$3 / hr</span>
+                <span class="text-[10px] text-slate-400 block">160h @ $480/mo</span>
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex items-center justify-between">
+              <span>One-Time A-La-Carte Rate: <strong>$6.16 / hr</strong></span>
+              <span class="text-emerald-700 font-bold">Save 51% with Sub</span>
+            </div>
+            <button onclick="portal.inquireService('Junior Specialist Pod', '$3/hr ($480/mo) or $6.16/hr one-time')" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Order / Inquire Junior Pod
+            </button>
+          </div>
+
+          <!-- Card 2: Senior Specialist Pod -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-brand-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-bold uppercase text-purple-600 tracking-wider">High Velocity</span>
+                <h4 class="text-sm font-bold text-slate-900">Senior Specialist Pod</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Technical SEO, web engineering, Zapier/Make automations.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-extrabold text-slate-900">$5 / hr</span>
+                <span class="text-[10px] text-slate-400 block">160h @ $800/mo</span>
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex items-center justify-between">
+              <span>One-Time A-La-Carte Rate: <strong>$10.27 / hr</strong></span>
+              <span class="text-emerald-700 font-bold">Save 51% with Sub</span>
+            </div>
+            <button onclick="portal.inquireService('Senior Specialist Pod', '$5/hr ($800/mo) or $10.27/hr one-time')" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Order / Inquire Senior Pod
+            </button>
+          </div>
+
+          <!-- Card 3: SEO Content Writing -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-brand-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-bold uppercase text-emerald-600 tracking-wider">Content Engine</span>
+                <h4 class="text-sm font-bold text-slate-900">SEO Content Article (1,200+ words)</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Surfer/Frase score 80+, human edited, ready to publish.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-extrabold text-slate-900">$32 / ea</span>
+                <span class="text-[10px] text-slate-400 block">Turnaround: 48h</span>
+              </div>
+            </div>
+            <button onclick="portal.inquireService('SEO Content Article', '$32/article')" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Add Single Article ($32)
+            </button>
+          </div>
+
+          <!-- Card 4: 5-Pack Content Cluster -->
+          <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-50/50 to-white border border-emerald-200 shadow-sm hover:border-emerald-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-black uppercase text-emerald-700 tracking-wider bg-emerald-100 px-2 py-0.5 rounded">Popular Bundle</span>
+                <h4 class="text-sm font-bold text-slate-900 mt-1">5-Article Authority Cluster</h4>
+                <p class="text-xs text-slate-500 mt-0.5">1 Pillar (2,000w) + 4 Supporting Posts (1,000w each) with internal linking mesh.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-extrabold text-emerald-800">$150 / pack</span>
+                <span class="text-[10px] text-slate-400 line-through">$160 regular</span>
+              </div>
+            </div>
+            <button onclick="portal.inquireService('5-Article Content Authority Cluster', '$150/pack')" class="w-full py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">
+              Order 5-Pack Cluster ($150)
+            </button>
+          </div>
+
+          <!-- Card 5: PR Wire Distribution -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-brand-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-bold uppercase text-blue-600 tracking-wider">Syndication</span>
+                <h4 class="text-sm font-bold text-slate-900">PR Wire Press Release Distribution</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Guaranteed pickup on 200+ news sites, AP, Yahoo News syndicate.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-extrabold text-slate-900">$240 / release</span>
+                <span class="text-[10px] text-slate-400 block">Full report</span>
+              </div>
+            </div>
+            <button onclick="portal.inquireService('PR Wire Distribution', '$240/release')" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Order PR Wire ($240)
+            </button>
+          </div>
+
+          <!-- Card 6: Technical SEO & Core Web Vitals Deep Audit -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-brand-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-[10px] font-bold uppercase text-amber-600 tracking-wider">Diagnostic Sprint</span>
+                <h4 class="text-sm font-bold text-slate-900">Technical SEO & CWV Deep Audit</h4>
+                <p class="text-xs text-slate-500 mt-0.5">60-point Screaming Frog crawl + developer-ready action sprint sheet.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-extrabold text-slate-900">$199 / audit</span>
+                <span class="text-[10px] text-slate-400 block">3-day SLA</span>
+              </div>
+            </div>
+            <button onclick="portal.inquireService('Technical SEO & CWV Audit', '$199')" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+              Order Tech Audit ($199)
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="p-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between text-xs text-slate-600">
+          <span>Need custom high-volume terms?</span>
+          <button onclick="portal.openSyncModal(); portal.closeStorefrontDrawer();" class="text-brand-600 font-bold hover:underline">
+            Talk to PM &rarr;
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Book 15m PM Sync -->
+  <div id="modalSync" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900">Book 15m PM Sync</h3>
+          <p class="text-xs text-slate-500">Live operational alignment with your dedicated PM</p>
+        </div>
+        <button onclick="portal.closeModal('modalSync')" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="portal.submitSyncBooking(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Agenda / Sync Topic</label>
+          <select id="syncTopic" class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+            <option value="Sprint Kickoff & Asset Alignment">Sprint Kickoff & Asset Alignment</option>
+            <option value="Deliverable Review & Revisions">Deliverable Review & Revisions</option>
+            <option value="Monthly Pod Capacity & Overtime Expansion">Monthly Pod Capacity & Overtime Expansion</option>
+            <option value="Urgent Technical Roadmap Question">Urgent Technical Roadmap Question</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Preferred Timeframe (GMT+7 to GMT-5)</label>
+          <input type="text" id="syncTimeframe" required placeholder="e.g. Tomorrow 10am EST or Today 3pm UTC"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Additional Notes</label>
+          <textarea id="syncNotes" rows="2" placeholder="Specific questions or items to cover..."
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs"></textarea>
+        </div>
+        <div class="pt-3 flex justify-end gap-2 border-t border-slate-100">
+          <button type="button" onclick="portal.closeModal('modalSync')" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-xs">Confirm Booking Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: New Order (Staff Only) -->
+  <div id="modalNewOrder" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-slate-900">Create New Order</h3>
+        <button onclick="portal.closeModal('modalNewOrder')" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="portal.submitNewOrder(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Client Email</label>
+          <input type="email" id="newOrderEmail" required placeholder="client@agency.com"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Client Name</label>
+          <input type="text" id="newOrderName" placeholder="Client Name or Company"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Service Package</label>
+          <input type="text" id="newOrderService" required value="Dedicated Specialist Pod"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Amount ($ USD)</label>
+          <input type="number" id="newOrderAmount" step="1" value="300"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Billing Cycle</label>
+          <select id="newOrderCycle" class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+            <option value="one_time">One Time</option>
+            <option value="monthly">Monthly Subscription</option>
+          </select>
+        </div>
+        <div class="pt-3 flex justify-end gap-2 border-t border-slate-100">
+          <button type="button" onclick="portal.closeModal('modalNewOrder')" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white shadow-xs">Create Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Deliverable (Staff Only) -->
+  <div id="modalDeliverable" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-slate-900">Add Deliverable</h3>
+        <button onclick="portal.closeModal('modalDeliverable')" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="portal.submitDeliverable(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Deliverable Title</label>
+          <input type="text" id="delivTitle" required placeholder="SEO Audit Report / Video Render v1"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Download / Google Drive / Figma URL</label>
+          <input type="url" id="delivUrl" required placeholder="https://..."
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Notes / Summary</label>
+          <textarea id="delivNotes" rows="3" placeholder="Summary of what was completed..."
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs"></textarea>
+        </div>
+        <div class="pt-3 flex justify-end gap-2 border-t border-slate-100">
+          <button type="button" onclick="portal.closeModal('modalDeliverable')" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white shadow-xs">Submit Deliverable</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Request Revision (Client) -->
+  <div id="modalRevision" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-slate-900">Request Revision</h3>
+        <button onclick="portal.closeModal('modalRevision')" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="portal.submitRevisionRequest(event)" class="space-y-3">
+        <input type="hidden" id="revDelivId">
+        <p class="text-xs text-slate-500">Describe the changes or modifications you'd like your specialist to make.</p>
+        <div>
+          <textarea id="revFeedback" rows="4" required placeholder="Specific feedback, timestamps, or adjustments needed..."
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs"></textarea>
+        </div>
+        <div class="pt-3 flex justify-end gap-2 border-t border-slate-100">
+          <button type="button" onclick="portal.closeModal('modalRevision')" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-xs font-bold text-white shadow-xs">Send Revision Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Scope Item / Assign Crew (Staff Only) -->
+  <div id="modalItem" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-slate-900">Add Item & Assign Crew</h3>
+        <button onclick="portal.closeModal('modalItem')" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="portal.submitItem(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Service / Task Name</label>
+          <input type="text" id="itemServiceName" required placeholder="SEO Content / Video Cut / Technical SEO"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Quantity</label>
+          <input type="number" id="itemQty" step="0.5" value="1"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Assign Specialist / Crew</label>
+          <select id="itemAssignCrew" class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+            <option value="">-- Unassigned --</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Notes</label>
+          <input type="text" id="itemNotes" placeholder="Internal or task instructions"
+            class="w-full rounded-xl bg-white border border-slate-300 px-3.5 py-2 text-sm text-slate-900 focus:outline-none focus:border-brand-600 shadow-xs">
+        </div>
+        <div class="pt-3 flex justify-end gap-2 border-t border-slate-100">
+          <button type="button" onclick="portal.closeModal('modalItem')" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white shadow-xs">Add Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/public/app.js"></script>
+</body>
+</html>

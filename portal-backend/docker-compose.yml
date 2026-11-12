@@ -1,0 +1,68 @@
+services:
+  portal-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jdp-portal-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - APP_URL=https://portal.jdp.team
+      - SMTP_PORT=25
+      - SMTP_HOST=0.0.0.0
+      - SMTP_DOMAIN=reply.jdp.team
+      - DATA_DIR=/app/data
+      - DB_PATH=/app/data/portal.db
+      - DKIM_KEY_PATH=/app/data/dkim/private.key
+      - DKIM_SELECTOR=default
+      - DKIM_DOMAIN=reply.jdp.team
+      - OUTBOUND_SMTP_HOST=${OUTBOUND_SMTP_HOST:-}
+      - OUTBOUND_SMTP_PORT=${OUTBOUND_SMTP_PORT:-587}
+      - OUTBOUND_SMTP_SECURE=${OUTBOUND_SMTP_SECURE:-false}
+      - OUTBOUND_SMTP_USER=${OUTBOUND_SMTP_USER:-}
+      - OUTBOUND_SMTP_PASS=${OUTBOUND_SMTP_PASS:-}
+      - OUTBOUND_FROM=${OUTBOUND_FROM:-support@jdp.team}
+      - OUTBOUND_NAME=${OUTBOUND_NAME:-JDP Team}
+      - COOKIE_SECRET=${COOKIE_SECRET:-jdp-team-secret-cookie-key-32-chars-long!}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@jdp.team}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-jdp123}
+    ports:
+      # Port 25 for Inbound SMTP Mail Relay (Must be exposed to receive MX mail)
+      - "25:25"
+      # Port 3000 exposed to localhost for internal health checks
+      - "127.0.0.1:3000:3000"
+    volumes:
+      # Persistent SQLite DB and DKIM keys
+      - ./data:/app/data
+      - ./public:/app/public:ro
+    networks:
+      - portal-net
+
+  caddy:
+    image: caddy:alpine
+    container_name: jdp-portal-caddy
+    restart: unless-stopped
+    ports:
+      # HTTP and HTTPS for Auto-SSL via Let's Encrypt
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - portal-net
+    depends_on:
+      - portal-app
+
+volumes:
+  caddy-data:
+    name: jdp-caddy-data
+  caddy-config:
+    name: jdp-caddy-config
+
+networks:
+  portal-net:
+    name: jdp-portal-network

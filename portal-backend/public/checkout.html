@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulated Checkout & Onboarding — JDP Team Wholesale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
+            },
+            paypal: {
+              yellow: '#ffc439',
+              yellowHover: '#f2ba36',
+              blue: '#003087',
+              darkBlue: '#001c64'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom focus & transitions */
+    .package-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .package-card.selected {
+      border-color: #2563eb;
+      background-color: #f8fafc;
+      box-shadow: 0 0 0 2px #2563eb, 0 10px 15px -3px rgba(37, 99, 235, 0.1);
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-fast {
+      animation: spin 0.6s linear infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-brand-600 selection:text-white">
+
+  <!-- 1. Trust Notification Bar -->
+  <aside aria-label="Trust & SLA" class="bg-gradient-to-r from-slate-900 via-slate-800 to-brand-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-slate-700/60 shadow-xs">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+      <div class="flex items-center gap-2 font-medium">
+        <span class="inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30 text-[10px]">
+          <svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          Winner 2026
+        </span>
+        <span class="hidden sm:inline text-slate-200">South-South Digital Excellence Award &bull;</span>
+        <span class="text-slate-300">Trustpilot <strong class="text-white">4.2 / 5.0</strong> Verified Supplier</span>
+      </div>
+      <div class="flex items-center gap-3 text-slate-300 font-medium ml-auto sm:ml-0">
+        <span class="inline-flex items-center gap-1.5 text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          100% Wholesale SLA Guarantee
+        </span>
+        <span class="hidden md:inline text-slate-400">&bull; 30-Day Money-Back Policy</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. Header -->
+  <header class="border-b border-slate-200 bg-white sticky top-0 z-20 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="https://jdp.team" class="text-xl font-extrabold tracking-tight text-slate-900 hover:opacity-90 transition">
+          JDP<span class="text-brand-600">.team</span>
+        </a>
+        <span class="text-slate-300">|</span>
+        <span class="text-xs sm:text-sm font-semibold text-slate-600">Wholesale Checkout Simulator</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-xs font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition">
+          Portal Dashboard &rarr;
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Sandbox Notice Banner -->
+  <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 border-b border-amber-200/80 px-4 py-2.5">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-3 text-xs text-amber-900 font-medium">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+        <span><strong>Sandbox Mode:</strong> Belum perlu akun PayPal asli. Klik tombol PayPal kuning di bawah untuk mensimulasikan pembelian langsung, mendapatkan sesi login otomatis, dan langsung masuk ke Client Portal.</span>
+      </div>
+      <button onclick="checkoutApp.prefillTestBuyer()" class="shrink-0 bg-white border border-amber-300 hover:bg-amber-50 text-amber-900 font-bold px-2.5 py-1 rounded-md text-[11px] shadow-2xs transition">
+        ⚡ Quick Pre-Fill
+      </button>
+    </div>
+  </div>
+
+  <!-- 4. Main Checkout Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
+    <div class="grid lg:grid-cols-12 gap-8">
+
+      <!-- Left Column: Package Selector & Client Info (7 cols) -->
+      <section class="lg:col-span-7 space-y-6">
+
+        <!-- Section 1: Choose Wholesale Package -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <h2 class="text-base font-extrabold text-slate-900">1. Select Fulfillment Service</h2>
+              <p class="text-xs text-slate-500">Choose dedicated pod staffing or a turnkey production sprint</p>
+            </div>
+            <span class="text-[11px] font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2 py-0.5 rounded-full">Wholesale B2B</span>
+          </div>
+
+          <!-- Package Radio Cards Container -->
+          <div id="packageList" class="space-y-3">
+            <!-- Dynamically populated or fallback -->
+            <div class="text-xs text-slate-400 p-4 text-center">Loading wholesale rate card...</div>
+          </div>
+        </div>
+
+        <!-- Section 2: Client Contact Details -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <h2 class="text-base font-extrabold text-slate-900">2. Client & Agency Contact</h2>
+              <p class="text-xs text-slate-500">Your portal account and order confirmations will be linked here</p>
+            </div>
+            <button type="button" onclick="checkoutApp.prefillTestBuyer()" class="text-xs font-bold text-brand-600 hover:text-brand-700 underline">
+              Use sample data
+            </button>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="clientName" class="block text-xs font-bold text-slate-700 mb-1">Full Name / Contact *</label>
+              <input type="text" id="clientName" value="Sarah Connor" placeholder="e.g. Sarah Connor" required
+                class="w-full text-xs sm:text-sm bg-slate-50/70 border border-slate-300 focus:bg-white focus:border-brand-600 focus:ring-1 focus:ring-brand-600 rounded-xl px-3.5 py-2.5 text-slate-900 transition">
+            </div>
+
+            <div>
+              <label for="clientEmail" class="block text-xs font-bold text-slate-700 mb-1">Work Email Address *</label>
+              <input type="email" id="clientEmail" value="sarah@agency-partner.com" placeholder="e.g. sarah@agency.com" required
+                class="w-full text-xs sm:text-sm bg-slate-50/70 border border-slate-300 focus:bg-white focus:border-brand-600 focus:ring-1 focus:ring-brand-600 rounded-xl px-3.5 py-2.5 text-slate-900 transition">
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="clientCompany" class="block text-xs font-bold text-slate-700 mb-1">Agency or Brand Name (Optional)</label>
+              <input type="text" id="clientCompany" value="Apex Digital Media" placeholder="e.g. Acme Agency LLC"
+                class="w-full text-xs sm:text-sm bg-slate-50/70 border border-slate-300 focus:bg-white focus:border-brand-600 focus:ring-1 focus:ring-brand-600 rounded-xl px-3.5 py-2.5 text-slate-900 transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: High Converting Order Bumps -->
+        <div class="bg-gradient-to-br from-indigo-50/60 to-brand-50/60 rounded-2xl border border-indigo-200/80 p-5 shadow-xs space-y-3">
+          <div class="flex items-center gap-2 text-indigo-950 font-bold text-xs uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+            Recommended Agency Add-ons (Order Bumps)
+          </div>
+
+          <label class="flex items-start gap-3 p-3 bg-white rounded-xl border border-indigo-200/70 hover:border-indigo-400 cursor-pointer transition shadow-2xs">
+            <input type="checkbox" id="bumpTopical" onchange="checkoutApp.updateSummary()" class="mt-1 w-4 h-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
+            <div class="flex-1 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900">Add Topical Authority 5-Pack Sprint</span>
+                <span class="font-extrabold text-brand-600">+$150</span>
+              </div>
+              <p class="text-slate-500 mt-0.5 leading-relaxed">5 deep 2,500+ word semantic articles with custom diagrams and schema markup for immediate ranking momentum.</p>
+            </div>
+          </label>
+
+          <label class="flex items-start gap-3 p-3 bg-white rounded-xl border border-indigo-200/70 hover:border-indigo-400 cursor-pointer transition shadow-2xs">
+            <input type="checkbox" id="bumpConcierge" onchange="checkoutApp.updateSummary()" class="mt-1 w-4 h-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
+            <div class="flex-1 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900">Add Priority 24/7 Slack Concierge</span>
+                <span class="font-extrabold text-brand-600">+$90/mo</span>
+              </div>
+              <p class="text-slate-500 mt-0.5 leading-relaxed">Direct agency Slack channel with dedicated Senior Ops lead and &lt;15 min emergency turnaround.</p>
+            </div>
+          </label>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Order Summary & PayPal Simulated Payment (5 cols) -->
+      <aside class="lg:col-span-5 space-y-5">
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm sticky top-24 space-y-5">
+          <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-slate-900">Order Summary</h3>
+            <span id="summaryBadge" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">Monthly</span>
+          </div>
+
+          <!-- Line Items List -->
+          <div id="summaryItemsList" class="space-y-2 text-xs">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Total Calculation -->
+          <div class="pt-3 border-t border-slate-100 space-y-1.5 text-xs">
+            <div class="flex justify-between text-slate-500">
+              <span>Subtotal</span>
+              <span id="summarySubtotal">$480.00</span>
+            </div>
+            <div class="flex justify-between text-slate-500">
+              <span>B2B Wholesale Tax</span>
+              <span class="text-emerald-600 font-semibold">$0.00 (Tax Exempt)</span>
+            </div>
+            <div id="partnerBadgeRow" class="flex justify-between items-center text-xs py-1 px-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800">
+              <span class="font-medium flex items-center gap-1">
+                <span>🤝</span> Referred by Partner:
+              </span>
+              <span id="partnerCodeDisplay" class="font-mono font-bold uppercase">JAMES</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2 border-t border-slate-200 text-slate-900">
+              <span class="text-sm font-extrabold">Total Due Today</span>
+              <span id="summaryTotal" class="text-2xl font-black text-brand-600">$480.00</span>
+            </div>
+            <p id="summaryCadenceNote" class="text-[11px] text-slate-400 text-right">Renews monthly at $480. Cancel anytime in 1 click.</p>
+          </div>
+
+          <!-- Payment Simulation Buttons -->
+          <div class="pt-2 space-y-3">
+            <div class="text-center">
+              <span class="text-[11px] uppercase tracking-wider font-extrabold text-slate-400">Select Instant Simulated Payment</span>
+            </div>
+
+            <!-- Primary Simulated PayPal Button -->
+            <button id="btnSimulatePaypal" type="button" onclick="checkoutApp.submitCheckout('paypal')"
+              class="w-full py-3.5 px-4 rounded-xl font-extrabold text-slate-900 text-sm shadow-md transition-all flex items-center justify-center gap-2"
+              style="background-color: #ffc439; border: 1px solid #f2ba36;">
+              <svg class="h-5 w-auto" viewBox="0 0 100 28" fill="none">
+                <path d="M12.2 3.5h7.7c4.6 0 7.3 2.3 6.9 6.7-.4 4.5-3.5 7.2-7.8 7.2h-3.6l-1.5 9.1h-4.3l2.6-16.1v-6.9zm6.4 10.3c2.4 0 4.1-1.4 4.3-3.7.2-2.3-1.1-3.6-3.4-3.6h-3.5l-1.2 7.3h3.8z" fill="#003087"/>
+                <path d="M33.4 10.5h4.2l-3.3 16H30l1.2-5.9c-.8.9-2 1.4-3.3 1.4-3.3 0-5.7-2.6-5.3-6.8.4-4.5 3.3-7.5 7.1-7.5 1.5 0 2.8.6 3.7 1.6v-2.8zm-3.8 11.8c2 0 3.7-1.7 4-3.9.3-2.3-1.1-4.1-3.1-4.1-2 0-3.7 1.7-4 3.9-.3 2.3 1 4.1 3.1 4.1z" fill="#0079C1"/>
+                <path d="M47.7 10.5l-5.6 16.3c-.6 1.8-1.5 2.6-3.1 2.6-.5 0-1-.1-1.3-.2l.7-3.7c.3.1.6.1.8.1.8 0 1.2-.4 1.5-1.2l.3-.8-4.5-13.1h4.4l2.6 8.9 4.2-8.9h4.3z" fill="#00457C"/>
+                <path d="M63.7 3.5h7.7c4.6 0 7.3 2.3 6.9 6.7-.4 4.5-3.5 7.2-7.8 7.2h-3.6l-1.5 9.1h-4.3l2.6-16.1v-6.9zm6.4 10.3c2.4 0 4.1-1.4 4.3-3.7.2-2.3-1.1-3.6-3.4-3.6h-3.5l-1.2 7.3h3.8z" fill="#003087"/>
+                <path d="M84.9 10.5h4.2l-3.3 16h-4.3l1.2-5.9c-.8.9-2 1.4-3.3 1.4-3.3 0-5.7-2.6-5.3-6.8.4-4.5 3.3-7.5 7.1-7.5 1.5 0 2.8.6 3.7 1.6v-2.8zm-3.8 11.8c2 0 3.7-1.7 4-3.9.3-2.3-1.1-4.1-3.1-4.1-2 0-3.7 1.7-4 3.9-.3 2.3 1 4.1 3.1 4.1z" fill="#0079C1"/>
+                <path d="M92.1 3.5h4.2l-4.1 23h-4.2l4.1-23z" fill="#00457C"/>
+              </svg>
+              <span>Simulate PayPal Payment</span>
+            </button>
+
+            <!-- Secondary Card Button -->
+            <button id="btnSimulateCard" type="button" onclick="checkoutApp.submitCheckout('card')"
+              class="w-full py-3 px-4 rounded-xl font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm border border-slate-300 transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              <span>Simulate Debit or Credit Card</span>
+            </button>
+
+            <!-- Processing Feedback Box -->
+            <div id="processingNotice" class="hidden p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 text-xs space-y-2">
+              <div class="flex items-center gap-2.5 font-bold">
+                <div class="w-4 h-4 border-2 border-brand-600 border-t-transparent rounded-full animate-spin-fast"></div>
+                <span id="processingTitle">Processing simulated payment...</span>
+              </div>
+              <p id="processingDetail" class="text-[11px] text-blue-700">Connecting sandbox to client portal database and issuing secure session token...</p>
+            </div>
+          </div>
+
+          <!-- Trust & Guarantees -->
+          <div class="pt-3 border-t border-slate-100 space-y-2 text-[11px] text-slate-500">
+            <div class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span><strong>Instant Portal Access:</strong> Auto-logged in upon payment completion.</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span><strong>100% White-Label:</strong> Your clients never see JDP branding.</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span><strong>Masked Email Relay:</strong> Seamless two-way proxy communication.</span>
+            </div>
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- 5. Footer -->
+  <footer class="border-t border-slate-200 bg-white py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>&copy; 2026 JDP Team Wholesale Operations. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="https://jdp.team" class="hover:text-slate-600">Main Site</a>
+        <span>&bull;</span>
+        <a href="/" class="hover:text-slate-600">Client Portal</a>
+        <span>&bull;</span>
+        <a href="/login" class="hover:text-slate-600">Staff Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    const checkoutApp = {
+      packages: [],
+      selectedPackageId: 'junior-pod',
+      isSubmitting: false,
+
+      async init() {
+        // Fetch packages
+        try {
+          const res = await fetch('/api/checkout/packages');
+          const data = await res.json();
+          this.packages = data.packages || [];
+        } catch (e) {
+          console.warn('Using fallback packages');
+          this.packages = [
+            {
+              id: 'tripwire-1usd',
+              name: '$1 "Prove It" Agency Test Task (BFCM Special)',
+              price_cents: 100,
+              price_display: '$1',
+              rate_hourly: 'Loss Leader Test',
+              billing_cycle: 'one_time',
+              badge: '🔥 $1 Prove It Task',
+              description: 'Zero-risk test task. Hand off 1 real client deliverable. 24–48h SLA turnaround with dedicated English PM.'
+            },
+            {
+              id: 'junior-pod-bogo',
+              name: 'Junior Pod BOGO — 2X Output (80h/mo)',
+              price_cents: 18200,
+              price_display: '$182/mo',
+              rate_hourly: 'BOGO (2x Output)',
+              billing_cycle: 'monthly',
+              badge: '🎁 2x Output For Life',
+              description: 'BOGO on Junior Pod. Normally 40 hrs -> Now 80 hrs/mo locked in for life. Dedicated English PM + full white-label.'
+            },
+            {
+              id: 'senior-conductor-bogo',
+              name: 'Senior Conductor BOGO — 2X Output (240h/mo)',
+              price_cents: 52900,
+              price_display: '$529/mo',
+              rate_hourly: 'BOGO (2x Output)',
+              billing_cycle: 'monthly',
+              badge: '🚀 Double AI Velocity',
+              description: 'BOGO on Senior AI Conductor Pod. Normally 120 hrs -> Now 240 hrs/mo. n8n, AI content factory & custom agents.'
+            },
+            {
+              id: 'junior-pod',
+              name: 'Dedicated Junior Pod (160h/mo)',
+              price_cents: 48000,
+              price_display: '$480/mo',
+              rate_hourly: '$3.00/hr',
+              billing_cycle: 'monthly',
+              badge: 'Most Popular Wholesale',
+              description: '1 Dedicated Junior Specialist + Lead PM oversight. Perfect for outreach, link building & CRM hygiene.'
+            },
+            {
+              id: 'senior-conductor',
+              name: 'Senior AI Conductor Pod (160h/mo)',
+              price_cents: 80000,
+              price_display: '$800/mo',
+              rate_hourly: '$5.00/hr',
+              billing_cycle: 'monthly',
+              badge: 'Automation & Agent Sprints',
+              description: '1 Senior AI Workflow Specialist + Custom Agent Pipelines (n8n / Python / Make).'
+            },
+            {
+              id: 'fullstack-dev',
+              name: 'Full-Stack Developer Pod (160h/mo)',
+              price_cents: 64000,
+              price_display: '$640/mo',
+              rate_hourly: '$4.00/hr',
+              billing_cycle: 'monthly',
+              badge: 'Engineering',
+              description: '1 Dedicated Full-Stack Engineer (React, Vue, Node.js, Python, Fastify).'
+            },
+            {
+              id: 'topical-pack',
+              name: 'Topical Authority 5-Pack Sprint',
+              price_cents: 15000,
+              price_display: '$150',
+              rate_hourly: 'Turnkey Sprint',
+              billing_cycle: 'one_time',
+              badge: 'Entity SEO',
+              description: '5 Long-Form (2,500+ words) Semantic Entity-Optimized Articles with custom diagrams.'
+            },
+            {
+              id: 'tier1-pr',
+              name: 'Tier-1 PR Wire Distribution',
+              price_cents: 24000,
+              price_display: '$240',
+              rate_hourly: 'Turnkey Sprint',
+              billing_cycle: 'one_time',
+              badge: 'Wire Blast',
+              description: 'Guaranteed syndication across Associated Press (AP News), Yahoo Finance, MarketWatch, and 300+ affiliate outlets.'
+            }
+          ];
+        }
+
+        // Parse query params (e.g. ?package=senior-conductor&email=...&ref=james)
+        const urlParams = new URLSearchParams(window.location.search);
+        const pkgParam = urlParams.get('package');
+        if (pkgParam && this.packages.find(p => p.id === pkgParam)) {
+          this.selectedPackageId = pkgParam;
+        }
+        const emailParam = urlParams.get('email');
+        if (emailParam && document.getElementById('clientEmail')) {
+          document.getElementById('clientEmail').value = emailParam;
+        }
+        const nameParam = urlParams.get('name');
+        if (nameParam && document.getElementById('clientName')) {
+          document.getElementById('clientName').value = nameParam;
+        }
+        const companyParam = urlParams.get('company');
+        if (companyParam && document.getElementById('clientCompany')) {
+          document.getElementById('clientCompany').value = companyParam;
+        }
+
+        // Referral tracking
+        const refParam = urlParams.get('ref') || urlParams.get('referral_code');
+        if (refParam) {
+          this.refCode = refParam.trim().toLowerCase();
+          localStorage.setItem('jdp_ref', this.refCode);
+        } else {
+          this.refCode = localStorage.getItem('jdp_ref') || 'james';
+        }
+
+        this.renderPackages();
+        this.updateSummary();
+      },
+
+      renderPackages() {
+        const container = document.getElementById('packageList');
+        if (!container) return;
+
+        container.innerHTML = this.packages.map(p => {
+          const isSelected = p.id === this.selectedPackageId;
+          return `
+            <div onclick="checkoutApp.selectPackage('${p.id}')"
+              class="package-card ${isSelected ? 'selected' : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/70'} cursor-pointer p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-start gap-3">
+                <input type="radio" name="pkg" value="${p.id}" ${isSelected ? 'checked' : ''} class="mt-1 w-4 h-4 text-brand-600 border-slate-300 focus:ring-brand-500">
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <h4 class="text-sm font-bold text-slate-900">${p.name}</h4>
+                    ${p.badge ? `<span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full ${isSelected ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'}">${p.badge}</span>` : ''}
+                  </div>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">${p.description}</p>
+                </div>
+              </div>
+              <div class="sm:text-right shrink-0 pl-7 sm:pl-0">
+                <span class="text-base font-extrabold text-slate-900">${p.price_display}</span>
+                <span class="block text-[11px] text-slate-400">${p.rate_hourly || (p.billing_cycle === 'monthly' ? 'Monthly Retainer' : 'One-Time')}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      selectPackage(pkgId) {
+        this.selectedPackageId = pkgId;
+        this.renderPackages();
+        this.updateSummary();
+      },
+
+      prefillTestBuyer() {
+        const names = ['Sarah Connor', 'Michael Scott', 'Elena Rostova', 'David Vance', 'Jessica Alba'];
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const cleanHandle = randomName.toLowerCase().replace(' ', '.');
+        const randId = Math.floor(100 + Math.random() * 900);
+
+        document.getElementById('clientName').value = randomName;
+        document.getElementById('clientEmail').value = `${cleanHandle}${randId}@agency-partner.com`;
+        document.getElementById('clientCompany').value = `${randomName.split(' ')[0]} Media Group`;
+        this.updateSummary();
+      },
+
+      updateSummary() {
+        const pkg = this.packages.find(p => p.id === this.selectedPackageId) || this.packages[0];
+        if (!pkg) return;
+
+        const bumpTopical = document.getElementById('bumpTopical')?.checked;
+        const bumpConcierge = document.getElementById('bumpConcierge')?.checked;
+
+        let totalCents = pkg.price_cents;
+        const items = [
+          { name: pkg.name, qty: 1, price_cents: pkg.price_cents }
+        ];
+
+        if (bumpTopical) {
+          totalCents += 15000;
+          items.push({ name: 'Topical Authority 5-Pack Sprint (Add-on)', qty: 1, price_cents: 15000 });
+        }
+        if (bumpConcierge) {
+          totalCents += 9000;
+          items.push({ name: 'Priority 24/7 Slack Concierge (Add-on)', qty: 1, price_cents: 9000 });
+        }
+
+        const itemsContainer = document.getElementById('summaryItemsList');
+        if (itemsContainer) {
+          itemsContainer.innerHTML = items.map(it => `
+            <div class="flex justify-between items-start text-slate-700">
+              <span class="line-clamp-1 pr-2">${it.name}</span>
+              <span class="font-bold shrink-0">$${(it.price_cents / 100).toFixed(2)}</span>
+            </div>
+          `).join('');
+        }
+
+        const totalStr = '$' + (totalCents / 100).toFixed(2);
+        document.getElementById('summarySubtotal').textContent = totalStr;
+        document.getElementById('summaryTotal').textContent = totalStr;
+
+        const badge = document.getElementById('summaryBadge');
+        if (badge) {
+          badge.textContent = pkg.billing_cycle === 'monthly' ? 'Monthly Pod' : 'One-Time Sprint';
+        }
+
+        const partnerCodeEl = document.getElementById('partnerCodeDisplay');
+        if (partnerCodeEl) {
+          partnerCodeEl.textContent = (this.refCode || 'JAMES').toUpperCase();
+        }
+
+        const note = document.getElementById('summaryCadenceNote');
+        if (note) {
+          if (pkg.billing_cycle === 'monthly') {
+            note.textContent = `Renews monthly at ${totalStr}. Cancel anytime in 1 click via portal.`;
+          } else {
+            note.textContent = `One-time investment. Turnkey sprint kickoff within < 12 hours.`;
+          }
+        }
+      },
+
+      async submitCheckout(paymentType) {
+        if (this.isSubmitting) return;
+
+        const email = document.getElementById('clientEmail').value.trim();
+        const name = document.getElementById('clientName').value.trim();
+        const company = document.getElementById('clientCompany').value.trim();
+
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid work email address to receive order access.');
+          document.getElementById('clientEmail').focus();
+          return;
+        }
+
+        const pkg = this.packages.find(p => p.id === this.selectedPackageId) || this.packages[0];
+        const bumpTopical = document.getElementById('bumpTopical')?.checked;
+        const bumpConcierge = document.getElementById('bumpConcierge')?.checked;
+
+        let totalCents = pkg.price_cents;
+        const items = [
+          { name: pkg.name, qty: 1, price_cents: pkg.price_cents }
+        ];
+
+        if (bumpTopical) {
+          totalCents += 15000;
+          items.push({ name: 'Topical Authority 5-Pack Sprint (Add-on)', qty: 1, price_cents: 15000 });
+        }
+        if (bumpConcierge) {
+          totalCents += 9000;
+          items.push({ name: 'Priority 24/7 Slack Concierge (Add-on)', qty: 1, price_cents: 9000 });
+        }
+
+        // Lock UI & show processing state
+        this.isSubmitting = true;
+        const btnPaypal = document.getElementById('btnSimulatePaypal');
+        const btnCard = document.getElementById('btnSimulateCard');
+        const processingNotice = document.getElementById('processingNotice');
+        const processingTitle = document.getElementById('processingTitle');
+
+        btnPaypal.disabled = true;
+        btnCard.disabled = true;
+        btnPaypal.classList.add('opacity-50', 'cursor-not-allowed');
+        btnCard.classList.add('opacity-50', 'cursor-not-allowed');
+
+        processingNotice.classList.remove('hidden');
+        processingTitle.textContent = paymentType === 'paypal'
+          ? 'Capturing Simulated PayPal Authorization...'
+          : 'Validating Simulated Credit Card Authorization...';
+
+        try {
+          const payload = {
+            email,
+            name,
+            company,
+            service_name: pkg.name,
+            total_cents: totalCents,
+            billing_cycle: pkg.billing_cycle,
+            ref: this.refCode || 'james',
+            items
+          };
+
+          const res = await fetch('/api/checkout/simulate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.error || 'Checkout simulation failed');
+          }
+
+          processingTitle.innerHTML = '<span class="text-emerald-700">✓ Payment Approved! Redirecting to Portal...</span>';
+          document.getElementById('processingDetail').textContent = 'Secure session issued. Loading your order intake dashboard...';
+
+          setTimeout(() => {
+            window.location.href = data.redirect_url || `/orders/${data.order_id}`;
+          }, 600);
+
+        } catch (err) {
+          console.error('[Checkout Simulation Error]', err);
+          alert('Error during simulation: ' + err.message);
+          this.isSubmitting = false;
+          btnPaypal.disabled = false;
+          btnCard.disabled = false;
+          btnPaypal.classList.remove('opacity-50', 'cursor-not-allowed');
+          btnCard.classList.remove('opacity-50', 'cursor-not-allowed');
+          processingNotice.classList.add('hidden');
+        }
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checkoutApp.init();
+    });
+  </script>
+</body>
+</html>

@@ -12,3 +12,8 @@ browser-screenshots/
 .check_tmp/
 index-final.png
 services-full.png
+NUL
+server.log
+*.log
+portal-backend/data/
+portal-backend/.env*

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — JDP Team Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af'
+            },
+            accent: {
+              50: '#ecfdf5',
+              500: '#10b981',
+              600: '#059669'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .bg-dot-grid {
+      background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 bg-dot-grid flex flex-col justify-center py-12 sm:px-6 lg:px-8 selection:bg-brand-600 selection:text-white">
+
+  <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+    <div class="inline-flex items-center gap-2 mb-3">
+      <a href="https://jdp.team" class="text-3xl font-extrabold tracking-tight text-slate-900 hover:opacity-90 transition">
+        JDP<span class="text-brand-600">.team</span>
+      </a>
+      <span class="text-[11px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border border-slate-200 text-slate-600 bg-white shadow-xs">
+        Portal
+      </span>
+    </div>
+    <h2 class="text-sm font-medium text-slate-500">Client Fulfillment & Operations Portal</h2>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4">
+    <div class="bg-white border border-slate-200/90 py-8 px-6 shadow-xl shadow-slate-200/60 rounded-2xl sm:px-10">
+
+      <!-- Tab Switcher -->
+      <div class="flex border-b border-slate-200 mb-6 pb-2 gap-4">
+        <button id="tabClientBtn" onclick="switchTab('client')" class="text-sm font-bold text-brand-600 border-b-2 border-brand-600 pb-2 transition-all">
+          Client Magic Link
+        </button>
+        <button id="tabStaffBtn" onclick="switchTab('staff')" class="text-sm font-semibold text-slate-500 border-b-2 border-transparent pb-2 transition-all hover:text-slate-900">
+          Staff Password Login
+        </button>
+      </div>
+
+      <!-- Error / Success Alert Box -->
+      <div id="alertBox" class="hidden mb-4 p-3.5 rounded-xl text-sm font-medium"></div>
+
+      <!-- Client Magic Link Form -->
+      <form id="magicLinkForm" onsubmit="handleMagicLink(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Your Email Address</label>
+          <input type="email" id="magicEmail" required placeholder="founder@agency.com"
+            class="w-full rounded-xl bg-white border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 transition shadow-xs">
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          We'll send a secure one-click sign-in link to your email. No passwords needed.
+        </p>
+        <button type="submit" id="magicSubmitBtn"
+          class="w-full flex justify-center items-center py-3 px-4 rounded-xl text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 focus:outline-none shadow-md shadow-slate-900/10 hover:shadow-lg transition">
+          Send Magic Login Link
+        </button>
+      </form>
+
+      <!-- Staff Password Form -->
+      <form id="staffForm" onsubmit="handleStaffLogin(event)" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Staff Email</label>
+          <input type="email" id="staffEmail" required placeholder="admin@jdp.team"
+            class="w-full rounded-xl bg-white border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 transition shadow-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Password</label>
+          <input type="password" id="staffPassword" required placeholder="••••••••••••"
+            class="w-full rounded-xl bg-white border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 transition shadow-xs">
+        </div>
+        <button type="submit" id="staffSubmitBtn"
+          class="w-full flex justify-center items-center py-3 px-4 rounded-xl text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 focus:outline-none shadow-md shadow-slate-900/10 hover:shadow-lg transition">
+          Sign In to Portal
+        </button>
+      </form>
+
+      <!-- Dev Link Helper if returned -->
+      <div id="devHelper" class="mt-4 hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800">
+        <span class="font-bold">Dev Quick Login:</span>
+        <a id="devLink" href="#" class="underline ml-1 break-all font-semibold">Click here to verify</a>
+      </div>
+
+    </div>
+
+    <div class="mt-6 text-center text-xs text-slate-500">
+      Need help? Contact <a href="mailto:support@jdp.team" class="text-brand-600 font-semibold hover:underline">support@jdp.team</a>
+    </div>
+  </div>
+
+  <script>
+    function showAlert(type, text) {
+      const box = document.getElementById('alertBox');
+      box.className = type === 'error'
+        ? 'mb-4 p-3.5 rounded-xl text-sm font-medium bg-rose-50 border border-rose-200 text-rose-800'
+        : 'mb-4 p-3.5 rounded-xl text-sm font-medium bg-emerald-50 border border-emerald-200 text-emerald-800';
+      box.textContent = text;
+      box.classList.remove('hidden');
+    }
+
+    function switchTab(tab) {
+      const isClient = tab === 'client';
+      document.getElementById('magicLinkForm').classList.toggle('hidden', !isClient);
+      document.getElementById('staffForm').classList.toggle('hidden', isClient);
+
+      const clientBtn = document.getElementById('tabClientBtn');
+      const staffBtn = document.getElementById('tabStaffBtn');
+
+      if (isClient) {
+        clientBtn.className = 'text-sm font-bold text-brand-600 border-b-2 border-brand-600 pb-2 transition-all';
+        staffBtn.className = 'text-sm font-semibold text-slate-500 border-b-2 border-transparent pb-2 transition-all hover:text-slate-900';
+      } else {
+        staffBtn.className = 'text-sm font-bold text-brand-600 border-b-2 border-brand-600 pb-2 transition-all';
+        clientBtn.className = 'text-sm font-semibold text-slate-500 border-b-2 border-transparent pb-2 transition-all hover:text-slate-900';
+      }
+      document.getElementById('alertBox').classList.add('hidden');
+    }
+
+    async function handleMagicLink(e) {
+      e.preventDefault();
+      const btn = document.getElementById('magicSubmitBtn');
+      const email = document.getElementById('magicEmail').value.trim();
+      btn.disabled = true;
+      btn.textContent = 'Sending link...';
+
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextUrl = urlParams.get('next') || '/';
+
+        const res = await fetch('/api/auth/magic-link', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, nextUrl })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to send magic link');
+
+        showAlert('success', 'Magic login link sent! Check your email inbox.');
+        if (data.verifyUrl) {
+          const devHelper = document.getElementById('devHelper');
+          const devLink = document.getElementById('devLink');
+          devLink.href = data.verifyUrl;
+          devLink.textContent = data.verifyUrl;
+          devHelper.classList.remove('hidden');
+        }
+      } catch (err) {
+        showAlert('error', err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send Magic Login Link';
+      }
+    }
+
+    async function handleStaffLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('staffSubmitBtn');
+      const email = document.getElementById('staffEmail').value.trim();
+      const password = document.getElementById('staffPassword').value;
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Invalid credentials');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        window.location.href = urlParams.get('next') || '/';
+      } catch (err) {
+        showAlert('error', err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign In to Portal';
+      }
+    }
+
+    // Check URL parameters for errors
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('error')) {
+        showAlert('error', 'Session or login token expired. Please sign in again.');
+      }
+    });
+  </script>
+</body>
+</html>
