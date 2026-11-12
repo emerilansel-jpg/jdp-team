@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth no-js dark">
+<html lang="en" class="scroll-smooth no-js">
 <head>
   <meta charset="UTF-8">
   <script>document.documentElement.classList.replace('no-js','js');</script>
@@ -9,6 +9,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/motion.css?v=20260924">
+  <style>
+    /* No-JS / safety fallback: scroll-reveal must never leave content permanently dim */
+    .no-js .reveal-on-scroll, .reveal-on-scroll.force-revealed { opacity: 1 !important; transform: none !important; }
+  </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,24 +24,32 @@
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
-            dark: {
-              950: '#030508',
-              900: '#05070c',
-              850: '#0a0e17',
-              800: '#0f172a',
-              750: '#151d30',
-              700: '#1e293b'
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554'
             },
-            emerald: {
+            accent: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
               400: '#34d399',
               500: '#10b981',
               600: '#059669',
               700: '#047857'
             },
-            amber: {
-              400: '#fbbf24',
-              500: '#f59e0b',
-              600: '#d97706'
+            surface: {
+              pure: '#ffffff',
+              subtle: '#f8fafc',
+              muted: '#f1f5f9',
+              border: '#e2e8f0',
+              borderHover: '#cbd5e1'
             }
           }
         }
@@ -53,85 +66,130 @@
       box-sizing: border-box;
     }
     html, body {
-      background-color: #05070c;
-      color: #f8fafc;
+      overflow-x: clip !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+      position: relative;
+    }
+    body {
+      background-color: #ffffff;
+      color: #0f172a;
       font-family: 'Plus Jakarta Sans', sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
-      max-width: 100vw;
+      -webkit-tap-highlight-color: transparent;
     }
     .min-touch {
       min-width: 44px;
       min-height: 44px;
     }
-    /* Subtle dot grid */
-    .bg-dark-grid {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-      background-size: 32px 32px;
+    .bg-dot-grid {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 28px 28px;
     }
-    /* Radial Glow Accents */
-    .glow-emerald-hero {
-      background: radial-gradient(circle at 50% -10%, rgba(16, 185, 129, 0.22) 0%, rgba(5, 7, 12, 0) 65%);
+    .bg-mesh-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.07) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
     }
-    .glow-amber-card {
-      background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, rgba(10, 14, 23, 0) 70%);
+    .hero-blob {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(64px);
+      pointer-events: none;
+      will-change: transform, opacity;
+      z-index: 0;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
-    .glow-emerald-card {
-      background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18) 0%, rgba(10, 14, 23, 0) 70%);
+    .hero-blob-a {
+      width: min(640px, 100vw); height: min(640px, 100vw);
+      top: -14%; left: -12%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.40) 0%, rgba(37, 99, 235, 0.25) 42%, transparent 70%);
+      animation: heroDriftA 13s ease-in-out infinite alternate;
     }
-    /* Glassmorphic Cards */
-    .glass-panel {
-      background: rgba(10, 14, 23, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s var(--ease-out);
+    .hero-blob-b {
+      width: min(560px, 95vw); height: min(560px, 95vw);
+      bottom: -18%; right: -14%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.35) 0%, rgba(6, 182, 212, 0.22) 42%, transparent 70%);
+      animation: heroDriftB 16s ease-in-out infinite alternate;
     }
-    .glass-panel:hover {
-      border-color: rgba(255, 255, 255, 0.16);
+    .hero-blob-c {
+      width: min(520px, 90vw); height: min(520px, 90vw);
+      top: 26%; left: 8%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.30) 0%, rgba(99, 102, 241, 0.20) 42%, transparent 70%);
+      animation: heroDriftC 19s ease-in-out infinite alternate;
+    }
+    .hero-blob-d {
+      width: min(430px, 80vw); height: min(430px, 80vw);
+      top: -8%; right: 10%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(14, 165, 233, 0.22) 42%, transparent 70%);
+      animation: heroDriftD 11s ease-in-out infinite alternate;
+    }
+    @keyframes heroDriftA {
+      0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+      50%  { transform: translate3d(120px, 80px, 0) scale(1.18); opacity: 1; }
+      100% { transform: translate3d(-60px, 110px, 0) scale(0.94); opacity: 0.88; }
+    }
+    @keyframes heroDriftB {
+      0%   { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0.88; }
+      50%  { transform: translate3d(-110px, -70px, 0) scale(1.16); opacity: 1; }
+      100% { transform: translate3d(70px, -100px, 0) scale(1.05); opacity: 0.9; }
+    }
+    @keyframes heroDriftC {
+      0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.85; }
+      50%  { transform: translate3d(-80px, 70px, 0) scale(1.15); opacity: 1; }
+      100% { transform: translate3d(90px, -50px, 0) scale(0.9); opacity: 0.88; }
+    }
+    @keyframes heroDriftD {
+      0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.88; }
+      50%  { transform: translate3d(-70px, 60px, 0) scale(1.2); opacity: 1; }
+      100% { transform: translate3d(55px, 75px, 0) scale(0.95); opacity: 0.86; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-blob { animation: none; opacity: 0.7; }
+    }
+    .card-clean {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .card-clean:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
       transform: translateY(-2px);
     }
-    .glass-card-emerald {
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.1) 0%, rgba(10, 14, 23, 0.85) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.25);
-      transition: all 0.3s var(--ease-out);
+    .btn-motion {
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
     }
-    .glass-card-emerald:hover {
-      border-color: rgba(16, 185, 129, 0.7);
-      box-shadow: 0 0 50px -5px rgba(16, 185, 129, 0.35);
-      transform: translateY(-3px);
+    .btn-motion:hover {
+      transform: translateY(-2px);
     }
-    /* Shimmer effect for badges */
-    .badge-shimmer {
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 100%);
-      background-size: 200% 100%;
-      animation: shimmer 3s infinite;
+    .btn-motion:active {
+      transform: translateY(1px);
     }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-    /* FAQ Accordion Grid Transition */
-    .faq-wrapper {
+    .faq-grid-wrapper {
       display: grid;
       grid-template-rows: 0fr;
       transition: grid-template-rows 300ms var(--ease-out);
     }
-    .faq-wrapper.open {
+    .faq-grid-wrapper.open {
       grid-template-rows: 1fr;
     }
     .faq-inner {
+      min-height: 0;
       overflow: hidden;
+      transition: opacity 250ms var(--ease-out);
     }
-    .faq-icon {
+    .faq-grid-wrapper:not(.open) .faq-inner {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border-top-width: 0 !important;
+      visibility: hidden;
+    }
+    .faq-icon-rot {
       transition: transform 250ms var(--ease-out);
     }
-    .faq-icon.rotated {
+    .faq-icon-rot.rotated {
       transform: rotate(45deg);
     }
     /* Modal styles */
@@ -153,102 +211,97 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#05070c] text-slate-100 selection:bg-emerald-500 selection:text-black">
+<body class="min-h-screen bg-white text-slate-900 selection:bg-brand-600 selection:text-white">
 
-  <!-- Top Announcement Banner & Live Scarcity Tracker -->
-  <aside aria-label="BFCM Scarcity Banner" class="sticky top-0 z-50 bg-[#030508]/95 backdrop-blur-md border-b border-emerald-500/25 text-white py-2 px-3 sm:px-4 shadow-lg shadow-black/50">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-      <!-- Left: Scarcity Callout -->
+  <!-- Top Announcement Bar (matching index.html) -->
+  <aside aria-label="Announcement" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
       <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-          BFCM EXCLUSIVE
-        </span>
-        <span class="text-slate-300 font-semibold">CAPPED AT 5 AGENCIES BEFORE THANKSGIVING</span>
-        <span class="inline-flex items-center gap-1 text-amber-300 font-bold bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-md text-[11px]">
-          🔥 3 of 5 spots claimed • 2 spots remaining
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-accent-500 text-white uppercase">BFCM '26</span>
+        <span class="font-semibold text-white">Strictly Capped at 5 Agencies Before Thanksgiving</span>
+        <span class="inline-flex items-center gap-1 text-amber-300 font-bold bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded text-[11px]">
+          🔥 3 of 5 spots claimed · 2 spots remaining
         </span>
       </div>
-
-      <!-- Right: Urgency Countdown & Fast Trigger -->
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-1.5 text-slate-300 font-medium">
           <span class="hidden md:inline text-slate-400 text-[11px]">Offer Expires In:</span>
-          <div id="countdownTimer" class="font-mono font-extrabold text-emerald-400 bg-black/60 px-2.5 py-0.5 rounded border border-emerald-500/30 text-[11px] tracking-wider">
+          <div id="countdownTimer" class="font-mono font-extrabold text-accent-400 bg-slate-900 px-2.5 py-0.5 rounded border border-slate-800 text-[11px] tracking-wider">
             Loading timer...
           </div>
         </div>
-        <button onclick="openTripwireModal()" class="hidden md:inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-black bg-emerald-400 hover:bg-emerald-300 px-3 py-1 rounded-md transition shadow-sm hover:scale-105 active:scale-95">
+        <button onclick="openTripwireModal()" class="hidden md:inline-flex items-center gap-1 text-[11px] font-bold text-white bg-brand-600 hover:bg-brand-500 px-3 py-1 rounded-md transition shadow-xs">
           Claim $1 Task →
         </button>
       </div>
     </div>
   </aside>
 
-  <!-- Dynamic Referral Partner Notification Ribbon -->
-  <div id="referralBanner" class="bg-gradient-to-r from-emerald-950/60 via-[#0a1612] to-emerald-950/60 border-b border-emerald-500/20 py-2 px-4 text-center text-xs text-emerald-300 font-medium">
+  <!-- Referral Partner Notification Ribbon -->
+  <div id="referralBanner" class="bg-brand-50/70 border-b border-brand-100 py-2 px-4 text-center text-xs text-brand-900 font-medium">
     <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
-      <span class="text-emerald-400 text-sm">🤝</span>
-      <span id="refNoticeText">BFCM 2026 Wholesale Capacity Release: Direct Agency Rate Card Active. Zero Setup Fee.</span>
-      <a href="https://portal.jdp.team/partner" id="partnerHeaderLink" class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 underline ml-2">
+      <span class="text-sm">🤝</span>
+      <span id="refNoticeText" class="font-semibold text-slate-800">BFCM 2026 Wholesale Capacity Release: Direct Agency Rate Card Active. Zero Setup Fee.</span>
+      <a href="https://portal.jdp.team/partner" id="partnerHeaderLink" class="inline-flex items-center gap-1 text-[11px] font-bold text-brand-600 hover:text-brand-700 underline ml-2">
         Earn 20% Recurring as a Partner ↗
       </a>
     </div>
   </div>
 
-  <!-- Primary Navigation -->
-  <header class="border-b border-white/5 bg-[#05070c]/90 backdrop-blur-md sticky top-[41px] z-40 transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-      
-      <!-- Brand Logo Wordmark -->
-      <a href="/" class="flex items-center gap-3 group min-touch" aria-label="JDP.team Wholesale Home">
-        <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#0f172a] to-[#05070c] border border-white/10 group-hover:border-emerald-500/50 shadow-md transition-all">
-          <svg class="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none">
-            <path d="M4 6H20V8H4V6Z" fill="currentColor"/>
-            <path d="M10 8H12V16C12 17.6569 10.6569 19 9 19H6V17H9C9.55228 17 10 16.5523 10 16V8Z" fill="#10b981"/>
-            <circle cx="17.5" cy="16.5" r="2.5" fill="#34d399"/>
+  <!-- Header / Navigation (Exact Homepage Shell & Wordmark) -->
+  <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
+      <!-- Wordmark Logo (Identical to index.html) -->
+      <a href="/" class="flex items-center gap-3 group py-1 min-touch select-none" aria-label="JDP.team Home">
+        <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-slate-950 text-white shadow-md shadow-slate-950/20 group-hover:scale-105 transition-all overflow-hidden border border-slate-800">
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-600/40 via-transparent to-cyan-400/30 opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <svg class="w-5 h-5 relative z-10 text-white" viewBox="0 0 24 24" fill="none">
+            <path d="M5 6H19V8H5V6Z" fill="white" />
+            <path d="M11 8H13V15C13 16.6569 11.6569 18 10 18H7V16H10C10.5523 16 11 15.5523 11 15V8Z" fill="#38bdf8" />
+            <circle cx="17" cy="16.5" r="2.2" fill="#2563eb" />
           </svg>
         </div>
         <div class="flex flex-col">
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-xl sm:text-2xl font-black tracking-[-0.05em] text-white font-sans">
-              jdp<span class="text-emerald-400">.team</span>
+          <div class="flex items-baseline gap-1">
+            <span class="text-xl sm:text-[1.45rem] font-black tracking-[-0.055em] text-slate-950 font-sans leading-none">
+              jdp<span class="text-brand-600 font-black">.team</span>
             </span>
-            <span class="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              BFCM '26
+            <span class="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200 ml-1">
+              BFCM
             </span>
           </div>
-          <span class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-400 group-hover:text-emerald-400 transition-colors">
-            Wholesale SEO &amp; VA Engine
+          <span class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-400 group-hover:text-brand-600 transition-colors mt-0.5 leading-none">
+            Wholesale Engine
           </span>
         </div>
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-slate-400">
-        <a href="#deals" class="hover:text-emerald-400 transition">The 2 Deals</a>
-        <a href="#tripwire" class="hover:text-emerald-400 transition">$1 Test Task</a>
-        <a href="#bogo" class="hover:text-emerald-400 transition">2x BOGO Output</a>
-        <a href="#capabilities" class="hover:text-emerald-400 transition">Capabilities</a>
-        <a href="#guarantee" class="hover:text-emerald-400 transition">White-Label Guarantee</a>
-        <a href="#faq" class="hover:text-emerald-400 transition">FAQ</a>
-        <a href="https://jdp.team/services" target="_blank" rel="noopener" class="text-slate-400 hover:text-emerald-400 transition flex items-center gap-1">
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-slate-600">
+        <a href="#deals" class="hover:text-brand-600 transition">The 2 Deals</a>
+        <a href="#tripwire" class="hover:text-brand-600 transition">$1 Test Task</a>
+        <a href="#bogo" class="hover:text-brand-600 transition">2x BOGO Output</a>
+        <a href="#capabilities" class="hover:text-brand-600 transition">Capabilities</a>
+        <a href="#guarantee" class="hover:text-brand-600 transition">White-Label Guarantee</a>
+        <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
+        <a href="/services" class="text-slate-500 hover:text-brand-600 transition flex items-center gap-1">
           Catalog ↗
         </a>
       </nav>
 
-      <!-- Header CTAs -->
+      <!-- Desktop Header CTAs -->
       <div class="hidden sm:flex items-center gap-3">
-        <button onclick="openTripwireModal()" class="px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-emerald-500/40 transition hover:scale-105 active:scale-95">
+        <button onclick="openTripwireModal()" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-50 border border-slate-300 transition shadow-xs hover:scale-105 active:scale-95">
           ⚡ $1 "Prove It" Task
         </button>
-        <a href="#bogo" class="px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/20 transition hover:scale-105 active:scale-95">
-          🎁 Lock In 2x Output
+        <a href="#bogo" class="px-5 py-2.5 rounded-xl text-xs font-black bg-brand-600 hover:bg-brand-500 text-white btn-motion shadow-md shadow-brand-600/20 flex items-center gap-2 transition hover:scale-105 active:scale-95">
+          <span>🎁 Lock In 2x Output</span>
+          <span>→</span>
         </a>
       </div>
 
-      <!-- Mobile Hamburger -->
-      <button id="mobileMenuBtn" aria-label="Toggle Navigation" aria-expanded="false" class="lg:hidden p-2.5 min-touch rounded-xl text-slate-300 hover:text-white bg-white/5 border border-white/10 transition flex items-center justify-center">
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="mobileMenu" class="lg:hidden p-2.5 min-touch rounded-xl text-slate-700 hover:text-slate-950 hover:bg-slate-100 border border-slate-200 transition flex items-center justify-center">
         <svg id="mobileMenuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -256,97 +309,104 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobileMenu" class="hidden lg:hidden border-b border-white/10 bg-[#05070c]/98 backdrop-blur-xl px-5 pt-3 pb-6 space-y-2 text-sm font-semibold shadow-2xl transition-all">
-      <a href="#deals" class="block py-2.5 text-slate-300 hover:text-emerald-400 transition" onclick="closeMobileMenu()">The 2 BFCM Deals</a>
-      <a href="#tripwire" class="block py-2.5 text-slate-300 hover:text-emerald-400 transition" onclick="closeMobileMenu()">$1 "Prove It" Task</a>
-      <a href="#bogo" class="block py-2.5 text-slate-300 hover:text-emerald-400 transition" onclick="closeMobileMenu()">2x BOGO Pod Plans</a>
-      <a href="#capabilities" class="block py-2.5 text-slate-300 hover:text-emerald-400 transition" onclick="closeMobileMenu()">Wholesale Capabilities</a>
-      <a href="#guarantee" class="block py-2.5 text-slate-300 hover:text-emerald-400 transition" onclick="closeMobileMenu()">White-Label Guarantee</a>
-      <a href="#faq" class="block py-2.5 text-slate-300 hover:text-emerald-400 transition" onclick="closeMobileMenu()">BFCM FAQ</a>
-      <a href="https://portal.jdp.team/partner" class="block py-2.5 text-emerald-400 font-bold hover:text-emerald-300 transition" onclick="closeMobileMenu()">Earn 20% Recurring as a Partner ↗</a>
-      <div class="pt-4 border-t border-white/10 flex flex-col gap-2.5">
-        <button onclick="openTripwireModal(); closeMobileMenu();" class="w-full py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-white/10 text-white border border-white/20 text-center">
+    <div id="mobileMenu" class="hidden lg:hidden border-b border-slate-200 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-1 text-sm font-medium shadow-xl transition-all">
+      <a href="#deals" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">The 2 BFCM Deals</a>
+      <a href="#tripwire" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">$1 "Prove It" Task</a>
+      <a href="#bogo" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">2x BOGO Pod Plans</a>
+      <a href="#capabilities" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">Wholesale Capabilities</a>
+      <a href="#guarantee" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">White-Label Guarantee</a>
+      <a href="#faq" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">BFCM FAQ</a>
+      <a href="https://portal.jdp.team/partner" class="flex items-center min-touch px-3 py-2 rounded-lg text-brand-600 font-bold hover:bg-brand-50/80 transition" onclick="closeMobileMenu()">Earn 20% Recurring as a Partner ↗</a>
+      <div class="pt-3 mt-2 border-t border-slate-100 flex flex-col gap-2">
+        <button onclick="openTripwireModal(); closeMobileMenu();" class="w-full py-3.5 min-touch rounded-xl text-xs font-black uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-200 text-center hover:bg-slate-200 transition">
           ⚡ Claim $1 Test Task (2 Spots Left)
         </button>
-        <a href="#bogo" onclick="closeMobileMenu();" class="w-full py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-500 text-black text-center shadow-lg shadow-emerald-500/25">
-          🎁 Lock In 2x Monthly Output (BOGO)
+        <a href="#bogo" onclick="closeMobileMenu();" class="w-full py-3.5 min-touch rounded-xl text-sm font-black bg-brand-600 hover:bg-brand-700 text-white text-center flex items-center justify-center gap-2 shadow-md">
+          <span>🎁 Lock In 2x Monthly Output (BOGO)</span>
+          <span>→</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden bg-dark-grid glow-emerald-hero border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      
-      <!-- Top Scarcity Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 text-xs font-bold mb-8 shadow-sm">
-        <span class="flex h-2 w-2 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+  <!-- Hero Section (Aligned with index.html Mesh & Kinetic Aura) -->
+  <section id="heroSection" class="relative flex flex-col justify-center pt-14 pb-16 md:pt-20 md:pb-28 overflow-hidden bg-mesh-glow border-b border-slate-200">
+    <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-c" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-d" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none"></div>
+
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 my-auto min-w-0 box-border">
+
+      <!-- Eyebrow Badge (Exact index.html Badge Architecture) -->
+      <div class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white/95 text-slate-800 text-[11px] sm:text-xs font-semibold mb-6 shadow-sm max-w-full text-center">
+        <span class="flex h-2 w-2 relative shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-500"></span>
         </span>
-        <span class="tracking-wider uppercase">SPECIAL BFCM WHOLESALE ACCESS</span>
+        <span class="text-slate-950 font-bold uppercase tracking-wider">SPECIAL BFCM WHOLESALE ACCESS</span>
       </div>
 
-      <!-- Hero Headline -->
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-5xl mx-auto leading-[1.12]">
+      <!-- Main Headline (Matching index.html Typography & Font Hierarchy) -->
+      <h1 class="text-[1.85rem] min-[400px]:text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 max-w-5xl mx-auto leading-[1.14] px-1 break-words">
         Hand Us Your Real Agency Work for Just $1.<br class="hidden sm:inline">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+        <span class="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-indigo-700 to-accent-600">
           Or Lock In 2x Monthly Output For Life.
         </span>
       </h1>
 
-      <!-- Hero Subhead -->
-      <p class="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+      <!-- Subheadline -->
+      <p class="mt-5 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed px-2 font-medium">
         We quietly run the white-label fulfillment backend for dozens of 7-figure SEO agencies. For BFCM, inspect our speed, English PM communication, and deliverables on our dime — or double your capacity on any monthly Pod plan.
       </p>
 
-      <!-- Scarcity Meter Card -->
-      <div class="mt-8 max-w-xl mx-auto glass-panel p-4 rounded-2xl border border-white/10 text-left">
-        <div class="flex items-center justify-between text-xs font-bold text-slate-300 mb-2">
+      <!-- Scarcity Meter Card (Clean Light Aesthetic) -->
+      <div class="mt-8 max-w-xl mx-auto rounded-2xl bg-white/95 border border-slate-200 shadow-sm p-4.5 text-left hover:border-brand-300 transition">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-700 mb-2">
           <span class="flex items-center gap-1.5">
-            <span class="text-amber-400">⏳</span>
+            <span>⏳</span>
             <span>Pre-Thanksgiving Agency Intake Limit:</span>
           </span>
-          <span class="text-emerald-400 font-extrabold uppercase">60% Claimed (3/5 Taken)</span>
+          <span class="text-brand-600 font-extrabold uppercase">60% Claimed (3/5 Taken)</span>
         </div>
-        <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden border border-white/10">
-          <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-700" style="width: 60%;"></div>
+        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+          <div class="h-full bg-gradient-to-r from-brand-600 to-accent-500 rounded-full transition-all duration-700" style="width: 60%;"></div>
         </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
+        <div class="mt-2 text-[11px] text-slate-500 flex items-center justify-between">
           <span>Strictly capped so our dedicated PMs never sacrifice quality.</span>
-          <strong class="text-amber-400 font-bold">Only 2 Agency Spots Left</strong>
+          <strong class="text-amber-800 font-bold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Only 2 Agency Spots Left</strong>
         </div>
       </div>
 
-      <!-- Dual Direct CTAs -->
+      <!-- Dual Direct CTAs (index.html Button Styles) -->
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#tripwire" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-black uppercase tracking-wider bg-emerald-500 hover:bg-emerald-400 text-black shadow-xl shadow-emerald-500/25 transition hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+        <button onclick="openTripwireModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-black bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/25 btn-motion transition hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
           <span>⚡ Claim Your $1 "Prove It" Task</span>
           <span>→</span>
-        </a>
-        <a href="#bogo" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-black uppercase tracking-wider bg-white/10 hover:bg-white/15 text-white border border-white/15 hover:border-emerald-500/50 shadow-md transition hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+        </button>
+        <a href="#bogo" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-black bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 shadow-sm btn-motion transition hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
           <span>🎁 Lock In 2x Monthly Output (BOGO)</span>
           <span>→</span>
         </a>
       </div>
 
-      <!-- Trust Badges Grid -->
-      <div class="mt-12 pt-8 border-t border-white/10 max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-slate-400">
-        <div class="flex items-center justify-center gap-2 p-2">
-          <span class="text-emerald-400 text-base">🛡️</span>
+      <!-- Trust Badges (Matching Homepage Grid) -->
+      <div class="mt-12 pt-8 border-t border-slate-200 max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-slate-600">
+        <div class="flex items-center justify-center gap-2 p-2 rounded-xl bg-white/70 border border-slate-100 shadow-xs">
+          <span class="text-brand-600 text-base">🛡️</span>
           <span>100% White-Label</span>
         </div>
-        <div class="flex items-center justify-center gap-2 p-2">
-          <span class="text-emerald-400 text-base">⚡</span>
+        <div class="flex items-center justify-center gap-2 p-2 rounded-xl bg-white/70 border border-slate-100 shadow-xs">
+          <span class="text-brand-600 text-base">⚡</span>
           <span>24–48h SLA Delivery</span>
         </div>
-        <div class="flex items-center justify-center gap-2 p-2">
-          <span class="text-emerald-400 text-base">👨‍💼</span>
+        <div class="flex items-center justify-center gap-2 p-2 rounded-xl bg-white/70 border border-slate-100 shadow-xs">
+          <span class="text-brand-600 text-base">👨💼</span>
           <span>1 Dedicated English PM</span>
         </div>
-        <div class="flex items-center justify-center gap-2 p-2">
-          <span class="text-emerald-400 text-base">🚀</span>
+        <div class="flex items-center justify-center gap-2 p-2 rounded-xl bg-white/70 border border-slate-100 shadow-xs">
+          <span class="text-brand-600 text-base">🚀</span>
           <span>6-Stage Client Portal</span>
         </div>
       </div>
@@ -355,18 +415,18 @@
   </section>
 
   <!-- THE 2 FEATURED BFCM DEALS SECTION -->
-  <section id="deals" class="py-20 md:py-28 bg-[#070a12] border-b border-white/5 relative">
+  <section id="deals" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
+
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600 px-3 py-1 rounded-full bg-brand-50 border border-brand-200">
           The Exclusive Deals
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-4 tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-black text-slate-950 mt-3 tracking-tight">
           Choose How You Want to Test &amp; Scale
         </h2>
-        <p class="text-slate-400 text-base sm:text-lg mt-3">
+        <p class="text-slate-600 text-base sm:text-lg mt-2">
           Take the zero-risk $1 test drive to inspect our speed, or permanently lock in 2x capacity across your agency for all of 2026 and beyond.
         </p>
       </div>
@@ -375,39 +435,37 @@
       <div class="grid lg:grid-cols-2 gap-8 items-stretch max-w-6xl mx-auto">
 
         <!-- ================= DEAL A: The $1 "Prove It" Task ================= -->
-        <div id="tripwire" class="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 flex flex-col justify-between relative overflow-hidden group">
-          <div class="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
+        <div id="tripwire" class="card-clean rounded-3xl p-6 sm:p-10 bg-white border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden group">
           <div>
             <!-- Badge & Header -->
             <div class="flex items-center justify-between gap-3 mb-6">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-accent-50 text-accent-700 border border-accent-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-500 animate-ping"></span>
                 ZERO-RISK TEST TASK
               </span>
-              <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Deal A</span>
+              <span class="text-xs font-extrabold text-amber-800 uppercase tracking-widest bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">Deal A</span>
             </div>
 
-            <h3 class="text-2xl sm:text-3xl font-black text-white">
+            <h3 class="text-2xl sm:text-3xl font-black text-slate-950">
               The $1 "Prove It" Task
             </h3>
-            <p class="text-sm text-slate-400 mt-2 font-medium">
+            <p class="text-sm text-slate-600 mt-2 font-medium leading-relaxed">
               Hand us a live, real client deliverable. We fulfill it in 24–48 hours to prove our quality before you ever spend another dime.
             </p>
 
-            <!-- Price display -->
-            <div class="mt-6 p-4 rounded-2xl bg-black/40 border border-white/5 flex items-baseline justify-between">
+            <!-- Price Display -->
+            <div class="mt-6 p-4 rounded-2xl bg-surface-subtle border border-slate-200 flex items-baseline justify-between">
               <div>
-                <span class="text-4xl sm:text-5xl font-black text-white">$1</span>
-                <span class="text-xs font-bold text-slate-400 ml-1">/ one-time test</span>
+                <span class="text-4xl sm:text-5xl font-black text-slate-950">$1</span>
+                <span class="text-xs font-bold text-slate-500 ml-1">/ one-time test</span>
               </div>
-              <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
+              <span class="text-xs font-bold text-accent-700 bg-accent-50 border border-accent-200 px-2.5 py-1 rounded-lg">
                 Zero Hidden Commitments
               </span>
             </div>
 
             <!-- Value Statement -->
-            <div class="mt-4 p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-300 leading-relaxed font-semibold">
+            <div class="mt-4 p-3.5 rounded-xl bg-brand-50/70 border border-brand-200 text-xs text-brand-900 leading-relaxed font-semibold">
               💡 <em>"Yes, we take an outright loss on this. We do it because 92% of agency owners who inspect our deliverables immediately sign up for a monthly Pod."</em>
             </div>
 
@@ -416,50 +474,50 @@
               <p class="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-3">
                 Choose 1 Live Client Deliverable to Hand Off:
               </p>
-              <ul class="space-y-3 text-sm text-slate-200">
+              <ul class="space-y-3 text-sm text-slate-700">
                 <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-400 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong>1 Full Topical Authority Map &amp; Entity Graph</strong> — complete cluster architecture &amp; keyword entities ready to dominate AI Search.</span>
+                  <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
+                  <span><strong class="text-slate-950">1 Full Topical Authority Map &amp; Entity Graph</strong> — complete cluster architecture &amp; keyword entities ready to dominate AI Search.</span>
                 </li>
                 <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-400 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong>1 Turnkey GEO-Optimized Article</strong> — 2,000+ words citation-engineered for Google AI Overviews &amp; Perplexity citations.</span>
+                  <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
+                  <span><strong class="text-slate-950">1 Turnkey GEO-Optimized Article</strong> — 2,000+ words citation-engineered for Google AI Overviews &amp; Perplexity citations.</span>
                 </li>
                 <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-400 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong>1 Competitor Entity &amp; Citation Audit</strong> — uncover exact content and schema voids where your client is losing AI visibility.</span>
+                  <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
+                  <span><strong class="text-slate-950">1 Competitor Entity &amp; Citation Audit</strong> — uncover exact content and schema voids where your client is losing AI visibility.</span>
                 </li>
                 <li class="flex items-start gap-2.5">
-                  <span class="text-emerald-400 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong>1 Technical VA Ops Sprint</strong> — CRM hygiene, custom manual prospecting, or complex directory citation audit.</span>
+                  <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
+                  <span><strong class="text-slate-950">1 Technical VA Ops Sprint</strong> — CRM hygiene, custom manual prospecting, or complex directory citation audit.</span>
                 </li>
               </ul>
             </div>
 
             <!-- Key Terms Included -->
-            <div class="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 gap-3 text-xs text-slate-300">
+            <div class="mt-8 pt-6 border-t border-slate-100 grid grid-cols-2 gap-3 text-xs text-slate-600">
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">⚡</span>
-                <span><strong>24–48h SLA</strong> Delivery</span>
+                <span class="text-brand-600 font-bold">⚡</span>
+                <span><strong class="text-slate-900">24–48h SLA</strong> Delivery</span>
               </div>
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">🛡️</span>
-                <span><strong>100% White-Label</strong> (Yours)</span>
+                <span class="text-brand-600 font-bold">🛡️</span>
+                <span><strong class="text-slate-900">100% White-Label</strong> (Yours)</span>
               </div>
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">👨‍💼</span>
-                <span><strong>Dedicated English PM</strong></span>
+                <span class="text-brand-600 font-bold">👨💼</span>
+                <span><strong class="text-slate-900">Dedicated English PM</strong></span>
               </div>
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">🔄</span>
-                <span><strong>Unlimited Revisions</strong></span>
+                <span class="text-brand-600 font-bold">🔄</span>
+                <span><strong class="text-slate-900">Unlimited Revisions</strong></span>
               </div>
             </div>
           </div>
 
           <!-- CTA Button -->
-          <div class="mt-8 pt-6 border-t border-white/10">
-            <button onclick="openTripwireModal()" class="w-full py-4 rounded-xl text-sm font-black uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-emerald-400/60 transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg">
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button onclick="openTripwireModal()" class="w-full py-4 rounded-xl text-sm font-black uppercase tracking-wider bg-slate-950 hover:bg-slate-800 text-white transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-md">
               <span>⚡ Claim $1 Test Task (2 Spots Left)</span>
               <span>→</span>
             </button>
@@ -470,83 +528,81 @@
         </div>
 
         <!-- ================= DEAL B: BOGO On ALL Monthly Pod Plans ================= -->
-        <div id="bogo" class="glass-card-emerald rounded-3xl p-6 sm:p-10 flex flex-col justify-between relative overflow-hidden group">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
+        <div id="bogo" class="rounded-3xl p-6 sm:p-10 bg-white border-2 border-brand-600 shadow-xl shadow-brand-600/10 flex flex-col justify-between relative overflow-hidden group">
           <div>
             <!-- Badge & Header -->
             <div class="flex items-center justify-between gap-3 mb-6">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-400 text-black shadow-md font-bold">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-600 text-white shadow-sm">
                 🔥 DOUBLE YOUR OUTPUT FOR LIFE
               </span>
-              <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest">Deal B</span>
+              <span class="text-xs font-black text-brand-600 uppercase tracking-widest bg-brand-50 border border-brand-200 px-2.5 py-0.5 rounded-full">Deal B</span>
             </div>
 
-            <h3 class="text-2xl sm:text-3xl font-black text-white">
+            <h3 class="text-2xl sm:text-3xl font-black text-slate-950">
               BOGO On ALL Monthly Pod Plans
             </h3>
-            <p class="text-sm text-slate-300 mt-2 font-medium">
+            <p class="text-sm text-slate-600 mt-2 font-medium leading-relaxed">
               Buy 1 Pod, get the exact same capacity doubled for free. Your 2x multiplier is grandfathered permanently for as long as your subscription stays active.
             </p>
 
             <!-- Price Display -->
-            <div class="mt-6 p-4 rounded-2xl bg-black/60 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <div class="mt-6 p-4 rounded-2xl bg-brand-50/70 border border-brand-200 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <div>
-                <span class="text-2xl sm:text-3xl font-black text-emerald-400">BUY 1, GET 1 FREE</span>
-                <span class="text-xs font-bold text-slate-300 block sm:inline sm:ml-2">(2X CAPACITY)</span>
+                <span class="text-2xl sm:text-3xl font-black text-brand-700">BUY 1, GET 1 FREE</span>
+                <span class="text-xs font-bold text-slate-600 block sm:inline sm:ml-2">(2X CAPACITY)</span>
               </div>
-              <span class="text-[11px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-lg self-start sm:self-auto">
+              <span class="text-[11px] font-bold text-accent-700 bg-accent-50 border border-accent-200 px-2.5 py-1 rounded-lg self-start sm:self-auto">
                 Locked In For Life
               </span>
             </div>
 
-            <!-- What Doubles Breakdown -->
+            <!-- What Automatically Doubles Breakdown -->
             <div class="mt-6 space-y-2.5">
-              <p class="text-xs font-extrabold uppercase tracking-widest text-emerald-300">
+              <p class="text-xs font-extrabold uppercase tracking-widest text-brand-700">
                 What Automatically Doubles Every Month:
               </p>
-              <div class="p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 text-xs text-slate-200 flex items-center justify-between">
-                <span>Buy 10 GEO Listicles/Articles</span>
-                <strong class="text-emerald-400 font-extrabold text-sm">→ 20 Delivered Monthly</strong>
+              <div class="p-3 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-700 flex items-center justify-between">
+                <span class="font-medium">Buy 10 GEO Listicles/Articles</span>
+                <strong class="text-brand-600 font-extrabold text-sm">→ 20 Delivered Monthly</strong>
               </div>
-              <div class="p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 text-xs text-slate-200 flex items-center justify-between">
-                <span>Buy 100 Tech &amp; AI VA Hours</span>
-                <strong class="text-emerald-400 font-extrabold text-sm">→ 200 Hours Monthly</strong>
+              <div class="p-3 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-700 flex items-center justify-between">
+                <span class="font-medium">Buy 100 Tech &amp; AI VA Hours</span>
+                <strong class="text-brand-600 font-extrabold text-sm">→ 200 Hours Monthly</strong>
               </div>
-              <div class="p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 text-xs text-slate-200 flex items-center justify-between">
-                <span>Buy 1 Dedicated Fulfillment Pod</span>
-                <strong class="text-emerald-400 font-extrabold text-sm">→ 2 Dedicated Pods / Double Velocity</strong>
+              <div class="p-3 rounded-xl bg-surface-subtle border border-slate-200 text-xs text-slate-700 flex items-center justify-between">
+                <span class="font-medium">Buy 1 Dedicated Fulfillment Pod</span>
+                <strong class="text-brand-600 font-extrabold text-sm">→ 2 Dedicated Pods / Double Velocity</strong>
               </div>
             </div>
 
             <!-- Transparent Tier Examples -->
             <div class="mt-8">
-              <p class="text-xs font-extrabold uppercase tracking-widest text-slate-300 mb-3">
+              <p class="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-3">
                 Featured BOGO Pod Rate Cards:
               </p>
               <div class="grid sm:grid-cols-2 gap-3">
                 <!-- Junior Pod Card -->
-                <div class="p-4 rounded-xl bg-black/50 border border-white/10 hover:border-emerald-500/50 transition">
+                <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-brand-400 hover:shadow-md transition">
                   <div class="flex justify-between items-center mb-1">
-                    <span class="text-xs font-bold text-white">Junior Pod BOGO</span>
-                    <span class="text-xs font-black text-emerald-400">$182/mo</span>
+                    <span class="text-xs font-bold text-slate-900">Junior Pod BOGO</span>
+                    <span class="text-xs font-black text-brand-600">$182/mo</span>
                   </div>
-                  <p class="text-[11px] text-slate-400">Normally 40 hrs → <strong>Now 80 hrs/mo</strong></p>
-                  <p class="text-[10px] text-slate-500 mt-1">Outreach, link insertions, CRM &amp; data research</p>
-                  <button onclick="goToCheckout('junior-pod-bogo')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-emerald-500/20 hover:bg-emerald-500 text-emerald-300 hover:text-black border border-emerald-500/40 transition">
+                  <p class="text-[11px] text-slate-600">Normally 40 hrs → <strong class="text-slate-900">Now 80 hrs/mo</strong></p>
+                  <p class="text-[10px] text-slate-400 mt-1">Outreach, link insertions, CRM &amp; data research</p>
+                  <button onclick="goToCheckout('junior-pod-bogo')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 transition">
                     Lock In $182/mo →
                   </button>
                 </div>
 
                 <!-- Senior Conductor Card -->
-                <div class="p-4 rounded-xl bg-black/50 border border-white/10 hover:border-emerald-500/50 transition">
+                <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-brand-400 hover:shadow-md transition">
                   <div class="flex justify-between items-center mb-1">
-                    <span class="text-xs font-bold text-white">Senior Conductor</span>
-                    <span class="text-xs font-black text-emerald-400">$529/mo</span>
+                    <span class="text-xs font-bold text-slate-900">Senior Conductor</span>
+                    <span class="text-xs font-black text-brand-600">$529/mo</span>
                   </div>
-                  <p class="text-[11px] text-slate-400">Normally 120 hrs → <strong>Now 240 hrs/mo</strong></p>
-                  <p class="text-[10px] text-slate-500 mt-1">AI agent workflows (n8n/Python), content pipelines</p>
-                  <button onclick="goToCheckout('senior-conductor-bogo')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-emerald-500/20 hover:bg-emerald-500 text-emerald-300 hover:text-black border border-emerald-500/40 transition">
+                  <p class="text-[11px] text-slate-600">Normally 120 hrs → <strong class="text-slate-900">Now 240 hrs/mo</strong></p>
+                  <p class="text-[10px] text-slate-400 mt-1">AI agent workflows (n8n/Python), content pipelines</p>
+                  <button onclick="goToCheckout('senior-conductor-bogo')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 transition">
                     Lock In $529/mo →
                   </button>
                 </div>
@@ -554,33 +610,33 @@
             </div>
 
             <!-- Inclusions -->
-            <div class="mt-6 pt-5 border-t border-emerald-500/20 grid grid-cols-2 gap-2 text-xs text-slate-300">
+            <div class="mt-6 pt-5 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs text-slate-600">
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">👨‍💼</span>
+                <span class="text-brand-600 font-bold">👨💼</span>
                 <span>Dedicated English PM</span>
               </div>
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">💬</span>
+                <span class="text-brand-600 font-bold">💬</span>
                 <span>Slack &amp; Portal Sync</span>
               </div>
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">📊</span>
+                <span class="text-brand-600 font-bold">📊</span>
                 <span>White-Label Reports</span>
               </div>
               <div class="flex items-center gap-1.5">
-                <span class="text-emerald-400">🔒</span>
+                <span class="text-brand-600 font-bold">🔒</span>
                 <span>No Contract Lock-in</span>
               </div>
             </div>
           </div>
 
           <!-- Main BOGO Button -->
-          <div class="mt-8 pt-6 border-t border-emerald-500/30">
-            <button onclick="goToCheckout('junior-pod-bogo')" class="w-full py-4 rounded-xl text-sm font-black uppercase tracking-wider bg-emerald-400 hover:bg-emerald-300 text-black shadow-xl shadow-emerald-400/25 transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button onclick="goToCheckout('junior-pod-bogo')" class="w-full py-4 rounded-xl text-sm font-black uppercase tracking-wider bg-brand-600 hover:bg-brand-500 text-white shadow-xl shadow-brand-600/25 transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
               <span>🎁 Lock In 2x Monthly Output For Life</span>
               <span>→</span>
             </button>
-            <p class="text-center text-[11px] text-slate-400 mt-2 font-medium">
+            <p class="text-center text-[11px] text-slate-500 mt-2 font-medium">
               Grandfathered for life. Cancel anytime in 1 click from your portal.
             </p>
           </div>
@@ -588,15 +644,15 @@
 
       </div>
 
-      <!-- Comparison Callout -->
-      <div class="mt-16 max-w-4xl mx-auto glass-panel p-6 sm:p-8 rounded-2xl border border-white/10">
-        <h4 class="text-lg font-bold text-white text-center mb-6">
+      <!-- Comparison Callout (Clean Homepage Card Pattern) -->
+      <div class="mt-16 max-w-4xl mx-auto rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-sm">
+        <h4 class="text-lg font-bold text-slate-950 text-center mb-6">
           Why Agencies Switch to JDP Wholesale vs. In-House Hiring
         </h4>
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-600">
             <thead>
-              <tr class="border-b border-white/10 text-slate-400 uppercase tracking-wider text-[11px]">
+              <tr class="border-b border-slate-200 text-slate-400 uppercase tracking-wider text-[11px]">
                 <th class="py-3 px-3">Fulfillment Model</th>
                 <th class="py-3 px-3">Effective Cost</th>
                 <th class="py-3 px-3">English PM</th>
@@ -604,30 +660,30 @@
                 <th class="py-3 px-3">Risk Level</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-white/5">
+            <tbody class="divide-y divide-slate-100">
               <tr>
-                <td class="py-3 px-3 font-semibold text-slate-400">Full-Time US/UK Hire</td>
-                <td class="py-3 px-3">$4,500 - $7,000/mo</td>
-                <td class="py-3 px-3">Yes</td>
-                <td class="py-3 px-3">Unpredictable</td>
-                <td class="py-3 px-3 text-red-400 font-bold">High (Payroll tax, benefits)</td>
+                <td class="py-3.5 px-3 font-semibold text-slate-800">Full-Time US/UK Hire</td>
+                <td class="py-3.5 px-3">$4,500 - $7,000/mo</td>
+                <td class="py-3.5 px-3">Yes</td>
+                <td class="py-3.5 px-3">Unpredictable</td>
+                <td class="py-3.5 px-3 text-red-600 font-bold">High (Payroll tax, benefits)</td>
               </tr>
               <tr>
-                <td class="py-3 px-3 font-semibold text-slate-400">Upwork / Fiverr Freelancers</td>
-                <td class="py-3 px-3">$25 - $50/hr</td>
-                <td class="py-3 px-3 text-amber-400 font-bold">Rarely (Ghosting risk)</td>
-                <td class="py-3 px-3">Zero guarantee</td>
-                <td class="py-3 px-3 text-amber-400 font-bold">Medium (Inconsistent QA)</td>
+                <td class="py-3.5 px-3 font-semibold text-slate-800">Upwork / Fiverr Freelancers</td>
+                <td class="py-3.5 px-3">$25 - $50/hr</td>
+                <td class="py-3.5 px-3 text-amber-700 font-bold">Rarely (Ghosting risk)</td>
+                <td class="py-3.5 px-3">Zero guarantee</td>
+                <td class="py-3.5 px-3 text-amber-700 font-bold">Medium (Inconsistent QA)</td>
               </tr>
-              <tr class="bg-emerald-500/10 font-bold text-white">
-                <td class="py-3 px-3 text-emerald-400 flex items-center gap-1.5">
+              <tr class="bg-brand-50/80 font-bold text-slate-950">
+                <td class="py-3.5 px-3 text-brand-700 flex items-center gap-1.5">
                   <span>★</span>
                   <span>JDP Wholesale BFCM</span>
                 </td>
-                <td class="py-3 px-3 text-emerald-300">From $182/mo (2x BOGO)</td>
-                <td class="py-3 px-3 text-emerald-300">Native/Fluent English PM</td>
-                <td class="py-3 px-3 text-emerald-300">Guaranteed 24–48h SLA</td>
-                <td class="py-3 px-3 text-emerald-400 font-black">Zero Risk (Cancel anytime)</td>
+                <td class="py-3.5 px-3 text-brand-700">From $182/mo (2x BOGO)</td>
+                <td class="py-3.5 px-3 text-brand-700">Native/Fluent English PM</td>
+                <td class="py-3.5 px-3 text-brand-700">Guaranteed 24–48h SLA</td>
+                <td class="py-3.5 px-3 text-emerald-700 font-black">Zero Risk (Cancel anytime)</td>
               </tr>
             </tbody>
           </table>
@@ -638,106 +694,106 @@
   </section>
 
   <!-- WHOLESALE CAPABILITIES SECTION -->
-  <section id="capabilities" class="py-20 md:py-28 bg-[#05070c] border-b border-white/5 relative">
+  <section id="capabilities" class="py-16 md:py-24 bg-white border-b border-slate-200 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600 px-3 py-1 rounded-full bg-brand-50 border border-brand-200">
           Agency Capabilities
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-4 tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-black text-slate-950 mt-3 tracking-tight">
           What You Can Hand Off to Us Today
         </h2>
-        <p class="text-slate-400 text-base sm:text-lg mt-3">
+        <p class="text-slate-600 text-base sm:text-lg mt-2">
           We operate as your invisible fulfillment engine. You sell at retail agency margins ($150–$300/hr or $2,500/retainer), we execute at wholesale speed.
         </p>
       </div>
 
-      <!-- 4 Capability Cards -->
+      <!-- 4 Capability Cards (Clean Card Layout from index.html) -->
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
+
         <!-- 1. GEO Content -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-emerald-500/40 flex flex-col justify-between">
+        <div class="card-clean p-6 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 flex flex-col justify-between shadow-xs hover:shadow-lg transition">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold mb-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl font-bold mb-4">
               ✍️
             </div>
-            <h3 class="text-lg font-black text-white mb-2">GEO-Optimized Content</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Topical entity mapping, citation-engineered copy designed specifically to get client brands cited in <strong>Google AI Overviews, Perplexity &amp; ChatGPT Search</strong>.
+            <h3 class="text-lg font-black text-slate-950 mb-2">GEO-Optimized Content</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Topical entity mapping, citation-engineered copy designed specifically to get client brands cited in <strong class="text-slate-900">Google AI Overviews, Perplexity &amp; ChatGPT Search</strong>.
             </p>
           </div>
-          <ul class="mt-6 pt-4 border-t border-white/5 text-[11px] text-slate-400 space-y-1.5">
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Entity clustering &amp; schema markup</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Deep semantic research</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> 2,000–3,500 words per deliverable</li>
+          <ul class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-600 space-y-1.5">
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Entity clustering &amp; schema markup</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Deep semantic research</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> 2,000–3,500 words per deliverable</li>
           </ul>
         </div>
 
         <!-- 2. Human Hands VA -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-emerald-500/40 flex flex-col justify-between">
+        <div class="card-clean p-6 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 flex flex-col justify-between shadow-xs hover:shadow-lg transition">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold mb-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl font-bold mb-4">
               🤝
             </div>
-            <h3 class="text-lg font-black text-white mb-2">Human Hands for AI &amp; Tech VA</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
+            <h3 class="text-lg font-black text-slate-950 mb-2">Human Hands for AI &amp; Tech VA</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
               The tedious manual work AI cannot do reliably: personalized link outreach pitching, manual data cleansing, CRM hygiene, and verification sprints.
             </p>
           </div>
-          <ul class="mt-6 pt-4 border-t border-white/5 text-[11px] text-slate-400 space-y-1.5">
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Link insertion prospecting</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> High-accuracy data entry &amp; scraping</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> HubSpot/GoHighLevel CRM ops</li>
+          <ul class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-600 space-y-1.5">
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Link insertion prospecting</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> High-accuracy data entry &amp; scraping</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> HubSpot/GoHighLevel CRM ops</li>
           </ul>
         </div>
 
         <!-- 3. GEO & AI Search Refreshes -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-emerald-500/40 flex flex-col justify-between">
+        <div class="card-clean p-6 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 flex flex-col justify-between shadow-xs hover:shadow-lg transition">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold mb-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl font-bold mb-4">
               ⚡
             </div>
-            <h3 class="text-lg font-black text-white mb-2">GEO &amp; AI Search Refreshes</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
+            <h3 class="text-lg font-black text-slate-950 mb-2">GEO &amp; AI Search Refreshes</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
               Transform legacy, decaying client URLs into citation-ready powerhouses. We extract entity gaps, inject authoritative statistics, and rewrite for LLM discoverability.
             </p>
           </div>
-          <ul class="mt-6 pt-4 border-t border-white/5 text-[11px] text-slate-400 space-y-1.5">
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Decaying content revitalization</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> LLM citation formatting</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Rapid rank recovery sprints</li>
+          <ul class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-600 space-y-1.5">
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Decaying content revitalization</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> LLM citation formatting</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Rapid rank recovery sprints</li>
           </ul>
         </div>
 
         <!-- 4. Dedicated AI & Automation Pods -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-emerald-500/40 flex flex-col justify-between">
+        <div class="card-clean p-6 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 flex flex-col justify-between shadow-xs hover:shadow-lg transition">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold mb-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl font-bold mb-4">
               🤖
             </div>
-            <h3 class="text-lg font-black text-white mb-2">Automation &amp; Engineering</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
+            <h3 class="text-lg font-black text-slate-950 mb-2">Automation &amp; Engineering</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
               Custom AI pipelines (n8n, Python, Make, LangChain), automated client reporting dashboards, headless CMS publishing, and website speed optimization.
             </p>
           </div>
-          <ul class="mt-6 pt-4 border-t border-white/5 text-[11px] text-slate-400 space-y-1.5">
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Custom n8n workflow builds</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> WordPress &amp; Webflow dev sprints</li>
-            <li class="flex items-center gap-1.5 text-emerald-300"><span>•</span> Automated scraper infrastructure</li>
+          <ul class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-600 space-y-1.5">
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Custom n8n workflow builds</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> WordPress &amp; Webflow dev sprints</li>
+            <li class="flex items-center gap-1.5"><span class="text-brand-600 font-bold">•</span> Automated scraper infrastructure</li>
           </ul>
         </div>
 
       </div>
 
       <!-- Catalog Link Banner -->
-      <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-emerald-950/40 border border-emerald-500/30 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="mt-12 p-6 rounded-2xl bg-surface-subtle border border-slate-200 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="text-left">
-          <h4 class="text-base font-bold text-white">Need a specific wholesale deliverable or custom scope?</h4>
-          <p class="text-xs text-slate-400 mt-1">Browse our full a-la-carte menu covering PR wire distributions, technical audits, and video editing.</p>
+          <h4 class="text-base font-bold text-slate-950">Need a specific wholesale deliverable or custom scope?</h4>
+          <p class="text-xs text-slate-600 mt-1">Browse our full a-la-carte menu covering PR wire distributions, technical audits, and video editing.</p>
         </div>
-        <a href="https://jdp.team/services" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-emerald-400 transition whitespace-nowrap">
-          View Full 20+ Service Catalog ↗
+        <a href="/services" class="px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-slate-950 hover:bg-slate-800 text-white transition whitespace-nowrap shadow-xs">
+          View Full 40+ Service Catalog ↗
         </a>
       </div>
 
@@ -745,56 +801,56 @@
   </section>
 
   <!-- WHY WE DO THIS & WHITE-LABEL GUARANTEE -->
-  <section id="guarantee" class="py-20 md:py-28 bg-[#070a12] border-b border-white/5 relative">
+  <section id="guarantee" class="py-16 md:py-24 bg-surface-subtle border-b border-slate-200 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600 px-3 py-1 rounded-full bg-brand-50 border border-brand-200">
           The JDP Guarantee
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-4 tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-black text-slate-950 mt-3 tracking-tight">
           Why 7-Figure Agencies Trust Us Behind the Scenes
         </h2>
-        <p class="text-slate-400 text-base sm:text-lg mt-3">
+        <p class="text-slate-600 text-base sm:text-lg mt-2">
           We protect your client relationships like Fort Knox. You take all the praise, we handle the production grind.
         </p>
       </div>
 
       <!-- 3 Pillars -->
       <div class="grid md:grid-cols-3 gap-8">
-        
+
         <!-- Pillar 1 -->
-        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative">
+        <div class="card-clean p-8 rounded-3xl border border-slate-200 bg-white relative shadow-sm">
           <div class="text-3xl mb-4">🛡️</div>
-          <h3 class="text-xl font-black text-white mb-3">100% White-Label Fulfillment</h3>
-          <p class="text-sm text-slate-300 leading-relaxed">
+          <h3 class="text-xl font-black text-slate-950 mb-3">100% White-Label Fulfillment</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
             Zero vendor leaks. All Google Docs, Figma files, reports, and spreadsheets come completely unbranded or styled with your agency’s logos and color codes. Your clients will only ever see your brand.
           </p>
-          <div class="mt-6 pt-4 border-t border-white/10 text-xs font-bold text-emerald-400">
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold text-brand-600">
             ✓ Strictly enforced NDA protection
           </div>
         </div>
 
         <!-- Pillar 2 -->
-        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative">
-          <div class="text-3xl mb-4">👨‍💼</div>
-          <h3 class="text-xl font-black text-white mb-3">Dedicated English Lead PM</h3>
-          <p class="text-sm text-slate-300 leading-relaxed">
+        <div class="card-clean p-8 rounded-3xl border border-slate-200 bg-white relative shadow-sm">
+          <div class="text-3xl mb-4">👨💼</div>
+          <h3 class="text-xl font-black text-slate-950 mb-3">Dedicated English Lead PM</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
             No broken English or endless back-and-forth timezone friction. Your assigned Project Manager has years of enterprise SEO experience, understands client briefs immediately, and manages QA thoroughly.
           </p>
-          <div class="mt-6 pt-4 border-t border-white/10 text-xs font-bold text-emerald-400">
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold text-brand-600">
             ✓ Daily updates via Slack, Email, or Portal
           </div>
         </div>
 
         <!-- Pillar 3 -->
-        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative">
+        <div class="card-clean p-8 rounded-3xl border border-slate-200 bg-white relative shadow-sm">
           <div class="text-3xl mb-4">💻</div>
-          <h3 class="text-xl font-black text-white mb-3">6-Stage Live Client Portal</h3>
-          <p class="text-sm text-slate-300 leading-relaxed">
-            Track every single deliverable across our transparent 6-stage lifecycle: <strong>Intake → In-Queue → Research → Production → Internal QA → Client-Ready Delivery</strong>. Full visibility, zero guesswork.
+          <h3 class="text-xl font-black text-slate-950 mb-3">6-Stage Live Client Portal</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Track every single deliverable across our transparent 6-stage lifecycle: <strong class="text-slate-900">Intake → In-Queue → Research → Production → Internal QA → Client-Ready Delivery</strong>. Full visibility, zero guesswork.
           </p>
-          <div class="mt-6 pt-4 border-t border-white/10 text-xs font-bold text-emerald-400">
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold text-brand-600">
             ✓ Instant portal login via portal.jdp.team
           </div>
         </div>
@@ -805,72 +861,72 @@
   </section>
 
   <!-- BFCM SPECIFIC FAQ ACCORDION -->
-  <section id="faq" class="py-20 md:py-28 bg-[#05070c] border-b border-white/5">
+  <section id="faq" class="py-16 md:py-24 bg-white border-b border-slate-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center mb-16">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+
+      <div class="text-center mb-14">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-brand-600 px-3 py-1 rounded-full bg-brand-50 border border-brand-200">
           Got Questions?
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black text-white mt-4 tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-black text-slate-950 mt-3 tracking-tight">
           BFCM Frequently Asked Questions
         </h2>
-        <p class="text-slate-400 text-base sm:text-lg mt-3">
+        <p class="text-slate-600 text-base sm:text-lg mt-2">
           Direct, honest answers about our $1 tripwire and BOGO pod terms.
         </p>
       </div>
 
-      <!-- Accordion Items -->
+      <!-- Accordion Items (Matching index.html FAQ Pattern) -->
       <div class="space-y-4">
-        
+
         <!-- FAQ 1 -->
-        <div class="glass-panel rounded-2xl border border-white/10 overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-white hover:text-emerald-400 transition" aria-expanded="false">
-            <span class="text-base sm:text-lg">What qualifies for the $1 "Prove It" test task?</span>
-            <span class="faq-icon text-xl text-emerald-400 shrink-0 font-mono">+</span>
+        <div class="card-clean rounded-2xl bg-white border border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">What qualifies for the $1 "Prove It" test task?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
           </button>
-          <div class="faq-wrapper">
-            <div class="faq-inner px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
               Any single, real client deliverable from your agency backlog! Examples include: 1 full topical authority map &amp; semantic keyword cluster graph; 1 turnkey GEO-optimized long-form article (2,000+ words) formatted with schema markup; 1 competitor entity gap &amp; citation audit; or 1 technical VA sprint (such as CRM data cleanup or a targeted outreach prospecting list). There is zero hidden catch, no automatic billing, and no credit card lock-in.
             </div>
           </div>
         </div>
 
         <!-- FAQ 2 -->
-        <div class="glass-panel rounded-2xl border border-white/10 overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-white hover:text-emerald-400 transition" aria-expanded="false">
-            <span class="text-base sm:text-lg">How does the BOGO renewal work? Does the double output stay on renewals?</span>
-            <span class="faq-icon text-xl text-emerald-400 shrink-0 font-mono">+</span>
+        <div class="card-clean rounded-2xl bg-white border border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">How does the BOGO renewal work? Does the double output stay on renewals?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
           </button>
-          <div class="faq-wrapper">
-            <div class="faq-inner px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
-              <strong>YES! The 2x output stays locked in permanently for all future renewal months.</strong> As long as your monthly Pod subscription remains active, your capacity remains doubled (e.g., Junior Pod gets 80 hours/mo instead of 40 hours for just $182/mo; Senior Conductor gets 240 hours/mo instead of 120 hours for $529/mo). If you cancel and rejoin later after BFCM, you would revert to standard rate cards.
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              <strong class="text-slate-900">YES! The 2x output stays locked in permanently for all future renewal months.</strong> As long as your monthly Pod subscription remains active, your capacity remains doubled (e.g., Junior Pod gets 80 hours/mo instead of 40 hours for just $182/mo; Senior Conductor gets 240 hours/mo instead of 120 hours for $529/mo). If you cancel and rejoin later after BFCM, you would revert to standard rate cards.
             </div>
           </div>
         </div>
 
         <!-- FAQ 3 -->
-        <div class="glass-panel rounded-2xl border border-white/10 overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-white hover:text-emerald-400 transition" aria-expanded="false">
-            <span class="text-base sm:text-lg">Why strictly 5 agency spots before Thanksgiving?</span>
-            <span class="faq-icon text-xl text-emerald-400 shrink-0 font-mono">+</span>
+        <div class="card-clean rounded-2xl bg-white border border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">Why strictly 5 agency spots before Thanksgiving?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
           </button>
-          <div class="faq-wrapper">
-            <div class="faq-inner px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
               Unlike generic overseas agencies that pack 30 clients onto one stressed manager, every JDP agency account is managed by a vetted Lead English Project Manager with a hard ceiling on active client accounts. To preserve our 24–48 hour turnaround SLA and obsessive quality standards, we are strictly capping this intake batch at 5 agencies. Once the 5th spot is claimed, the checkout automatically closes until Q1.
             </div>
           </div>
         </div>
 
         <!-- FAQ 4 -->
-        <div class="glass-panel rounded-2xl border border-white/10 overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-white hover:text-emerald-400 transition" aria-expanded="false">
-            <span class="text-base sm:text-lg">How do I submit and receive my deliverables?</span>
-            <span class="faq-icon text-xl text-emerald-400 shrink-0 font-mono">+</span>
+        <div class="card-clean rounded-2xl bg-white border border-slate-200 overflow-hidden">
+          <button type="button" onclick="toggleFaq(this)" class="w-full p-6 text-left flex justify-between items-center gap-4 focus:outline-none">
+            <span class="font-bold text-sm sm:text-base text-slate-950">How do I submit and receive my deliverables?</span>
+            <span class="faq-icon-rot text-lg font-bold text-slate-400">+</span>
           </button>
-          <div class="faq-wrapper">
-            <div class="faq-inner px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4">
-              Immediately upon checkout, an account is generated for you in our 6-Stage Client Portal (<code>portal.jdp.team</code>). You submit your task brief or share your Google Drive/Docs/Notion folder. Your dedicated PM acknowledges within 2 hours, routes it into production, performs internal QA, and delivers client-ready links or uploads directly to your CMS. You can also communicate directly with your PM via dedicated Slack or email.
+          <div class="faq-grid-wrapper">
+            <div class="faq-inner px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+              Immediately upon checkout, an account is generated for you in our 6-Stage Client Portal (<code class="text-brand-600 font-semibold">portal.jdp.team</code>). You submit your task brief or share your Google Drive/Docs/Notion folder. Your dedicated PM acknowledges within 2 hours, routes it into production, performs internal QA, and delivers client-ready links or uploads directly to your CMS. You can also communicate directly with your PM via dedicated Slack or email.
             </div>
           </div>
         </div>
@@ -880,58 +936,111 @@
     </div>
   </section>
 
-  <!-- AFFILIATE & PARTNER BANNER -->
-  <section class="py-16 bg-[#030508] border-b border-white/5">
+  <!-- AFFILIATE & PARTNER BANNER (Matching index.html Catalog Banner Style) -->
+  <section class="py-16 md:py-20 bg-surface-subtle border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card-emerald rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
-        <span class="text-xs font-black uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
-          Partner Program
-        </span>
-        <h3 class="text-2xl sm:text-4xl font-black text-white mt-4">
-          Know Other Agencies or Run an SEO Community?
-        </h3>
-        <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mt-3">
-          Earn a <strong>20% Lifetime Recurring Commission</strong> for every agency pod or project you refer to JDP Wholesale.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="https://portal.jdp.team/partner" id="partnerCtaBtn" class="px-8 py-3.5 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-400 hover:bg-emerald-300 text-black shadow-lg shadow-emerald-400/20 transition hover:scale-105 active:scale-95">
-            Join the Partner Program (20% Recurring) →
-          </a>
+      <div class="rounded-3xl bg-slate-950 border border-slate-800 p-8 sm:p-12 text-center text-white relative overflow-hidden shadow-xl">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-500/20 text-brand-300 border border-brand-500/30 mb-3">
+            Partner Program
+          </span>
+          <h3 class="text-2xl sm:text-4xl font-black text-white tracking-tight mb-3">
+            Know Other Agencies or Run an SEO Community?
+          </h3>
+          <p class="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed">
+            Earn a <strong class="text-white">20% Lifetime Recurring Commission</strong> for every agency pod or project you refer to JDP Wholesale.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="https://portal.jdp.team/partner" id="partnerCtaBtn" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black text-sm uppercase tracking-wider transition shadow-xl shadow-brand-900/60 hover:scale-105 active:scale-95">
+              <span>Join the Partner Program (20% Recurring)</span>
+              <span>→</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-[#030508] py-12 text-slate-500 text-xs border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      
-      <!-- Brand & Copyright -->
-      <div class="flex items-center gap-3">
-        <span class="text-lg font-black text-white tracking-tight">jdp<span class="text-emerald-400">.team</span></span>
-        <span class="text-slate-600">|</span>
-        <span>© 2026 JDP Team Wholesale. All rights reserved.</span>
+  <!-- Consistent Footer (Exact Copy of index.html Footer) -->
+  <footer class="border-t border-slate-200 bg-surface-subtle py-14 text-slate-600 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <!-- Col 1: Brand -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="flex items-baseline">
+              <span class="text-xl font-black tracking-[-0.065em] text-slate-950">jdp<span class="text-brand-600 font-extrabold">.team</span></span>
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent-500 ml-1"></span>
+            </div>
+            <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-950 text-white shadow-xs">White-Label</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Your secret remote team — white-label pod by JetDigitalPro.
+          </p>
+          <div class="text-xs text-slate-400 pt-2">
+            Nell VH • Legiit Certified
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Platform</div>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/" class="hover:text-brand-600 transition">Home</a></li>
+            <li><a href="/services" class="hover:text-brand-600 transition">Services</a></li>
+            <li><a href="/calculator.html" class="hover:text-brand-600 transition">Calculator</a></li>
+            <li><a href="/proof.html" class="hover:text-brand-600 transition">Proof</a></li>
+            <li><a href="/contact.html" class="hover:text-brand-600 transition">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Specialist Rates -->
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Rates</div>
+          <ul class="space-y-2 text-xs text-slate-500">
+            <li>Junior: from <strong class="text-slate-700">$3.00/hr</strong></li>
+            <li>Senior: from <strong class="text-slate-700">$5.00/hr</strong></li>
+            <li>Video: <strong class="text-slate-700">$5.00/hr</strong></li>
+            <li>SEO Spec: <strong class="text-slate-700">$7.00/hr</strong></li>
+            <li>SEO Content: <strong class="text-slate-700">from $15.00/art</strong></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Verification -->
+        <div>
+          <div class="font-bold text-slate-900 mb-3 text-xs uppercase tracking-wider">Contact</div>
+          <ul class="space-y-2 text-xs">
+            <li><a href="mailto:team@jdp.team" class="text-brand-600 hover:underline">team@jdp.team</a></li>
+            <li><a href="mailto:info@jetdigitalpro.com" class="text-brand-600 hover:underline">info@jetdigitalpro.com</a></li>
+            <li>Trustpilot: <span class="font-semibold text-slate-900">4.2 / 5.0</span></li>
+            <li><a href="https://jetdigitalpro.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600">JetDigitalPro.com ↗</a></li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Links -->
-      <div class="flex items-center gap-6 flex-wrap justify-center font-semibold text-slate-400">
-        <a href="#tripwire" class="hover:text-emerald-400 transition">$1 Test Task</a>
-        <a href="#bogo" class="hover:text-emerald-400 transition">BOGO Pods</a>
-        <a href="https://jdp.team/services" class="hover:text-emerald-400 transition">Services Catalog</a>
-        <a href="https://portal.jdp.team/partner" class="text-emerald-400 hover:text-emerald-300 transition">Affiliate Program (20%)</a>
-        <a href="https://portal.jdp.team" class="hover:text-emerald-400 transition">Client Portal</a>
-        <a href="mailto:ops@jdp.team" class="hover:text-emerald-400 transition">Contact Ops</a>
+      <div class="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div>
+          &copy; 2026 JDP.team. A JetDigitalPro brand. All rights reserved.
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <span>Strict NDA</span>
+          <span>•</span>
+          <span>100% White-Label Delivery</span>
+        </div>
+        <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 text-slate-700 hover:text-slate-950 hover:bg-slate-100 transition text-xs font-semibold min-touch" aria-label="Back to top">
+          <span>↑ Back to top</span>
+        </button>
       </div>
-
     </div>
   </footer>
 
-  <!-- MOBILE STICKY FLOATING ACTION BAR -->
-  <div class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#05070c]/95 backdrop-blur-md border-t border-white/10 p-3 flex items-center gap-2 shadow-2xl">
-    <button onclick="openTripwireModal()" class="flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-white/10 text-white border border-white/20 text-center">
+  <!-- Mobile Sticky Floating Action Bar -->
+  <div class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 flex items-center gap-2 shadow-2xl">
+    <button onclick="openTripwireModal()" class="flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-center transition">
       ⚡ $1 Task (2 Left)
     </button>
-    <a href="#bogo" class="flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-500 text-black text-center shadow-lg shadow-emerald-500/20">
+    <a href="#bogo" class="flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-brand-600 hover:bg-brand-500 text-white text-center shadow-lg shadow-brand-600/25 transition">
       🎁 2x BOGO Scale
     </a>
   </div>
@@ -939,36 +1048,36 @@
   <!-- ========================================================================= -->
   <!-- MODAL: INSTANT $1 TASK & ONBOARDING CLAIM -->
   <!-- ========================================================================= -->
-  <div id="claimModal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-box w-full max-w-lg glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 shadow-2xl relative">
-      
+  <div id="claimModal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-2xl relative text-slate-900">
+
       <!-- Close Button -->
-      <button onclick="closeClaimModal()" aria-label="Close Modal" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition">
+      <button onclick="closeClaimModal()" aria-label="Close Modal" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition">
         ✕
       </button>
 
       <!-- Modal Header -->
       <div class="mb-6">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-200">
           ⚡ ZERO-RISK TEST TASK
         </span>
-        <h3 id="modalTitle" class="text-xl sm:text-2xl font-black text-white mt-2">
+        <h3 id="modalTitle" class="text-xl sm:text-2xl font-black text-slate-950 mt-2">
           Claim Your $1 Agency Test Task
         </h3>
-        <p class="text-xs text-slate-400 mt-1">
+        <p class="text-xs text-slate-600 mt-1">
           Pick your deliverable below. We will assign your English PM and route into production within 24–48 hours.
         </p>
       </div>
 
       <!-- Quick Claim Form -->
       <form id="tripwireClaimForm" onsubmit="handleTripwireSubmit(event)" class="space-y-4">
-        
+
         <!-- Task Selection -->
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+          <label for="modalTaskType" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
             Select Your $1 Test Task:
           </label>
-          <select id="modalTaskType" class="w-full bg-[#030508] border border-white/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-white focus:outline-none focus:border-emerald-500 transition">
+          <select id="modalTaskType" class="w-full bg-surface-subtle border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition">
             <option value="topical-map">Topical Authority Map &amp; Entity Graph</option>
             <option value="geo-article">GEO-Optimized Long-Form Article (Google AI &amp; Perplexity Ready)</option>
             <option value="entity-audit">Competitor Entity &amp; AI Citation Audit</option>
@@ -979,30 +1088,30 @@
         <!-- Name & Email -->
         <div class="grid sm:grid-cols-2 gap-3">
           <div>
-            <label for="modalName" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+            <label for="modalName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
               Your Name / Agency *
             </label>
-            <input type="text" id="modalName" required placeholder="e.g. Alex (Peak SEO)" class="w-full bg-[#030508] border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition">
+            <input type="text" id="modalName" required placeholder="e.g. Alex (Peak SEO)" class="w-full bg-surface-subtle border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:bg-white transition">
           </div>
           <div>
-            <label for="modalEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+            <label for="modalEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
               Work Email *
             </label>
-            <input type="email" id="modalEmail" required placeholder="alex@agency.com" class="w-full bg-[#030508] border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition">
+            <input type="email" id="modalEmail" required placeholder="alex@agency.com" class="w-full bg-surface-subtle border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:bg-white transition">
           </div>
         </div>
 
         <!-- Optional Brief / Notes -->
         <div>
-          <label for="modalNotes" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+          <label for="modalNotes" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
             Brief Notes or Website Target (Optional)
           </label>
-          <input type="text" id="modalNotes" placeholder="e.g. client domain or target niche" class="w-full bg-[#030508] border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition">
+          <input type="text" id="modalNotes" placeholder="e.g. client domain or target niche" class="w-full bg-surface-subtle border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:bg-white transition">
         </div>
 
         <!-- Submit to Checkout Simulator -->
         <div class="pt-2">
-          <button type="submit" class="w-full py-4 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-400 hover:bg-emerald-300 text-black shadow-lg shadow-emerald-400/25 transition hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2">
+          <button type="submit" class="w-full py-4 rounded-xl text-xs font-black uppercase tracking-wider bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/25 transition hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2">
             <span>Proceed to $1 Checkout &amp; Portal Intake</span>
             <span>→</span>
           </button>
@@ -1118,17 +1227,17 @@
       setInterval(update, 1000);
     })();
 
-    // 3. FAQ Accordion Toggle
+    // 3. FAQ Accordion Toggle (Aligned with index.html)
     function toggleFaq(btn) {
       var wrapper = btn.nextElementSibling;
-      var icon = btn.querySelector('.faq-icon');
+      var icon = btn.querySelector('.faq-icon-rot');
       var isOpen = wrapper.classList.contains('open');
 
       // Close other accordions
-      document.querySelectorAll('.faq-wrapper').forEach(function(w) {
+      document.querySelectorAll('.faq-grid-wrapper').forEach(function(w) {
         w.classList.remove('open');
       });
-      document.querySelectorAll('.faq-icon').forEach(function(i) {
+      document.querySelectorAll('.faq-icon-rot').forEach(function(i) {
         i.classList.remove('rotated');
       });
 
@@ -1200,7 +1309,7 @@
       window.location.href = targetUrl;
     }
 
-    // 5. Mobile Navigation Toggle
+    // 5. Mobile Navigation Toggle (Aligned with index.html)
     var mobileMenuBtn = document.getElementById('mobileMenuBtn');
     var mobileMenu = document.getElementById('mobileMenu');
     var mobileMenuIcon = document.getElementById('mobileMenuIcon');
