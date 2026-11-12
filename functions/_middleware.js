@@ -38,17 +38,6 @@ export async function onRequest(context) {
   }
 
   // --- Existing public-site clean URL handling (unchanged) ---
-  if (url.pathname === '/bfcm' || url.pathname === '/bfcm/') {
-    const assetUrl = new URL(url);
-    assetUrl.pathname = '/bfcm.html';
-    const response = await context.env.ASSETS.fetch(new Request(assetUrl.toString(), context.request));
-    if (response.ok) {
-      const headers = new Headers(response.headers);
-      headers.set('content-type', 'text/html; charset=utf-8');
-      return new Response(response.body, { status: 200, headers });
-    }
-  }
-
   if (url.pathname === '/homepage2' || url.pathname === '/homepage2/') {
     const assetUrl = new URL(url);
     assetUrl.pathname = '/homepage2.html';
