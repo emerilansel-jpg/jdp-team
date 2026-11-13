@@ -251,7 +251,7 @@
   <!-- Header / Navigation (Exact Homepage Shell & Wordmark) -->
   <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
-      <!-- Wordmark Logo (Identical to index.html) -->
+      <!-- Modern Typographic Wordmark Logo (Wordmarks.net Style) -->
       <a href="/" class="flex items-center gap-3 group py-1 min-touch select-none" aria-label="JDP.team Home">
         <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-slate-950 text-white shadow-md shadow-slate-950/20 group-hover:scale-105 transition-all overflow-hidden border border-slate-800">
           <div class="absolute inset-0 bg-gradient-to-tr from-brand-600/40 via-transparent to-cyan-400/30 opacity-70 group-hover:opacity-100 transition-opacity"></div>
@@ -276,59 +276,42 @@
         </div>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-5 text-xs font-bold uppercase tracking-wider text-slate-600">
-        <a href="#founder" class="hover:text-brand-600 transition">Founder Note</a>
-        <a href="#deals" class="hover:text-brand-600 transition">The 2 Deals</a>
-        <a href="#tripwire" class="hover:text-brand-600 transition">$1 Test Tasks</a>
-        <a href="#bogo" class="hover:text-brand-600 transition">Month 1 BOGO</a>
-        <a href="#case-studies" class="hover:text-brand-600 transition">Case Studies</a>
-        <a href="#testimonials" class="hover:text-brand-600 transition">Reviews</a>
-        <a href="#capabilities" class="hover:text-brand-600 transition">Capabilities</a>
-        <a href="#guarantee" class="hover:text-brand-600 transition">White-Label</a>
-        <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
-        <a href="/services" class="text-slate-500 hover:text-brand-600 transition flex items-center gap-1">
-          Catalog ↗
-        </a>
+      <!-- Desktop Nav with Clay.com Fluid Sliding Pill (Identical to index.html) -->
+      <nav id="desktop-nav" class="nav-pill-wrapper hidden md:inline-flex items-center">
+        <div id="nav-pill-indicator"></div>
+        <a href="/" class="nav-pill-link">Home</a>
+        <a href="/services" class="nav-pill-link">Services</a>
+        <a href="/calculator.html" class="nav-pill-link">Calculator</a>
+        <a href="/proof.html" class="nav-pill-link">Proof &amp; Reviews</a>
+        <a href="/contact.html" class="nav-pill-link">Contact</a>
       </nav>
 
-      <!-- Desktop Header CTAs -->
+      <!-- Desktop CTAs (CRO 10/10 Single Primary Action) -->
       <div class="hidden sm:flex items-center gap-3">
-        <button onclick="openTripwireModal()" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-50 border border-slate-300 transition shadow-xs hover:scale-105 active:scale-95">
-          ⚡ $1 "Prove It" Tasks
-        </button>
-        <a href="#bogo" class="px-5 py-2.5 rounded-xl text-xs font-black bg-brand-600 hover:bg-brand-500 text-white btn-motion shadow-md shadow-brand-600/20 flex items-center gap-2 transition hover:scale-105 active:scale-95">
-          <span>🎁 Double Month 1 (BOGO)</span>
+        <a href="/services" class="px-5 py-2.5 rounded-xl text-xs font-black bg-brand-600 hover:bg-brand-500 text-white btn-motion shadow-md shadow-brand-600/20 flex items-center gap-2 transition hover:scale-105 active:scale-95">
+          <span>🛒 Browse Storefront &amp; Rates</span>
           <span>→</span>
         </a>
       </div>
 
       <!-- Mobile Hamburger Button -->
-      <button id="mobileMenuBtn" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="mobileMenu" class="lg:hidden p-2.5 min-touch rounded-xl text-slate-700 hover:text-slate-950 hover:bg-slate-100 border border-slate-200 transition flex items-center justify-center">
+      <button id="mobileMenuBtn" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden p-2.5 min-touch rounded-xl text-slate-700 hover:text-slate-950 hover:bg-slate-100 border border-slate-200 transition flex items-center justify-center">
         <svg id="mobileMenuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobileMenu" class="hidden lg:hidden border-b border-slate-200 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-1 text-sm font-medium shadow-xl transition-all">
-      <a href="#founder" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">Founder Note (Nell VH)</a>
-      <a href="#deals" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">The 2 BFCM Deals</a>
-      <a href="#tripwire" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">$1 "Prove It" Tasks</a>
-      <a href="#bogo" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">Month 1 BOGO Pod Plans</a>
-      <a href="#case-studies" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">Agency Case Studies</a>
-      <a href="#testimonials" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">Verified Client Reviews</a>
-      <a href="#capabilities" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">Wholesale Capabilities</a>
-      <a href="#guarantee" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">White-Label Guarantee</a>
-      <a href="#faq" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition" onclick="closeMobileMenu()">BFCM FAQ</a>
-      <a href="https://portal.jdp.team/partner" class="flex items-center min-touch px-3 py-2 rounded-lg text-brand-600 font-bold hover:bg-brand-50/80 transition" onclick="closeMobileMenu()">Earn 20% Recurring as a Partner ↗</a>
+    <!-- Mobile Drawer Menu (Identical to index.html) -->
+    <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-1 text-sm font-medium shadow-xl transition-all">
+      <a href="/" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition">Home</a>
+      <a href="/services" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition">Services</a>
+      <a href="/calculator.html" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition">Calculator</a>
+      <a href="/proof.html" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition">Proof &amp; Reviews</a>
+      <a href="/contact.html" class="flex items-center min-touch px-3 py-2 rounded-lg text-slate-700 hover:text-brand-600 hover:bg-slate-50 transition">Contact</a>
       <div class="pt-3 mt-2 border-t border-slate-100 flex flex-col gap-2">
-        <button onclick="openTripwireModal(); closeMobileMenu();" class="w-full py-3.5 min-touch rounded-xl text-xs font-black uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-200 text-center hover:bg-slate-200 transition">
-          ⚡ Claim $1 Test Tasks (Closes at Thanksgiving)
-        </button>
-        <a href="#bogo" onclick="closeMobileMenu();" class="w-full py-3.5 min-touch rounded-xl text-sm font-black bg-brand-600 hover:bg-brand-700 text-white text-center flex items-center justify-center gap-2 shadow-md">
-          <span>🎁 Double Your First Month (BOGO)</span>
+        <a href="/services" class="w-full py-3.5 min-touch rounded-xl text-sm font-black bg-brand-600 hover:bg-brand-700 text-white text-center flex items-center justify-center gap-2 shadow-md">
+          <span>🛒 Browse 40+ Services &amp; Rates</span>
           <span>→</span>
         </a>
       </div>
@@ -635,15 +618,18 @@
               <ul class="space-y-3 text-sm text-slate-700">
                 <li class="flex items-start gap-2.5">
                   <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong class="text-slate-950">Hands-Off GEO Writing</strong> — 1 post/month (<s class="text-slate-400">$37/mo</s> → <strong class="text-brand-600">$1</strong> Month 1) — entity-optimized, white-label article via dedicated English PM.</span>
+                  <span><strong class="text-slate-950">Hands-Off GEO Writing</strong> — 1 post/month (<s class="text-slate-400">$37/mo</s> → <strong class="text-brand-600">$1</strong> Month 1)<br>
+                  <span class="text-xs text-slate-500 font-medium">Entity-optimized, white-label article written for AI search citations — brief to published, zero editing on your end.</span></span>
                 </li>
                 <li class="flex items-start gap-2.5">
                   <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong class="text-slate-950">General VA</strong> — 10 hours/month (<s class="text-slate-400">$39/mo</s> → <strong class="text-brand-600">$1</strong> Month 1) — outreach, CRM hygiene, manual research, digital ops. Scale after: $3.0–$3.9/hr.</span>
+                  <span><strong class="text-slate-950">General VA</strong> — 10 hours/month (<s class="text-slate-400">$39/mo</s> → <strong class="text-brand-600">$1</strong> Month 1)<br>
+                  <span class="text-xs text-slate-500 font-medium">Outreach, CRM hygiene, manual research &amp; digital ops — the grunt work your team never has time for. Scale after: $3.0–$3.9/hr.</span></span>
                 </li>
                 <li class="flex items-start gap-2.5">
                   <span class="text-brand-600 font-bold shrink-0 mt-0.5">✔</span>
-                  <span><strong class="text-slate-950">GEO YouTube Listicle</strong> — 3 videos/month (<s class="text-slate-400">$47/mo</s> → <strong class="text-brand-600">$1</strong> Month 1) — script + listing, optimized for YouTube &amp; AI search citations.</span>
+                  <span><strong class="text-slate-950">GEO YouTube Listicle</strong> — 3 videos/month (<s class="text-slate-400">$47/mo</s> → <strong class="text-brand-600">$1</strong> Month 1)<br>
+                  <span class="text-xs text-slate-500 font-medium">Citation-ready script + optimized listing built to surface in YouTube &amp; AI search answers.</span></span>
                 </li>
               </ul>
             </div>
@@ -792,6 +778,9 @@
             </button>
             <p class="text-center text-[11px] text-slate-500 mt-2 font-medium">
               Month 1 BOGO offer. Renews at standard capacity. Cancel anytime in 1 click from your portal.
+            </p>
+            <p class="text-center text-[11px] text-brand-700 mt-2 font-bold bg-brand-50 rounded-lg py-2 px-3 border border-brand-100">
+              💡 BOGO applies to Pod Plans — the same dedicated PM + white-label system behind the $1 trials (GEO Writing, General VA &amp; YouTube Listicles). Lock in a Pod and your first month's output doubles.
             </p>
           </div>
         </div>
