@@ -16,18 +16,11 @@ console.log('       JDP Team DKIM & DNS Configuration Generator      ');
 console.log('========================================================\n');
 
 if (!fs.existsSync(privateKeyPath)) {
-  console.log(`Generating new 2048-bit RSA key pair in ${dkimDir}...`);
-  const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-    modulusLength: 2048,
-    publicKeyEncoding: {
-      type: 'spki',
-      format: 'pem'
-    },
-    privateKeyEncoding: {
-      type: 'pkcs8',
-      format: 'pem'
-    }
-  });
+  console.log(`Generating new Ed25519 DKIM key pair in ${dkimDir}...`);
+  // Ed25519 (RFC 8463): modern algorithm, stronger per-bit security than RSA
+  const keyPair = crypto.generateKeyPairSync('ed25519');
+  const privateKey = keyPair.privateKey.export({ type: 'pkcs8', format: 'pem' });
+  const publicKey = keyPair.publicKey.export({ type: 'spki', format: 'pem' });
 
   fs.writeFileSync(privateKeyPath, privateKey, { mode: 0o600 });
   fs.writeFileSync(publicKeyPath, publicKey, { mode: 0o644 });
@@ -43,7 +36,8 @@ const pubBase64 = pubPem
   .replace(/[\r\n\s]/g, '');
 
 const dkimRecordName = `${config.dkim.keySelector}._domainkey.${config.dkim.domainName}`;
-const dkimRecordValue = `v=DKIM1; k=rsa; p=${pubBase64}`;
+// k=ed25519 per RFC 8463
+const dkimRecordValue = `v=DKIM1; k=ed25519; p=${pubBase64}`;
 
 console.log('--- 1. DKIM TXT RECORD ---');
 console.log(`Type:  TXT`);

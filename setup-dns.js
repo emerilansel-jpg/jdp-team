@@ -52,7 +52,16 @@ const DESIRED_RECORDS = [
 ];
 
 async function cfRequest(path, method = 'GET', body = null) {
-  const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${ZONE_ID}${path}`, {
+  // Pinned Cloudflare API base — path segments validated so host/zone cannot be altered (SSRF guard)
+  const safePath = String(path);
+  if (!/^\/dns_records(\/[0-9a-f]+)?(\?per_page=\d+)?$/.test(safePath)) {
+    throw new Error(`cfRequest: rejected unexpected path "${safePath}"`);
+  }
+  const url = new URL(`https://api.cloudflare.com/client/v4/zones/${ZONE_ID}${safePath}`);
+  if (url.hostname !== 'api.cloudflare.com' || url.protocol !== 'https:') {
+    throw new Error('cfRequest: rejected non-Cloudflare URL');
+  }
+  const res = await fetch(url, {
     method,
     headers: {
       'Authorization': `Bearer ${TOKEN}`,
