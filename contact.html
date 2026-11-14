@@ -660,6 +660,30 @@
         formHeader.parentNode.insertBefore(alertDiv, formHeader);
       }
     }
+
+    // VIP BOGO Coupon Code detection & badge
+    const couponParam = urlParams.get('coupon') || (function () {
+      try { return localStorage.getItem('jdp_bogo_coupon') || ''; } catch (e) { return ''; }
+    })();
+
+    if (couponParam) {
+      const cleanCoupon = decodeURIComponent(couponParam).trim().toUpperCase();
+      const formHeader = document.querySelector('#contact-form') || document.querySelector('form');
+      if (formHeader) {
+        const couponAlert = document.createElement('div');
+        couponAlert.className = "mb-6 p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 text-xs font-semibold flex items-center justify-between shadow-xs";
+        couponAlert.innerHTML = "<span>🎁 VIP BOGO Coupon Active: <strong class='font-mono font-black text-brand-700 bg-amber-200/90 px-2 py-0.5 rounded border border-amber-300'>" + cleanCoupon + "</strong> &nbsp;·&nbsp; First Month Output Doubled Free</span><span class='text-[10px] uppercase font-black px-2 py-0.5 rounded bg-brand-600 text-white'>BOGO Applied</span>";
+        formHeader.parentNode.insertBefore(couponAlert, formHeader);
+      }
+      const tasksInput = document.getElementById('formTasks');
+      if (tasksInput) {
+        if (!tasksInput.value) {
+          tasksInput.value = "[VIP BOGO Coupon: " + cleanCoupon + "] Requesting wholesale capacity with Month 1 output doubled.";
+        } else if (tasksInput.value.indexOf(cleanCoupon) === -1) {
+          tasksInput.value += "\n\n[VIP BOGO Coupon Applied: " + cleanCoupon + " — Month 1 Output Doubled]";
+        }
+      }
+    }
   </script>
   <!-- Hallmark & Taste Motion System Script -->
   <script src="/motion.js?v=20260924" defer></script>

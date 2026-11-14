@@ -106,6 +106,23 @@
     </div>
   </div>
 
+  <!-- VIP BOGO Banner (Activated via ?coupon= or ?bogo=1) -->
+  <div id="vip-bogo-banner" class="hidden relative z-40 mt-20 sm:mt-24 bg-gradient-to-r from-amber-500 via-brand-600 to-indigo-700 text-white text-xs sm:text-sm py-3 px-4 shadow-md">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <div class="flex items-center gap-2.5">
+        <span class="text-xl">🎁</span>
+        <div>
+          <span class="font-extrabold uppercase tracking-wide">VIP BOGO Deal Activated:</span>
+          <span class="font-medium text-white/95">Double your first month capacity on any Pod or recurring service!</span>
+          <div class="text-[11px] text-white/80 mt-0.5">Coupon code <strong id="vip-coupon-code" class="font-mono bg-white/20 px-2 py-0.5 rounded text-amber-200 border border-white/30">JAMESVIP</strong> applied to your order intake.</div>
+        </div>
+      </div>
+      <button type="button" onclick="copyServicesCoupon()" class="px-3.5 py-1.5 rounded-lg bg-white text-slate-950 font-black text-xs hover:bg-amber-100 transition shadow-xs flex items-center gap-1.5 shrink-0" id="services-copy-btn">
+        <span id="services-copy-icon">📋</span> <span id="services-copy-text">Copy Code</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Hero -->
   <section class="relative pt-32 sm:pt-40 pb-12 sm:pb-16 bg-slate-950 text-white overflow-hidden">
     <div class="absolute inset-0 opacity-[0.07] pointer-events-none" style="background-image: radial-gradient(#93c5fd 1px, transparent 1px); background-size: 28px 28px;"></div>
@@ -1242,6 +1259,63 @@
       });
 
       applyFilters();
+    })();
+  </script>
+
+  <!-- VIP BOGO Coupon Auto-Detection & Link Rewriting -->
+  <script>
+    (function initVipBogo() {
+      var params = new URLSearchParams(window.location.search);
+      var coupon = params.get('coupon');
+      var bogo = params.get('bogo');
+      var ref = params.get('ref') || params.get('referral_code') || '';
+      try {
+        if (!ref) ref = localStorage.getItem('jdp_ref') || '';
+      } catch (e) {}
+
+      if (!coupon && (bogo || ref)) {
+        var cleanRef = ref ? ref.replace(/[^a-zA-Z0-9]/g, '').toUpperCase() : 'JAMES';
+        coupon = (cleanRef || 'JAMES') + 'VIP';
+      }
+
+      if (coupon) {
+        coupon = coupon.trim().toUpperCase();
+        try { localStorage.setItem('jdp_bogo_coupon', coupon); } catch (e) {}
+      } else {
+        try { coupon = localStorage.getItem('jdp_bogo_coupon') || ''; } catch (e) {}
+      }
+
+      if (coupon) {
+        var banner = document.getElementById('vip-bogo-banner');
+        var codeEl = document.getElementById('vip-coupon-code');
+        if (banner) banner.classList.remove('hidden');
+        if (codeEl) codeEl.textContent = coupon;
+
+        // Append coupon to all /contact.html links on the page
+        document.querySelectorAll('a[href^="/contact.html"]').forEach(function (a) {
+          var href = a.getAttribute('href');
+          if (href.indexOf('coupon=') === -1) {
+            var sep = href.indexOf('?') === -1 ? '?' : '&';
+            a.setAttribute('href', href + sep + 'coupon=' + encodeURIComponent(coupon));
+          }
+        });
+      }
+
+      window.copyServicesCoupon = function () {
+        var code = (document.getElementById('vip-coupon-code') || {}).textContent || coupon || 'JAMESVIP';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(function () {
+            var txt = document.getElementById('services-copy-text');
+            var ico = document.getElementById('services-copy-icon');
+            if (txt) txt.textContent = 'Copied!';
+            if (ico) ico.textContent = '✓';
+            setTimeout(function () {
+              if (txt) txt.textContent = 'Copy Code';
+              if (ico) ico.textContent = '📋';
+            }, 2000);
+          });
+        }
+      };
     })();
   </script>
 

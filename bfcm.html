@@ -715,6 +715,27 @@
               </div>
             </div>
 
+            <!-- VIP BOGO Coupon Voucher Box -->
+            <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-amber-50 via-brand-50 to-amber-50 border-2 border-dashed border-amber-300 relative">
+              <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="text-left">
+                  <div class="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-brand-900">
+                    <span>🎟️ YOUR BOGO VIP COUPON</span>
+                    <span class="px-1.5 py-0.5 rounded bg-brand-600 text-white font-bold text-[9px]">2X OUTPUT</span>
+                  </div>
+                  <div class="text-xs text-slate-600 mt-1">Use on our <strong class="text-slate-900">Services Storefront</strong> to double your Month 1 pod capacity.</div>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                  <div class="px-3.5 py-2 rounded-xl bg-slate-950 text-amber-300 font-mono font-black text-sm sm:text-base tracking-wider border border-slate-800 shadow-inner select-all" id="bogoCouponDisplay">
+                    JAMESVIP
+                  </div>
+                  <button type="button" onclick="copyBogoCoupon()" class="px-3 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-black text-xs transition shadow-xs flex items-center gap-1.5 min-touch whitespace-nowrap active:scale-95" id="copyCouponBtn" aria-label="Copy VIP Coupon Code">
+                    <span id="copyCouponIcon">📋</span> <span id="copyCouponText">Copy</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <!-- Transparent Tier Examples -->
             <div class="mt-8">
               <p class="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-3">
@@ -729,8 +750,8 @@
                   </div>
                   <p class="text-[11px] text-slate-600">Normally 40 hrs → <strong class="text-slate-900">80 hrs in Month 1</strong> (40 hrs/mo after)</p>
                   <p class="text-[10px] text-slate-400 mt-1">Outreach, link insertions, CRM &amp; data research</p>
-                  <button onclick="goToCheckout('junior-pod-bogo')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 transition">
-                    Lock In $182/mo →
+                  <button onclick="goToServicesBogo('Junior-Pod')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 transition">
+                    Browse on Storefront ($182/mo) →
                   </button>
                 </div>
 
@@ -742,8 +763,8 @@
                   </div>
                   <p class="text-[11px] text-slate-600">Normally 120 hrs → <strong class="text-slate-900">240 hrs in Month 1</strong> (120 hrs/mo after)</p>
                   <p class="text-[10px] text-slate-400 mt-1">AI agent workflows (n8n/Python), content pipelines</p>
-                  <button onclick="goToCheckout('senior-conductor-bogo')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 transition">
-                    Lock In $529/mo →
+                  <button onclick="goToServicesBogo('Senior-Conductor')" class="mt-3 w-full py-2 rounded-lg text-xs font-black bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 transition">
+                    Browse on Storefront ($529/mo) →
                   </button>
                 </div>
               </div>
@@ -772,15 +793,15 @@
 
           <!-- Main BOGO Button -->
           <div class="mt-8 pt-6 border-t border-slate-100">
-            <button onclick="goToCheckout('junior-pod-bogo')" class="w-full py-4 rounded-xl text-sm font-black uppercase tracking-wider bg-brand-600 hover:bg-brand-500 text-white shadow-xl shadow-brand-600/25 transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
-              <span>🎁 Claim 2x Month-1 Output (BOGO)</span>
+            <button onclick="goToServicesBogo()" class="w-full py-4 rounded-xl text-sm font-black uppercase tracking-wider bg-brand-600 hover:bg-brand-500 text-white shadow-xl shadow-brand-600/25 transition hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+              <span>🎁 Browse Storefront &amp; Apply BOGO Coupon (<span class="bogo-coupon-text">JAMESVIP</span>)</span>
               <span>→</span>
             </button>
             <p class="text-center text-[11px] text-slate-500 mt-2 font-medium">
               Month 1 BOGO offer. Renews at standard capacity. Cancel anytime in 1 click from your portal.
             </p>
             <p class="text-center text-[11px] text-brand-700 mt-2 font-bold bg-brand-50 rounded-lg py-2 px-3 border border-brand-100">
-              💡 BOGO applies to Pod Plans — the same dedicated PM + white-label system behind the $1 trials (GEO Writing, General VA &amp; YouTube Listicles). Lock in a Pod and your first month's output doubles.
+              💡 BOGO applies to Pod Plans on our Services page. Apply coupon code <strong class="bogo-coupon-text text-brand-900 font-mono">JAMESVIP</strong> to double your Month 1 output.
             </p>
           </div>
         </div>
@@ -1831,10 +1852,68 @@
         if (partnerCtaBtn) {
           partnerCtaBtn.href = ref ? ("https://portal.jdp.team/partner?ref=" + encodeURIComponent(ref)) : "https://portal.jdp.team/partner";
         }
+
+        // Initialize BOGO VIP Coupon display based on active affiliate
+        updateBogoCouponDisplays();
       } catch (e) {
         console.error("Referral parse error", e);
       }
     })();
+
+    function getBogoCoupon() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var ref = params.get('ref') || params.get('referral_code') || localStorage.getItem('jdp_ref') || '';
+        if (!ref) return 'JAMESVIP';
+        var clean = decodeURIComponent(ref).trim().replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        return clean ? (clean + 'VIP') : 'JAMESVIP';
+      } catch (e) {
+        return 'JAMESVIP';
+      }
+    }
+
+    function updateBogoCouponDisplays() {
+      var code = getBogoCoupon();
+      var disp = document.getElementById('bogoCouponDisplay');
+      if (disp) disp.textContent = code;
+      document.querySelectorAll('.bogo-coupon-text').forEach(function(el) {
+        el.textContent = code;
+      });
+    }
+
+    function goToServicesBogo(serviceName) {
+      var coupon = getBogoCoupon();
+      var ref = getActiveRef();
+      var targetUrl = "/services?bogo=1&coupon=" + encodeURIComponent(coupon);
+      if (ref) targetUrl += "&ref=" + ref;
+      if (serviceName) targetUrl += "&service=" + encodeURIComponent(serviceName);
+      window.location.href = targetUrl;
+    }
+
+    function copyBogoCoupon() {
+      var coupon = getBogoCoupon();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(coupon).then(function() {
+          var btnText = document.getElementById('copyCouponText');
+          var btnIcon = document.getElementById('copyCouponIcon');
+          if (btnText) btnText.textContent = 'Copied!';
+          if (btnIcon) btnIcon.textContent = '✓';
+          setTimeout(function() {
+            if (btnText) btnText.textContent = 'Copy';
+            if (btnIcon) btnIcon.textContent = '📋';
+          }, 2000);
+        });
+      } else {
+        var disp = document.getElementById('bogoCouponDisplay');
+        if (disp) {
+          var r = document.createRange();
+          r.selectNodeContents(disp);
+          var s = window.getSelection();
+          s.removeAllRanges();
+          s.addRange(r);
+        }
+      }
+    }
 
     function getActiveRef() {
       try {
